@@ -1,0 +1,20 @@
+﻿@Html.Partial("_nav_descarga")
+@section sectionHidden{
+    @{
+        string resultado = string.Empty;
+        List<DKintranet.Codigo.capaDatos.cCatalogo> lista = WebService.getCatalogosParaDescarga();
+        if (lista != null)
+        {
+            resultado += "<input type=\"hidden\" id=\"hiddenListaCatalogo\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(lista)) + "\" />";
+        }
+        WriteLiteral(resultado);
+    }
+}
+@section Scripts{
+    @Html.Partial("_scriptsConfig")
+}
+<div class="row">
+
+    <div class="col-xs-12" id="divGridCatalogo">
+    </div>
+</div>

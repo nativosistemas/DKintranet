@@ -1,0 +1,32 @@
+﻿@{
+    string resultadoHtmlCarritosTransfer = string.Empty;
+
+    if (Session["clientesDefault_Cliente"] != null)
+    {
+        List<DKintranet.Codigo.capaDatos.cSucursal> listaSucursalDependiente = WebService.RecuperarTodasSucursalesDependientes().Where(x => x.sde_sucursal == ((DKintranet.Codigo.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_codsuc).ToList();
+        //// Inicio S7
+        List<string> ListaSucursal = DKintranet.Codigo.clases.FuncionesPersonalizadas.RecuperarSucursalesParaBuscadorDeCliente();
+        //// Fin S7
+        if (!DKintranet.Controllers.mvcController.isCarritoExclusivo()) {
+            resultadoHtmlCarritosTransfer += "<div class=\"div_cierre_reparto\" id=\"divContenedorBaseCuentaRegresiva\" >";
+            resultadoHtmlCarritosTransfer += "</div>";
+        }
+        if (((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR &&
+            ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL &&
+            ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL &&
+            ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
+        {
+            foreach (string item in ListaSucursal)
+            {
+                resultadoHtmlCarritosTransfer += "<div id=\"divContenedorBase_" + item + "\" > </div>";
+
+            }
+            foreach (string item in ListaSucursal)
+            {
+                resultadoHtmlCarritosTransfer += "<div id=\"divContenedorBaseTransfer_" + item + "\" > </div>";
+            }
+        }
+    }
+    WriteLiteral(resultadoHtmlCarritosTransfer);
+
+}

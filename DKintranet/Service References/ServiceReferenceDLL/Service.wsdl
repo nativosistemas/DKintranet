@@ -1,0 +1,1798 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Login">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pNombre" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pContraseña" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ObtenerComprobantesDiscriminadosDePuntoDeVentaEntreFechas">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pIdentificadorCliente" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pFechaDesde" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="pFechaHasta" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerComprobantesDiscriminadosDePuntoDeVentaEntreFechasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerComprobantesDiscriminadosDePuntoDeVentaEntreFechasResult" type="tns:ArrayOfCComprobantesDiscriminadosDePuntoDeVenta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCComprobantesDiscriminadosDePuntoDeVenta">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="cComprobantesDiscriminadosDePuntoDeVenta" nillable="true" type="tns:cComprobantesDiscriminadosDePuntoDeVenta" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="cComprobantesDiscriminadosDePuntoDeVenta">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Comprobante" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Destinatario" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Fecha" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="FechaToString" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoExento" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoGravado" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoIvaInscripto" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoIvaNoInscripto" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoPercepcionesDGR" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoTotal" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoPercepcionesMunicipal" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroComprobante" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ObtenerTiposDeComprobantesAMostrar">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pIdentificadorCliente" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerTiposDeComprobantesAMostrarResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerTiposDeComprobantesAMostrarResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ModificarPasswordWEB">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pIdentificadorCliente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pPassActual" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pPassNueva" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarPasswordWEBResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ObtenerSaldoTotal">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pIdentificadorCliente" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerSaldoTotalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ObtenerSaldoTotalResult" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TomarPedido">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pLoginCliente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pIdSucursal" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pMensajeEnFactura" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pMensajeEnRemito" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pTipoEnvio" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pListaProducto" type="tns:ArrayOfCDllProductosAndCantidad" />
+            <s:element minOccurs="1" maxOccurs="1" name="pIsUrgente" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCDllProductosAndCantidad">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="cDllProductosAndCantidad" nillable="true" type="tns:cDllProductosAndCantidad" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="cDllProductosAndCantidad">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="codProductoNombre" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IdTransfer" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="cantidad" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="isOferta" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="TomarPedidoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TomarPedidoResult" type="tns:cDllPedido" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="cDllPedido">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CantidadRenglones" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CantidadUnidad" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Estado" type="tns:dllEstadosPedido" />
+          <s:element minOccurs="0" maxOccurs="1" name="EstadoToString" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaIngreso" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="FechaIngresoToString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FechaIngresoHoraToString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Items" type="tns:ArrayOfCDllPedidoItem" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemsConProblemasDeCreditos" type="tns:ArrayOfCDllPedidoItem" />
+          <s:element minOccurs="0" maxOccurs="1" name="Login" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MensajeEnFactura" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MensajeEnRemito" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoTotal" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroFactura" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroRemito" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Cancelado" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="DetalleSucursal" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="dllEstadosPedido">
+        <s:restriction base="s:string">
+          <s:enumeration value="Anulado" />
+          <s:enumeration value="EnPreparacion" />
+          <s:enumeration value="EnSucursal" />
+          <s:enumeration value="Enviado" />
+          <s:enumeration value="PendienteDeFacturar" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfCDllPedidoItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="cDllPedidoItem" nillable="true" type="tns:cDllPedidoItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="cDllPedidoItem">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Cantidad" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Caracteristica" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Faltas" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaIngreso" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="FechaIngresoToString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NombreObjetoComercial" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ObtenerNotaDeDebito">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pNumeroNotaDeDebito" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pLoginWeb" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerNotaDeDebitoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerNotaDeDebitoResult" type="tns:cNotaDeDebito" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="cNotaDeDebito">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CantidadHojas" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Destinatario" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Fecha" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="FechaToString" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoExento" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoGravado" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoIvaInscripto" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoIvaNoInscripto" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoPercepcionDGR" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoTotal" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Motivo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Numero" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="lista" type="tns:ArrayOfCNotaDeDebitoDetalle" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCNotaDeDebitoDetalle">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="cNotaDeDebitoDetalle" nillable="true" type="tns:cNotaDeDebitoDetalle" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="cNotaDeDebitoDetalle">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Descripcion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Importe" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroHoja" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumeroItem" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroNotaDeDebito" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ObtenerNotaDeCredito">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pNumeroNotaDeCredito" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pLoginWeb" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerNotaDeCreditoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerNotaDeCreditoResult" type="tns:cNotaDeCredito" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="cNotaDeCredito">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CantidadHojas" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Destinatario" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Fecha" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="FechaToString" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoExento" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoGravado" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoIvaInscripto" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoIvaNoInscripto" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoPercepcionDGR" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoTotal" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Motivo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Numero" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalUnidades" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="lista" type="tns:ArrayOfCNotaDeCreditoDetalle" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCNotaDeCreditoDetalle">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="cNotaDeCreditoDetalle" nillable="true" type="tns:cNotaDeCreditoDetalle" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="cNotaDeCreditoDetalle">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Cantidad" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Descripcion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Importe" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroHoja" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumeroItem" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroNotaDeCredito" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrecioPublico" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrecioUnitario" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Troquel" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ObtenerFactura">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pNumeroFactura" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pLoginWeb" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerFacturaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerFacturaResult" type="tns:cFactura" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="cFactura">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CantidadHojas" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CantidadRenglones" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DescuentoEspecial" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="DescuentoNetos" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="DescuentoPerfumeria" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="DescuentoWeb" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Destinatario" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Fecha" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="FechaToString" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoExento" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoGravado" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoIvaInscripto" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoIvaNoInscripto" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoPercepcionDGR" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoTotal" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Numero" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroRemito" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalUnidades" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoPercepcionMunicipal" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="FacturaTrazable" nillable="true" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="lista" type="tns:ArrayOfCFacturaDetalle" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCFacturaDetalle">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="cFacturaDetalle" nillable="true" type="tns:cFacturaDetalle" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="cFacturaDetalle">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Cantidad" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Caracteristica" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Descripcion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Importe" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroFactura" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroHoja" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumeroItem" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrecioPublico" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrecioUnitario" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Troquel" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ObtenerResumenAbierto">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pLoginWeb" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerResumenAbiertoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerResumenAbiertoResult" type="tns:cDllRespuestaResumenAbierto" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="cDllRespuestaResumenAbierto">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="lista" type="tns:ArrayOfCDllCtaResumenMovimiento" />
+          <s:element minOccurs="1" maxOccurs="1" name="isPoseeCuenta" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ImporteTotal" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCDllCtaResumenMovimiento">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="cDllCtaResumenMovimiento" nillable="true" type="tns:cDllCtaResumenMovimiento" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="cDllCtaResumenMovimiento">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Fecha" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="FechaToString" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TipoComprobante" type="tns:dllTipoComprobante" />
+          <s:element minOccurs="0" maxOccurs="1" name="TipoComprobanteToString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroComprobante" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Importe" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="dllTipoComprobante">
+        <s:restriction base="s:string">
+          <s:enumeration value="FAC" />
+          <s:enumeration value="REC" />
+          <s:enumeration value="NDE" />
+          <s:enumeration value="NCR" />
+          <s:enumeration value="NDI" />
+          <s:enumeration value="NCI" />
+          <s:enumeration value="RES" />
+          <s:enumeration value="CIE" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="ObtenerMovimientosDeFichaCtaCte">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pLoginWeb" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pFechaDesde" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="pFechaHasta" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerMovimientosDeFichaCtaCteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerMovimientosDeFichaCtaCteResult" type="tns:ArrayOfCFichaCtaCte" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCFichaCtaCte">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="cFichaCtaCte" nillable="true" type="tns:cFichaCtaCte" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="cFichaCtaCte">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Fecha" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="FechaToString" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TipoComprobante" type="tns:TiposComprobante" />
+          <s:element minOccurs="0" maxOccurs="1" name="TipoComprobanteToString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Comprobante" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Motivo" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaVencimiento" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="FechaVencimientoToString" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Debe" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Haber" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Saldo" nillable="true" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="TiposComprobante">
+        <s:restriction base="s:string">
+          <s:enumeration value="FAC" />
+          <s:enumeration value="NCR" />
+          <s:enumeration value="NDE" />
+          <s:enumeration value="NCI" />
+          <s:enumeration value="NDI" />
+          <s:enumeration value="REC" />
+          <s:enumeration value="RES" />
+          <s:enumeration value="CIE" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="ObtenerComprobantesEntreFechas">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pTipoComprobante" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pDesde" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="pHasta" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="pLoginWeb" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerComprobantesEntreFechasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerComprobantesEntreFechasResult" type="tns:ArrayOfCComprobanteDiscriminado" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCComprobanteDiscriminado">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="cComprobanteDiscriminado" nillable="true" type="tns:cComprobanteDiscriminado" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="cComprobanteDiscriminado">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Comprobante" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Destinatario" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DetallePercepciones" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Fecha" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="FechaToString" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoExento" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoGravado" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoIvaInscripto" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoIvaNoInscripto" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoPercepcionDGR" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoTotal" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroComprobante" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ObtenerMovimientosDeCuentaCorriente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="pIncluyeCancelados" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="pDesde" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="pHasta" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="pLoginWeb" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerMovimientosDeCuentaCorrienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerMovimientosDeCuentaCorrienteResult" type="tns:ArrayOfCCtaCteMovimiento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCCtaCteMovimiento">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="cCtaCteMovimiento" nillable="true" type="tns:cCtaCteMovimiento" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="cCtaCteMovimiento">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Atraso" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Fecha" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="FechaToString" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaPago" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="FechaPagoToString" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaVencimiento" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="FechaVencimientoToString" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Importe" nillable="true" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="MedioPago" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroComprobante" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroRecibo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Pago" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Saldo" nillable="true" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Semana" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TipoComprobante" type="tns:dllTipoComprobante" />
+          <s:element minOccurs="0" maxOccurs="1" name="TipoComprobanteToString" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ObtenerPedidosEntreFechas">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="pDesde" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="pHasta" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="pLoginWeb" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerPedidosEntreFechasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerPedidosEntreFechasResult" type="tns:ArrayOfCDllPedido" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCDllPedido">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="cDllPedido" nillable="true" type="tns:cDllPedido" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ObtenerResumenCerrado">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pNumeroResumen" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pLoginWeb" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerResumenCerradoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerResumenCerradoResult" type="tns:cResumen" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="cResumen">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Numero" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroSemana" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PeriodoDesde" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="PeriodoDesdeToString" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PeriodoHasta" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="PeriodoHastaToString" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalResumen" nillable="true" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="lista" type="tns:ArrayOfCResumenDetalle" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCResumenDetalle">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="cResumenDetalle" nillable="true" type="tns:cResumenDetalle" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="cResumenDetalle">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Descripcion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Dia" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Importe" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroHoja" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumeroItem" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroResumen" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TipoComprobante" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ObtenerSaldoCtaCteAFecha">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pLoginWeb" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pFecha" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerSaldoCtaCteAFechaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ObtenerSaldoCtaCteAFechaResult" nillable="true" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerChequesEnCartera">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pLoginWeb" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerChequesEnCarteraResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerChequesEnCarteraResult" type="tns:ArrayOfCDllChequeRecibido" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCDllChequeRecibido">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="cDllChequeRecibido" nillable="true" type="tns:cDllChequeRecibido" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="cDllChequeRecibido">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Banco" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Estado" type="tns:dllEstadoCheque" />
+          <s:element minOccurs="0" maxOccurs="1" name="EstadoToString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Fecha" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaVencimiento" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="FechaVencimientoToString" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Importe" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Numero" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="dllEstadoCheque">
+        <s:restriction base="s:string">
+          <s:enumeration value="Aceptado" />
+          <s:enumeration value="Cambiado" />
+          <s:enumeration value="Depositado" />
+          <s:enumeration value="EnCartera" />
+          <s:enumeration value="Rechazado" />
+          <s:enumeration value="Retirado" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="ObtenerSaldoChequesEnCartera">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pLoginWeb" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerSaldoChequesEnCarteraResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ObtenerSaldoChequesEnCarteraResult" nillable="true" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerSaldoResumenAbierto">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pLoginWeb" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerSaldoResumenAbiertoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ObtenerSaldoResumenAbiertoResult" nillable="true" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerSaldosPresentacionParaComposicion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pLoginWeb" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pFecha" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerSaldosPresentacionParaComposicionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerSaldosPresentacionParaComposicionResult" type="tns:cDllSaldosComposicion" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="cDllSaldosComposicion">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="SaldoTotal" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="SaldoCtaCte" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="SaldoResumenAbierto" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="SaldoChequeCartera" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="isPoseeCuentaResumen" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ObtenerTipoDeComprobanteAMostrar">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pLoginWeb" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerTipoDeComprobanteAMostrarResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerTipoDeComprobanteAMostrarResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TomarPedidoDeTransfers">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pLoginCliente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pIdSucursal" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pMensajeEnFactura" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pMensajeEnRemito" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pTipoEnvio" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pListaProducto" type="tns:ArrayOfCDllProductosAndCantidad" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TomarPedidoDeTransfersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TomarPedidoDeTransfersResult" type="tns:ArrayOfCDllPedidoTransfer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCDllPedidoTransfer">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="cDllPedidoTransfer" nillable="true" type="tns:cDllPedidoTransfer" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="cDllPedidoTransfer">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CantidadRenglones" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CantidadUnidad" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Estado" type="tns:dllEstadosPedido" />
+          <s:element minOccurs="0" maxOccurs="1" name="EstadoToString" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaIngreso" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="FechaIngresoToString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FechaIngresoHoraToString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Items" type="tns:ArrayOfCDllPedidoItem" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemsConProblemasDeCreditos" type="tns:ArrayOfCDllPedidoItem" />
+          <s:element minOccurs="0" maxOccurs="1" name="Login" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MensajeEnFactura" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MensajeEnRemito" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoTotal" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroFactura" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroRemito" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Cancelado" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ImprimirComprobante">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pTipoComprobante" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pNroComprobante" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ImprimirComprobanteResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ImprimirComprobPDFWEB_Prueba">
+        <s:complexType />
+      </s:element>
+      <s:element name="ImprimirComprobPDFWEB_PruebaResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ImprimirComprobPDFWEB">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pTipoComprobante" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pNroComprobante" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ImprimirComprobPDFWEBResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ObtenerPlanesDeObrasSociales">
+        <s:complexType />
+      </s:element>
+      <s:element name="ObtenerPlanesDeObrasSocialesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerPlanesDeObrasSocialesResult" type="tns:ArrayOfCPlan" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCPlan">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="cPlan" nillable="true" type="tns:cPlan" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="cPlan">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Nombre" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PideSemana" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioSemana">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NombrePlan" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginWeb" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Anio" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Semana" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioSemanaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioSemanaResult" type="tns:ArrayOfCPlanillaObSoc" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCPlanillaObSoc">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="cPlanillaObSoc" nillable="true" type="tns:cPlanillaObSoc" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="cPlanillaObSoc">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Anio" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Fecha" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="FechaToString" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Importe" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Mes" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Quincena" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Semana" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMesQuincena">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NombrePlan" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginWeb" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Anio" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Mes" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Quincena" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMesQuincenaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMesQuincenaResult" type="tns:ArrayOfCPlanillaObSoc" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NombrePlan" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginWeb" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Anio" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Mes" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMesResult" type="tns:ArrayOfCPlanillaObSoc" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FacturaTrazable">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pNumeroFactura" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FacturaTrazableResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FacturaTrazableResult" nillable="true" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerObraSocialCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pNumeroObraSocialCliente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pLoginWeb" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerObraSocialClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerObraSocialClienteResult" type="tns:cObraSocialCliente" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="cObraSocialCliente">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CantidadHojas" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Destinatario" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Fecha" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="FechaToString" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoTotal" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="NombrePlan" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumeroPlanilla" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="lista" type="tns:ArrayOfCObraSocialClienteItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCObraSocialClienteItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="cObraSocialClienteItem" nillable="true" type="tns:cObraSocialClienteItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="cObraSocialClienteItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Descripcion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Importe" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroHoja" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumeroItem" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroObraSocialCliente" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="LoginSoapIn">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerComprobantesDiscriminadosDePuntoDeVentaEntreFechasSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerComprobantesDiscriminadosDePuntoDeVentaEntreFechas" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerComprobantesDiscriminadosDePuntoDeVentaEntreFechasSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerComprobantesDiscriminadosDePuntoDeVentaEntreFechasResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerTiposDeComprobantesAMostrarSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerTiposDeComprobantesAMostrar" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerTiposDeComprobantesAMostrarSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerTiposDeComprobantesAMostrarResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModificarPasswordWEBSoapIn">
+    <wsdl:part name="parameters" element="tns:ModificarPasswordWEB" />
+  </wsdl:message>
+  <wsdl:message name="ModificarPasswordWEBSoapOut">
+    <wsdl:part name="parameters" element="tns:ModificarPasswordWEBResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerSaldoTotalSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerSaldoTotal" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerSaldoTotalSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerSaldoTotalResponse" />
+  </wsdl:message>
+  <wsdl:message name="TomarPedidoSoapIn">
+    <wsdl:part name="parameters" element="tns:TomarPedido" />
+  </wsdl:message>
+  <wsdl:message name="TomarPedidoSoapOut">
+    <wsdl:part name="parameters" element="tns:TomarPedidoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerNotaDeDebitoSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerNotaDeDebito" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerNotaDeDebitoSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerNotaDeDebitoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerNotaDeCreditoSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerNotaDeCredito" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerNotaDeCreditoSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerNotaDeCreditoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerFacturaSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerFactura" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerFacturaSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerFacturaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerResumenAbiertoSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerResumenAbierto" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerResumenAbiertoSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerResumenAbiertoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerMovimientosDeFichaCtaCteSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerMovimientosDeFichaCtaCte" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerMovimientosDeFichaCtaCteSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerMovimientosDeFichaCtaCteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerComprobantesEntreFechasSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerComprobantesEntreFechas" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerComprobantesEntreFechasSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerComprobantesEntreFechasResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerMovimientosDeCuentaCorrienteSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerMovimientosDeCuentaCorriente" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerMovimientosDeCuentaCorrienteSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerMovimientosDeCuentaCorrienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerPedidosEntreFechasSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerPedidosEntreFechas" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerPedidosEntreFechasSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerPedidosEntreFechasResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerResumenCerradoSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerResumenCerrado" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerResumenCerradoSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerResumenCerradoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerSaldoCtaCteAFechaSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerSaldoCtaCteAFecha" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerSaldoCtaCteAFechaSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerSaldoCtaCteAFechaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerChequesEnCarteraSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerChequesEnCartera" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerChequesEnCarteraSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerChequesEnCarteraResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerSaldoChequesEnCarteraSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerSaldoChequesEnCartera" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerSaldoChequesEnCarteraSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerSaldoChequesEnCarteraResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerSaldoResumenAbiertoSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerSaldoResumenAbierto" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerSaldoResumenAbiertoSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerSaldoResumenAbiertoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerSaldosPresentacionParaComposicionSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerSaldosPresentacionParaComposicion" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerSaldosPresentacionParaComposicionSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerSaldosPresentacionParaComposicionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerTipoDeComprobanteAMostrarSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerTipoDeComprobanteAMostrar" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerTipoDeComprobanteAMostrarSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerTipoDeComprobanteAMostrarResponse" />
+  </wsdl:message>
+  <wsdl:message name="TomarPedidoDeTransfersSoapIn">
+    <wsdl:part name="parameters" element="tns:TomarPedidoDeTransfers" />
+  </wsdl:message>
+  <wsdl:message name="TomarPedidoDeTransfersSoapOut">
+    <wsdl:part name="parameters" element="tns:TomarPedidoDeTransfersResponse" />
+  </wsdl:message>
+  <wsdl:message name="ImprimirComprobanteSoapIn">
+    <wsdl:part name="parameters" element="tns:ImprimirComprobante" />
+  </wsdl:message>
+  <wsdl:message name="ImprimirComprobanteSoapOut">
+    <wsdl:part name="parameters" element="tns:ImprimirComprobanteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ImprimirComprobPDFWEB_PruebaSoapIn">
+    <wsdl:part name="parameters" element="tns:ImprimirComprobPDFWEB_Prueba" />
+  </wsdl:message>
+  <wsdl:message name="ImprimirComprobPDFWEB_PruebaSoapOut">
+    <wsdl:part name="parameters" element="tns:ImprimirComprobPDFWEB_PruebaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ImprimirComprobPDFWEBSoapIn">
+    <wsdl:part name="parameters" element="tns:ImprimirComprobPDFWEB" />
+  </wsdl:message>
+  <wsdl:message name="ImprimirComprobPDFWEBSoapOut">
+    <wsdl:part name="parameters" element="tns:ImprimirComprobPDFWEBResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerPlanesDeObrasSocialesSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerPlanesDeObrasSociales" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerPlanesDeObrasSocialesSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerPlanesDeObrasSocialesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioSemanaSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioSemana" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioSemanaSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioSemanaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMesQuincenaSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMesQuincena" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMesQuincenaSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMesQuincenaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMesSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMes" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMesSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMesResponse" />
+  </wsdl:message>
+  <wsdl:message name="FacturaTrazableSoapIn">
+    <wsdl:part name="parameters" element="tns:FacturaTrazable" />
+  </wsdl:message>
+  <wsdl:message name="FacturaTrazableSoapOut">
+    <wsdl:part name="parameters" element="tns:FacturaTrazableResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerObraSocialClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerObraSocialCliente" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerObraSocialClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerObraSocialClienteResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ServiceSoap">
+    <wsdl:operation name="Login">
+      <wsdl:input message="tns:LoginSoapIn" />
+      <wsdl:output message="tns:LoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerComprobantesDiscriminadosDePuntoDeVentaEntreFechas">
+      <wsdl:input message="tns:ObtenerComprobantesDiscriminadosDePuntoDeVentaEntreFechasSoapIn" />
+      <wsdl:output message="tns:ObtenerComprobantesDiscriminadosDePuntoDeVentaEntreFechasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerTiposDeComprobantesAMostrar">
+      <wsdl:input message="tns:ObtenerTiposDeComprobantesAMostrarSoapIn" />
+      <wsdl:output message="tns:ObtenerTiposDeComprobantesAMostrarSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModificarPasswordWEB">
+      <wsdl:input message="tns:ModificarPasswordWEBSoapIn" />
+      <wsdl:output message="tns:ModificarPasswordWEBSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSaldoTotal">
+      <wsdl:input message="tns:ObtenerSaldoTotalSoapIn" />
+      <wsdl:output message="tns:ObtenerSaldoTotalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TomarPedido">
+      <wsdl:input message="tns:TomarPedidoSoapIn" />
+      <wsdl:output message="tns:TomarPedidoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerNotaDeDebito">
+      <wsdl:input message="tns:ObtenerNotaDeDebitoSoapIn" />
+      <wsdl:output message="tns:ObtenerNotaDeDebitoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerNotaDeCredito">
+      <wsdl:input message="tns:ObtenerNotaDeCreditoSoapIn" />
+      <wsdl:output message="tns:ObtenerNotaDeCreditoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerFactura">
+      <wsdl:input message="tns:ObtenerFacturaSoapIn" />
+      <wsdl:output message="tns:ObtenerFacturaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerResumenAbierto">
+      <wsdl:input message="tns:ObtenerResumenAbiertoSoapIn" />
+      <wsdl:output message="tns:ObtenerResumenAbiertoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerMovimientosDeFichaCtaCte">
+      <wsdl:input message="tns:ObtenerMovimientosDeFichaCtaCteSoapIn" />
+      <wsdl:output message="tns:ObtenerMovimientosDeFichaCtaCteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerComprobantesEntreFechas">
+      <wsdl:input message="tns:ObtenerComprobantesEntreFechasSoapIn" />
+      <wsdl:output message="tns:ObtenerComprobantesEntreFechasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerMovimientosDeCuentaCorriente">
+      <wsdl:input message="tns:ObtenerMovimientosDeCuentaCorrienteSoapIn" />
+      <wsdl:output message="tns:ObtenerMovimientosDeCuentaCorrienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerPedidosEntreFechas">
+      <wsdl:input message="tns:ObtenerPedidosEntreFechasSoapIn" />
+      <wsdl:output message="tns:ObtenerPedidosEntreFechasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerResumenCerrado">
+      <wsdl:input message="tns:ObtenerResumenCerradoSoapIn" />
+      <wsdl:output message="tns:ObtenerResumenCerradoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSaldoCtaCteAFecha">
+      <wsdl:input message="tns:ObtenerSaldoCtaCteAFechaSoapIn" />
+      <wsdl:output message="tns:ObtenerSaldoCtaCteAFechaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerChequesEnCartera">
+      <wsdl:input message="tns:ObtenerChequesEnCarteraSoapIn" />
+      <wsdl:output message="tns:ObtenerChequesEnCarteraSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSaldoChequesEnCartera">
+      <wsdl:input message="tns:ObtenerSaldoChequesEnCarteraSoapIn" />
+      <wsdl:output message="tns:ObtenerSaldoChequesEnCarteraSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSaldoResumenAbierto">
+      <wsdl:input message="tns:ObtenerSaldoResumenAbiertoSoapIn" />
+      <wsdl:output message="tns:ObtenerSaldoResumenAbiertoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSaldosPresentacionParaComposicion">
+      <wsdl:input message="tns:ObtenerSaldosPresentacionParaComposicionSoapIn" />
+      <wsdl:output message="tns:ObtenerSaldosPresentacionParaComposicionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerTipoDeComprobanteAMostrar">
+      <wsdl:input message="tns:ObtenerTipoDeComprobanteAMostrarSoapIn" />
+      <wsdl:output message="tns:ObtenerTipoDeComprobanteAMostrarSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TomarPedidoDeTransfers">
+      <wsdl:input message="tns:TomarPedidoDeTransfersSoapIn" />
+      <wsdl:output message="tns:TomarPedidoDeTransfersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ImprimirComprobante">
+      <wsdl:input message="tns:ImprimirComprobanteSoapIn" />
+      <wsdl:output message="tns:ImprimirComprobanteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ImprimirComprobPDFWEB_Prueba">
+      <wsdl:input message="tns:ImprimirComprobPDFWEB_PruebaSoapIn" />
+      <wsdl:output message="tns:ImprimirComprobPDFWEB_PruebaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ImprimirComprobPDFWEB">
+      <wsdl:input message="tns:ImprimirComprobPDFWEBSoapIn" />
+      <wsdl:output message="tns:ImprimirComprobPDFWEBSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerPlanesDeObrasSociales">
+      <wsdl:input message="tns:ObtenerPlanesDeObrasSocialesSoapIn" />
+      <wsdl:output message="tns:ObtenerPlanesDeObrasSocialesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioSemana">
+      <wsdl:input message="tns:ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioSemanaSoapIn" />
+      <wsdl:output message="tns:ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioSemanaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMesQuincena">
+      <wsdl:input message="tns:ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMesQuincenaSoapIn" />
+      <wsdl:output message="tns:ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMesQuincenaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMes">
+      <wsdl:input message="tns:ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMesSoapIn" />
+      <wsdl:output message="tns:ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FacturaTrazable">
+      <wsdl:input message="tns:FacturaTrazableSoapIn" />
+      <wsdl:output message="tns:FacturaTrazableSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerObraSocialCliente">
+      <wsdl:input message="tns:ObtenerObraSocialClienteSoapIn" />
+      <wsdl:output message="tns:ObtenerObraSocialClienteSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://tempuri.org/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerComprobantesDiscriminadosDePuntoDeVentaEntreFechas">
+      <soap:operation soapAction="http://tempuri.org/ObtenerComprobantesDiscriminadosDePuntoDeVentaEntreFechas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerTiposDeComprobantesAMostrar">
+      <soap:operation soapAction="http://tempuri.org/ObtenerTiposDeComprobantesAMostrar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarPasswordWEB">
+      <soap:operation soapAction="http://tempuri.org/ModificarPasswordWEB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSaldoTotal">
+      <soap:operation soapAction="http://tempuri.org/ObtenerSaldoTotal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TomarPedido">
+      <soap:operation soapAction="http://tempuri.org/TomarPedido" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerNotaDeDebito">
+      <soap:operation soapAction="http://tempuri.org/ObtenerNotaDeDebito" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerNotaDeCredito">
+      <soap:operation soapAction="http://tempuri.org/ObtenerNotaDeCredito" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerFactura">
+      <soap:operation soapAction="http://tempuri.org/ObtenerFactura" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerResumenAbierto">
+      <soap:operation soapAction="http://tempuri.org/ObtenerResumenAbierto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerMovimientosDeFichaCtaCte">
+      <soap:operation soapAction="http://tempuri.org/ObtenerMovimientosDeFichaCtaCte" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerComprobantesEntreFechas">
+      <soap:operation soapAction="http://tempuri.org/ObtenerComprobantesEntreFechas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerMovimientosDeCuentaCorriente">
+      <soap:operation soapAction="http://tempuri.org/ObtenerMovimientosDeCuentaCorriente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerPedidosEntreFechas">
+      <soap:operation soapAction="http://tempuri.org/ObtenerPedidosEntreFechas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerResumenCerrado">
+      <soap:operation soapAction="http://tempuri.org/ObtenerResumenCerrado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSaldoCtaCteAFecha">
+      <soap:operation soapAction="http://tempuri.org/ObtenerSaldoCtaCteAFecha" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerChequesEnCartera">
+      <soap:operation soapAction="http://tempuri.org/ObtenerChequesEnCartera" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSaldoChequesEnCartera">
+      <soap:operation soapAction="http://tempuri.org/ObtenerSaldoChequesEnCartera" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSaldoResumenAbierto">
+      <soap:operation soapAction="http://tempuri.org/ObtenerSaldoResumenAbierto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSaldosPresentacionParaComposicion">
+      <soap:operation soapAction="http://tempuri.org/ObtenerSaldosPresentacionParaComposicion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerTipoDeComprobanteAMostrar">
+      <soap:operation soapAction="http://tempuri.org/ObtenerTipoDeComprobanteAMostrar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TomarPedidoDeTransfers">
+      <soap:operation soapAction="http://tempuri.org/TomarPedidoDeTransfers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImprimirComprobante">
+      <soap:operation soapAction="http://tempuri.org/ImprimirComprobante" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImprimirComprobPDFWEB_Prueba">
+      <soap:operation soapAction="http://tempuri.org/ImprimirComprobPDFWEB_Prueba" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImprimirComprobPDFWEB">
+      <soap:operation soapAction="http://tempuri.org/ImprimirComprobPDFWEB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerPlanesDeObrasSociales">
+      <soap:operation soapAction="http://tempuri.org/ObtenerPlanesDeObrasSociales" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioSemana">
+      <soap:operation soapAction="http://tempuri.org/ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioSemana" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMesQuincena">
+      <soap:operation soapAction="http://tempuri.org/ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMesQuincena" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMes">
+      <soap:operation soapAction="http://tempuri.org/ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FacturaTrazable">
+      <soap:operation soapAction="http://tempuri.org/FacturaTrazable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerObraSocialCliente">
+      <soap:operation soapAction="http://tempuri.org/ObtenerObraSocialCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://tempuri.org/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerComprobantesDiscriminadosDePuntoDeVentaEntreFechas">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerComprobantesDiscriminadosDePuntoDeVentaEntreFechas" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerTiposDeComprobantesAMostrar">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerTiposDeComprobantesAMostrar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarPasswordWEB">
+      <soap12:operation soapAction="http://tempuri.org/ModificarPasswordWEB" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSaldoTotal">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerSaldoTotal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TomarPedido">
+      <soap12:operation soapAction="http://tempuri.org/TomarPedido" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerNotaDeDebito">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerNotaDeDebito" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerNotaDeCredito">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerNotaDeCredito" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerFactura">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerFactura" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerResumenAbierto">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerResumenAbierto" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerMovimientosDeFichaCtaCte">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerMovimientosDeFichaCtaCte" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerComprobantesEntreFechas">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerComprobantesEntreFechas" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerMovimientosDeCuentaCorriente">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerMovimientosDeCuentaCorriente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerPedidosEntreFechas">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerPedidosEntreFechas" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerResumenCerrado">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerResumenCerrado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSaldoCtaCteAFecha">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerSaldoCtaCteAFecha" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerChequesEnCartera">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerChequesEnCartera" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSaldoChequesEnCartera">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerSaldoChequesEnCartera" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSaldoResumenAbierto">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerSaldoResumenAbierto" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSaldosPresentacionParaComposicion">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerSaldosPresentacionParaComposicion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerTipoDeComprobanteAMostrar">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerTipoDeComprobanteAMostrar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TomarPedidoDeTransfers">
+      <soap12:operation soapAction="http://tempuri.org/TomarPedidoDeTransfers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImprimirComprobante">
+      <soap12:operation soapAction="http://tempuri.org/ImprimirComprobante" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImprimirComprobPDFWEB_Prueba">
+      <soap12:operation soapAction="http://tempuri.org/ImprimirComprobPDFWEB_Prueba" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImprimirComprobPDFWEB">
+      <soap12:operation soapAction="http://tempuri.org/ImprimirComprobPDFWEB" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerPlanesDeObrasSociales">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerPlanesDeObrasSociales" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioSemana">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioSemana" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMesQuincena">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMesQuincena" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMes">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FacturaTrazable">
+      <soap12:operation soapAction="http://tempuri.org/FacturaTrazable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerObraSocialCliente">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerObraSocialCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service">
+    <wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
+      <soap:address location="http://186.153.136.20:81/Service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceSoap12" binding="tns:ServiceSoap12">
+      <soap12:address location="http://186.153.136.20:81/Service.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

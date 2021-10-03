@@ -1,0 +1,32 @@
+﻿@Html.Partial("_nav_ctacte")
+@section Scripts{
+    @Html.Partial("_scriptsCompocisionSaldos")
+    <script type="text/javascript">
+    jQuery(document).ready(function () {
+        CargarHtmlPanel_nav_composicionsaldos();
+        CargarHtmlResumenAbierto();
+    });
+
+    </script>
+}
+@section sectionHidden{
+    @Html.Partial("_hiddenComposicionSaldo")
+@{
+    string resultado_sub = string.Empty;
+    if (HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+    {
+       DKintranet.ServiceReferenceDLL.cDllRespuestaResumenAbierto objResumenAbierto = WebService.ObtenerResumenAbierto(((DKintranet.Codigo.capaDatos.cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login);
+        if (objResumenAbierto != null)
+        {
+            resultado_sub += "<input type=\"hidden\" id=\"hiddenListaResumenAbierto\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(objResumenAbierto)) + "\" />";
+        }
+    }
+    WriteLiteral(resultado_sub);
+}
+}
+
+<div class="row">
+    @Html.Partial("_nav_composicionsaldos")
+    <div id="divResultadoResumenAbierto"  class="col-xs-12">
+    </div>
+</div>

@@ -1,0 +1,13 @@
+﻿@{
+    string resultado = string.Empty;
+    if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+    {
+        Session["composicionsaldo_SaldosResultados"] = WebService.ObtenerSaldosPresentacionParaComposicion(((DKintranet.Codigo.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login, DateTime.Now);
+
+        if (Session["composicionsaldo_SaldosResultados"] != null)
+        {
+            resultado += "<input type=\"hidden\" id=\"hiddenCompocisionSaldos\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson((DKintranet.ServiceReferenceDLL.cDllSaldosComposicion)Session["composicionsaldo_SaldosResultados"])) + "\" />";
+        }
+    }
+    WriteLiteral(resultado);
+}

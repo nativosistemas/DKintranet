@@ -1,0 +1,98 @@
+﻿@Html.Partial("_nav_ctacte")
+
+@section Scripts{
+    <script type="text/javascript" src="../includes/mvc/js/plugins/footable/footable.js"></script>
+    <script src="~/includes/mvc/js/documento.js?n=13" type="text/javascript"></script>
+}
+
+@section sectionHidden{
+    @{
+        if (Session["clientes_pages_Documento_ID"] != null && Session["clientes_pages_Documento_TIPO"] != null && Session["clientesDefault_Cliente"] != null)
+        {
+            //
+            string resultado = string.Empty;
+            object resultadoObj = null;
+            switch (Session["clientes_pages_Documento_TIPO"].ToString())
+            {
+                case "FAC":
+                    resultadoObj = WebService.ObtenerFactura(Session["clientes_pages_Documento_ID"].ToString(), ((DKintranet.Codigo.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login);
+                    break;
+                case "PENDINTE":
+                    if (HttpContext.Current.Session["estadopedidos_ListaPendienteDeFacturar"] != null)
+                    {
+                        resultadoObj = ((List<DKintranet.ServiceReferenceDLL.cDllPedido>)Session["estadopedidos_ListaPendienteDeFacturar"])[Convert.ToInt32(Session["clientes_pages_Documento_ID"])];
+                    }
+                    break;
+                case "NCR":
+                    resultadoObj = WebService.ObtenerNotaDeCredito(Session["clientes_pages_Documento_ID"].ToString(), ((DKintranet.Codigo.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login);
+                    break;
+                case "NDE":
+                    resultadoObj = WebService.ObtenerNotaDeDebito(Session["clientes_pages_Documento_ID"].ToString(), ((DKintranet.Codigo.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login);
+                    break;
+                case "RES":
+                    resultadoObj = WebService.ObtenerResumenCerrado(Session["clientes_pages_Documento_ID"].ToString(), ((DKintranet.Codigo.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login);
+                    break;
+                case "OSC":
+                    resultadoObj = WebService.ObtenerObraSocialCliente(Session["clientes_pages_Documento_ID"].ToString(), ((DKintranet.Codigo.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login);
+                    break;
+                case "REC":
+                    resultadoObj = WebService.ObtenerRecibo(Session["clientes_pages_Documento_ID"].ToString(), ((DKintranet.Codigo.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login);
+                    break;
+                default:
+                    break;
+            }
+            if (resultadoObj != null)
+            {
+                //
+                string nombreArchivo = Session["clientes_pages_Documento_TIPO"].ToString() + "_" + Session["clientes_pages_Documento_ID"].ToString() + ".pdf";
+                bool isExistePdf = System.IO.File.Exists(DKintranet.Codigo.clases.Constantes.cArchivo_ImpresionesComprobante + nombreArchivo);
+                if (!isExistePdf)
+                {
+                    WebService.ImprimirComprobante(Session["clientes_pages_Documento_TIPO"].ToString(), Session["clientes_pages_Documento_ID"].ToString());
+                }
+                if (Session["clientes_pages_Documento_TIPO"].ToString() == "FAC")
+                {
+                    DKintranet.ServiceReferenceDLL.cFactura objFactura = (DKintranet.ServiceReferenceDLL.cFactura)resultadoObj;
+                    if (objFactura.FacturaTrazable != null && (bool)objFactura.FacturaTrazable)
+                    {
+                        string nombreArchivoTrz = "REM_ANEXTRAZ" + "_" + objFactura.NumeroRemito + ".pdf";
+                        bool isExistePdfTrz = System.IO.File.Exists(DKintranet.Codigo.clases.Constantes.cArchivo_ImpresionesComprobante + nombreArchivoTrz);
+                        if (!isExistePdfTrz)
+                        {
+                            WebService.ImprimirComprobante("TRZ", objFactura.NumeroRemito);
+                        }
+                    }
+                }
+                resultado += "<input type=\"hidden\" id=\"hiddenIsPdfExiste\" value=\"" + isExistePdf.ToString().ToLower() + "\" />";
+                //
+                resultado += "<input type=\"hidden\" id=\"hiddenDocumento\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(resultadoObj)) + "\" />";
+            }
+            resultado += "<input type=\"hidden\" id=\"hiddenTipoDocumento\" value=\"" + Server.HtmlEncode(Session["clientes_pages_Documento_TIPO"].ToString()) + "\" />";
+            resultado += "<input type=\"hidden\" id=\"hiddenRaiz\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Constantes.cRaiz) + "\" />";
+            WriteLiteral(resultado);
+        }
+    }
+}
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-4 col-xs-12">
+        <a class="btn_volver float-left" href="#" onclick="volver(); return false;"><i class="fa fa-play"></i> VOLVER</a>
+        <div class="clear visible-xs"></div>
+        <div class="pad_7">
+            <div id="divTituloDocumento" class="tit_secund"></div>
+        </div>
+    </div>
+    <div class="clear5 visible-xs"></div>
+    <div id="divContenedorDocumentoDescarga" class="col-lg-6 col-md-6 col-sm-8 col-xs-12 text-right">
+
+    </div>
+    <div class="clear20 hidden-xs"></div>
+    <div class="clear10 visible-xs"></div>
+    <div id="divContenedorDocumentoCabecera" class="col-xs-12">
+
+    </div>
+    <div id="divContenedorDocumento" class="col-xs-12">
+
+    </div>
+
+
+</div>

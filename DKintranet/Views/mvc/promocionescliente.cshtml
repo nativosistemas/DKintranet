@@ -1,0 +1,37 @@
+﻿@Html.Partial("_nav_secundario")
+@section Scripts{
+    <style type="text/css">
+        /*.col-item {
+            border: 5px solid #fff;
+        }*/
+    </style>
+    <script type="text/javascript">
+
+
+    </script>
+}
+@section sectionHidden{
+    @{
+        string resultado = string.Empty;
+        List<DKintranet.Codigo.capaDatos.cOferta> l = WebService.RecuperarTodasOfertaPublicar(Session["promocionescliente_TIPO"] != null && Session["promocionescliente_TIPO"].ToString() == "1");
+        resultado += "<input type=\"hidden\" id=\"hiddenListaPromocionesClientes\" value=\"" + Server.HtmlEncode(l == null ? string.Empty : DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(l)) + "\" />";
+
+        WriteLiteral(resultado);
+    }
+}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="clear15"></div>
+            <div id="carousel-lg" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <div class="row" id="divContenedorOfertasPromocionesClientes">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>            

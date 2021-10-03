@@ -1,0 +1,19 @@
+﻿@Html.Partial("_nav_secundario")
+
+@section sectionHidden{
+    @{
+        string resultado = "";
+        //if (DKintranet.Controllers.mvcController.isSubirPedido())
+        //{
+        //    resultado += "<input type=\"hidden\" id=\"hiddenIsSubirPedido\" value=\"" + Server.HtmlEncode("true") + "\" />";
+        //}
+        resultado += "<input type=\"hidden\" id=\"hiddenIsSubirPedidoRepetido\" value=\"" + Server.HtmlEncode("true") + "\" />";
+        WriteLiteral(resultado);
+    }
+}
+
+
+@section Scripts{
+   
+@Html.Partial("_scripts_subirArchivo")
+}

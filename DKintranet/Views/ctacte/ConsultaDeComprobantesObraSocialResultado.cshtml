@@ -1,0 +1,91 @@
+﻿@Html.Partial("_nav_ctacte")
+
+@section Scripts{
+    @Html.Partial("_scriptsCtacte")
+    <script type="text/javascript">
+
+        jQuery(document).ready(function () {
+            CargarHtmlObraSocial();
+        });
+
+
+    </script>
+
+}
+@{
+
+    string nombrePlan = string.Empty;
+    int? anio = null;
+    int? mes = null;
+    int? quincena = null;
+    int? semana = null;
+    List<DKintranet.ServiceReferenceDLL.cPlanillaObSoc> lista = null;
+    if (Session["clientesDefault_Cliente"] != null)
+    {
+        try
+        {
+            if (Request.QueryString["nombrePlan"] != null)
+            {
+                nombrePlan = Request.QueryString["nombrePlan"];
+            }
+            if (Request.QueryString["anio"] != null)
+            {
+                anio = Convert.ToInt32(Request.QueryString["anio"]);
+            }
+            if (Request.QueryString["mes"] != null)
+            {
+                mes = Convert.ToInt32(Request.QueryString["mes"]);
+            }
+            if (Request.QueryString["quincena"] != null)
+            {
+                quincena = Convert.ToInt32(Request.QueryString["quincena"]);
+                if (quincena.Value == 0)
+                {
+                    quincena = null;
+                }
+            }
+            if (Request.QueryString["semana"] != null)
+            {
+                semana = Convert.ToInt32(Request.QueryString["semana"]);
+            }
+            string loginWeb = ((DKintranet.Codigo.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login;
+            if (!string.IsNullOrEmpty(nombrePlan) && anio != null && mes != null && quincena == null)
+            {
+                lista = WebService.ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMes(nombrePlan, loginWeb, anio.Value, mes.Value);
+            }
+            else if (!string.IsNullOrEmpty(nombrePlan) && anio != null && mes != null && quincena != null)
+            {
+                lista = WebService.ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMesQuincena(nombrePlan, loginWeb, anio.Value, mes.Value, quincena.Value);
+            }
+            else if (!string.IsNullOrEmpty(nombrePlan) && anio != null && semana != null)
+            {
+                lista = WebService.ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioSemana(nombrePlan, loginWeb, anio.Value, semana.Value);
+            }
+        }
+        catch (Exception ex)
+        {
+            //throw;
+        }
+    }
+    if (lista != null)
+    {
+        WriteLiteral("<input type=\"hidden\" id=\"hiddenListaPlanillasObraSocial\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(lista)) + "\" />");
+        //Response.Write("<input type=\"hidden\" id=\"hiddenListaPlanillasObraSocial\" value=\"" + Server.HtmlEncode(SitioBase.clases.Serializador.SerializarAJson(lista)) + "\" />");
+    }
+
+
+}
+
+<div class="row">
+    <div class="col-lg-7 col-md-8 col-sm-12 col-xs-12">
+        <a class="btn_volver float-left"  href="/ctacte/ConsultaDeComprobantesObraSocial"><i class="fa fa-play"></i> VOLVER</a>
+        <div class="clear visible-xs"></div>
+        <div class="pad_7">
+            <div class="tit_secund">Resultados</div>
+        </div>
+    </div>
+    <div class="clear20 hidden-xs"></div>
+    <div id="divResultadoObraSocial" class="col-xs-12">
+        @*<?php include_once("../includes/mvc/tabla_ConsultaDeComprobantesObraSocialResultado.php"); ?>*@
+    </div>
+</div>

@@ -1,0 +1,39 @@
+﻿@Html.Partial("_nav_ctacte")
+@section Scripts{
+    @Html.Partial("_scriptsCompocisionSaldos")
+    <script type="text/javascript">
+    jQuery(document).ready(function () {
+        CargarHtmlPanel_nav_composicionsaldos();
+        CargarHtmlCompocisionSaldo_CtaCte();
+    });
+
+    </script>
+}
+@section sectionHidden{
+    @Html.Partial("_hiddenComposicionSaldo")
+@{
+    string resultado_sub = string.Empty;
+    if (Request.QueryString["menu"] == null) // si viene desde el menu interno
+    {
+        if (HttpContext.Current.Session["CompocisionSaldo_ResultadoMovimientosDeCuentaCorriente"] != null)
+        {
+            List<DKintranet.ServiceReferenceDLL.cCtaCteMovimiento> resultadoAUX = (List<DKintranet.ServiceReferenceDLL.cCtaCteMovimiento>)HttpContext.Current.Session["CompocisionSaldo_ResultadoMovimientosDeCuentaCorriente"];
+            resultado_sub += "<input type=\"hidden\" id=\"hiddenListaCompocisionSaldo\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(resultadoAUX)) + "\" />";
+            decimal? limiteSaldo = WebService.RecuperarLimiteSaldo();
+            if (limiteSaldo != null)
+            {
+                resultado_sub += "<input type=\"hidden\" id=\"hiddenLimiteSaldo\" value=\"" + Server.HtmlEncode(limiteSaldo.ToString()) + "\" />";
+            }
+        }
+    }
+    WriteLiteral(resultado_sub);
+}
+}
+
+
+
+<div class="row">
+    @Html.Partial("_nav_composicionsaldos")
+    <div id="divResultadoCompocisionSaldo" class="col-xs-12">
+    </div>
+</div>

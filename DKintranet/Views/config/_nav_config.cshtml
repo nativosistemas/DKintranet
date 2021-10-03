@@ -1,0 +1,50 @@
+﻿@{
+    string classMensajes = "";
+    string classPerfil = "";
+    string classUsuarios = "";
+    string strController = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString();
+    switch (strController)
+    {
+        case "mensajes":
+            classMensajes = " class=\"active\" ";
+            break;
+        case "perfil":
+            classPerfil = " class=\"active\" ";
+            break;
+        case "usuarios":
+            classUsuarios = " class=\"active\" ";
+            break;
+        default:
+            break;
+    }
+
+}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="nav_sec">
+            @{
+                if (((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR &&
+                    ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL &&
+                    ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL &&
+                    ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
+                {
+                    <a href="/config/mensajes" @{ WriteLiteral(classMensajes);}><i class="fa fa-envelope" title="MENSAJES"></i><span class="hidden-sm hidden-xs">MENSAJES</span></a>
+                    <div class="separate"></div>
+    }
+            }
+            <a href="/config/perfil" @{ WriteLiteral(classPerfil);}><i class="fa fa-key" title="CONTRASEÑA"></i><span class="hidden-sm hidden-xs">CONTRASEÑA</span></a>
+            @{
+                if (HttpContext.Current.Session["clientesDefault_Usuario"] != null && 
+                    ((DKintranet.Codigo.capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_OPERADORCLIENTE && 
+                    ((DKintranet.Codigo.capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR &&
+                    ((DKintranet.Codigo.capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL &&
+                    ((DKintranet.Codigo.capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL &&
+                    ((DKintranet.Codigo.capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
+                {
+                    <div class="separate"></div>
+                    <a href="/config/usuarios" @{ WriteLiteral(classUsuarios);}><i class="fa fa-users" title="USUARIOS"></i><span class="hidden-sm hidden-xs">USUARIOS</span></a>
+    }
+            }
+        </div>
+    </div>
+</div>

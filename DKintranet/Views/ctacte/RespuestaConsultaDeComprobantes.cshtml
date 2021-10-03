@@ -1,0 +1,55 @@
+﻿@Html.Partial("_nav_ctacte")
+@section Scripts{
+    @Html.Partial("_scriptsCtacte")
+@Html.Partial("_scriptsComprobantes")
+    <script type="text/javascript">
+    jQuery(document).ready(function () {
+        if (listaComprobantesEntreFecha == null) {
+            listaComprobantesEntreFecha = eval('(' + $('#hiddenListaComprobantesEntreFecha').val() + ')');
+            if (typeof listaComprobantesEntreFecha == 'undefined') {
+                listaComprobantesEntreFecha = null;
+            }
+        }
+        CargarHtmlComprobanteEntreFecha();
+    });
+
+    </script>
+}
+@section sectionHidden{
+    @{
+        string resultado = string.Empty;
+        if (Session["RespuestaConsultaDeComprobantes_TIPO"] != null && Session["ConsultaDeComprobantes_ComprobantesEntreFecha"] != null)
+        {
+            List<DKintranet.ServiceReferenceDLL.cComprobanteDiscriminado> resultadoObj = (List<DKintranet.ServiceReferenceDLL.cComprobanteDiscriminado>)Session["ConsultaDeComprobantes_ComprobantesEntreFecha"];
+            resultado += "<input type=\"hidden\" id=\"hiddenListaComprobantesEntreFecha\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(resultadoObj)) + "\" />";
+            resultado += "<input type=\"hidden\" id=\"hiddenTipoDocumento\" value=\"" + Server.HtmlEncode(Session["RespuestaConsultaDeComprobantes_TIPO"].ToString()) + "\" />";
+            resultado += "<input type=\"hidden\" id=\"hiddenListaNroComps\" value=\"[";
+            for (var i= 0; i < resultadoObj.Count;i++) {
+                resultado += "{" + resultadoObj[i].NumeroComprobante + "}";
+                if (i < resultadoObj.Count - 1)
+                {
+                    resultado += ",";
+                }
+            }
+            resultado += "]\" />";
+        }
+        WriteLiteral(resultado);
+    }
+}
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-4 col-xs-12">
+        <a class="btn_volver float-left"  href="/ctacte/ConsultaDeComprobantes" ><i class="fa fa-play"></i> VOLVER</a>
+        <div class="clear visible-xs"></div>
+        <div class="pad_7">
+            <div id="divTituloDocumento"  class="tit_secund">Resultados</div>
+        </div>
+    </div>
+    <div class="clear5 visible-xs"></div>
+    <div id="divContenedorDescarga" class="col-lg-6 col-md-6 col-sm-8 col-xs-12 text-right">
+
+    </div>
+    <div class="clear20 hidden-xs"></div>
+    <div id="divResultadoComprobanteEntreFecha" class="col-xs-12">
+        @*<?php include_once("../includes/mvc/tabla_RespuestaConsultaDeComprobantes.php"); ?>*@
+    </div>
+</div>

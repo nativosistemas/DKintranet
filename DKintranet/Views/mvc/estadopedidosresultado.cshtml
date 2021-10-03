@@ -1,0 +1,48 @@
+﻿@Html.Partial("_nav_secundario")
+
+@section Scripts{
+    @Html.Partial("_scripts_pedidos")
+}
+
+@section sectionHidden{
+    @{
+
+        string resultado = string.Empty;
+        if (Session["estadopedidos_Resultado"] != null)
+        {
+            List<DKintranet.ServiceReferenceDLL.cDllPedido> listaPedidos = (List<DKintranet.ServiceReferenceDLL.cDllPedido>)Session["estadopedidos_Resultado"];
+            Session["estadopedidos_ListaPendienteDeFacturar"] = null;
+            foreach (DKintranet.ServiceReferenceDLL.cDllPedido item in listaPedidos)
+            {
+                if (item.EstadoToString == "PendienteDeFacturar")
+                {
+                    if (Session["estadopedidos_ListaPendienteDeFacturar"] == null)
+                    {
+                        Session["estadopedidos_ListaPendienteDeFacturar"] = new List<DKintranet.ServiceReferenceDLL.cDllPedido>();
+                    }
+                    ((List<DKintranet.ServiceReferenceDLL.cDllPedido>)Session["estadopedidos_ListaPendienteDeFacturar"]).Add(item);
+                }
+            }
+
+            resultado += "<input type=\"hidden\" id=\"hiddenListaPedidos\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson((List<DKintranet.ServiceReferenceDLL.cDllPedido>)Session["estadopedidos_Resultado"])) + "\" />";
+        }
+        WriteLiteral(resultado);
+    }
+
+}
+<div class="row">
+    <div id="divResultadoPedidos" class="col-xs-12">
+        <div class="div_cont_pagos">
+            <div id="divResultadoPedidos_sinResultado" class="col-xs-12 text-center">
+                <a class="btn_volver float-left" href="../mvc/estadopedidos"><i class="fa fa-play"></i>VOLVER</a>
+                <div class="clear10"></div>
+                @*<div id="divResultadoPedidos"></div>*@
+                @*<p class="color_red">La búsqueda no arroja resultados</p>*@
+            </div>
+            <div class="clear0"></div>
+        </div>
+
+
+
+    </div>
+</div>

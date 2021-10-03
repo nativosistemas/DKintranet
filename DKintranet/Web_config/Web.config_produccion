@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Para obtener más información sobre cómo configurar la aplicación de ASP.NET, visite
+  http://go.microsoft.com/fwlink/?LinkId=169433
+  -->
+<configuration>
+  <configSections>
+    <!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 -->
+    <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+    <section name="ajaxControlToolkit" type="AjaxControlToolkit.AjaxControlToolkitConfigSection, AjaxControlToolkit" />
+  </configSections>
+  <appSettings>
+    <add key="webpages:Version" value="3.0.0.0" />
+    <add key="webpages:Enabled" value="false" />
+    <add key="PreserveLoginUrl" value="true" />
+    <add key="ClientValidationEnabled" value="true" />
+    <add key="UnobtrusiveJavaScriptEnabled" value="true" />
+    <add key="ValidationSettings:UnobtrusiveValidationMode" value="None" />
+    <!-- config-->
+    <add key="raiz" value="https://www.DKintranet.com.ar/" />
+    <add key="raiz_f" value="C:\sitio\web\" />
+    <add key="raiz_archivos" value="C:\ArchivosSitioWEB" />
+    <add key="raiz_Log" value="C:\LogKellerhoff\" />
+    <add key="ws_usu" value="WSentrar" />
+    <add key="ws_psw" value="WSentrarPsw" />
+    <add key="ws_dll_usu" value="WSdll" />
+    <add key="ws_dll_psw" value="WSdllPsw" />
+    <add key="wsProyectos.WebService" value="https://www.DKintranet.com.ar/WebService.asmx" />
+    <add key="PagSinPermiso" value="https://www.DKintranet.com.ar/admin/pages/SinPermiso.aspx" />
+    <add key="url_DKcore" value="http://localhost:84/api/" />
+    <!--Constantes-->
+    <add key="accion_Alta" value="1" />
+    <add key="accion_Modificar" value="2" />
+    <add key="accion_CambioEstado" value="3" />
+    <add key="accion_CambioContraseña" value="4" />
+    <add key="accion_CambioOrden" value="5" />
+    <add key="accion_CambioPublicar" value="6" />
+    <add key="accion_CambioEliminar" value="7" />
+    <add key="estado_SinEstado" value="1" />
+    <add key="estado_Activo" value="2" />
+    <add key="estado_Inactivo" value="3" />
+    <add key="estado_SinLeer" value="4" />
+    <add key="estado_Leido" value="5" />
+    <add key="rol_AdministradorCliente" value="2" />
+    <add key="rol_OperadorCliente" value="3" />
+    <add key="rol_Promotor" value="10" />
+    <add key="rol_EncSuc" value="11" />
+    <add key="rol_EncGral" value="12" />
+    <add key="rol_GrupoCliente" value="13" />
+    <add key="mailRegistracion" value="computos@DKintranet.com.ar;operador@DKintranet.com.ar;sistemas@DKintranet.com.ar" />
+    <add key="mailRegistracionNoCliente" value="drogueria@DKintranet.com.ar;sistemas@DKintranet.com.ar" />
+    <add key="mailContacto" value="drogueria@DKintranet.com.ar" />
+    <add key="mail_from" value="web@DKintranet.com.ar" />
+    <add key="mail_pass" value="huracan.2011" />
+    <add key="SMTP_SERVER" value="186.153.136.19" />
+    <add key="SMTP_PORT" value="25" />
+    <add key="BAN_SERVIDORDLL" value="servidorDLL" />
+    <add key="seccion_PEDIDOS" value="PEDIDOS" />
+    <add key="seccion_DESCARGAS" value="DESCARGAS" />
+    <add key="seccion_CUENTASCORRIENTES" value="CUENTASCORRIENTES" />
+    <add key="seccion_DEVOLUCIONES" value="DEVOLUCIONES" />
+    <add key="acuerdo_SinAcuerdo" value="0" />
+    <add key="acuerdo_GENOMA" value="1" />
+    <add key="acuerdo_ADEM" value="2" />
+    <add key="tipoCliente_Perfumeria" value="P" />
+    <add key="tipoCliente_Todos" value="D" />
+    <add key="mail_cv" value="c.felibert@DKintranet.com.ar" />
+    <add key="mail_ctacte" value="drogueria@DKintranet.com.ar" />
+    <add key="mail_reclamos" value="reclamos@DKintranet.com.ar" />
+    <add key="mail_farmaceuticas" value="farmaceutica@DKintranet.com.ar" />
+    <add key="codigoUsuarioSinRegistrar" value="1" />
+    <add key="ImpresionesComprobante" value="C:\Impresiones\" />
+    <add key="reCAPTCHA_ClaveSecreta" value="6LdTLCMUAAAAAOB031bSkiBIIlhvwS_WOPNKKEcn" />
+    <add key="CantidadFilaPorPagina" value="100" />
+    <add key="CantidadFilaPorPaginaSubirPedido" value="10" />
+    <add key="LimiteDePaginador" value="8" />
+    <!--Fin Constantes-->
+  </appSettings>
+  <!--
+    Para obtener una descripción de los cambios de web.config, vea http://go.microsoft.com/fwlink/?LinkId=235367.
+
+    Los siguientes atributos se pueden establecer en la etiqueta <httpRuntime>.
+      <system.Web>
+        <httpRuntime targetFramework="4.6.1" />
+      </system.Web>
+  -->
+  <system.web>
+    <compilation targetFramework="4.6.1" />
+    <httpRuntime targetFramework="4.6.1" maxRequestLength="16000" executionTimeout="500" />
+    <sessionState timeout="720" />
+    <pages>
+      <namespaces>
+        <add namespace="System.Web.Helpers" />
+        <add namespace="System.Web.Mvc" />
+        <add namespace="System.Web.Mvc.Ajax" />
+        <add namespace="System.Web.Mvc.Html" />
+        <add namespace="System.Web.Routing" />
+        <add namespace="System.Web.WebPages" />
+      </namespaces>
+      <controls>
+        <add tagPrefix="ajaxToolkit" assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" />
+      </controls>
+    </pages>
+  </system.web>
+  <system.web.extensions>
+    <scripting>
+      <webServices>
+        <jsonSerialization maxJsonLength="10000000" />
+      </webServices>
+    </scripting>
+  </system.web.extensions>
+  <connectionStrings>
+    <add name="db_conexion" connectionString="Data Source=DKWEBP01;Initial Catalog=db_Kellerhoff;user id=web_kellerhoff;password=webkelle2012;" providerName="System.Data.SqlClient" />
+    <add name="KellerhoffEntities" connectionString="metadata=res://*/Codigo.Model.csdl|res://*/Codigo.Model.ssdl|res://*/Codigo.Model.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=DKWEBP01;initial catalog=db_Kellerhoff;user id=web_kellerhoff;password=webkelle2012;integrated security=False;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />
+  </connectionStrings>
+  <system.webServer>
+    <validation validateIntegratedModeConfiguration="false" />
+    <rewrite>
+      <rules>
+        <rule name="Redirige_HTTP_TO_HTTPS" stopProcessing="true">
+          <match url="(.*)" />
+          <conditions>
+            <add input="{HTTPS}" pattern="^OFF$" />
+          </conditions>
+          <action type="Redirect" url="https://{HTTP_HOST}{REQUEST_URI}" />
+        </rule>
+      </rules>
+    </rewrite>
+    <!--<staticContent>
+      <mimeMap fileExtension=".mp4" mimeType="video/mp4" />
+      <mimeMap fileExtension=".m4v" mimeType="video/m4v" />
+    </staticContent>-->
+  </system.webServer>
+  <runtime>
+    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+      <dependentAssembly>
+        <assemblyIdentity name="Newtonsoft.Json" culture="neutral" publicKeyToken="30ad4fe6b2a6aeed" />
+        <bindingRedirect oldVersion="0.0.0.0-6.0.0.0" newVersion="6.0.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Web.Helpers" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="1.0.0.0-3.0.0.0" newVersion="3.0.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Web.Mvc" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="1.0.0.0-5.2.0.0" newVersion="5.2.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Web.Optimization" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="1.0.0.0-1.1.0.0" newVersion="1.1.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Web.WebPages" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="1.0.0.0-3.0.0.0" newVersion="3.0.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="WebGrease" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="0.0.0.0-1.5.2.14234" newVersion="1.5.2.14234" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Runtime.CompilerServices.Unsafe" publicKeyToken="b03f5f7f11d50a3a" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-4.0.6.0" newVersion="4.0.6.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Threading.Tasks.Extensions" publicKeyToken="cc7b13ffcd2ddd51" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-4.2.0.1" newVersion="4.2.0.1" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.ValueTuple" publicKeyToken="cc7b13ffcd2ddd51" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-4.0.3.0" newVersion="4.0.3.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Buffers" publicKeyToken="cc7b13ffcd2ddd51" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-4.0.3.0" newVersion="4.0.3.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="HtmlAgilityPack" publicKeyToken="bd319b19eaf3b43a" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-1.11.24.0" newVersion="1.11.24.0" />
+      </dependentAssembly>
+    </assemblyBinding>
+  </runtime>
+  <system.codedom>
+    <compilers>
+      <compiler language="c#;cs;csharp" extension=".cs" type="Microsoft.CodeDom.Providers.DotNetCompilerPlatform.CSharpCodeProvider, Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" warningLevel="4" compilerOptions="/langversion:6 /nowarn:1659;1699;1701" />
+      <compiler language="vb;vbs;visualbasic;vbscript" extension=".vb" type="Microsoft.CodeDom.Providers.DotNetCompilerPlatform.VBCodeProvider, Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" warningLevel="4" compilerOptions="/langversion:14 /nowarn:41008 /define:_MYTYPE=\&quot;Web\&quot; /optionInfer+" />
+    </compilers>
+  </system.codedom>
+  <system.serviceModel>
+    <bindings>
+      <basicHttpBinding>
+        <binding name="ServiceSoap" closeTimeout="00:01:00" openTimeout="00:01:00" receiveTimeout="00:10:00" sendTimeout="00:10:00" allowCookies="false" bypassProxyOnLocal="false" hostNameComparisonMode="StrongWildcard" maxBufferPoolSize="524288" maxBufferSize="2147483647" maxReceivedMessageSize="2147483647" textEncoding="utf-8" transferMode="Buffered" useDefaultWebProxy="true" messageEncoding="Text">
+          <readerQuotas maxDepth="32" maxStringContentLength="8192" maxArrayLength="16384" maxBytesPerRead="4096" maxNameTableCharCount="16384" />
+          <security mode="None">
+            <transport clientCredentialType="None" proxyCredentialType="None" realm="" />
+            <message clientCredentialType="UserName" algorithmSuite="Default" />
+          </security>
+        </binding>
+      </basicHttpBinding>
+    </bindings>
+    <client>
+      <endpoint address="http://172.16.0.4/Service.asmx" binding="basicHttpBinding" bindingConfiguration="ServiceSoap" contract="ServiceReferenceDLL.ServiceSoap" name="ServiceSoap" />
+    </client>
+  </system.serviceModel>
+  <entityFramework>
+    <defaultConnectionFactory type="System.Data.Entity.Infrastructure.SqlConnectionFactory, EntityFramework" />
+    <providers>
+      <provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
+    </providers>
+  </entityFramework>
+  <ajaxControlToolkit htmlSanitizer="AjaxControlToolkit.HtmlEditor.Sanitizer.DefaultHtmlSanitizer, AjaxControlToolkit.HtmlEditor.Sanitizer" />
+</configuration>
+<!--ProjectGuid: 56850317-1AB8-4331-94FE-FA7704239813-->

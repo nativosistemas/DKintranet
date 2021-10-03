@@ -1,0 +1,1957 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{56850317-1AB8-4331-94FE-FA7704239813}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DKintranet</RootNamespace>
+    <AssemblyName>DKintranet</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <Use64BitIISExpress />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=20.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxControlToolkit.20.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="AjaxControlToolkit.HtmlEditor.Sanitizer, Version=20.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxControlToolkit.HtmlEditor.Sanitizer.20.1.0\lib\net40\AjaxControlToolkit.HtmlEditor.Sanitizer.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.11.24.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.24\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.7.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.SqlClient, Version=4.6.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SqlClient.4.8.2\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing.Common, Version=4.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Drawing.Common.5.0.2\lib\net461\System.Drawing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.7.1\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.4.7.2\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="admin\Default.aspx" />
+    <Content Include="admin\pages\AgregarArchivo.aspx" />
+    <Content Include="admin\pages\AgregarArchivoGenerico.aspx" />
+    <Content Include="admin\pages\GestionCatalogo.aspx" />
+    <Content Include="admin\pages\GestionCategoriaRestriccion.aspx" />
+    <Content Include="admin\pages\GestionCurriculumVitae_v2.aspx" />
+    <Content Include="admin\pages\GestionHomeSlide.aspx" />
+    <Content Include="admin\pages\GestionHomeSlideEditar.aspx" />
+    <Content Include="admin\pages\GestionHorarioSucursal.aspx" />
+    <Content Include="admin\pages\GestionMensajeNewV4.aspx" />
+    <Content Include="admin\pages\GestionMensajeNewV4Editar.aspx" />
+    <Content Include="admin\pages\GestionMensajeV3VistaPreviaV2.aspx" />
+    <Content Include="admin\pages\GestionMontoMinimo.aspx" />
+    <Content Include="admin\pages\GestionOferta.aspx" />
+    <Content Include="admin\pages\GestionOfertaEditar.aspx" />
+    <Content Include="admin\pages\GestionOfertaHome.aspx" />
+    <Content Include="admin\pages\GestionPopUp.aspx" />
+    <Content Include="admin\pages\GestionProcedimientos.aspx" />
+    <Content Include="admin\pages\GestionProductoDatosExtras.aspx" />
+    <Content Include="admin\pages\GestionProductoImagen.aspx" />
+    <Content Include="admin\pages\GestionProductoImagenAgregar.aspx" />
+    <Content Include="admin\pages\GestionProductoImagenProceso.aspx" />
+    <Content Include="admin\pages\GestionReCall.aspx" />
+    <Content Include="admin\pages\GestionReCallAgregar.aspx" />
+    <Content Include="admin\pages\GestionRegla.aspx" />
+    <Content Include="admin\pages\GestionRol.aspx" />
+    <Content Include="admin\pages\GestionRolesYReglas.aspx" />
+    <Content Include="admin\pages\GestionSucursal.aspx" />
+    <Content Include="admin\pages\GestionTiposEnvios.aspx" />
+    <Content Include="admin\pages\GestionTiposEnviosSucursal.aspx" />
+    <Content Include="admin\pages\GestionTiposEnviosSucursal_Reparto.aspx" />
+    <Content Include="admin\pages\GestionUsuario.aspx" />
+    <Content Include="admin\pages\Laboratorio.aspx" />
+    <Content Include="admin\pages\LaboratorioEditar.aspx" />
+    <Content Include="admin\pages\lib\css\bootstrap-responsive.css" />
+    <Content Include="admin\pages\lib\css\bootstrap-responsive.min.css" />
+    <Content Include="admin\pages\lib\css\bootstrap-wysihtml5.css" />
+    <Content Include="admin\pages\lib\css\bootstrap.css" />
+    <Content Include="admin\pages\lib\css\bootstrap.min.css" />
+    <Content Include="admin\pages\lib\css\prettify.css" />
+    <Content Include="admin\pages\lib\css\wysiwyg-color.css" />
+    <Content Include="admin\pages\lib\img\glyphicons-halflings-white.png" />
+    <Content Include="admin\pages\lib\img\glyphicons-halflings.png" />
+    <Content Include="admin\pages\lib\js\bootstrap-button.js" />
+    <Content Include="admin\pages\lib\js\bootstrap-wysihtml5.js" />
+    <Content Include="admin\pages\lib\js\bootstrap.js" />
+    <Content Include="admin\pages\lib\js\bootstrap.min.js" />
+    <Content Include="admin\pages\lib\js\jquery-1.7.2.min.js" />
+    <Content Include="admin\pages\lib\js\prettify.js" />
+    <Content Include="admin\pages\lib\js\wysihtml5-0.3.0.js" />
+    <Content Include="admin\pages\lib\js\wysihtml5-0.3.0.min.js" />
+    <Content Include="admin\pages\MenuPrincipal.aspx" />
+    <Content Include="admin\pages\Modulo.aspx" />
+    <Content Include="admin\pages\ModuloEditar.aspx" />
+    <Content Include="admin\pages\SinPermiso.aspx" />
+    <Content Include="archivos\LABBI.jpg" />
+    <Content Include="archivos\new.png" />
+    <Content Include="archivos\new2.png" />
+    <Content Include="clientes\pages\devoluciones.aspx" />
+    <Content Include="clientes\pages\carrodiferido.aspx" />
+    <Content Include="clientes\pages\composicionsaldo.aspx" />
+    <Content Include="clientes\pages\composicionsaldoCtaCte.aspx" />
+    <Content Include="clientes\pages\comprobantescompleto.aspx" />
+    <Content Include="clientes\pages\descargaResumenes.aspx" />
+    <Content Include="clientes\pages\descargaResumenesDetalle.aspx" />
+    <Content Include="clientes\pages\Documento.aspx" />
+    <Content Include="clientes\pages\estadopedidosresultado.aspx" />
+    <Content Include="clientes\pages\FichaDebeHaberSaldo.aspx" />
+    <Content Include="clientes\pages\inhabilitado.aspx" />
+    <Content Include="clientes\pages\PedidosBuscador.aspx" />
+    <Content Include="Codigo\Model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model.Context.cs</LastGenOutput>
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Content>
+    <Content Include="Codigo\Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.cs</LastGenOutput>
+    </Content>
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="home\contacto.aspx" />
+    <Content Include="home\contactocv.aspx" />
+    <Content Include="home\lanzamiento.aspx" />
+    <Content Include="home\videoinstitucional.aspx" />
+    <Content Include="home\empresa.aspx" />
+    <Content Include="home\index.aspx" />
+    <Content Include="home\promociones.aspx" />
+    <Content Include="home\recall.aspx" />
+    <Content Include="home\recalls.aspx" />
+    <Content Include="home\registracion.aspx" />
+    <Content Include="home\versionexplorer.html" />
+    <Content Include="home\vistapreviaoferta.aspx" />
+    <Content Include="home\vistapreviaslider.aspx" />
+    <Content Include="img\adver.png" />
+    <Content Include="img\btn_buscar %282%29.jpg" />
+    <Content Include="img\btn_buscar.jpg" />
+    <Content Include="img\btn_cerrar.png" />
+    <Content Include="img\btn_confirmar.png" />
+    <Content Include="img\btn_confirmarExtendido.png" />
+    <Content Include="img\btn_next.png" />
+    <Content Include="img\btn_prev.png" />
+    <Content Include="img\btn_vaciar.png" />
+    <Content Include="img\chrome.png" />
+    <Content Include="img\div_bot_interna.jpg" />
+    <Content Include="img\div_footer.jpg" />
+    <Content Include="img\ellecktra.png" />
+    <Content Include="img\estado_c.png" />
+    <Content Include="img\estado_n.png" />
+    <Content Include="img\estado_s.png" />
+    <Content Include="img\fbo_botlogin-blanco.png" />
+    <Content Include="img\fbo_botlogin.jpg" />
+    <Content Include="img\fbo_botloginamarillo.jpg" />
+    <Content Include="img\fbo_btngral.jpg" />
+    <Content Include="img\fbo_btngral.png" />
+    <Content Include="img\fbo_btngral_120.jpg" />
+    <Content Include="img\fdo.jpg" />
+    <Content Include="img\fdo_botonera.png" />
+    <Content Include="img\fdo_botonera1-2.png" />
+    <Content Include="img\fdo_botonera3.png" />
+    <Content Include="img\fdo_botonera4-6.png" />
+    <Content Include="img\fdo_botonera5.png" />
+    <Content Include="img\fdo_content.png" />
+    <Content Include="img\fdo_ft.png" />
+    <Content Include="img\fdo_hd.png" />
+    <Content Include="img\fdo_login.png" />
+    <Content Include="img\fdo_separador_header.jpg" />
+    <Content Include="img\firefox.png" />
+    <Content Include="img\fondos\boton_fdo - copia.jpg" />
+    <Content Include="img\fondos\boton_fdo.jpg" />
+    <Content Include="img\fondos\fdo.jpg" />
+    <Content Include="img\fondos\grilla_header - copia.jpg" />
+    <Content Include="img\fondos\grilla_header.jpg" />
+    <Content Include="img\fondos\header_menu.jpg" />
+    <Content Include="img\fondos\header_top.jpg" />
+    <Content Include="img\fondos\tab_fdo.jpg" />
+    <Content Include="img\fondos\tab_fdo_act.jpg" />
+    <Content Include="img\fondos\tab_fdo_ove.jpg" />
+    <Content Include="img\galeria\cerrar_obra.png" />
+    <Content Include="img\galeria\lupa.png" />
+    <Content Include="img\galeria\play.png" />
+    <Content Include="img\home\back_hdr.jpg" />
+    <Content Include="img\home\bx_loader.gif" />
+    <Content Include="img\home\controls.png" />
+    <Content Include="img\home\dataweb.jpg" />
+    <Content Include="img\home\empresa.jpg" />
+    <Content Include="img\home\empresa\empresa1.gif" />
+    <Content Include="img\home\empresa\empresa1.jpg" />
+    <Content Include="img\home\empresa\empresa2.jpg" />
+    <Content Include="img\home\empresa\empresa3.jpg" />
+    <Content Include="img\home\empresa\empresa4.jpg" />
+    <Content Include="img\home\empresa\empresa5.jpg" />
+    <Content Include="img\home\empresa\empresa6.jpg" />
+    <Content Include="img\home\empresa\empresa7.jpg" />
+    <Content Include="img\home\empresa\empresa8.jpg" />
+    <Content Include="img\home\empresa\empresa9.jpg" />
+    <Content Include="img\home\frase_home.jpg" />
+    <Content Include="img\home\fullimage1.jpg" />
+    <Content Include="img\home\fullimage1_ch.jpg" />
+    <Content Include="img\home\fullimage1_md.jpg" />
+    <Content Include="img\home\fullimage2.jpg" />
+    <Content Include="img\home\fullimage2_ch.jpg" />
+    <Content Include="img\home\fullimage2_md.jpg" />
+    <Content Include="img\home\fullimage3.jpg" />
+    <Content Include="img\home\fullimage3_ch.jpg" />
+    <Content Include="img\home\fullimage3_md.jpg" />
+    <Content Include="img\home\historia\1.jpg" />
+    <Content Include="img\home\historia\2.jpg" />
+    <Content Include="img\home\historia\3.jpg" />
+    <Content Include="img\home\historia\4.jpg" />
+    <Content Include="img\home\historia\5.jpg" />
+    <Content Include="img\home\historia\6.jpg" />
+    <Content Include="img\home\historia\7.jpg" />
+    <Content Include="img\home\historia\8.jpg" />
+    <Content Include="img\home\img_contacto.jpg" />
+    <Content Include="img\home\img_home1.jpg" />
+    <Content Include="img\home\img_home2.jpg" />
+    <Content Include="img\home\img_home3.jpg" />
+    <Content Include="img\home\img_home4.jpg" />
+    <Content Include="img\home\img_home5.jpg" />
+    <Content Include="img\home\img_recall.png" />
+    <Content Include="img\home\img_rrhh.jpg" />
+    <Content Include="img\home\img_rrhh_new.jpg" />
+    <Content Include="img\home\loading.gif" />
+    <Content Include="img\home\logos\logo-ftr.png" />
+    <Content Include="img\home\logos\logo.png" />
+    <Content Include="img\home\logos\logo2.png" />
+    <Content Include="img\home\logos\logo_ch.png" />
+    <Content Include="img\home\logos\mestizos_rojo.png" />
+    <Content Include="img\home\logos\nativo.png" />
+    <Content Include="img\home\logos\nativo_blanco.png" />
+    <Content Include="img\home\logos\nativo_v2.png" />
+    <Content Include="img\home\logos\nativo_v3.png" />
+    <Content Include="img\home\no_disponible.jpg" />
+    <Content Include="img\home\pin.png" />
+    <Content Include="img\home\revista.png" />
+    <Content Include="img\iconos\bullet_key.png" />
+    <Content Include="img\iconos\Change.png" />
+    <Content Include="img\iconos\delete2.png" />
+    <Content Include="img\iconos\Edit.png" />
+    <Content Include="img\iconos\events.png" />
+    <Content Include="img\iconos\new.png" />
+    <Content Include="img\icon_form_off.png" />
+    <Content Include="img\icon_form_on.png" />
+    <Content Include="img\icon_msn_off.png" />
+    <Content Include="img\icon_msn_on.png" />
+    <Content Include="img\icon_msn_on_center.png" />
+    <Content Include="img\icon_msn_on_left.png" />
+    <Content Include="img\ico_farmacia.jpg" />
+    <Content Include="img\ico_login.jpg" />
+    <Content Include="img\ico_mas.jpg" />
+    <Content Include="img\ico_titulo.jpg" />
+    <Content Include="img\ie.png" />
+    <Content Include="img\img_home2.jpg" />
+    <Content Include="img\img_home3.jpg" />
+    <Content Include="img\img_home4.jpg" />
+    <Content Include="img\img_home5.jpg" />
+    <Content Include="img\linea_tabla.jpg" />
+    <Content Include="img\logo.png" />
+    <Content Include="img\logo_footer.png" />
+    <Content Include="img\mapa.jpg" />
+    <Content Include="img\mapa.png" />
+    <Content Include="img\mapa2.jpg" />
+    <Content Include="img\mapaContacto.jpg" />
+    <Content Include="img\mvc\argencard.jpg" />
+    <Content Include="img\mvc\back_hdr.jpg" />
+    <Content Include="img\mvc\banelco.jpg" />
+    <Content Include="img\mvc\bbva.jpg" />
+    <Content Include="img\mvc\bx_loader.gif" />
+    <Content Include="img\mvc\cabal.jpg" />
+    <Content Include="img\mvc\cargando.gif" />
+    <Content Include="img\mvc\controls.png" />
+    <Content Include="img\mvc\credicoop.jpg" />
+    <Content Include="img\mvc\credicoop.png" />
+    <Content Include="img\mvc\dataweb.jpg" />
+    <Content Include="img\mvc\diners_club.jpg" />
+    <Content Include="img\mvc\galicia.jpg" />
+    <Content Include="img\mvc\galicia.png" />
+    <Content Include="img\mvc\hsbc.jpg" />
+    <Content Include="img\mvc\hsbc.png" />
+    <Content Include="img\mvc\lider.jpg" />
+    <Content Include="img\mvc\link.jpg" />
+    <Content Include="img\mvc\link.png" />
+    <Content Include="img\mvc\loading.gif" />
+    <Content Include="img\mvc\logos\logo-ftr.png" />
+    <Content Include="img\mvc\logos\logo.png" />
+    <Content Include="img\mvc\logos\logo2.png" />
+    <Content Include="img\mvc\logos\logo_ch.png" />
+    <Content Include="img\mvc\logos\mestizos_rojo.png" />
+    <Content Include="img\mvc\logos\nativo.png" />
+    <Content Include="img\mvc\macro.jpg" />
+    <Content Include="img\mvc\macro.png" />
+    <Content Include="img\mvc\mastercard.jpg" />
+    <Content Include="img\mvc\nacion.png" />
+    <Content Include="img\mvc\naranja.jpg" />
+    <Content Include="img\mvc\nevada.jpg" />
+    <Content Include="img\mvc\no_disponible.jpg" />
+    <Content Include="img\mvc\patagonia.jpg" />
+    <Content Include="img\mvc\patagonia.png" />
+    <Content Include="img\mvc\pin.png" />
+    <Content Include="img\mvc\santa_fe.jpg" />
+    <Content Include="img\mvc\santa_fe.png" />
+    <Content Include="img\mvc\supervielle.jpg" />
+    <Content Include="img\mvc\supervielle.png" />
+    <Content Include="img\mvc\tarjeta_shopping.jpg" />
+    <Content Include="img\mvc\visa.jpg" />
+    <Content Include="img\notas\fdo_notas.png" />
+    <Content Include="img\notas\img1.jpg" />
+    <Content Include="img\notas\img2.jpg" />
+    <Content Include="img\produtos\camera.png" />
+    <Content Include="img\produtos\camera2.png" />
+    <Content Include="img\produtos\camera3.png" />
+    <Content Include="img\produtos\camera4.png" />
+    <Content Include="img\produtos\camera5.png" />
+    <Content Include="img\produtos\camera6.png" />
+    <Content Include="img\produtos\medicamento.jpg" />
+    <Content Include="img\punta_buscar.jpg" />
+    <Content Include="img\punta_entrega.jpg" />
+    <Content Include="img\secciones\empresa.jpg" />
+    <Content Include="img\secciones\infraes.jpg" />
+    <Content Include="img\secciones\infraestructura.jpg" />
+    <Content Include="img\secciones\nuestragente.jpg" />
+    <Content Include="img\secciones\servicios.jpg" />
+    <Content Include="img\slides\1.jpg" />
+    <Content Include="img\slides\2.jpg" />
+    <Content Include="img\slides\3.jpg" />
+    <Content Include="img\slides\4.jpg" />
+    <Content Include="img\slides\5.jpg" />
+    <Content Include="img\slides\6.jpg" />
+    <Content Include="img\slides\7.jpg" />
+    <Content Include="img\slides\9.jpg" />
+    <Content Include="img\slides\fdo_titulo.png" />
+    <Content Include="img\slides\slide1.jpg" />
+    <Content Include="img\slides\slide2.jpg" />
+    <Content Include="img\slides\slide3.jpg" />
+    <Content Include="img\slides\slide4.jpg" />
+    <Content Include="img\slides\slide5.jpg" />
+    <Content Include="img\slides\slide6.jpg" />
+    <Content Include="img\sucursal_head.png" />
+    <Content Include="img\ui-icons_454545_256x240.png" />
+    <Content Include="img\varios\accesoDenegado.png" />
+    <Content Include="img\varios\ajax-barra-loader.gif" />
+    <Content Include="img\varios\ajax-loader.gif" />
+    <Content Include="img\varios\d11.png" />
+    <Content Include="img\varios\descarga.png" />
+    <Content Include="img\varios\descarga2.png" />
+    <Content Include="img\varios\fdo_upload_files.png" />
+    <Content Include="img\varios\loader.gif" />
+    <Content Include="img\varios\loading.gif" />
+    <Content Include="img\varios\loading_bar.gif" />
+    <Content Include="img\varios\rule-delete.gif" />
+    <Content Include="img\varios\rule-insert.gif" />
+    <Content Include="img\varios\rule-update.gif" />
+    <Content Include="img\varios\rule-view.gif" />
+    <Content Include="img\varios\tree-collapse.gif" />
+    <Content Include="img\varios\tree-expand.gif" />
+    <Content Include="includes\css\abm.css" />
+    <Content Include="includes\css\abmCliente.css" />
+    <Content Include="includes\css\bootstrap.min.css" />
+    <Content Include="includes\css\easyslider.css" />
+    <Content Include="includes\css\fileuploader.css" />
+    <Content Include="includes\css\fonts\alike-regular-demo.html" />
+    <Content Include="includes\css\fonts\alike-regular-webfont.svg" />
+    <Content Include="includes\css\fonts\generator_config.txt" />
+    <Content Include="includes\css\fonts\specimen_files\alike-regular-cleartype.png" />
+    <Content Include="includes\css\fonts\specimen_files\easytabs.js" />
+    <Content Include="includes\css\fonts\specimen_files\grid_12-825-55-15.css" />
+    <Content Include="includes\css\fonts\specimen_files\specimen_stylesheet.css" />
+    <Content Include="includes\css\fonts\stylesheet.css" />
+    <Content Include="includes\css\galeria-shadowbox.css" />
+    <Content Include="includes\css\Galeria.css" />
+    <Content Include="includes\css\general.css" />
+    <Content Include="includes\css\generalClientes.css" />
+    <Content Include="includes\css\jAlert.css" />
+    <Content Include="includes\css\jquery-confirm.min.css" />
+    <Content Include="includes\css\jquery-ui.css" />
+    <Content Include="includes\css\NO_Galeria.css" />
+    <Content Include="includes\css\PedidosBuscador.css" />
+    <Content Include="includes\css\shadowbox-3.0.3\btn_next.png" />
+    <Content Include="includes\css\shadowbox-3.0.3\btn_prev.png" />
+    <Content Include="includes\css\shadowbox-3.0.3\close.png" />
+    <Content Include="includes\css\shadowbox-3.0.3\loading.gif" />
+    <Content Include="includes\css\shadowbox-3.0.3\next.png" />
+    <Content Include="includes\css\shadowbox-3.0.3\pause.png" />
+    <Content Include="includes\css\shadowbox-3.0.3\play.png" />
+    <Content Include="includes\css\shadowbox-3.0.3\previous.png" />
+    <Content Include="includes\css\shadowbox-3.0.3\shadowbox.css" />
+    <Content Include="includes\css\shadowbox-3.0.3\shadowbox.js" />
+    <Content Include="includes\css\textos.css" />
+    <Content Include="includes\css\VistaPrevia.css" />
+    <Content Include="includes\css\web.css" />
+    <Content Include="includes\css\webNew.css" />
+    <Content Include="includes\engine1\arrows.png" />
+    <Content Include="includes\engine1\bullet.png" />
+    <Content Include="includes\engine1\fullscreen.png" />
+    <Content Include="includes\engine1\jquery.js" />
+    <Content Include="includes\engine1\pause.png" />
+    <Content Include="includes\engine1\play.png" />
+    <Content Include="includes\engine1\script.js" />
+    <Content Include="includes\engine1\style.css" />
+    <Content Include="includes\engine1\style.mod.css" />
+    <Content Include="includes\engine1\triangle.png" />
+    <Content Include="includes\engine1\wowslider.js" />
+    <Content Include="includes\engine1\wowslider.mod.js" />
+    <Content Include="includes\home\css\main-overwrite.css" />
+    <Content Include="includes\home\css\main.css" />
+    <Content Include="includes\home\fonts\footable.svg" />
+    <Content Include="includes\home\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="includes\home\js\bootstrap\bootstrap.js" />
+    <Content Include="includes\home\js\bootstrap\bootstrap.min.js" />
+    <Content Include="includes\home\js\contacto.js" />
+    <Content Include="includes\home\js\index.js" />
+    <Content Include="includes\home\js\jquery\function.js" />
+    <Content Include="includes\home\js\jquery\function_forms.js" />
+    <Content Include="includes\home\js\jquery\jquery.js" />
+    <Content Include="includes\home\js\jquery\maps.js" />
+    <Content Include="includes\home\js\jquery\modernizr.js" />
+    <Content Include="includes\home\js\jquery\owl.carousel.min.js" />
+    <Content Include="includes\home\js\jquery\timeline.js" />
+    <Content Include="includes\home\js\jquery\validate.js" />
+    <Content Include="includes\home\js\master.js" />
+    <Content Include="includes\home\js\oferta.js" />
+    <Content Include="includes\home\js\plugins\jasny\jasny-bootstrap.min.js" />
+    <Content Include="includes\home\js\recall.js" />
+    <Content Include="includes\home\js\registracion.js" />
+    <Content Include="includes\home\js\slider.js" />
+    <Content Include="includes\home\less\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="includes\jquery.bxslider\images\bx_loader.gif" />
+    <Content Include="includes\jquery.bxslider\images\controls.png" />
+    <Content Include="includes\jquery.bxslider\jquery.bxslider.css" />
+    <Content Include="includes\jquery.bxslider\jquery.bxslider.js" />
+    <Content Include="includes\jquery.bxslider\jquery.bxslider.min.js" />
+    <Content Include="includes\jquery.bxslider\plugins\jquery.easing.1.3.js" />
+    <Content Include="includes\jquery.bxslider\plugins\jquery.fitvids.js" />
+    <Content Include="includes\js\AgregarArchivo.js" />
+    <Content Include="includes\js\AgregarArchivoGenerico.js" />
+    <Content Include="includes\js\app.js" />
+    <Content Include="includes\js\bootstrap.min.js" />
+    <Content Include="includes\js\buscador.js" />
+    <Content Include="includes\js\carritodiferido.js" />
+    <Content Include="includes\js\composicionsaldo.js" />
+    <Content Include="includes\js\composicionsaldo_original.js" />
+    <Content Include="includes\js\comprobantescompleto.js" />
+    <Content Include="includes\js\CtaCte.js" />
+    <Content Include="includes\js\Documento.js" />
+    <Content Include="includes\js\easySlider1.7.js" />
+    <Content Include="includes\js\estadopedidos.js" />
+    <Content Include="includes\js\Ficha.js" />
+    <Content Include="includes\js\fileuploader.js" />
+    <Content Include="includes\js\Galeria.js" />
+    <Content Include="includes\js\GestionCurriculumVitae_v2.js" />
+    <Content Include="includes\js\GestionHomeSlide.js" />
+    <Content Include="includes\js\GestionMensajeV3.js" />
+    <Content Include="includes\js\GestionOferta.js" />
+    <Content Include="includes\js\GestionPopUp.js" />
+    <Content Include="includes\js\GestionProductoImagen.js" />
+    <Content Include="includes\js\GestionReCall.js" />
+    <Content Include="includes\js\GestionRegla.js" />
+    <Content Include="includes\js\GestionReparto.js" />
+    <Content Include="includes\js\GestionRolesYReglas.js" />
+    <Content Include="includes\js\jAlert.js" />
+    <Content Include="includes\js\jquery-1.7.2.min.js" />
+    <Content Include="includes\js\jquery-3.1.0.min.js" />
+    <Content Include="includes\js\jquery-confirm.min.js" />
+    <Content Include="includes\js\jquery-ui.js" />
+    <Content Include="includes\js\jquery.easing.1.3.js" />
+    <Content Include="includes\js\jquery.js" />
+    <Content Include="includes\js\Laboratorio.js" />
+    <Content Include="includes\js\Libreria.js" />
+    <Content Include="includes\js\loginAdmin.js" />
+    <Content Include="includes\js\Modulo.js" />
+    <Content Include="includes\js\NO_Galeria.js" />
+    <Content Include="includes\js\NO_PedidosBuscador_v2.js" />
+    <Content Include="includes\js\obrasocial.js" />
+    <Content Include="includes\js\Paginador.js" />
+    <Content Include="includes\js\paginador_admin.js" />
+    <Content Include="includes\js\PedidosBuscador.js" />
+    <Content Include="includes\js\PedidosTransfer.js" />
+    <Content Include="includes\js\promocionescliente.js" />
+    <Content Include="includes\js\Recuperador.js" />
+    <Content Include="includes\js\subirarchivoresultado.js" />
+    <Content Include="includes\js\subirpedido.js" />
+    <Content Include="includes\js\subirpedido_v2.js" />
+    <Content Include="includes\mvc\css\main-overwrite.css" />
+    <Content Include="includes\mvc\css\main.css" />
+    <Content Include="includes\mvc\css\select2.min.css" />
+    <Content Include="includes\mvc\fonts\footable.svg" />
+    <Content Include="includes\mvc\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="includes\mvc\js\ajax.js" />
+    <Content Include="includes\mvc\js\bootstrap\bootstrap.min.js" />
+    <Content Include="includes\mvc\js\buscadorCAR.js" />
+    <Content Include="includes\mvc\js\carrito.js" />
+    <Content Include="includes\mvc\js\composicionsaldo.js" />
+    <Content Include="includes\mvc\js\comprobantes.js" />
+    <Content Include="includes\mvc\js\config.js" />
+    <Content Include="includes\mvc\js\ctacte.js" />
+    <Content Include="includes\mvc\js\devoluciones.js" />
+    <Content Include="includes\mvc\js\documento.js" />
+    <Content Include="includes\mvc\js\jquery\function.js" />
+    <Content Include="includes\mvc\js\jquery\function_forms.js" />
+    <Content Include="includes\mvc\js\jquery\function_home.js" />
+    <Content Include="includes\mvc\js\jquery\jquery.js" />
+    <Content Include="includes\mvc\js\jquery\modernizr.js" />
+    <Content Include="includes\mvc\js\jquery\owl.carousel.min.js" />
+    <Content Include="includes\mvc\js\jquery\validate.js" />
+    <Content Include="includes\mvc\js\kellerhoff.js" />
+    <Content Include="includes\mvc\js\libreria.js" />
+    <Content Include="includes\mvc\js\mensaje.js" />
+    <Content Include="includes\mvc\js\oferta.js" />
+    <Content Include="includes\mvc\js\paginador.js" />
+    <Content Include="includes\mvc\js\pedidos.js" />
+    <Content Include="includes\mvc\js\plugins\daterangepicker\daterangepicker.css" />
+    <Content Include="includes\mvc\js\plugins\daterangepicker\daterangepicker.min.js" />
+    <Content Include="includes\mvc\js\plugins\daterangepicker\moment.min.js" />
+    <Content Include="includes\mvc\js\plugins\footable\footable.js" />
+    <Content Include="includes\mvc\js\promotores.js" />
+    <Content Include="includes\mvc\js\select2.full.min.js" />
+    <Content Include="includes\mvc\js\subirpedido.js" />
+    <Content Include="includes\mvc\js\transfer.js" />
+    <Content Include="includes\mvc\less\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="index.aspx" />
+    <Content Include="pages\index.aspx" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="includes\mvc\fonts\footable.eot" />
+    <Content Include="includes\mvc\fonts\footable.ttf" />
+    <Content Include="includes\mvc\fonts\footable.woff" />
+    <Content Include="includes\mvc\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="includes\mvc\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="includes\mvc\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="includes\mvc\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="includes\mvc\less\bootstrap\.csscomb.json" />
+    <Content Include="includes\mvc\less\bootstrap\.csslintrc" />
+    <Content Include="includes\mvc\less\bootstrap\alerts.less" />
+    <Content Include="includes\mvc\less\bootstrap\badges.less" />
+    <Content Include="includes\mvc\less\bootstrap\bootstrap.less" />
+    <Content Include="includes\mvc\less\bootstrap\breadcrumbs.less" />
+    <Content Include="includes\mvc\less\bootstrap\button-groups.less" />
+    <Content Include="includes\mvc\less\bootstrap\buttons.less" />
+    <Content Include="includes\mvc\less\bootstrap\carousel.less" />
+    <Content Include="includes\mvc\less\bootstrap\close.less" />
+    <Content Include="includes\mvc\less\bootstrap\code.less" />
+    <Content Include="includes\mvc\less\bootstrap\component-animations.less" />
+    <Content Include="includes\mvc\less\bootstrap\dropdowns.less" />
+    <Content Include="includes\mvc\less\bootstrap\forms.less" />
+    <Content Include="includes\mvc\less\bootstrap\glyphicons.less" />
+    <Content Include="includes\mvc\less\bootstrap\grid.less" />
+    <Content Include="includes\mvc\less\bootstrap\input-groups.less" />
+    <Content Include="includes\mvc\less\bootstrap\jumbotron.less" />
+    <Content Include="includes\mvc\less\bootstrap\labels.less" />
+    <Content Include="includes\mvc\less\bootstrap\list-group.less" />
+    <Content Include="includes\mvc\less\bootstrap\media.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\alerts.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\background-variant.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\border-radius.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\buttons.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\center-block.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\clearfix.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\forms.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\gradients.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\grid-framework.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\grid.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\hide-text.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\image.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\labels.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\list-group.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\nav-divider.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\nav-vertical-align.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\opacity.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\pagination.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\panels.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\progress-bar.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\reset-filter.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\reset-text.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\resize.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\responsive-visibility.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\size.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\tab-focus.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\table-row.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\text-emphasis.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\text-overflow.less" />
+    <Content Include="includes\mvc\less\bootstrap\mixins\vendor-prefixes.less" />
+    <Content Include="includes\mvc\less\bootstrap\modals.less" />
+    <Content Include="includes\mvc\less\bootstrap\navbar.less" />
+    <Content Include="includes\mvc\less\bootstrap\navs.less" />
+    <Content Include="includes\mvc\less\bootstrap\normalize.less" />
+    <Content Include="includes\mvc\less\bootstrap\pager.less" />
+    <Content Include="includes\mvc\less\bootstrap\pagination.less" />
+    <Content Include="includes\mvc\less\bootstrap\panels.less" />
+    <Content Include="includes\mvc\less\bootstrap\popovers.less" />
+    <Content Include="includes\mvc\less\bootstrap\print.less" />
+    <Content Include="includes\mvc\less\bootstrap\progress-bars.less" />
+    <Content Include="includes\mvc\less\bootstrap\responsive-embed.less" />
+    <Content Include="includes\mvc\less\bootstrap\responsive-utilities.less" />
+    <Content Include="includes\mvc\less\bootstrap\scaffolding.less" />
+    <Content Include="includes\mvc\less\bootstrap\tables.less" />
+    <Content Include="includes\mvc\less\bootstrap\theme.less" />
+    <Content Include="includes\mvc\less\bootstrap\thumbnails.less" />
+    <Content Include="includes\mvc\less\bootstrap\tooltip.less" />
+    <Content Include="includes\mvc\less\bootstrap\type.less" />
+    <Content Include="includes\mvc\less\bootstrap\utilities.less" />
+    <Content Include="includes\mvc\less\bootstrap\variables.less" />
+    <Content Include="includes\mvc\less\bootstrap\wells.less" />
+    <Content Include="includes\mvc\less\font-awesome\animated.less" />
+    <Content Include="includes\mvc\less\font-awesome\bordered-pulled.less" />
+    <Content Include="includes\mvc\less\font-awesome\core.less" />
+    <Content Include="includes\mvc\less\font-awesome\fixed-width.less" />
+    <Content Include="includes\mvc\less\font-awesome\font-awesome.less" />
+    <Content Include="includes\mvc\less\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="includes\mvc\less\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="includes\mvc\less\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="includes\mvc\less\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="includes\mvc\less\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="includes\mvc\less\font-awesome\icons.less" />
+    <Content Include="includes\mvc\less\font-awesome\larger.less" />
+    <Content Include="includes\mvc\less\font-awesome\list.less" />
+    <Content Include="includes\mvc\less\font-awesome\mixins.less" />
+    <Content Include="includes\mvc\less\font-awesome\path.less" />
+    <Content Include="includes\mvc\less\font-awesome\rotated-flipped.less" />
+    <Content Include="includes\mvc\less\font-awesome\screen-reader.less" />
+    <Content Include="includes\mvc\less\font-awesome\spinning.less" />
+    <Content Include="includes\mvc\less\font-awesome\stacked.less" />
+    <Content Include="includes\mvc\less\font-awesome\variables.less" />
+    <EntityDeploy Include="Codigo\Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Codigo\Model.edmx.diagram">
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Content>
+    <Content Include="includes\home\less\bootstrap\.csscomb.json" />
+    <Content Include="includes\home\less\bootstrap\.csslintrc" />
+    <Content Include="includes\home\less\bootstrap\alerts.less" />
+    <Content Include="includes\home\less\bootstrap\badges.less" />
+    <Content Include="includes\home\less\bootstrap\bootstrap.less" />
+    <Content Include="includes\home\less\bootstrap\breadcrumbs.less" />
+    <Content Include="includes\home\less\bootstrap\button-groups.less" />
+    <Content Include="includes\home\less\bootstrap\buttons.less" />
+    <Content Include="includes\home\less\bootstrap\carousel.less" />
+    <Content Include="includes\home\less\bootstrap\close.less" />
+    <Content Include="includes\home\less\bootstrap\code.less" />
+    <Content Include="includes\home\less\bootstrap\component-animations.less" />
+    <Content Include="includes\home\less\bootstrap\dropdowns.less" />
+    <Content Include="includes\home\less\bootstrap\forms.less" />
+    <Content Include="includes\home\less\bootstrap\glyphicons.less" />
+    <Content Include="includes\home\less\bootstrap\grid.less" />
+    <Content Include="includes\home\less\bootstrap\input-groups.less" />
+    <Content Include="includes\home\less\bootstrap\jumbotron.less" />
+    <Content Include="includes\home\less\bootstrap\labels.less" />
+    <Content Include="includes\home\less\bootstrap\list-group.less" />
+    <Content Include="includes\home\less\bootstrap\media.less" />
+    <Content Include="includes\home\less\bootstrap\mixins.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\alerts.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\background-variant.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\border-radius.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\buttons.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\center-block.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\clearfix.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\forms.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\gradients.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\grid-framework.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\grid.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\hide-text.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\image.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\labels.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\list-group.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\nav-divider.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\nav-vertical-align.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\opacity.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\pagination.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\panels.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\progress-bar.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\reset-filter.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\reset-text.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\resize.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\responsive-visibility.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\size.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\tab-focus.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\table-row.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\text-emphasis.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\text-overflow.less" />
+    <Content Include="includes\home\less\bootstrap\mixins\vendor-prefixes.less" />
+    <Content Include="includes\home\less\bootstrap\modals.less" />
+    <Content Include="includes\home\less\bootstrap\navbar.less" />
+    <Content Include="includes\home\less\bootstrap\navs.less" />
+    <Content Include="includes\home\less\bootstrap\normalize.less" />
+    <Content Include="includes\home\less\bootstrap\pager.less" />
+    <Content Include="includes\home\less\bootstrap\pagination.less" />
+    <Content Include="includes\home\less\bootstrap\panels.less" />
+    <Content Include="includes\home\less\bootstrap\popovers.less" />
+    <Content Include="includes\home\less\bootstrap\print.less" />
+    <Content Include="includes\home\less\bootstrap\progress-bars.less" />
+    <Content Include="includes\home\less\bootstrap\responsive-embed.less" />
+    <Content Include="includes\home\less\bootstrap\responsive-utilities.less" />
+    <Content Include="includes\home\less\bootstrap\scaffolding.less" />
+    <Content Include="includes\home\less\bootstrap\tables.less" />
+    <Content Include="includes\home\less\bootstrap\theme.less" />
+    <Content Include="includes\home\less\bootstrap\thumbnails.less" />
+    <Content Include="includes\home\less\bootstrap\tooltip.less" />
+    <Content Include="includes\home\less\bootstrap\type.less" />
+    <Content Include="includes\home\less\bootstrap\utilities.less" />
+    <Content Include="includes\home\less\bootstrap\variables.less" />
+    <Content Include="includes\home\less\bootstrap\wells.less" />
+    <Content Include="includes\home\less\font-awesome\animated.less" />
+    <Content Include="includes\home\less\font-awesome\bordered-pulled.less" />
+    <Content Include="includes\home\less\font-awesome\core.less" />
+    <Content Include="includes\home\less\font-awesome\fixed-width.less" />
+    <Content Include="includes\home\less\font-awesome\font-awesome.less" />
+    <Content Include="includes\home\less\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="includes\home\less\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="includes\home\less\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="includes\home\less\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="includes\home\less\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="includes\home\less\font-awesome\icons.less" />
+    <Content Include="includes\home\less\font-awesome\larger.less" />
+    <Content Include="includes\home\less\font-awesome\list.less" />
+    <Content Include="includes\home\less\font-awesome\mixins.less" />
+    <Content Include="includes\home\less\font-awesome\path.less" />
+    <Content Include="includes\home\less\font-awesome\rotated-flipped.less" />
+    <Content Include="includes\home\less\font-awesome\screen-reader.less" />
+    <Content Include="includes\home\less\font-awesome\spinning.less" />
+    <Content Include="includes\home\less\font-awesome\stacked.less" />
+    <Content Include="includes\home\less\font-awesome\variables.less" />
+    <Content Include="master\home.Master" />
+    <Content Include="master\homeContacto.master" />
+    <Content Include="archivos\Diseño TXT Factura.pdf" />
+    <Content Include="archivos\Psicotrópicos.pdf" />
+    <Content Include="includes\home\less\bootstrap-theme.less" />
+    <Content Include="includes\home\less\buttons.less" />
+    <Content Include="includes\home\less\filtros.less" />
+    <Content Include="includes\home\less\footable.standalone.less" />
+    <Content Include="includes\home\less\footer.less" />
+    <Content Include="includes\home\less\header.less" />
+    <Content Include="includes\home\less\main.less" />
+    <Content Include="includes\home\less\mixins.less" />
+    <Content Include="includes\home\less\modal.less" />
+    <Content Include="includes\home\less\owl.carousel.less" />
+    <Content Include="includes\home\less\owl.theme.less" />
+    <Content Include="includes\home\less\productos.less" />
+    <Content Include="includes\home\less\recall.less" />
+    <Content Include="includes\home\less\secciones.less" />
+    <Content Include="includes\home\less\side-menu.less" />
+    <Content Include="includes\home\less\styles.less" />
+    <Content Include="includes\home\less\timeline.less" />
+    <Content Include="includes\home\less\variables.less" />
+    <Content Include="includes\home\less\web.less" />
+    <Content Include="includes\home\fonts\footable.eot" />
+    <Content Include="includes\home\fonts\footable.ttf" />
+    <Content Include="includes\home\fonts\footable.woff" />
+    <Content Include="includes\home\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="includes\home\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="includes\home\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="includes\home\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="archivos\FormatoArchivoTXTFacturas.pdf" />
+    <Content Include="clientes\pages\devoluciones.cshtml" />
+    <Content Include="master\BaseAdmin.Master" />
+    <Content Include="master\BaseAdminJs3.Master" />
+    <Content Include="archivos\video_institucional_110años.MP4" />
+    <Content Include="archivos\video_institucional.MP4" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ArrayOfCCbteParaImprimir.datasource" />
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ArrayOfCResumen.datasource" />
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerComprobantesAImprimirEnBaseAResumenResponse.datasource" />
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerUltimos10ResumenesDePuntoDeVentaResponse.datasource" />
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.AgregarReclamoFacturadoNoEnviadoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.AgregarSolicitudDevolucionClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ArrayOfCCbteParaImprimir.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ArrayOfCComprobanteDiscriminado.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ArrayOfCComprobantesDiscriminadosDePuntoDeVenta.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ArrayOfCConsObraSocial.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ArrayOfCCtaCteMovimiento.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ArrayOfCDevolucionItemPrecarga.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ArrayOfCDllChequeRecibido.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ArrayOfCDllPedido.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ArrayOfCDllPedidoTransfer.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ArrayOfCFactura.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ArrayOfCFichaCtaCte.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ArrayOfCLote.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ArrayOfCPlan.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ArrayOfCPlanillaObSoc.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ArrayOfCResumen.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ArrayOfCVencimientoResumen.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ArrayOfString.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.cCtaCteMovimiento.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.cDllPedido.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.cDllRespuestaResumenAbierto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.cDllSaldosComposicion.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.cFactura.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.cNotaDeCredito.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.cNotaDeDebito.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.cObraSocialCliente.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.cRecibo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.cResumen.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.EsFacturaConDevolucionesEnProcesoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.FacturaTrazableResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.HelloWorldResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ImprimirComprobanteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ImprimirComprobPDFWEBResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.LoginResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ModificarPasswordWEBResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerAplicacionesDeComprobantesPorTipoYNumeroResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerCantidadSolicitadaDevolucionPorProductoFacturaYClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerChequesEnCarteraResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerComprobantesAImprimirEnBaseAResumenResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerComprobantesDiscriminadosDePuntoDeVentaEntreFechasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerComprobantesEntreFechasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerComprobantesObrasSocialesDePuntoDeVentaEntreFechasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerCreditoDisponibleSemanalResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerCreditoDisponibleTotalResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerFacturaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerFacturasPorUltimosNumerosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerMovimientoPorTipoYNumeroDeComprobanteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerMovimientosDeCuentaCorrienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerMovimientosDeFichaCtaCteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerNotaDeCreditoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerNotaDeDebitoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerNumerosLoteDeProductoDeFacturaProveedorLogLotesConCadenaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerObraSocialClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerPedidosEntreFechasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerPlanesDeObrasSocialesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMesQuincenaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioSemanaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerReciboResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerRecibo_PruebaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerResumenAbiertoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerResumenCerradoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerSaldoChequesEnCarteraResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerSaldoCtaCteAFechaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerSaldoFinalADiciembrePorClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerSaldoResumenAbiertoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerSaldosPresentacionParaComposicionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerSaldoTotalResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClientePorNumeroResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClienteSegunFiltrosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerTipoDeComprobanteAMostrarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerTiposDeComprobantesAMostrarResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerUltimos10ResumenesDePuntoDeVentaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.ObtenerVencimientosResumenPorFechaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.TomarPedidoConIdCarritoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.TomarPedidoDeTransfersConIdCarritoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.TomarPedidoDeTransfersResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\DKintranet.ServiceReferenceDLL.TomarPedidoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\ServiceReferenceDLL\Service1.disco" />
+    <None Include="Service References\ServiceReferenceDLL\Service2.disco" />
+    <Content Include="servicios\descargarArchivo.aspx" />
+    <Content Include="servicios\generarCSV.aspx" />
+    <Content Include="servicios\generar_archivo.aspx" />
+    <Content Include="servicios\generar_archivoPdf.aspx" />
+    <Content Include="servicios\generar_comprobantes_txt.aspx" />
+    <Content Include="servicios\generar_comprobantes_discriminado.aspx" />
+    <Content Include="servicios\thumbnail.aspx" />
+    <Content Include="SQLscript\nativosistemas_2019_10_16.sql" />
+    <Content Include="SQLscript\nativosistemas_2019_11_12.sql" />
+    <Content Include="SQLscript\nativosistemas_2020_04_02.sql" />
+    <Content Include="SQLscript\nativosistemas_2020_04_29.sql" />
+    <Content Include="SQLscript\nativosistemas_2020_05_05.sql" />
+    <Content Include="SQLscript\nativosistemas_2020_05_08.sql" />
+    <Content Include="SQLscript\nativosistemas_2020_06_23.sql" />
+    <Content Include="SQLscript\nativosistemas_2020_06_30.sql" />
+    <Content Include="SQLscript\nativosistemas_2020_09_15.sql" />
+    <Content Include="SQLscript\nativosistemas_2020_12_15.sql" />
+    <Content Include="SQLscript\nativosistemas_2021_08_22.sql" />
+    <Content Include="SQLscript\pablobrunodw_2019_07_30.sql" />
+    <Content Include="SQLscript\pablobrunodw_2019_09_26.sql" />
+    <Content Include="WebService.asmx" />
+    <Content Include="img\Thumbs.db" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <None Include="Service References\ServiceReferenceDLL\Service.disco" />
+    <None Include="Service References\ServiceReferenceDLL\configuration91.svcinfo" />
+    <None Include="Service References\ServiceReferenceDLL\configuration.svcinfo" />
+    <None Include="Service References\ServiceReferenceDLL\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\devoluciones\Devoluciones.cshtml" />
+    <Content Include="Views\devoluciones\_nav_secundario.cshtml" />
+    <Content Include="Views\devoluciones\NuevaDevolucion.cshtml" />
+    <Content Include="Views\devoluciones\NuevaDevolucionVencidos.cshtml" />
+    <Content Include="Views\devoluciones\_scriptsDevoluciones.cshtml" />
+    <None Include="Service References\ServiceReferenceDLL\Service1.wsdl" />
+    <Content Include="Views\devoluciones\NotaDevolucion.cshtml" />
+    <Content Include="Views\devoluciones\NuevaDevolucionFacturaCompleta.cshtml" />
+    <Content Include="Views\devoluciones\_scriptsDevsDaterangepicker.cshtml" />
+    <Content Include="Views\devoluciones\_nav_secundario_fne.cshtml" />
+    <Content Include="Views\devoluciones\DevolucionesFacturadoNoEnviado.cshtml" />
+    <Content Include="Views\devoluciones\ReclamoFacturadoNoEnviado.cshtml" />
+    <None Include="Service References\ServiceReferenceDLL\Service2.wsdl" />
+    <None Include="Web_config\Web.config_produccion">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="admin\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\AgregarArchivo.aspx.cs">
+      <DependentUpon>AgregarArchivo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\AgregarArchivo.aspx.designer.cs">
+      <DependentUpon>AgregarArchivo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\AgregarArchivoGenerico.aspx.cs">
+      <DependentUpon>AgregarArchivoGenerico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\AgregarArchivoGenerico.aspx.designer.cs">
+      <DependentUpon>AgregarArchivoGenerico.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionCatalogo.aspx.cs">
+      <DependentUpon>GestionCatalogo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionCatalogo.aspx.designer.cs">
+      <DependentUpon>GestionCatalogo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionCategoriaRestriccion.aspx.cs">
+      <DependentUpon>GestionCategoriaRestriccion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionCategoriaRestriccion.aspx.designer.cs">
+      <DependentUpon>GestionCategoriaRestriccion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionCurriculumVitae_v2.aspx.cs">
+      <DependentUpon>GestionCurriculumVitae_v2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionCurriculumVitae_v2.aspx.designer.cs">
+      <DependentUpon>GestionCurriculumVitae_v2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionHomeSlide.aspx.cs">
+      <DependentUpon>GestionHomeSlide.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionHomeSlide.aspx.designer.cs">
+      <DependentUpon>GestionHomeSlide.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionHomeSlideEditar.aspx.cs">
+      <DependentUpon>GestionHomeSlideEditar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionHomeSlideEditar.aspx.designer.cs">
+      <DependentUpon>GestionHomeSlideEditar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionHorarioSucursal.aspx.cs">
+      <DependentUpon>GestionHorarioSucursal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionHorarioSucursal.aspx.designer.cs">
+      <DependentUpon>GestionHorarioSucursal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionMensajeNewV4.aspx.cs">
+      <DependentUpon>GestionMensajeNewV4.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionMensajeNewV4.aspx.designer.cs">
+      <DependentUpon>GestionMensajeNewV4.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionMensajeNewV4Editar.aspx.cs">
+      <DependentUpon>GestionMensajeNewV4Editar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionMensajeNewV4Editar.aspx.designer.cs">
+      <DependentUpon>GestionMensajeNewV4Editar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionMensajeV3VistaPreviaV2.aspx.cs">
+      <DependentUpon>GestionMensajeV3VistaPreviaV2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionMensajeV3VistaPreviaV2.aspx.designer.cs">
+      <DependentUpon>GestionMensajeV3VistaPreviaV2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionMontoMinimo.aspx.cs">
+      <DependentUpon>GestionMontoMinimo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionMontoMinimo.aspx.designer.cs">
+      <DependentUpon>GestionMontoMinimo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionOferta.aspx.cs">
+      <DependentUpon>GestionOferta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionOferta.aspx.designer.cs">
+      <DependentUpon>GestionOferta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionOfertaEditar.aspx.cs">
+      <DependentUpon>GestionOfertaEditar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionOfertaEditar.aspx.designer.cs">
+      <DependentUpon>GestionOfertaEditar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionOfertaHome.aspx.cs">
+      <DependentUpon>GestionOfertaHome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionOfertaHome.aspx.designer.cs">
+      <DependentUpon>GestionOfertaHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionPopUp.aspx.cs">
+      <DependentUpon>GestionPopUp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionPopUp.aspx.designer.cs">
+      <DependentUpon>GestionPopUp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionProcedimientos.aspx.cs">
+      <DependentUpon>GestionProcedimientos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionProcedimientos.aspx.designer.cs">
+      <DependentUpon>GestionProcedimientos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionProductoDatosExtras.aspx.cs">
+      <DependentUpon>GestionProductoDatosExtras.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionProductoDatosExtras.aspx.designer.cs">
+      <DependentUpon>GestionProductoDatosExtras.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionProductoImagen.aspx.cs">
+      <DependentUpon>GestionProductoImagen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionProductoImagen.aspx.designer.cs">
+      <DependentUpon>GestionProductoImagen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionProductoImagenAgregar.aspx.cs">
+      <DependentUpon>GestionProductoImagenAgregar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionProductoImagenAgregar.aspx.designer.cs">
+      <DependentUpon>GestionProductoImagenAgregar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionProductoImagenProceso.aspx.cs">
+      <DependentUpon>GestionProductoImagenProceso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionProductoImagenProceso.aspx.designer.cs">
+      <DependentUpon>GestionProductoImagenProceso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionReCall.aspx.cs">
+      <DependentUpon>GestionReCall.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionReCall.aspx.designer.cs">
+      <DependentUpon>GestionReCall.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionReCallAgregar.aspx.cs">
+      <DependentUpon>GestionReCallAgregar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionReCallAgregar.aspx.designer.cs">
+      <DependentUpon>GestionReCallAgregar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionRegla.aspx.cs">
+      <DependentUpon>GestionRegla.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionRegla.aspx.designer.cs">
+      <DependentUpon>GestionRegla.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionRol.aspx.cs">
+      <DependentUpon>GestionRol.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionRol.aspx.designer.cs">
+      <DependentUpon>GestionRol.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionRolesYReglas.aspx.cs">
+      <DependentUpon>GestionRolesYReglas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionRolesYReglas.aspx.designer.cs">
+      <DependentUpon>GestionRolesYReglas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionSucursal.aspx.cs">
+      <DependentUpon>GestionSucursal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionSucursal.aspx.designer.cs">
+      <DependentUpon>GestionSucursal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionTiposEnvios.aspx.cs">
+      <DependentUpon>GestionTiposEnvios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionTiposEnvios.aspx.designer.cs">
+      <DependentUpon>GestionTiposEnvios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionTiposEnviosSucursal.aspx.cs">
+      <DependentUpon>GestionTiposEnviosSucursal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionTiposEnviosSucursal.aspx.designer.cs">
+      <DependentUpon>GestionTiposEnviosSucursal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionTiposEnviosSucursal_Reparto.aspx.cs">
+      <DependentUpon>GestionTiposEnviosSucursal_Reparto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionTiposEnviosSucursal_Reparto.aspx.designer.cs">
+      <DependentUpon>GestionTiposEnviosSucursal_Reparto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionUsuario.aspx.cs">
+      <DependentUpon>GestionUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionUsuario.aspx.designer.cs">
+      <DependentUpon>GestionUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\Laboratorio.aspx.cs">
+      <DependentUpon>Laboratorio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\Laboratorio.aspx.designer.cs">
+      <DependentUpon>Laboratorio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\LaboratorioEditar.aspx.cs">
+      <DependentUpon>LaboratorioEditar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\LaboratorioEditar.aspx.designer.cs">
+      <DependentUpon>LaboratorioEditar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\MenuPrincipal.aspx.cs">
+      <DependentUpon>MenuPrincipal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\MenuPrincipal.aspx.designer.cs">
+      <DependentUpon>MenuPrincipal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\Modulo.aspx.cs">
+      <DependentUpon>Modulo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\Modulo.aspx.designer.cs">
+      <DependentUpon>Modulo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\ModuloEditar.aspx.cs">
+      <DependentUpon>ModuloEditar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\ModuloEditar.aspx.designer.cs">
+      <DependentUpon>ModuloEditar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\SinPermiso.aspx.cs">
+      <DependentUpon>SinPermiso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\SinPermiso.aspx.designer.cs">
+      <DependentUpon>SinPermiso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="clientes\pages\devoluciones.aspx.cs">
+      <DependentUpon>devoluciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="clientes\pages\devoluciones.aspx.designer.cs">
+      <DependentUpon>devoluciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="clientes\pages\carrodiferido.aspx.cs">
+      <DependentUpon>carrodiferido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="clientes\pages\carrodiferido.aspx.designer.cs">
+      <DependentUpon>carrodiferido.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="clientes\pages\composicionsaldo.aspx.cs">
+      <DependentUpon>composicionsaldo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="clientes\pages\composicionsaldo.aspx.designer.cs">
+      <DependentUpon>composicionsaldo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="clientes\pages\composicionsaldoCtaCte.aspx.cs">
+      <DependentUpon>composicionsaldoCtaCte.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="clientes\pages\composicionsaldoCtaCte.aspx.designer.cs">
+      <DependentUpon>composicionsaldoCtaCte.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="clientes\pages\comprobantescompleto.aspx.cs">
+      <DependentUpon>comprobantescompleto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="clientes\pages\comprobantescompleto.aspx.designer.cs">
+      <DependentUpon>comprobantescompleto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="clientes\pages\descargaResumenes.aspx.cs">
+      <DependentUpon>descargaResumenes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="clientes\pages\descargaResumenes.aspx.designer.cs">
+      <DependentUpon>descargaResumenes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="clientes\pages\descargaResumenesDetalle.aspx.cs">
+      <DependentUpon>descargaResumenesDetalle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="clientes\pages\descargaResumenesDetalle.aspx.designer.cs">
+      <DependentUpon>descargaResumenesDetalle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="clientes\pages\Documento.aspx.cs">
+      <DependentUpon>Documento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="clientes\pages\Documento.aspx.designer.cs">
+      <DependentUpon>Documento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="clientes\pages\estadopedidosresultado.aspx.cs">
+      <DependentUpon>estadopedidosresultado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="clientes\pages\estadopedidosresultado.aspx.designer.cs">
+      <DependentUpon>estadopedidosresultado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="clientes\pages\FichaDebeHaberSaldo.aspx.cs">
+      <DependentUpon>FichaDebeHaberSaldo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="clientes\pages\FichaDebeHaberSaldo.aspx.designer.cs">
+      <DependentUpon>FichaDebeHaberSaldo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="clientes\pages\inhabilitado.aspx.cs">
+      <DependentUpon>inhabilitado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="clientes\pages\inhabilitado.aspx.designer.cs">
+      <DependentUpon>inhabilitado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="clientes\pages\PedidosBuscador.aspx.cs">
+      <DependentUpon>PedidosBuscador.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="clientes\pages\PedidosBuscador.aspx.designer.cs">
+      <DependentUpon>PedidosBuscador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Codigo\capaDatos\capaCAR_decision.cs" />
+    <Compile Include="Codigo\capaDatos\accesoBD.cs" />
+    <Compile Include="Codigo\capaDatos\capaAuditoria.cs" />
+    <Compile Include="Codigo\capaDatos\capaCAR.cs" />
+    <Compile Include="Codigo\capaDatos\CapaCarritoDiferido.cs" />
+    <Compile Include="Codigo\capaDatos\capaCAR_WebService.cs" />
+    <Compile Include="Codigo\capaDatos\capaCatalogo.cs" />
+    <Compile Include="Codigo\capaDatos\capaClientes.cs" />
+    <Compile Include="Codigo\capaDatos\capaContactos.cs" />
+    <Compile Include="Codigo\capaDatos\capaCore_decision.cs" />
+    <Compile Include="Codigo\capaDatos\capaCore_WebService.cs" />
+    <Compile Include="Codigo\capaDatos\capaCV.cs" />
+    <Compile Include="Codigo\capaDatos\capaDevoluciones.cs" />
+    <Compile Include="Codigo\capaDatos\capaEF.cs" />
+    <Compile Include="Codigo\capaDatos\capaHome.cs" />
+    <Compile Include="Codigo\capaDatos\capaLogRegistro.cs" />
+    <Compile Include="Codigo\capaDatos\capaMensaje.cs" />
+    <Compile Include="Codigo\capaDatos\capaMensajeNew.cs" />
+    <Compile Include="Codigo\capaDatos\capaNoticia.cs" />
+    <Compile Include="Codigo\capaDatos\capaProductos.cs" />
+    <Compile Include="Codigo\capaDatos\capaRecurso.cs" />
+    <Compile Include="Codigo\capaDatos\capaSeguridad.cs" />
+    <Compile Include="Codigo\capaDatos\capaSincronizador.cs" />
+    <Compile Include="Codigo\capaDatos\capaTiposEnvios.cs" />
+    <Compile Include="Codigo\capaDatos\capaTransfer.cs" />
+    <Compile Include="Codigo\capaDatos\capaWebServiceDLL.cs" />
+    <Compile Include="Codigo\clases\AccesoGrilla.cs" />
+    <Compile Include="Codigo\clases\cBaseAdmin.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Codigo\clases\cHomePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Codigo\clases\ClasesPersonalizadas.cs" />
+    <Compile Include="Codigo\clases\Constantes.cs" />
+    <Compile Include="Codigo\clases\cSubirpedido.cs" />
+    <Compile Include="Codigo\clases\cThumbnail.cs" />
+    <Compile Include="Codigo\clases\FuncionesPersonalizadas.cs" />
+    <Compile Include="Codigo\clases\Generales\AccesoDisco.cs" />
+    <Compile Include="Codigo\clases\Generales\ArchivoExcel.cs" />
+    <Compile Include="Codigo\clases\Generales\Captcha.cs" />
+    <Compile Include="Codigo\clases\Generales\cCombo.cs" />
+    <Compile Include="Codigo\clases\Generales\Clonar.cs" />
+    <Compile Include="Codigo\clases\Generales\cMail.cs" />
+    <Compile Include="Codigo\clases\Generales\Criptografía.cs" />
+    <Compile Include="Codigo\clases\Generales\Numerica.cs" />
+    <Compile Include="Codigo\clases\Generales\Serializador.cs" />
+    <Compile Include="Codigo\clases\Generales\Texto.cs" />
+    <Compile Include="Codigo\clases\Generales\Validaciones.cs" />
+    <Compile Include="Codigo\clases\Seguridad.cs" />
+    <Compile Include="Codigo\Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Codigo\Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Codigo\Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Codigo\tbl_HomeSlide.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Codigo\tbl_Oferta_Rating.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Codigo\tbl_Recall.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\configController.cs" />
+    <Compile Include="Controllers\ctacteController.cs" />
+    <Compile Include="Controllers\devolucionesController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\mvcController.cs" />
+    <Compile Include="Filters\AuthorizePermisoAttribute.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="home\contacto.aspx.cs">
+      <DependentUpon>contacto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="home\contacto.aspx.designer.cs">
+      <DependentUpon>contacto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="home\contactocv.aspx.cs">
+      <DependentUpon>contactocv.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="home\contactocv.aspx.designer.cs">
+      <DependentUpon>contactocv.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="home\lanzamiento.aspx.cs">
+      <DependentUpon>lanzamiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="home\lanzamiento.aspx.designer.cs">
+      <DependentUpon>lanzamiento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="home\videoinstitucional.aspx.cs">
+      <DependentUpon>videoinstitucional.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="home\videoinstitucional.aspx.designer.cs">
+      <DependentUpon>videoinstitucional.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="home\empresa.aspx.cs">
+      <DependentUpon>empresa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="home\empresa.aspx.designer.cs">
+      <DependentUpon>empresa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="home\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="home\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="home\promociones.aspx.cs">
+      <DependentUpon>promociones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="home\promociones.aspx.designer.cs">
+      <DependentUpon>promociones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="home\recall.aspx.cs">
+      <DependentUpon>recall.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="home\recall.aspx.designer.cs">
+      <DependentUpon>recall.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="home\recalls.aspx.cs">
+      <DependentUpon>recalls.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="home\recalls.aspx.designer.cs">
+      <DependentUpon>recalls.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="home\registracion.aspx.cs">
+      <DependentUpon>registracion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="home\registracion.aspx.designer.cs">
+      <DependentUpon>registracion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="home\vistapreviaoferta.aspx.cs">
+      <DependentUpon>vistapreviaoferta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="home\vistapreviaoferta.aspx.designer.cs">
+      <DependentUpon>vistapreviaoferta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="home\vistapreviaslider.aspx.cs">
+      <DependentUpon>vistapreviaslider.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="home\vistapreviaslider.aspx.designer.cs">
+      <DependentUpon>vistapreviaslider.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\BaseAdmin.Master.cs">
+      <DependentUpon>BaseAdmin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="master\BaseAdmin.Master.designer.cs">
+      <DependentUpon>BaseAdmin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="master\BaseAdminJs3.Master.cs">
+      <DependentUpon>BaseAdminJs3.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="master\BaseAdminJs3.Master.designer.cs">
+      <DependentUpon>BaseAdminJs3.Master</DependentUpon>
+    </Compile>
+    <Compile Include="master\home.Master.cs">
+      <DependentUpon>home.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="master\home.Master.designer.cs">
+      <DependentUpon>home.Master</DependentUpon>
+    </Compile>
+    <Compile Include="master\homeContacto.master.cs">
+      <DependentUpon>homeContacto.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="master\homeContacto.master.designer.cs">
+      <DependentUpon>homeContacto.master</DependentUpon>
+    </Compile>
+    <Compile Include="pages\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\ServiceReferenceDLL\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\descargarArchivo.aspx.cs">
+      <DependentUpon>descargarArchivo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="servicios\descargarArchivo.aspx.designer.cs">
+      <DependentUpon>descargarArchivo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\generarCSV.aspx.cs">
+      <DependentUpon>generarCSV.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="servicios\generarCSV.aspx.designer.cs">
+      <DependentUpon>generarCSV.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\generar_archivo.aspx.cs">
+      <DependentUpon>generar_archivo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="servicios\generar_archivo.aspx.designer.cs">
+      <DependentUpon>generar_archivo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\generar_archivoPdf.aspx.cs">
+      <DependentUpon>generar_archivoPdf.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="servicios\generar_archivoPdf.aspx.designer.cs">
+      <DependentUpon>generar_archivoPdf.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\generar_comprobantes_txt.aspx.cs">
+      <DependentUpon>generar_comprobantes_txt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="servicios\generar_comprobantes_txt.aspx.designer.cs">
+      <DependentUpon>generar_comprobantes_txt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\generar_comprobantes_discriminado.aspx.cs">
+      <DependentUpon>generar_comprobantes_discriminado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="servicios\generar_comprobantes_discriminado.aspx.designer.cs">
+      <DependentUpon>generar_comprobantes_discriminado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\thumbnail.aspx.cs">
+      <DependentUpon>thumbnail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="servicios\thumbnail.aspx.designer.cs">
+      <DependentUpon>thumbnail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebService.asmx.cs">
+      <DependentUpon>WebService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="packages.config" />
+    <Content Include="includes\css\fonts\0wlTTJEXU4hQ4azwPn6Wjw.woff" />
+    <Content Include="includes\css\fonts\alike-regular-webfont.eot" />
+    <Content Include="includes\css\fonts\alike-regular-webfont.ttf" />
+    <Content Include="includes\css\fonts\alike-regular-webfont.woff" />
+    <Content Include="includes\css\fonts\specimen_files\Thumbs.db" />
+    <Content Include="includes\css\shadowbox-3.0.3\LICENSE" />
+    <Content Include="includes\css\shadowbox-3.0.3\README" />
+    <Content Include="includes\jquery.bxslider\bower.json" />
+    <Content Include="includes\jquery.bxslider\readme.md" />
+    <None Include="Service References\ServiceReferenceDLL\Service.wsdl" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\mvc\Index.cshtml" />
+    <Content Include="Views\Shared\_main.cshtml" />
+    <Content Include="Views\mvc\Buscador.cshtml" />
+    <Content Include="Views\mvc\_nav_secundario.cshtml" />
+    <Content Include="Views\mvc\_filtros_buscador.cshtml" />
+    <Content Include="Views\mvc\Diferido.cshtml" />
+    <Content Include="Views\mvc\_buscardorHidden.cshtml" />
+    <Content Include="Views\mvc\carrito.cshtml" />
+    <Content Include="Views\mvc\_scripts_buscadorGeneral.cshtml" />
+    <Content Include="Views\mvc\_carritoBase.cshtml" />
+    <Content Include="Views\mvc\carritoDiferido.cshtml" />
+    <Content Include="Views\mvc\_divDetalleProducto.cshtml" />
+    <Content Include="Views\mvc\_contenedoresCarrito.cshtml" />
+    <Content Include="Views\mvc\subirpedido.cshtml" />
+    <Content Include="Views\mvc\subirarchivoresultado.cshtml" />
+    <Content Include="Views\mvc\subirarchivoresultado_msg.cshtml" />
+    <Content Include="Views\config\mensajes.cshtml" />
+    <Content Include="Views\config\_scriptsConfig.cshtml" />
+    <Content Include="Views\config\_nav_config.cshtml" />
+    <Content Include="Views\config\perfil.cshtml" />
+    <Content Include="Views\config\usuarios.cshtml" />
+    <Content Include="Views\config\Error.cshtml" />
+    <Content Include="Views\config\inhabilitado.cshtml" />
+    <Content Include="Views\mvc\estadopedidos.cshtml" />
+    <Content Include="Views\ctacte\Documento.cshtml" />
+    <Content Include="Views\mvc\estadopedidosresultado.cshtml" />
+    <Content Include="Views\mvc\_scripts_pedidos.cshtml" />
+    <Content Include="Views\mvc\recuperador.cshtml" />
+    <Content Include="Views\mvc\promocionescliente.cshtml" />
+    <Content Include="Views\config\mediosdepago1.cshtml" />
+    <Content Include="Views\config\mediosdepago2.cshtml" />
+    <Content Include="Views\config\mediosdepago3.cshtml" />
+    <Content Include="Views\config\mediosdepago4.cshtml" />
+    <Content Include="Views\config\mediosdepago5.cshtml" />
+    <Content Include="Views\config\_nav_mediosdepago.cshtml" />
+    <Content Include="Views\config\catalogo.cshtml" />
+    <Content Include="Views\config\descarga.cshtml" />
+    <Content Include="Views\config\_nav_descarga.cshtml" />
+    <Content Include="Views\config\_pagos_includes.cshtml" />
+    <Content Include="Views\config\_scriptsMediosdepago.cshtml" />
+    <Content Include="Views\config\sinpermiso.cshtml" />
+    <Content Include="Views\config\sinusodll.cshtml" />
+    <Content Include="Views\ctacte\_nav_ctacte.cshtml" />
+    <Content Include="Views\ctacte\FichaDebeHaberSaldo.cshtml" />
+    <Content Include="Views\ctacte\_scriptsCtacte.cshtml" />
+    <Content Include="Views\ctacte\descargaResumenes.cshtml" />
+    <Content Include="Views\ctacte\descargaResumenesDetalle.cshtml" />
+    <Content Include="Views\ctacte\composicionsaldo.cshtml" />
+    <Content Include="Views\ctacte\composicionsaldoCtaCte.cshtml" />
+    <Content Include="Views\ctacte\composicionsaldoCtaResumen.cshtml" />
+    <Content Include="Views\ctacte\composicionsaldochequecuenta.cshtml" />
+    <Content Include="Views\ctacte\_hiddenComposicionSaldo.cshtml" />
+    <Content Include="Views\ctacte\_scriptsCompocisionSaldos.cshtml" />
+    <Content Include="Views\ctacte\_nav_composicionsaldos.cshtml" />
+    <Content Include="Views\ctacte\ConsultaDeComprobantes.cshtml" />
+    <Content Include="Views\ctacte\RespuestaConsultaDeComprobantes.cshtml" />
+    <Content Include="Views\ctacte\_scriptsCtacteDaterangepicker.cshtml" />
+    <Content Include="Views\ctacte\_scriptsComprobantes.cshtml" />
+    <Content Include="Views\ctacte\comprobantescompleto.cshtml" />
+    <Content Include="Views\ctacte\ConsultaDeComprobantesObraSocial.cshtml" />
+    <Content Include="Views\ctacte\ConsultaDeComprobantesObraSocialResultado.cshtml" />
+    <Content Include="Views\ctacte\ConsultaDeComprobantesObraSocialResultadoRango.cshtml" />
+    <Content Include="Views\ctacte\deudaVencida.cshtml" />
+    <Content Include="Views\mvc\_scripts_subirArchivo.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="archivos\noticia\jpg\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ServiceReferenceDLL\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DKbase\DKbase.csproj">
+      <Project>{fd26b2b9-152b-4573-9dff-9db44343725e}</Project>
+      <Name>DKbase</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>35226</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:35230/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

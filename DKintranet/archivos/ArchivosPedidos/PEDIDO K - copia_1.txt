@@ -1,0 +1,286 @@
+Farmacia MARIANO ACOSTA	                                        	      	                                             	                         	X 0001-00000852
+                       	                                        	      	                                             	                         	10/08/2018     
+Pedido a droguería     	                                        	      	                                             	                         	               
+Proveedor:             	Monroe - Gomer S.A.C.I                  	      	                                             	Número de factura:       	               
+C.U.I.T.:              	30-51705909-5                           	      	                                             	Es reposición automática:	[-]            
+Sugerido               	Encargado                               	Pedido	Producto                                     	                         	Código barras  
+1                      	0                                       	2     	ACALIX  60 mg COM x   50                     	                         	7444345002811  
+2                      	0                                       	1     	ACALIX AP 120 mg CAP x   30                  	                         	7795345001968  
+3                      	0                                       	1     	ACALIX CRONOS 180 mg CAP x   30              	                         	7555555013541  
+4                      	0                                       	2     	ACANTEX 1 g IM F.A x    1                    	                         	7795380001275  
+1                      	0                                       	1     	ACLUSIN 100 mg COM x   60                    	                         	7791909116130  
+2                      	0                                       	1     	ADALAT OROS 60 mg COM x   20                 	                         	7793640002017  
+4                      	0                                       	1     	ADALAT RETARD 10 mg COM x   50               	                         	7793640001898  
+5                      	0                                       	1     	ADALAT RETARD 20 mg COM x   50               	                         	7793640233916  
+5                      	0                                       	2     	ADVANTAN CRE x   15                          	                         	7795320050127  
+7                      	0                                       	2     	ALCON LAGRIMAS COL x   15                    	                         	7792086057544  
+1                      	0                                       	1     	ALKET  COL x    5                            	                         	7795368054729  
+1                      	0                                       	1     	AMISPED 10 mg COM x   30                     	                         	7705959013226  
+1                      	0                                       	1     	AMLOC 10 mg TAB x   20                       	                         	7795381012249  
+1                      	0                                       	1     	AMLOC 10 mg TAB x   30                       	                         	7795381012331  
+36                     	0                                       	2     	AMOXIDAL DUO MUC COM x   14                  	                         	7795345002361  
+1                      	0                                       	1     	AMOXIDAL RESPIRATORIO 500 mg SUS x  120      	                         	7795345010243  
+2                      	0                                       	1     	AMOXIDAL RESPIRATORIO DUO COM x   14         	                         	7795345011097  
+1                      	0                                       	1     	AMPLIAR PLUS 10/10 mg COM x   30             	                         	7791909295019  
+6                      	0                                       	2     	APASMO GTS x   20                            	                         	7795356001308  
+1                      	0                                       	1     	APASMO COMPUESTO COM x   20                  	                         	7795356905002  
+9                      	0                                       	1     	ARTOMEY 20 mg COM x   30                     	                         	7795326000331  
+1                      	0                                       	1     	ARTRODAR GLUCO CAP x   60                    	                         	7795371000041  
+8                      	0                                       	2     	ARTROSTOP COLAGENO pouch de 6 g SOB x    1   	                         	0000077960924  
+2                      	0                                       	1     	ATACAND 16 mg DIVIS. COM x   30              	                         	7795302036026  
+3                      	0                                       	1     	ATACAND D 16/12.5 mg DIVIS. COM x   30       	                         	7795302180088  
+1                      	0                                       	1     	ATENOLOL GADOR 100 mg COM x   28             	                         	7792183100280  
+1                      	0                                       	1     	AXIOMAT 20 mg COM x   30                     	                         	7795328052871  
+1                      	0                                       	1     	AZATIOPRINA RONTAG 50 mg COM x  100          	                         	7798239770223  
+4                      	0                                       	2     	BACTROBAN CRE x   15                         	                         	7794640205217  
+4                      	0                                       	2     	BACTROBAN NASAL UNG x    3                   	                         	7794640205118  
+1                      	0                                       	1     	BAÑO OCULAR POEN  COL x   80                 	                         	7795368547153  
+3                      	0                                       	3     	BELOZOK  50 mg COM x   30                    	                         	7795302180460  
+4                      	0                                       	1     	BENGUE ULTRA GEL x   65                      	                         	0650240006678  
+2                      	0                                       	1     	BETASEL 0.5%  COL x    5                     	                         	7896548158777  
+2                      	0                                       	1     	BETASEL S 0.25%  COL x    5                  	                         	7792086057599  
+1                      	0                                       	1     	BETNOVATE N CRE x   15                       	                         	7796930001196  
+1                      	0                                       	1     	BEZACUR RETARD  400 mg COM x   30            	                         	7795380004047  
+5                      	0                                       	2     	BISOLVON COMPOSITUM NF SOL x  120            	                         	7795304000636  
+59                     	0                                       	1     	BLOKIUM  75 mg COM x   15                    	                         	7791909317322  
+11                     	0                                       	1     	BLOKIUM  75 mg 3 ML AMP x    3               	                         	7791909317834  
+1                      	0                                       	1     	BLOKIUM  75 mg 3 ML AMP x    5               	                         	7791909317872  
+2                      	0                                       	1     	BLOKIUM B12 AMP x    3                       	                         	7791909319210  
+3                      	0                                       	2     	BRIMOPRESS T  COL x    5                     	                         	7795368000283  
+1                      	0                                       	1     	BRIT  COL x    5                             	                         	7791763000798  
+5                      	0                                       	1     	BRONQUISEDAN ADULTOS JBE x  150              	                         	7792819000359  
+26                     	0                                       	12    	BUSCAPINA GRA x   20                         	                         	7795304018235  
+24                     	0                                       	2     	BUSCAPINA COMPOSITUM GTS x   20              	                         	7795304019324  
+3                      	0                                       	2     	BUSCAPINA COMPOSITUM N (VL) COM x   20       	                         	7795304022225  
+2                      	0                                       	2     	BUSHI ESCUDO FORMADOR PEZON ENV x    2       	                         	7793742004506  
+1                      	0                                       	1     	CEFALEXINA ARGENTIA  250 mg SUS x  120       	                         	7798129410178  
+22                     	0                                       	2     	CEFALEXINA ARGENTIA DUO 1 g COM x   14       	                         	7798129411021  
+2                      	0                                       	1     	CEFALEXINA ARGENTIA DUO 750 mg SUS x   90    	                         	7798129411014  
+7                      	0                                       	2     	CELESTONE GTS x   15                         	                         	7793081023343  
+7                      	0                                       	2     	CELESTONE CRONODOSE 2 ML AMP x    1          	                         	7793081023831  
+1                      	0                                       	1     	CENTRUM  SUPLEMENTO DIETARIO  COM x  100     	                         	7795381001830  
+1                      	0                                       	1     	CENTRUM SILVER FORTE COM x   30              	                         	7792270062002  
+10                     	0                                       	1     	CHAPSTICK CUIDADO INTENSO Labial BAR x  4,2  	                         	0003660083331  
+24                     	0                                       	2     	CICATRICURE FIRMEZA CORPORAL NF EMU x  400   	                         	7798140258414  
+6                      	0                                       	2     	CILOXADEX  COL x    5                        	                         	7896548140437  
+5                      	0                                       	2     	CILOXADEX OFT. UNG x  3,5                    	                         	7896548198575  
+2                      	0                                       	1     	CIPROVIT CALCICO JBE x  150                  	                         	7795328050266  
+2                      	0                                       	1     	CIRCLET ANILLO VAGINAL  ENV x    1           	                         	7795318000110  
+2                      	0                                       	1     	COLCHICINA HOUDE COM x   60                  	                         	7795366453166  
+5                      	0                                       	2     	COMBIVENT SM Sol.Monodosis ENV x   20        	                         	7795304000438  
+1                      	0                                       	1     	COOL TEARS  COL x   20                       	                         	7791763000491  
+26                     	0                                       	12    	CORBIS  5 mg COM x   30                      	                         	7795345010830  
+12                     	0                                       	2     	CORTIPYREN B  8 mg COM x   20                	                         	7792183100884  
+6                      	0                                       	1     	CORTIPYREN B 40 mg COM x   20                	                         	7792183100891  
+2                      	0                                       	1     	CURFLEX COM x   30                           	                         	7798028620401  
+1                      	0                                       	1     	CYCLO 3 CAP x   30                           	                         	7798067995287  
+2                      	0                                       	1     	DAUNLIP CAP x   30                           	                         	7795378004707  
+18                     	0                                       	2     	DBI 500 mg COM x   60                        	                         	7795378002314  
+59                     	0                                       	3     	DBI AP 850 mg COM x   30                     	                         	7795378000587  
+1                      	0                                       	1     	DBI AP 850 mg COM x  100                     	                         	7795378000594  
+19                     	0                                       	1     	DBI AP FORTE 1000 mg COM x   30              	                         	7795378002345  
+3                      	0                                       	1     	DBI AP FORTE 1000 mg COM x   60              	                         	7795378002352  
+7                      	0                                       	1     	DBI AP FORTE 1000 mg COM x  100              	                         	7795378004776  
+4                      	0                                       	1     	DECADURABOLIN  50 mg 1 ML AMP x    1         	                         	7795318000035  
+8                      	0                                       	1     	DECIDEX CAP x   10                           	                         	7795345000589  
+76                     	0                                       	12    	DELTISONA-B GTS x   20                       	                         	7795312020664  
+6                      	0                                       	2     	DERALBINE PDA x   30                         	                         	7793742002946  
+13                     	0                                       	12    	DERMOPER FLUIDA CRE x  100                   	                         	7791763000088  
+2                      	0                                       	1     	DESLAFAX  50 mg COM x   30                   	                         	7792183000856  
+10                     	0                                       	2     	DEXALERGIN COM x   20                        	                         	7795350021302  
+11                     	0                                       	3     	DEXALERGIN GTS x   60                        	                         	7795350021432  
+2                      	0                                       	1     	DEXAMERAL 40 mg COM x   14                   	                         	7795367000918  
+11                     	0                                       	1     	DEXA-RHINOSPRAY N  10 ML AER x  120          	                         	7795304085466  
+6                      	0                                       	1     	DIABET TX LIQUIDO  TAL x   70                	                         	7798140253181  
+2                      	0                                       	1     	DIOXAFLEX 5% GEL x   50                      	                         	7790375002664  
+6                      	0                                       	1     	DIOXAFLEX GESIC COM x   20                   	                         	7790375250485  
+1                      	0                                       	1     	DIURAL 50 mg COM x   30                      	                         	7798160690768  
+3                      	0                                       	1     	DIUREX A 25/2.5 mg COM x   30                	                         	7790375262006  
+2                      	0                                       	1     	DIUREX A 50/5 mg COM x   30                  	                         	7790375252205  
+12                     	0                                       	2     	DOLTEN 60 mg AMP x    1                      	                         	7791824111760  
+6                      	0                                       	1     	DOLTEN SL 10 mg COM x   10                   	                         	7791824116130  
+2                      	0                                       	1     	DORLAMIDA  COL x    5                        	                         	7798097890354  
+1                      	0                                       	1     	DOSTINEX 0.5 mg COM x    8                   	                         	7791824117489  
+3                      	0                                       	1     	DRILYNA 300 mg COM x   20                    	                         	7790375000530  
+1                      	0                                       	1     	EFICICLINA 300 mg CAP x   14                 	                         	7798051852572  
+1                      	0                                       	1     	ELGYDIUM BLANQUEADOR CRE x   75              	                         	3577056013003  
+3                      	0                                       	2     	EMLA C/2 PARCHES OCULS CRE x    5            	                         	7795302051180  
+3                      	0                                       	2     	EMPECID GYNO 3 DIA VAG. COM x    3           	                         	7793640215554  
+6                      	0                                       	1     	ENSURE ADVANCE Vainilla   POL x  400         	                         	8427030003719  
+2                      	0                                       	1     	ERITROMED  COL x   10                        	                         	7798069050236  
+6                      	0                                       	1     	ERITROMICINA ELEA OFT. UNG x  3,5            	                         	7796285055301  
+3                      	0                                       	2     	ERNEX DUO CLT x  120                         	                         	7791909363213  
+1                      	0                                       	1     	ESTREPTOCARBOCAFTIAZOL COM x   60            	                         	7790375250232  
+2                      	0                                       	1     	EUMOTIL 200 mg COM x   30                    	                         	7795338016962  
+2                      	0                                       	1     	EXFORGE  5/160 mg COM x   28                 	                         	7795306104196  
+5                      	0                                       	2     	EXFORGE D  5/160/12.5 mg COM x   28          	                         	7795306001150  
+1                      	0                                       	2     	EXFORGE D  5/160/25 mg COM x   28            	                         	7795306001143  
+2                      	0                                       	2     	EXFORGE D 10/160/12.5 mg COM x   28          	                         	7795306001129  
+1                      	0                                       	1     	EXTENSIL 30 mg COM x    6                    	                         	7792175009171  
+3                      	0                                       	1     	FILTEN 12.5 mg COM x   28                    	                         	7792183487466  
+11                     	0                                       	2     	FLAGYL 500 mg OVU x   10                     	                         	7795312107983  
+6                      	0                                       	1     	FLAGYSTATIN OVU x   10                       	                         	7795312107990  
+2                      	0                                       	1     	FLOGOSTOP 500 mg COM x   60                  	                         	7795326004261  
+8                      	0                                       	1     	FLUMARC  5 mg COM x   20                     	                         	7798084680296  
+3                      	0                                       	1     	FLUMARC 10 mg COM x   20                     	                         	7798084680302  
+24                     	0                                       	12    	FLUOROGEL  P/CHIQUITOS Tutti Fruti GEL x   60	                         	7794066000144  
+1                      	0                                       	1     	FOR-AGE CAP x   60                           	                         	7798021293039  
+56                     	0                                       	3     	FRENALER CORT COM x   10                     	                         	7795345120386  
+1                      	0                                       	1     	GALVUS 50 mg COM x   56                      	                         	7795306150124  
+6                      	0                                       	2     	GENTEAL  COL x   10                          	                         	7792086020494  
+6                      	0                                       	2     	GENTEAL  COL x   15                          	                         	7792086020500  
+2                      	0                                       	2     	GENTEAL OFT. GEL x   10                      	                         	7792086020654  
+2                      	0                                       	1     	GLIOSARTAN PLUS 40/12.5 mg COM x   28        	                         	7790375251925  
+4                      	0                                       	1     	GLUCAMINOL FORTE 850 COM x   60              	                         	7791864600040  
+17                     	0                                       	2     	HEXALER CORT COM x   10                      	                         	7795380010529  
+1                      	0                                       	1     	HEXALER PLUS LIB.PROL. CAP x   10            	                         	7795380010390  
+1                      	0                                       	1     	HIPOLIXAN 600 COM x   60                     	                         	7790375000837  
+1                      	0                                       	1     	HONGUIL VAGINAL CAP x    1                   	                         	7791763296573  
+61                     	0                                       	3     	IBUPIRAC 4%  SUS x   90                      	                         	7791824118202  
+5                      	0                                       	6     	IBUPIRAC MIGRA COM x   20                    	                         	7791824112668  
+13                     	0                                       	3     	IBUPIRAC ORAL GTS x   30                     	                         	7791824118257  
+3                      	0                                       	3     	IBUPIRETAS COM x   20                        	                         	7791824115904  
+24                     	0                                       	6     	IBUPIRETAS JR. MAST. COM x   20              	                         	7795381411134  
+1                      	0                                       	1     	IMIGRAN  50 mg TAB x    4                    	                         	7796930004128  
+1                      	0                                       	1     	INDUZEPAM 0.50 mg COM x   30                 	                         	7791171100967  
+1                      	0                                       	1     	INDUZEPAM 0.50 mg COM x   50                 	                         	7791171100974  
+2                      	0                                       	1     	IRUXOL UNG x   15                            	                         	7790440512012  
+48                     	0                                       	1     	ISET UD 500 mg COM x    8                    	                         	7791909222602  
+2                      	0                                       	1     	ISOPTO ATROPINA 1% COL x    5                	                         	7792086057711  
+2                      	0                                       	1     	ISOPTO CARPINA 2% COL x   15                 	                         	7792086057735  
+3                      	0                                       	1     	ISOPTOMAX  COL x    5                        	                         	7792086057780  
+6                      	0                                       	1     	ISOPTOMAX OFT. UNG x    3                    	                         	7792086057797  
+143                    	0                                       	10    	KALA COM x   28                              	                         	7792175008273  
+12                     	0                                       	1     	KALA FOLIC  COM x   28                       	                         	7792175009386  
+30                     	0                                       	6     	KALA MD COM x   28                           	                         	7792175008570  
+3                      	0                                       	2     	KARIDIUM 10 mg COM x   60                    	                         	7795312000376  
+1                      	0                                       	1     	KONAKION MM  2 mg C/DOSIF.ORAL AMP x    5    	                         	7792371026125  
+1                      	0                                       	1     	LAMISIL 250 mg COM x   28                    	                         	7795383000213  
+1                      	0                                       	1     	LANZOPRAL SUSP. SOB x   30                   	                         	7795345012070  
+1                      	0                                       	1     	LASILACTON  50 mg CAP x   30                 	                         	7795312000147  
+5                      	0                                       	3     	LASIX 40 mg COM x   50                       	                         	7795312000116  
+1                      	0                                       	1     	LEVECOM XR 750 mg  COM x   30                	                         	7795338019956  
+3                      	0                                       	1     	LEVEDAD  COL x   10                          	                         	7791763000330  
+3                      	0                                       	2     	LEVOTIROXINA GSK   50 mcg COM x   50         	                         	7796930004524  
+14                     	0                                       	2     	LOPRED SUSP. COL x    5                      	                         	7796285255053  
+1                      	0                                       	1     	LOPROX LACA p/UÑAS SOL x    3                	                         	7795312000468  
+1                      	0                                       	1     	LORAZEPAN CHOBET 2 mg COM x   50             	                         	7795375547009  
+7                      	0                                       	2     	LOSACOR 100 mg COM x   30                    	                         	7795345011738  
+2                      	0                                       	2     	LOSACOR D  50/12.5 mg COM x   30             	                         	7795345001999  
+4                      	0                                       	1     	LOSACOR D 100/25 mg COM x   30               	                         	7795345011974  
+6                      	0                                       	3     	LOTRIAL  5 mg COM x   30                     	                         	7795345011592  
+6                      	0                                       	2     	LOTRIAL  5 mg COM x   60                     	                         	7795345012780  
+61                     	0                                       	6     	LOTRIAL 10 mg COM x   30                     	                         	7795345011608  
+1                      	0                                       	2     	LOTRIAL 10 mg COM x   50                     	                         	7795345003665  
+8                      	0                                       	3     	LOTRIAL 10 mg COM x   60                     	                         	7795345012797  
+3                      	0                                       	2     	LOTRIAL 20 mg COM x   30                     	                         	7795345011615  
+2                      	0                                       	1     	LOTRIAL 20 mg COM x   60                     	                         	7795345012803  
+2                      	0                                       	1     	LOTRIAL D 10/25 COM x   30                   	                         	7795345001340  
+6                      	0                                       	3     	LOUTEN Emul. COL x  2,5                      	                         	7795368002942  
+1                      	0                                       	1     	LUSTONA 40 mg COM x   30                     	                         	7795338013121  
+1                      	0                                       	1     	LYRICA  25 mg CAP x   30                     	                         	7795381000963  
+12                     	0                                       	2     	MAGNUS GEL LUBRICANTE  5 g SOB x    6        	                         	7795356099329  
+1                      	0                                       	1     	MAXIBRAL XR 75 mg COM x   30                 	                         	7795378005575  
+3                      	0                                       	1     	MAXIOSTENIL PLUS 2 ML JPR x    1             	                         	7795371000034  
+12                     	0                                       	2     	MEBUTAR 200 COM x    6                       	                         	7793742002397  
+11                     	0                                       	2     	MEBUTAR 200 SUS x   30                       	                         	7793742002403  
+3                      	0                                       	1     	MECANYL K 1500 mg GRANUL. SOB x   30         	                         	7795328053403  
+1                      	0                                       	1     	MECTIN XR  500 mg COM x   30                 	                         	7795326000379  
+3                      	0                                       	1     	MELINDA PLUS COM x   30                      	                         	7798051851643  
+9                      	0                                       	2     	MEPLAR 20 mg RECUB. COM x   30               	                         	7795338013992  
+2                      	0                                       	1     	MEPLAR 30 mg COM x   30                      	                         	7795338016405  
+4                      	0                                       	1     	MERCILON COM x   21                          	                         	7795318001049  
+6                      	0                                       	3     	MERIDIAN 10 mg COM x   30                    	                         	7795345011875  
+2                      	0                                       	2     	MERIDIAN 20 mg COM x   30                    	                         	7795345011899  
+1                      	0                                       	1     	METGLUCON 1000 mg AP COM x   30              	                         	7795380000049  
+2                      	0                                       	1     	METRERGINA 0.2 mg COM x   20                 	                         	7792796000182  
+10                     	0                                       	2     	MICOLIS TAL x   20                           	                         	7795345120928  
+12                     	0                                       	1     	MICOSEP TAL x   30                           	                         	7795373010970  
+1                      	0                                       	1     	MIDAX   5 mg COM x   28                      	                         	7792183003017  
+1                      	0                                       	1     	MIDAX 10 mg COM x   28                       	                         	7792183003048  
+2                      	0                                       	1     	MIGRAL SUP x   10                            	                         	7795378001089  
+1                      	0                                       	1     	MIOPROPAN T 200/1.5 mg COM x   30            	                         	7792175008709  
+50                     	0                                       	2     	MIRELLE COM x   28                           	                         	7795320050653  
+2                      	0                                       	2     	MIRUS-S  COL x   15                          	                         	7896548122983  
+1                      	0                                       	1     	MOMETAX CRE x   30                           	                         	7795380042773  
+2                      	0                                       	1     	MOPERIDONA GTS x   20                        	                         	7795356956400  
+3                      	0                                       	1     	MOSAR 5 mg RECUB COM x   20                  	                         	7791848269010  
+4                      	0                                       	1     	MOSAR 5 mg RECUB COM x   30                  	                         	7791848269102  
+3                      	0                                       	1     	MUCOBRON FORTE JBE x  120                    	                         	7792369000335  
+2                      	0                                       	1     	MUCOSOLVAN FORTE JBE x  120                  	                         	7795304000650  
+2                      	0                                       	1     	MUCOSOLVAN FR JBE x  120                     	                         	4048846010421  
+2                      	0                                       	1     	MUPATEN CRE x   20                           	                         	7795320004519  
+6                      	0                                       	3     	MYSODONE 250 mg COM x   30                   	                         	7798081261337  
+1                      	0                                       	1     	NALOX OVU x   12                             	                         	7795339000335  
+1                      	0                                       	1     	NALOX 500 mg COM x   20                      	                         	7795339000489  
+5                      	0                                       	1     	NAN 2 OPTIPRO ENV x  900                     	                         	7501058610645  
+1                      	0                                       	1     	NAN COMFORT  POL x  400                      	                         	7613033734441  
+2                      	0                                       	1     	NASTIZOL COM x   20                          	                         	7790375250393  
+1                      	0                                       	1     	NATACYN  COL x   15                          	                         	7792086057827  
+2                      	0                                       	1     	NEBIDO 250 mg/ml   4 ml AMP x    1           	                         	7703331510837  
+1                      	0                                       	1     	NEBIX  5 mg COM x   30                       	                         	7790375267575  
+2                      	0                                       	1     	NEOTIGASON 25 mg CAP x   30                  	                         	7792069000291  
+5                      	0                                       	2     	NERVOMAX TB12 CAP x   40                     	                         	7795371000140  
+6                      	0                                       	1     	NEUMOCORT PLUS /INHAL. AER x  150            	                         	7795373024458  
+1                      	0                                       	2     	NEUMOTEROL 200 CAPS + APLIC INH x   60       	                         	7791848281012  
+1                      	0                                       	2     	NEUMOTEROL 200 CAPS + APLIC INH x  120       	                         	7791848281029  
+3                      	0                                       	2     	NEUMOTEROL 200 S/APLIC. CAPS INH x   60      	                         	7791848281050  
+1                      	0                                       	2     	NEUMOTEROL 200 S/APLIC. CAPS INH x  120      	                         	7791848281067  
+2                      	0                                       	1     	NEUMOTEX BRONQUIAL 200 mcg AER x  200        	                         	7791848244710  
+5                      	0                                       	1     	NEURISTAN  75 mg CAP x   30                  	                         	7791909221728  
+1                      	0                                       	1     	NEUTRACOL 600 mg COM x   40                  	                         	7795328050976  
+18                     	0                                       	2     	NEVANAC 0.1%  COL x    5                     	                         	7792086416563  
+13                     	0                                       	3     	NEXIUM 40 mg COM x   28                      	                         	7795302180125  
+16                     	0                                       	2     	NICOTINELL GUMS 2 mg COOL MINT CHI x   24    	                         	7794640172052  
+1                      	0                                       	1     	NIVAS 30 mg COM x   30                       	                         	7798084680920  
+4                      	0                                       	1     	NIVAS FORTE 60 mg COM x   30                 	                         	7798084680906  
+6                      	0                                       	1     	NIVAS FORTE 60 mg COM x   60                 	                         	7798084680913  
+6                      	0                                       	2     	NOCTE 10 mg COM x   30                       	                         	7790375261993  
+1                      	0                                       	1     	NORMOLIPOL 10 mg COM x   30                  	                         	7798011652594  
+4                      	0                                       	2     	NOZINAN  25 mg COM x   30                    	                         	7795312001625  
+1                      	0                                       	1     	NULIPAR 0.5 mg COM x   30                    	                         	7795338012001  
+590                    	0                                       	90    	NUTRILON 1 PROFUTURA Brik 200 ml  ENV x    1 	                         	7795323002468  
+40                     	0                                       	2     	NUTRILON SIN LACTOSA LCP  LAT x  800         	                         	7795323003359  
+1                      	0                                       	1     	OCUVITE OMEGA 3 BLANDAS CAP x   50           	                         	7798069050687  
+4                      	0                                       	1     	OILALFO COMPUESTO SHA x  100                 	                         	7795380042575  
+2                      	0                                       	2     	OMEGA 100 GTS x   20                         	                         	7795339000205  
+3                      	0                                       	2     	OPTAMOX 250 mg PEDIATRICA SUS x   90         	                         	7795345008226  
+6                      	0                                       	1     	OPTILAC COL x   10                           	                         	7791763000316  
+3                      	0                                       	2     	OPTIVE  COL x   10                           	                         	7795316000105  
+2                      	0                                       	1     	ORIFUNGAL CRE x   15                         	                         	7795314027678  
+3                      	0                                       	3     	OTRIVINA NASAL fco.dosif. SPR x   10         	                         	7794640172304  
+1                      	0                                       	1     	OXA GEL x   50                               	                         	7795328053847  
+8                      	0                                       	1     	OXA B12 COM x   15                           	                         	7795328053410  
+5                      	0                                       	1     	OXA B12 IM AMP x    6                        	                         	7795328053762  
+6                      	0                                       	1     	OXADISTEN COM x   20                         	                         	7795328053717  
+4                      	0                                       	2     	PANTOMICINA  500 ES COM x    8               	                         	7790375000608  
+7                      	0                                       	2     	PASMINOX 40 mg COM x   20                    	                         	7795328054936  
+6                      	0                                       	2     	PATANOL S 0.2%  COL x  2,5                   	                         	7792086000090  
+6                      	0                                       	1     	PAXON D 100/12.5 mg COM x   28               	                         	7792183488661  
+27                     	0                                       	1     	PERVINOX TOPICA SOL x   60                   	                         	7791848054500  
+4                      	0                                       	1     	PHARMATON COMPLEX CAP x   30                 	                         	7795304083240  
+1                      	0                                       	1     	PHARMATON COMPLEX CAP x  100                 	                         	7795304866904  
+1                      	0                                       	1     	PLENACOR  50 mg COM x   30                   	                         	7790375261665  
+2                      	0                                       	2     	PLIDAN 10 mg COM x   20                      	                         	7795345011660  
+4                      	0                                       	1     	POINTTS VERRUGAS + 12 APLIC. SPR x  125      	                         	0650240018084  
+1                      	0                                       	1     	POLYPLEX SUSP. COL x    5                    	                         	7796285255114  
+4                      	0                                       	2     	POVIRAL 800 mg COM x   40                    	                         	7795345011752  
+2                      	0                                       	1     	PRADAXA 110 mg CAP x   10                    	                         	4048846001535  
+1                      	0                                       	2     	PREMARIN C/APLICADOR VAGINAL CRE x   26      	                         	7795381001311  
+1                      	0                                       	1     	PREMARIN CD 0.625 mg GRA x   28              	                         	7795381001212  
+4                      	0                                       	1     	PRENORETIC  50 mg COM x   28                 	                         	7794220000263  
+1                      	0                                       	1     	PRENORETIC  50 mg COM x   56                 	                         	7794220000270  
+2                      	0                                       	1     	PRENORMINE  50 COM x   28                    	                         	7794220000300  
+10                     	0                                       	2     	PRIMOLUT NOR 10 mg COM x   20                	                         	7896116863461  
+9                      	0                                       	1     	PROCELAC 20 mg CAP x   28                    	                         	7795350022910  
+22                     	0                                       	1     	PROCTO VENART PDA x   30                     	                         	7791909423870  
+2                      	0                                       	1     	PROCTYL HC PDA x   10                        	                         	7795300000326  
+2                      	0                                       	1     	PROPECIA 1 mg COM x   30                     	                         	7797991065974  
+2                      	0                                       	1     	PROSTACUR COM x   50                         	                         	7791171000649  
+5                      	0                                       	1     	PROSTENE 5 mg COM x   30                     	                         	7795350020060  
+6                      	0                                       	3     	PSICOASTEN 20 mg COM x   30                  	                         	7795328058224  
+7                      	0                                       	1     	PULMOSAN PEDIATRICO JBE x  120               	                         	7792369002346  
+8                      	0                                       	2     	QUETIAZIC 100 mg COM x   30                  	                         	7798084684386  
+1                      	0                                       	1     	QUETIAZIC 200 mg COM x   30                  	                         	7798084684393  
+                       	Farmacia MARIANO ACOSTA - ACOSTA MARIANO	      	                                             	                         	Pagina: 1 / 1  
+v2.1.0 build:1592      	                                        	      	                                             	                         	               

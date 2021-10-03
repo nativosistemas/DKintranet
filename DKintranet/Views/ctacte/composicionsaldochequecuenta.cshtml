@@ -1,0 +1,32 @@
+﻿@Html.Partial("_nav_ctacte")
+@section Scripts{
+    @Html.Partial("_scriptsCompocisionSaldos")
+    <script type="text/javascript">
+    jQuery(document).ready(function () {
+        CargarHtmlPanel_nav_composicionsaldos();
+        CargarHtmlChequesEnCartera();
+    });
+
+    </script>
+}
+@section sectionHidden{
+    @Html.Partial("_hiddenComposicionSaldo")
+@{
+    string resultado_sub = string.Empty;
+    if (HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+    {
+        List<DKintranet.ServiceReferenceDLL.cDllChequeRecibido> resultadoChequesEnCartera = WebService.ObtenerChequesEnCartera(((DKintranet.Codigo.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login);
+        if (resultadoChequesEnCartera != null)
+        {
+            resultado_sub += "<input type=\"hidden\" id=\"hiddenChequesEnCartera\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(resultadoChequesEnCartera)) + "\" />";
+        }
+    }
+    WriteLiteral(resultado_sub);
+}
+}
+
+<div class="row">
+    @Html.Partial("_nav_composicionsaldos")
+    <div id="divResultadoChequecuenta" class="col-xs-12">
+    </div>
+</div>

@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewBag.Title = "Nueva Devolucion Factura Completa";
+}
+
+@{
+    if (((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR ||
+        ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL ||
+        ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL ||
+        ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
+    {
+        Response.Redirect("/config/sinpermiso");
+    }
+}
+
+@Html.Partial("_nav_secundario")
+@Html.Partial("_scriptsDevoluciones")
+<p class="tit_secund">Devolución de Factura Completa</p>
+<p class="color_red">Recuerde que se agregarán todos los productos y cantidades que figuran en la factura.</p>
+@*<p>Por favor, complete los datos del formulario para poder realizar una nueva DEVOLUCIÓN.</p>*@
+<div class="row">
+    <div class="col-xs-12 padding_l-10">
+        <div class="clear15"></div>
+        <div id="divPanelNroComprobante">
+            @{
+                int nroCliente = ((DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo;
+
+                <input type="hidden" name="txtNroCliente" id="txtNroCliente" value="@{ WriteLiteral(nroCliente); }" />
+            }
+            <div class="col-xs-12 col-sm-3" id="DEVMotivoFC">
+                <label for="cmbMotivoFC" class="col-xs-12 no-padding">Motivo</label>
+                <div class="col-xs-10 col-sm-9 col-md-10 no-padding">
+                    <input type="text" name="cmbMotivoFC" id="cmbMotivoFC" list="MotivoValues" class="form-control" />
+
+                    <datalist id="MotivoValues">
+  @*                      <option value="Bien facturado mal enviado" data-id="1">*@
+                        <option value="No pedido" data-id="2">
+                        @*<option value="Producto con falla de laboratorio" data-id="3">
+                        <option value="Producto con vencimiento corto" data-id="4">
+                        <option value="Producto de más sin ser facturado" data-id="5">
+                        <option value="Producto roto" data-id="6">
+                        <option value="Producto vacío" data-id="7">*@
+                        <option value="Transfer equívoco" data-id="8">
+                    </datalist>
+                </div>
+                <div class="col-xs-2 col-sm-3 col-md-2 text-center">
+                    <a class="refresh-input text-center" data-id="cmbMotivoFC"> <i class="fa fa-refresh fa-lg"></i> </a>
+                </div>
+            </div>
+            @*<div class="col-md-2 col-sm-3 col-xs-5 hidden" id="DEVTipoComprobanteFC">
+                <label for="cmbTipoComprobanteFC" class="col-xs-12 no-padding">Comprobante</label>
+                <div class="col-xs-10 col-sm-9 no-padding">
+                    <input type="text" name="cmbTipoComprobanteFC" id="cmbTipoComprobanteFC" class="form-control" list="TipoCbteValues" />
+                    <datalist id="TipoCbteValues">
+                        @{
+                            if (Session["ConsultaDeComprobantes_tipoComprobante"] != null)
+                            {
+                                string strTipoComprobante_option = string.Empty;
+                                int cont = 0;
+                                foreach (string item in ((List<string>)Session["ConsultaDeComprobantes_tipoComprobante"]))
+                                {
+                                    if (item.Substring(0, 3) == "FAC")
+                                    {
+                                        strTipoComprobante_option += "<option value=\"" + item + "\"  data-id=\"" + cont + "\">";
+                                        cont++;
+                                    }
+                                }
+                                WriteLiteral(strTipoComprobante_option);
+                            }
+                        }
+                    </datalist>
+                </div>
+                <div class="col-xs-2 col-sm-3 text-center">
+                    <a class="refresh-input text-center" data-id="cmbTipoComprobanteFC"> <i class="fa fa-refresh fa-lg"></i> </a>
+                </div>
+            </div>*@
+            <div class="col-sm-4 col-xs-7 hidden" id="DEVNroComprobanteFC">
+                <label for="txtNroComprobanteFC" class="col-xs-12 no-padding">Nro</label>
+                <div class="col-xs-10 col-sm-9 no-padding">
+                    <input id="txtNroComprobanteFC" name="txtNroComprobanteFC" type="text" class="form-control"  placeholder="Ingrese como mínimo los últimos tres ( 3 ) dígitos"/>
+                </div>
+                <div class="col-xs-2 col-sm-3 text-center">
+                    <a class="refresh-input text-center" data-id="txtNroComprobanteFC"> <i class="fa fa-refresh fa-lg"></i> </a>
+                </div>
+            </div>
+            <div class="col-sm-2 col-xs-4 pull-right text-right hidden" id="DEVAgregarFC">
+                <label style="color:#ededed;">Boton</label>
+                <button class="btn btn-primary btn-block btnAgregarDevFC" id="btnAgregarDevFC" disabled>
+                    AGREGAR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-caret-right"></i>
+                </button>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 padding_l-10 table-responsive">
+        <p class="tit_secund">Devoluciones Precargadas <span id="DetalleDev"></span></p>
+        <table class="table table-striped tablaDevoluciones">
+            <thead>
+                <tr>
+                    <th>Producto devuelto</th>
+                    <th class="text-center" width="200">Cantidad</th>
+                </tr>
+            </thead>
+            <tbody id="tblDevolucionFC"></tbody>
+
+        </table>
+    </div>
+    <div class="col-xs-12 padding_l-10">
+        <div class="col-xs-6 botonera_dev">
+            <button type="button" class="btn btn-danger btnLimpiarPrecarga" id="btnLimpiarPrecargaFC">
+                <i class="fa fa-trash-o"></i> &nbsp;&nbsp; LIMPIAR
+            </button>
+        </div>
+        <div class="col-xs-6 botonera_dev">
+            <button type="button" class="btn btn-primary pull-right btnProcesarPrecarga" id="btnProcesarPrecargaFC">
+                <i class="fa fa-check"></i> &nbsp;&nbsp; CONFIRMAR
+            </button>
+        </div>
+    </div>
+</div>
