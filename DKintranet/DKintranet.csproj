@@ -1544,6 +1544,7 @@
     <Compile Include="Codigo\capaDatos\capaAuditoria.cs" />
     <Compile Include="Codigo\capaDatos\capaCAR.cs" />
     <Compile Include="Codigo\capaDatos\CapaCarritoDiferido.cs" />
+    <Compile Include="Codigo\capaDatos\capaCAR_intranet.cs" />
     <Compile Include="Codigo\capaDatos\capaCAR_WebService.cs" />
     <Compile Include="Codigo\capaDatos\capaCatalogo.cs" />
     <Compile Include="Codigo\capaDatos\capaClientes.cs" />

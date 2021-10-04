@@ -22,11 +22,11 @@ namespace DKintranet.Codigo.capaDatos
                 DataSet dsProductoCarrito = new DataSet();
                 if (pTipo == Constantes.cTipo_Carrito)
                 {
-                    dsProductoCarrito = capaCAR.RecuperarCarritosPorSucursalYProductos(pIdCliente);
+                    dsProductoCarrito = capaCAR_decision.RecuperarCarritosPorSucursalYProductos_decision(pIdCliente);
                 }
                 else if (pTipo == Constantes.cTipo_CarritoDiferido)
                 {
-                    dsProductoCarrito = capaCAR.RecuperarCarritosDiferidosPorCliente(pIdCliente);
+                    dsProductoCarrito = capaCAR_decision.RecuperarCarritosDiferidosPorCliente_decision(pIdCliente);
                 }
 
                 List<cCarrito> listaSucursal = (from item in dsProductoCarrito.Tables[1].AsEnumerable()
