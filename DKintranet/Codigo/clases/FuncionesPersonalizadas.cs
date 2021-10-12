@@ -742,8 +742,10 @@ namespace DKintranet.Codigo.clases
             pListaProductos = ActualizarStockListaProductos(pListaSucursal, pListaProductos);
             List<DKintranet.Codigo.capaDatos.cSucursal> listaSucursal = WebService.RecuperarTodasSucursales();
             bool trabajaPerfumeria = true;
-            for (int i = 0; i< listaSucursal.Count; i++) {
-                if (listaSucursal[i].suc_codigo == pSucursalElegida) {
+            for (int i = 0; i < listaSucursal.Count; i++)
+            {
+                if (listaSucursal[i].suc_codigo == pSucursalElegida)
+                {
                     trabajaPerfumeria = listaSucursal[i].suc_trabajaPerfumeria;
                 }
             }
@@ -759,9 +761,12 @@ namespace DKintranet.Codigo.clases
             {
                 for (int i = 0; i < pListaProductos.Count; i++)
                 {
-                    if (pListaProductos[i].pro_codtpopro == "P" && !trabajaPerfumeria) {
+                    if (pListaProductos[i].pro_codtpopro == "P" && !trabajaPerfumeria)
+                    {
                         sucElegida = "CC";
-                    } else {
+                    }
+                    else
+                    {
                         sucElegida = pSucursalElegida;
                     }
                     foreach (cSucursalStocks item in pListaProductos[i].listaSucursalStocks)
@@ -772,8 +777,10 @@ namespace DKintranet.Codigo.clases
                         }
                     }
                 }
-            } else {
-                
+            }
+            else
+            {
+
             }
             return pListaProductos;
         }
@@ -842,7 +849,8 @@ namespace DKintranet.Codigo.clases
                     for (int iImagen = 0; iImagen < listaProductosBuscador.Count; iImagen++)
                     {
                         cProductos objImagen = listaProductosConImagen.Where(x => x.pro_codigo == listaProductosBuscador[iImagen].pro_codigo).FirstOrDefault();
-                        if (objImagen != null) { 
+                        if (objImagen != null)
+                        {
                             listaProductosBuscador[iImagen].pri_nombreArchivo = objImagen.pri_nombreArchivo;
                             listaProductosBuscador[iImagen].pri_ancho_ampliar = objImagen.pri_ancho_ampliar;
                             listaProductosBuscador[iImagen].pri_alto_ampliar = objImagen.pri_alto_ampliar;
@@ -1314,7 +1322,35 @@ namespace DKintranet.Codigo.clases
                     }
                 }
             }
+            if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null)
+            {
+                Codigo.capaDatos.Usuario user = (Codigo.capaDatos.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"];
+                if (isUserTomaPedidoIntranet(user))
+                {
+                    switch (pNombreSeccion)
+                    {
+                        case "DESCARGAS":
+                        case "CUENTASCORRIENTES":
+                        case "DEVOLUCIONES":
+                        case "MEDIOS_DE_PAGOS":
+                        case "PEDIDOS_RECUPERADOR":
+                        case "PEDIDOS_MIS_PEDIDOS":
+                            resultado = false;
+                            break;
+                    }
+                }
+            }
+
             return resultado;
+        }
+        public static bool isUserTomaPedidoIntranet(Codigo.capaDatos.Usuario pUser)
+        {
+            bool result = false;
+            if (pUser != null && pUser.idRol == 14)
+            {
+                result = true;
+            }
+            return result;
         }
         public static List<cTipoEnvioClienteFront> RecuperarTiposDeEnvios()
         {

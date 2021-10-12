@@ -156,22 +156,6 @@
                                 }
 
                             }
-                            @*inicio FARMASHOW*@
-                            @{
-                                //string hrefFARMASHOW;
-                                //if (((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR ||
-                                //    ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL ||
-                                //    ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL)
-                                //{
-                                //    hrefFARMASHOW = " href=\"http://www.DKintranet.com.ar:8081\" ";
-                                //}
-                                //else
-                                //{
-                                //    hrefFARMASHOW = " href=\"http://www.DKintranet.com.ar:8081/index.php?NumeroCliente=" + ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).usu_codCliente.ToString() + "\" ";
-                                //}
-                            }
-                            @*<li><a @{WriteLiteral(hrefFARMASHOW);} target="_blank" class="btnFarmashow"><h3>FARMASHOW</h3></a></li>*@
-                            @*fin FARMASHOW*@
                             @{
                                 if (DKintranet.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion(DKintranet.Codigo.clases.Constantes.cSECCION_PEDIDOS))
                                 {
@@ -185,7 +169,10 @@
                                 {
                                     <li><a href="/ctacte/composicionsaldo" @{ WriteLiteral(classCuentasCorrientes);}><h3>CUENTAS CORRIENTES</h3></a></li>
                                 }
-                                <li class="hidden-sm"><a @{ WriteLiteral(classMediosDePagos);} href="/config/mediosdepago1"><h3>MEDIOS DE PAGOS</h3></a></li>
+                                if (DKintranet.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion("MEDIOS_DE_PAGOS"))
+                                {
+                                    <li class="hidden-sm"><a @{ WriteLiteral(classMediosDePagos);} href="/config/mediosdepago1"><h3>MEDIOS DE PAGOS</h3></a></li>
+                                }
                                 if (DKintranet.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion(DKintranet.Codigo.clases.Constantes.cSECCION_DESCARGAS))
                                 {
                                     <li class="hidden-sm"><a href="/config/catalogo" @{ WriteLiteral(classDescargas);}><h3>DESCARGAS</h3></a></li>
@@ -326,16 +313,19 @@
                             </div>
                         </li>
                     }
-                    <li>
-                        <a class="s_menu" id="filter_3" href="#">MEDIOS DE PAGO<i id="angle_filter_3" class="fa fa-angle-down"></i></a>
-                        <div class="div_filter" id="d_filter_3">
-                            <a href="/config/mediosdepago1"><i class="fa fa-dollar"></i>SERVICIO RECAUDATORIO</a>
-                            <a href="/config/mediosdepago2"><i class="fa fa-credit-card-alt"></i>TARJETA DE DEPOSITO</a>
-                            <a href="/config/mediosdepago3"><i class="fa fa-bank"></i>Depositos y transferencias bancarias</a>
-                            <a href="/config/mediosdepago4"><i class="fa fa-credit-card"></i>Tarjetas de Crédito</a>
-                            <a href="/config/mediosdepago5"><i class="fa fa-file-text-o"></i>Sistema Cobinpro</a>
-                        </div>
-                    </li>
+                    if (DKintranet.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion("MEDIOS_DE_PAGOS"))
+                    {
+                        <li>
+                            <a class="s_menu" id="filter_3" href="#">MEDIOS DE PAGO<i id="angle_filter_3" class="fa fa-angle-down"></i></a>
+                            <div class="div_filter" id="d_filter_3">
+                                <a href="/config/mediosdepago1"><i class="fa fa-dollar"></i>SERVICIO RECAUDATORIO</a>
+                                <a href="/config/mediosdepago2"><i class="fa fa-credit-card-alt"></i>TARJETA DE DEPOSITO</a>
+                                <a href="/config/mediosdepago3"><i class="fa fa-bank"></i>Depositos y transferencias bancarias</a>
+                                <a href="/config/mediosdepago4"><i class="fa fa-credit-card"></i>Tarjetas de Crédito</a>
+                                <a href="/config/mediosdepago5"><i class="fa fa-file-text-o"></i>Sistema Cobinpro</a>
+                            </div>
+                        </li>
+                    }
                     if (DKintranet.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion(DKintranet.Codigo.clases.Constantes.cSECCION_DESCARGAS))
                     {
                         <li>
@@ -531,7 +521,45 @@
                         }
                     </select>
                 }
+                if (Session["clientesDefault_Usuario"] != null && DKintranet.Codigo.clases.FuncionesPersonalizadas.isUserTomaPedidoIntranet((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]))
+                {
+                    <p class="TitleCliente">Seleccione un cliente</p>
+                    List<DKintranet.Codigo.capaDatos.cClientes> colClientes = new List<DKintranet.Codigo.capaDatos.cClientes>(); //WebService.RecuperarTodosClientes();
+                    if (Session["usuario_TomarPedido_listaClientes"] != null)
+                    {
+                        colClientes = (List<DKintranet.Codigo.capaDatos.cClientes>)Session["usuario_TomarPedido_listaClientes"];
+                    }
+
+                    <select class="form-control cmbCliente" id="cmbCliente_intranet" name="cmbCliente_intranet">
+                        @{
+                            foreach (DKintranet.Codigo.capaDatos.cClientes oCli in colClientes)
+                            {
+                                string inhabilitado;
+
+                                if (oCli.cli_estado == "INH")
+                                {
+                                    inhabilitado = "<span style='color: red;'> (INHABILITADO) </span>";
+                                }
+                                else
+                                {
+                                    inhabilitado = "";
+                                }
+                                if (((DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo == oCli.cli_codigo)
+                                {
+                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }" selected>
+                                        @{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);}
+                                    </option>
+                                }
+                                else
+                                {
+                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }">@{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);} </option>
+                                }
+                            }
+                        }
+                    </select>
+                }
             }
+
             @* Fin Promotores *@
         </div>
         <div id="contenidoRender" class="container-fluid">
@@ -598,7 +626,7 @@
                 && Session["clientesDefault_Usuario"] != null)
             {
                 Session["ClientesBase_isLogeo"] = null;
-                bool isUsuarioVerMensajes_PopUp = true;                
+                bool isUsuarioVerMensajes_PopUp = true;
                 isUsuarioVerMensajes_PopUp = !(!string.IsNullOrEmpty(oCli.cli_GrupoCliente) && oCli.cli_GrupoCliente.Trim().ToUpper() == "FARMACITY");
                 if (isUsuarioVerMensajes_PopUp)
                 {
@@ -631,7 +659,7 @@
     <script src="~/includes/mvc/js/kellerhoff.js?n=53" type="text/javascript"></script>
     <script src="~/includes/mvc/js/ajax.js?n=45" type="text/javascript"></script>
     <script src="~/includes/mvc/js/mensaje.js?n=33" type="text/javascript"></script>
-    <script src="~/includes/mvc/js/promotores.js?n=4" type="text/javascript"></script>
+    <script src="~/includes/mvc/js/promotores.js?n=5" type="text/javascript"></script>
 
     @RenderSection("scripts", required: false)
 </body>

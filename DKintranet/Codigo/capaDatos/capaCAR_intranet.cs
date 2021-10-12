@@ -39,8 +39,7 @@ namespace DKintranet.Codigo.capaDatos
         {
             int usu_codigo = ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id;
             return RecuperarCarritosPorSucursalYProductos_generica_intranet(pIdCliente, usu_codigo, Constantes.cTipo_CarritoDiferido);
-        }
-
+        }       
         public static bool AgregarProductoAlCarrito_generica_intranet(string pSucursal, string pIdProducto, int pCantidadProducto, string pTipo, int pIdCliente, int? pIdUsuario)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
@@ -183,6 +182,111 @@ namespace DKintranet.Codigo.capaDatos
             catch (Exception ex)
             {
                 return null;
+            }
+            finally
+            {
+                if (Conn.State == ConnectionState.Open)
+                {
+                    Conn.Close();
+                }
+            }
+        }
+        public static int BorrarCarrito(int pIdCliente, string pSucursal, string pTipo, string pAccion)
+        {
+            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+            SqlCommand cmdComandoInicio = new SqlCommand("CAR.spBorrarCarrito_intranet", Conn);
+            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+
+            SqlParameter paCtr_codCliente = cmdComandoInicio.Parameters.Add("@codCliente", SqlDbType.Int);
+            SqlParameter paSucursal = cmdComandoInicio.Parameters.Add("@sucursal", SqlDbType.NVarChar, 2);
+            SqlParameter paTipo = cmdComandoInicio.Parameters.Add("@tipo", SqlDbType.NVarChar, 100);
+            SqlParameter paAccion = cmdComandoInicio.Parameters.Add("@accion", SqlDbType.NVarChar, 100);
+            SqlParameter paCodUsuario = cmdComandoInicio.Parameters.Add("@codUsuario", SqlDbType.Int);
+            SqlParameter paIdCarrito = cmdComandoInicio.Parameters.Add("@idCarrito", SqlDbType.Int);
+            paIdCarrito.Direction = ParameterDirection.Output;
+            paCodUsuario.Value = ((capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).id;
+            paCtr_codCliente.Value = pIdCliente;
+            paSucursal.Value = pSucursal;
+            paTipo.Value = pTipo;
+            paAccion.Value = pAccion;
+            try
+            {
+                Conn.Open();
+                cmdComandoInicio.ExecuteNonQuery();
+                if (paIdCarrito.Value == DBNull.Value)
+                    return -1;
+                return Convert.ToInt32(paIdCarrito.Value);
+                //return true;
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+            finally
+            {
+                if (Conn.State == ConnectionState.Open)
+                {
+                    Conn.Close();
+                }
+            }
+        }
+        public static void guardarPedido_base(string strXML, int car_id, string codSucursal, string pTipo, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, bool pIsUrgente)
+        {
+            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+            SqlCommand cmdComandoInicio = new SqlCommand("CAR.spCargarPedido_intranet", Conn);
+            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+            SqlParameter paLrc_id = cmdComandoInicio.Parameters.Add("@car_id", SqlDbType.Int);
+            SqlParameter paLrc_codSucursal = cmdComandoInicio.Parameters.Add("@car_codSucursal", SqlDbType.NVarChar, 2);
+            SqlParameter palrc_codCliente = cmdComandoInicio.Parameters.Add("@car_codCliente", SqlDbType.Int);
+            SqlParameter paCodUsuario = cmdComandoInicio.Parameters.Add("@codUsuario", SqlDbType.Int);
+            SqlParameter paTipo = cmdComandoInicio.Parameters.Add("@tipo", SqlDbType.NVarChar, 100);
+            SqlParameter paFechaPedido = cmdComandoInicio.Parameters.Add("@FechaPedido", SqlDbType.DateTime);
+            SqlParameter paMensajeEnFactura = cmdComandoInicio.Parameters.Add("@MensajeEnFactura", SqlDbType.NVarChar, -1);
+            SqlParameter paMensajeEnRemito = cmdComandoInicio.Parameters.Add("@MensajeEnRemito", SqlDbType.NVarChar, -1);
+            SqlParameter paTipoEnvio = cmdComandoInicio.Parameters.Add("@TipoEnvio", SqlDbType.NVarChar, -1);
+            SqlParameter paIsUrgente = cmdComandoInicio.Parameters.Add("@IsUrgente", SqlDbType.Bit);
+            SqlParameter paStrXML = cmdComandoInicio.Parameters.Add("@strXML", SqlDbType.Xml);
+            paLrc_id.Value = car_id;
+            paLrc_codSucursal.Value = codSucursal;
+            palrc_codCliente.Value = (int)((capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente;
+            paFechaPedido.Value = DateTime.Now;
+            paCodUsuario.Value = ((capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).id;
+            if (pMensajeEnFactura == null)
+            {
+                paMensajeEnFactura.Value = DBNull.Value;
+            }
+            else
+            {
+                paMensajeEnFactura.Value = pMensajeEnFactura;
+            }
+            if (pMensajeEnRemito == null)
+            {
+                paMensajeEnRemito.Value = DBNull.Value;
+            }
+            else
+            {
+                paMensajeEnRemito.Value = pMensajeEnRemito;
+            }
+            if (pTipoEnvio == null)
+            {
+                paTipoEnvio.Value = DBNull.Value;
+            }
+            else
+            {
+                paTipoEnvio.Value = pTipoEnvio;
+            }
+            paIsUrgente.Value = pIsUrgente;
+            //paCodTransfer.Value = DBNull.Value;
+            paTipo.Value = pTipo;
+            paStrXML.Value = strXML;
+            try
+            {
+                Conn.Open();
+                cmdComandoInicio.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                //return -1;
             }
             finally
             {

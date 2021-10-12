@@ -3,9 +3,10 @@
     string resultado = string.Empty;
     if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null )
     {
+        DKintranet.Codigo.capaDatos.cClientes cliente = (DKintranet.Codigo.capaDatos.cClientes)HttpContext.Current.Session["clientesDefault_Cliente"];
         List<DKintranet.Codigo.capaDatos.cSucursal> listaSucursal = WebService.RecuperarTodasSucursales();
         // Optimizar
-        List<DKintranet.Codigo.capaDatos.cSucursal> listaSucursalInfoAux = WebService.RecuperarTodasSucursalesDependientes().Where(x => x.sde_sucursal == ((DKintranet.Codigo.capaDatos.cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc).ToList();
+        List<DKintranet.Codigo.capaDatos.cSucursal> listaSucursalInfoAux = WebService.RecuperarTodasSucursalesDependientes().Where(x => x.sde_sucursal == cliente.cli_codsuc).ToList();
         List<DKintranet.Codigo.capaDatos.cSucursal> listaSucursalInfo = new List<DKintranet.Codigo.capaDatos.cSucursal>();
         //// Inicio S7
         List<string> ListaSucursalOptimizar = DKintranet.Codigo.clases.FuncionesPersonalizadas.RecuperarSucursalesParaBuscadorDeCliente();
@@ -26,19 +27,19 @@
         List<DKintranet.Codigo.clases.cCarrito> listaCarrito = new List<DKintranet.Codigo.clases.cCarrito>();
         if (DKintranet.Controllers.mvcController.isDiferido())
         {
-            Session["clientesDefault_CarritoDiferido"] = DKintranet.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosDiferidosPorCliente((int)((DKintranet.Codigo.capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente);
+            Session["clientesDefault_CarritoDiferido"] = DKintranet.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosDiferidosPorCliente(cliente.cli_codigo);
             listaCarrito = (List<DKintranet.Codigo.clases.cCarrito>)Session["clientesDefault_CarritoDiferido"];
             resultado += "<input type=\"hidden\" id=\"hiddenIsCarritoDiferido\" value=\"" + Server.HtmlEncode("true") + "\" />";
             if (DKintranet.Codigo.capaDatos.capaCAR_decision.isCAR) {
-                resultado += "<input type=\"hidden\" id=\"hiddenListaCarritosTransferPorSucursal\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(DKintranet.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(((DKintranet.Codigo.capaDatos.cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]), DKintranet.Codigo.clases.Constantes.cTipo_CarritoDiferidoTransfers))) + "\" />";
+                resultado += "<input type=\"hidden\" id=\"hiddenListaCarritosTransferPorSucursal\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(DKintranet.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(cliente, DKintranet.Codigo.clases.Constantes.cTipo_CarritoDiferidoTransfers))) + "\" />";
             }
 
         }
         else if (DKintranet.Controllers.mvcController.isBuscador())
         {
-            Session["clientesDefault_Carrito"] = DKintranet.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosPorSucursalYProductos((int)((DKintranet.Codigo.capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente);
+            Session["clientesDefault_Carrito"] = DKintranet.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosPorSucursalYProductos(cliente.cli_codigo);
             listaCarrito = (List<DKintranet.Codigo.clases.cCarrito>)Session["clientesDefault_Carrito"];
-            resultado += "<input type=\"hidden\" id=\"hiddenListaCarritosTransferPorSucursal\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(DKintranet.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(((DKintranet.Codigo.capaDatos.cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]),DKintranet.Codigo.clases.Constantes.cTipo_CarritoTransfers))) + "\" />";
+            resultado += "<input type=\"hidden\" id=\"hiddenListaCarritosTransferPorSucursal\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(DKintranet.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(cliente, DKintranet.Codigo.clases.Constantes.cTipo_CarritoTransfers))) + "\" />";
 
         }
         resultado += "<input type=\"hidden\" id=\"hiddenListaCarritos\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(listaCarrito)) + "\" />";

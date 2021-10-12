@@ -234,6 +234,29 @@ namespace DKintranet.Controllers
                                     resultado = "OkPromotor";
                                 }
                             }
+                            else if (FuncionesPersonalizadas.isUserTomaPedidoIntranet(user)) //"TomarPedidoCC"
+                            {
+                                Autenticacion objAutenticacion = new Autenticacion();
+                                objAutenticacion.UsuarioNombre = System.Configuration.ConfigurationManager.AppSettings["ws_usu"];
+                                objAutenticacion.UsuarioClave = System.Configuration.ConfigurationManager.AppSettings["ws_psw"];
+                                WebService.CredencialAutenticacion = objAutenticacion;
+
+                                List<cClientes> clientes = WebService.RecuperarTodosClientes();
+                                System.Web.HttpContext.Current.Session["usuario_TomarPedido_listaClientes"] = clientes;
+
+                                System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] = clientes.FirstOrDefault();//WebService.RecuperarClientePorId((int)clientes[0].cli_codigo);
+
+                                if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+                                {
+                                    System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] = user;
+                                    List<string> listaPermisoDenegados = FuncionesPersonalizadas.RecuperarSinPermisosSecciones(((Codigo.capaDatos.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
+                                    System.Web.HttpContext.Current.Session["master_ListaSinPermisoSecciones"] = listaPermisoDenegados;
+                                    CargarAccionesEnVariableSession();
+                                    System.Web.HttpContext.Current.Session["ClientesBase_isLogeo"] = true;
+                                    System.Web.HttpContext.Current.Session["isMostrarOferta"] = false;
+                                    resultado = "OkTomarPedido";
+                                }
+                            }
                             else
                             {
                                 resultado = "Usuario con rol sin permiso.";

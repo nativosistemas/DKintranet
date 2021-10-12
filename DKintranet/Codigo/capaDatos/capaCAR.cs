@@ -164,7 +164,7 @@ namespace DKintranet.Codigo.capaDatos
                 int maxValue = rd.Next(1000, 7500);
                 while (n < 10)
                 {
-                    int time= rd.Next(minValue, maxValue);
+                    int time = rd.Next(minValue, maxValue);
                     System.Threading.Thread.Sleep(time);
                     isBorrar = capaCAR.BorrarCarritoPorId(car_id, pAccion);
                     if (isBorrar)
@@ -181,7 +181,7 @@ namespace DKintranet.Codigo.capaDatos
         public static bool BorrarCarritoPorId(int car_id, string pAccion)
         {
             //return false;
-           // /*
+            // /*
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
             SqlCommand cmdComandoInicio = new SqlCommand("CAR.spBorrarCarritoPorId", Conn);
             cmdComandoInicio.CommandType = CommandType.StoredProcedure;
@@ -211,7 +211,7 @@ namespace DKintranet.Codigo.capaDatos
                     Conn.Close();
                 }
             }
-          //  */
+            //  */
         }
 
         public static void guardarPedido(cCarrito pCarrito, string pTipo, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, bool pIsUrgente)
@@ -230,7 +230,7 @@ namespace DKintranet.Codigo.capaDatos
                 strXML += nodo.ToString();
             }
             strXML += "</Root>";
-            guardarPedido_base(strXML, pCarrito.lrc_id, pCarrito.codSucursal, pTipo, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pIsUrgente);
+            capaCAR_decision.guardarPedido_base_decision(strXML, pCarrito.lrc_id, pCarrito.codSucursal, pTipo, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pIsUrgente);
         }
         public static void guardarPedido(List<cProductosGenerico> pListaProductos, int car_id, string codSucursal, string pTipo, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, bool pIsUrgente)
         {
@@ -248,7 +248,7 @@ namespace DKintranet.Codigo.capaDatos
                 strXML += nodo.ToString();
             }
             strXML += "</Root>";
-            guardarPedido_base(strXML, car_id, codSucursal, pTipo, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pIsUrgente);
+            capaCAR_decision.guardarPedido_base_decision(strXML, car_id, codSucursal, pTipo, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pIsUrgente);
         }
         public static void guardarPedido_base(string strXML, int car_id, string codSucursal, string pTipo, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, bool pIsUrgente)
         {
@@ -463,14 +463,14 @@ namespace DKintranet.Codigo.capaDatos
                 }
             }
         }
-        public static bool InicioCarritoEnProceso(int car_id,string pAccion)
+        public static bool InicioCarritoEnProceso(int car_id, string pAccion)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
             SqlCommand cmdComandoInicio = new SqlCommand("CAR.spInicioCarritoEnProceso", Conn);
             cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
             SqlParameter paCar_id = cmdComandoInicio.Parameters.Add("@car_id", SqlDbType.Int);
-            SqlParameter paAccion = cmdComandoInicio.Parameters.Add("@accion", SqlDbType.NVarChar,100); 
+            SqlParameter paAccion = cmdComandoInicio.Parameters.Add("@accion", SqlDbType.NVarChar, 100);
             SqlParameter paIsOk = cmdComandoInicio.Parameters.Add("@isOk", SqlDbType.Bit);
             paIsOk.Direction = ParameterDirection.Output;
             paCar_id.Value = car_id;

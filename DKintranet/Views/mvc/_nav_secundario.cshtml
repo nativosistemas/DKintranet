@@ -59,13 +59,18 @@
                     <div class="separate"></div>
                 }
             }
-            <a href="/mvc/estadopedidos" @{WriteLiteral(classEstadopedidos);}><i class="fa fa-file-text" title="MIS PEDIDOS"></i><span class="hidden-sm hidden-xs">MIS PEDIDOS</span></a>
-            <div class="separate"></div>
+            @{
+                if (DKintranet.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion("PEDIDOS_MIS_PEDIDOS"))
+                {
+                    <a href="/mvc/estadopedidos" @{WriteLiteral(classEstadopedidos);}><i class="fa fa-file-text" title="MIS PEDIDOS"></i><span class="hidden-sm hidden-xs">MIS PEDIDOS</span></a>
+                    <div class="separate"></div> }
+            }
             @{
                 if (((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR &&
                     ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL &&
                     ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL &&
-                    ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
+                    ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE &&
+                    DKintranet.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion("PEDIDOS_RECUPERADOR"))
                 {
                     <a href="/mvc/recuperador?t=1" @{WriteLiteral(classRecuperador);}><i class="fa fa-recycle" title="RECUPERADOR"></i><span class="hidden-sm hidden-xs">RECUPERADOR</span></a>
                     <div class="separate"></div>
@@ -76,8 +81,6 @@
             <a href="/mvc/promocionescliente?t=0" class="oferta  @{ WriteLiteral(classPromocionesCliente);}"><i class="fa fa-percent" title="OFERTAS"></i><span class="hidden-sm hidden-xs hidden-md">OFERTAS</span></a>
             <div class="separate"></div>
             <a href="/mvc/promocionescliente?t=1" class="nuevoLanzamiento  @{ WriteLiteral(classNuevosLanzamientos);}"><i class="fa fa-percent" title="NUEVOS LANZAMIENTOS"></i><span class="hidden-sm hidden-xs hidden-md">NUEVOS LANZAMIENTOS</span></a>
-            <div class="separate"></div>
-            <a href="https://bit.ly/2E2EusC" target="_blank" class=""><img id="labbi" src="~/archivos/LABBI.jpg" /></a>
         </div>
     </div>
 </div>
