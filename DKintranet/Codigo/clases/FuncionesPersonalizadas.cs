@@ -1346,7 +1346,7 @@ namespace DKintranet.Codigo.clases
         public static bool isUserTomaPedidoIntranet(Codigo.capaDatos.Usuario pUser)
         {
             bool result = false;
-            if (pUser != null && pUser.idRol == 14)
+            if (pUser != null && pUser.rol_Nombre == DKbase.generales.Constantes.cTomarPedidoCC)
             {
                 result = true;
             }

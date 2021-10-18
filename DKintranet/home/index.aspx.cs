@@ -31,6 +31,7 @@ namespace DKintranet.home
                 Session["clientesDefault_CantRecuperadorFalta"] = null;
                 Session["clientesDefault_CantRecuperadorFaltaFechaHora"] = null;
             }
+
             //////
             try
             {
@@ -52,6 +53,7 @@ namespace DKintranet.home
                 var lll = ex.Message;
                 //throw;
             }
+            Response.Redirect("~/config/LoginIntranet");
         }
         [WebMethod(EnableSession = true)]
         public static string RecuperarTodasOfertas(List<cOfertaHome> pResultado, bool isNuevoLanzamiento = false)

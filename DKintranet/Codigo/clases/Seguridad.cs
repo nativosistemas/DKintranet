@@ -27,6 +27,7 @@ namespace DKintranet.Codigo.clases
                     //capaCore_WebService.setDatosLogin(pLogin, pPassword);
                     us.id = Convert.ToInt32(dsResultado.Tables["Login"].Rows[0]["usu_codigo"]);
                     us.idRol = Convert.ToInt32(dsResultado.Tables["Login"].Rows[0]["usu_codRol"]);
+                    us.rol_Nombre = Convert.ToString(dsResultado.Tables["Login"].Rows[0]["rol_Nombre"]);
                     us.NombreYApellido = Convert.ToString(dsResultado.Tables["Login"].Rows[0]["NombreYapellido"]).Trim();
                     us.ApNombre = Convert.ToString(dsResultado.Tables["Login"].Rows[0]["ApNombre"]).Trim();
                     us.idUsuarioLog = Convert.ToInt32(dsResultado.Tables["Login"].Rows[0]["ulg_codUsuarioLog"]);

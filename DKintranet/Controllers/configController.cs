@@ -14,6 +14,11 @@ namespace DKintranet.Controllers
 {
     public class configController : Controller
     {
+        public ActionResult LoginIntranet()
+        {
+            //return Redirect("/home/index.aspx");
+            return View();
+        }
         public string RecuperarOferta(int pId)
         {
             int? id = pId;
@@ -107,15 +112,19 @@ namespace DKintranet.Controllers
             {
                 if (user.id != -1)
                 {
-                    if (user.usu_estado == Constantes.cESTADO_ACTIVO && user.usu_codCliente != null)
+                    if (user.usu_estado == Constantes.cESTADO_ACTIVO)
                     {
-                        if (user.idRol == Constantes.cROL_ADMINISTRADORCLIENTE || user.idRol == Constantes.cROL_OPERADORCLIENTE)
+                        if (FuncionesPersonalizadas.isUserTomaPedidoIntranet(user)) //"TomarPedidoCC"
                         {
                             Autenticacion objAutenticacion = new Autenticacion();
                             objAutenticacion.UsuarioNombre = System.Configuration.ConfigurationManager.AppSettings["ws_usu"];
                             objAutenticacion.UsuarioClave = System.Configuration.ConfigurationManager.AppSettings["ws_psw"];
                             WebService.CredencialAutenticacion = objAutenticacion;
-                            System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] = WebService.RecuperarClientePorId((int)user.usu_codCliente);
+
+                            List<cClientes> clientes = WebService.RecuperarTodosClientes();
+                            System.Web.HttpContext.Current.Session["usuario_TomarPedido_listaClientes"] = clientes;
+
+                            System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] = clientes.FirstOrDefault();//WebService.RecuperarClientePorId((int)clientes[0].cli_codigo);
 
                             if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
                             {
@@ -125,142 +134,12 @@ namespace DKintranet.Controllers
                                 CargarAccionesEnVariableSession();
                                 System.Web.HttpContext.Current.Session["ClientesBase_isLogeo"] = true;
                                 System.Web.HttpContext.Current.Session["isMostrarOferta"] = false;
-                                resultado = "Ok";
-                            }
-                            else
-                            {
-                                resultado = "Error al recuperar el cliente";
+                                resultado = "OkTomarPedido";
                             }
                         }
                         else
                         {
-                            if (user.idRol == Constantes.cROL_PROMOTOR)
-                            {
-                                // resultado = "Es Promotor";
-                                //resultado = user.NombreYApellido;
-                                Autenticacion objAutenticacion = new Autenticacion();
-                                objAutenticacion.UsuarioNombre = System.Configuration.ConfigurationManager.AppSettings["ws_usu"];
-                                objAutenticacion.UsuarioClave = System.Configuration.ConfigurationManager.AppSettings["ws_psw"];
-                                WebService.CredencialAutenticacion = objAutenticacion;
-
-                                List<cClientes> clientes = WebService.spRecuperarTodosClientesByPromotor(user.ApNombre);
-
-                                System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] = WebService.RecuperarClientePorId((int)clientes[0].cli_codigo);
-
-                                if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
-                                {
-                                    System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] = user;
-                                    List<string> listaPermisoDenegados = FuncionesPersonalizadas.RecuperarSinPermisosSecciones(((Codigo.capaDatos.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
-                                    System.Web.HttpContext.Current.Session["master_ListaSinPermisoSecciones"] = listaPermisoDenegados;
-                                    CargarAccionesEnVariableSession();
-                                    System.Web.HttpContext.Current.Session["ClientesBase_isLogeo"] = true;
-                                    System.Web.HttpContext.Current.Session["isMostrarOferta"] = false;
-                                    resultado = "OkPromotor";
-                                }
-                            }
-                            else if (user.idRol == Constantes.cROL_ENCGRAL)
-                            {
-                                // resultado = "Es Promotor";
-                                //resultado = user.NombreYApellido;
-                                Autenticacion objAutenticacion = new Autenticacion();
-                                objAutenticacion.UsuarioNombre = System.Configuration.ConfigurationManager.AppSettings["ws_usu"];
-                                objAutenticacion.UsuarioClave = System.Configuration.ConfigurationManager.AppSettings["ws_psw"];
-                                WebService.CredencialAutenticacion = objAutenticacion;
-
-                                List<cClientes> clientes = WebService.RecuperarTodosClientes();
-
-                                System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] = WebService.RecuperarClientePorId((int)clientes[0].cli_codigo);
-
-                                if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
-                                {
-                                    System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] = user;
-                                    List<string> listaPermisoDenegados = FuncionesPersonalizadas.RecuperarSinPermisosSecciones(((Codigo.capaDatos.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
-                                    System.Web.HttpContext.Current.Session["master_ListaSinPermisoSecciones"] = listaPermisoDenegados;
-                                    CargarAccionesEnVariableSession();
-                                    System.Web.HttpContext.Current.Session["ClientesBase_isLogeo"] = true;
-                                    System.Web.HttpContext.Current.Session["isMostrarOferta"] = false;
-                                    resultado = "OkPromotor";
-                                }
-                            }
-                            else if (user.idRol == Constantes.cROL_ENCSUCURSAL)
-                            {
-                                // resultado = "Es Promotor";
-                                //resultado = user.NombreYApellido;
-                                Autenticacion objAutenticacion = new Autenticacion();
-                                objAutenticacion.UsuarioNombre = System.Configuration.ConfigurationManager.AppSettings["ws_usu"];
-                                objAutenticacion.UsuarioClave = System.Configuration.ConfigurationManager.AppSettings["ws_psw"];
-                                WebService.CredencialAutenticacion = objAutenticacion;
-
-                                IdSuc = pName.Substring(3, 2);
-
-                                List<cClientes> clientes = WebService.RecuperarTodosClientesBySucursal(IdSuc);
-
-                                System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] = WebService.RecuperarClientePorId((int)clientes[0].cli_codigo);
-
-                                if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
-                                {
-                                    System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] = user;
-                                    List<string> listaPermisoDenegados = FuncionesPersonalizadas.RecuperarSinPermisosSecciones(((Codigo.capaDatos.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
-                                    System.Web.HttpContext.Current.Session["master_ListaSinPermisoSecciones"] = listaPermisoDenegados;
-                                    CargarAccionesEnVariableSession();
-                                    System.Web.HttpContext.Current.Session["ClientesBase_isLogeo"] = true;
-                                    System.Web.HttpContext.Current.Session["isMostrarOferta"] = false;
-                                    resultado = "OkPromotor";
-                                }
-                            }
-                            else if (user.idRol == Constantes.cROL_GRUPOCLIENTE)
-                            {
-                                // resultado = "Es Promotor";
-                                //resultado = user.NombreYApellido;
-                                Autenticacion objAutenticacion = new Autenticacion();
-                                objAutenticacion.UsuarioNombre = System.Configuration.ConfigurationManager.AppSettings["ws_usu"];
-                                objAutenticacion.UsuarioClave = System.Configuration.ConfigurationManager.AppSettings["ws_psw"];
-                                WebService.CredencialAutenticacion = objAutenticacion;
-
-                                GrupoCliente = pName;
-
-                                List<cClientes> clientes = WebService.RecuperarTodosClientesByGrupoCliente(GrupoCliente);
-
-                                System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] = WebService.RecuperarClientePorId((int)clientes[0].cli_codigo);
-
-                                if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
-                                {
-                                    System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] = user;
-                                    List<string> listaPermisoDenegados = FuncionesPersonalizadas.RecuperarSinPermisosSecciones(((Codigo.capaDatos.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
-                                    System.Web.HttpContext.Current.Session["master_ListaSinPermisoSecciones"] = listaPermisoDenegados;
-                                    CargarAccionesEnVariableSession();
-                                    System.Web.HttpContext.Current.Session["ClientesBase_isLogeo"] = true;
-                                    System.Web.HttpContext.Current.Session["isMostrarOferta"] = false;
-                                    resultado = "OkPromotor";
-                                }
-                            }
-                            else if (FuncionesPersonalizadas.isUserTomaPedidoIntranet(user)) //"TomarPedidoCC"
-                            {
-                                Autenticacion objAutenticacion = new Autenticacion();
-                                objAutenticacion.UsuarioNombre = System.Configuration.ConfigurationManager.AppSettings["ws_usu"];
-                                objAutenticacion.UsuarioClave = System.Configuration.ConfigurationManager.AppSettings["ws_psw"];
-                                WebService.CredencialAutenticacion = objAutenticacion;
-
-                                List<cClientes> clientes = WebService.RecuperarTodosClientes();
-                                System.Web.HttpContext.Current.Session["usuario_TomarPedido_listaClientes"] = clientes;
-
-                                System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] = clientes.FirstOrDefault();//WebService.RecuperarClientePorId((int)clientes[0].cli_codigo);
-
-                                if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
-                                {
-                                    System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] = user;
-                                    List<string> listaPermisoDenegados = FuncionesPersonalizadas.RecuperarSinPermisosSecciones(((Codigo.capaDatos.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
-                                    System.Web.HttpContext.Current.Session["master_ListaSinPermisoSecciones"] = listaPermisoDenegados;
-                                    CargarAccionesEnVariableSession();
-                                    System.Web.HttpContext.Current.Session["ClientesBase_isLogeo"] = true;
-                                    System.Web.HttpContext.Current.Session["isMostrarOferta"] = false;
-                                    resultado = "OkTomarPedido";
-                                }
-                            }
-                            else
-                            {
-                                resultado = "Usuario con rol sin permiso.";
-                            }
+                            resultado = "Usuario con rol sin permiso.";
                         }
                     }
                     else

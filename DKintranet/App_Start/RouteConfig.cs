@@ -16,7 +16,7 @@ namespace DKintranet
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "mvc", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "config", action = "LoginIntranet", id = UrlParameter.Optional }
             );
             ////routes.MapPageRoute("Default",
             ////   "home/{action}",

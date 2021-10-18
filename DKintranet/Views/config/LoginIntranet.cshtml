@@ -1,0 +1,28 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Intranet";
+}
+<script src="~/includes/mvc/js/libreria.js"></script>
+<script src="~/includes/mvc/js/intranet.js"></script>
+
+<main class="form-signin">
+    <form>
+        <h1 class="h3 mb-3 fw-normal">Intranet</h1>
+
+        <div class="form-floating">
+            <input type="text" class="form-control" id="txtUsuario" placeholder="Usuario" onkeypress="onkeypressIngresar(event)" />
+            <label for="txtUsuario">Usuario</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="txtPassword" placeholder="Password" onkeypress="onkeypressIngresar(event)" />
+            <label for="txtPassword">Contraseña</label>
+        </div>
+        <div class="form-floating">
+
+            <span id="infoLogin" style="color:red"></span>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="button" onclick="onclickIngresar();">Ingresar</button>
+
+    </form>
+</main>

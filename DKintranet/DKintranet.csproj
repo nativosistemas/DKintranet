@@ -612,6 +612,7 @@
     <Content Include="includes\mvc\js\ctacte.js" />
     <Content Include="includes\mvc\js\devoluciones.js" />
     <Content Include="includes\mvc\js\documento.js" />
+    <Content Include="includes\mvc\js\intranet.js" />
     <Content Include="includes\mvc\js\jquery\function.js" />
     <Content Include="includes\mvc\js\jquery\function_forms.js" />
     <Content Include="includes\mvc\js\jquery\function_home.js" />
@@ -1183,6 +1184,7 @@
     <Content Include="Views\devoluciones\DevolucionesFacturadoNoEnviado.cshtml" />
     <Content Include="Views\devoluciones\ReclamoFacturadoNoEnviado.cshtml" />
     <None Include="Service References\ServiceReferenceDLL\Service2.wsdl" />
+    <Content Include="Views\config\LoginIntranet.cshtml" />
     <None Include="Web_config\Web.config_produccion">
       <SubType>Designer</SubType>
     </None>
