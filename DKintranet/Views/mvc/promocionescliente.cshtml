@@ -13,9 +13,10 @@
 @section sectionHidden{
     @{
         string resultado = string.Empty;
-        List<DKintranet.Codigo.capaDatos.cOferta> l = WebService.RecuperarTodasOfertaPublicar(Session["promocionescliente_TIPO"] != null && Session["promocionescliente_TIPO"].ToString() == "1");
-        resultado += "<input type=\"hidden\" id=\"hiddenListaPromocionesClientes\" value=\"" + Server.HtmlEncode(l == null ? string.Empty : DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(l)) + "\" />";
-
+        if (Session["clientesDefault_Cliente"] != null) {
+            List<DKintranet.Codigo.capaDatos.cOferta> l = WebService.RecuperarTodasOfertaPublicar(Session["promocionescliente_TIPO"] != null && Session["promocionescliente_TIPO"].ToString() == "1");
+            resultado += "<input type=\"hidden\" id=\"hiddenListaPromocionesClientes\" value=\"" + Server.HtmlEncode(l == null ? string.Empty : DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(l)) + "\" />";
+        }
         WriteLiteral(resultado);
     }
 }

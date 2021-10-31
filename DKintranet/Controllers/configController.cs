@@ -124,12 +124,12 @@ namespace DKintranet.Controllers
                             List<cClientes> clientes = WebService.RecuperarTodosClientes();
                             System.Web.HttpContext.Current.Session["usuario_TomarPedido_listaClientes"] = clientes;
 
-                            System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] = clientes.FirstOrDefault();//WebService.RecuperarClientePorId((int)clientes[0].cli_codigo);
+                            //System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] = clientes.FirstOrDefault();//WebService.RecuperarClientePorId((int)clientes[0].cli_codigo);
 
-                            if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+                            if (user != null)
                             {
                                 System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] = user;
-                                List<string> listaPermisoDenegados = FuncionesPersonalizadas.RecuperarSinPermisosSecciones(((Codigo.capaDatos.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
+                                List<string> listaPermisoDenegados = FuncionesPersonalizadas.RecuperarSinPermisosSecciones(user.id);
                                 System.Web.HttpContext.Current.Session["master_ListaSinPermisoSecciones"] = listaPermisoDenegados;
                                 CargarAccionesEnVariableSession();
                                 System.Web.HttpContext.Current.Session["ClientesBase_isLogeo"] = true;

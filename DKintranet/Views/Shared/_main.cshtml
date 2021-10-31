@@ -529,34 +529,41 @@
                     {
                         colClientes = (List<DKintranet.Codigo.capaDatos.cClientes>)Session["usuario_TomarPedido_listaClientes"];
                     }
+                    DKintranet.Codigo.capaDatos.cClientes clienteActual = null;
+                    if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+                    {
+                        clienteActual = ((DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]);
+                    }
 
-                    <select class="form-control cmbCliente" id="cmbCliente_intranet" name="cmbCliente_intranet">
-                        @{
-                            foreach (DKintranet.Codigo.capaDatos.cClientes oCli in colClientes)
-                            {
-                                string inhabilitado;
+        <select class="form-control cmbCliente" id="cmbCliente_intranet" name="cmbCliente_intranet">
+            <option disabled value selected> -- Seleccione una opción -- </option>
+            @{
+                foreach (DKintranet.Codigo.capaDatos.cClientes oCli in colClientes)
+                {
+                    string inhabilitado;
 
-                                if (oCli.cli_estado == "INH")
-                                {
-                                    inhabilitado = "<span style='color: red;'> (INHABILITADO) </span>";
-                                }
-                                else
-                                {
-                                    inhabilitado = "";
-                                }
-                                if (((DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo == oCli.cli_codigo)
-                                {
-                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }" selected>
-                                        @{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);}
-                                    </option>
-                                }
-                                else
-                                {
-                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }">@{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);} </option>
-                                }
-                            }
-                        }
-                    </select>
+                    if (oCli.cli_estado == "INH")
+                    {
+                        inhabilitado = "<span style='color: red;'> (INHABILITADO) </span>";
+                    }
+                    else
+                    {
+                        inhabilitado = "";
+                    }
+
+                    if (clienteActual != null && clienteActual.cli_codigo == oCli.cli_codigo)
+                    {
+                        <option value="@{ WriteLiteral(oCli.cli_codigo); }" selected>
+                            @{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);}
+                        </option>
+                    }
+                    else
+                    {
+                        <option value="@{ WriteLiteral(oCli.cli_codigo); }">@{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);} </option>
+                    }
+                }
+            }
+        </select>
                 }
             }
 

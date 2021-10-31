@@ -206,6 +206,10 @@ $(document).ready(function () {
     ObtenerHorarioCierreAndSiguiente(cli_codsuc());
     CargarCantidadCarritos_Celular();
     carritoNoHayCarritosCelular();
+
+    //
+
+    document.getElementById('txtBuscador').focus();
 });
 
 function carritoNoHayCarritosCelular() {
