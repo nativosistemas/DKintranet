@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Script.Serialization;
 using DKintranet.Codigo.clases;
 
 
@@ -17,6 +18,7 @@ namespace DKintranet.Codigo.capaDatos
         private static readonly HttpClient client = new HttpClient();
         private static string url = System.Configuration.ConfigurationManager.AppSettings["url_DKcore"];
         private static JsonSerializerOptions oJsonSerializerOptions = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+       // private static JsonSerializerOptions oJsonSerializerOptions_2 = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy. };
         private static string _pass { get; set; }
         private static string _login { get; set; }
         public static void setDatosLogin(string login, string pass)
@@ -120,6 +122,20 @@ namespace DKintranet.Codigo.capaDatos
             {
                 var resultResponse = response.Content.ReadAsStringAsync().Result;
                 result = JsonSerializer.Deserialize<DKbase.dll.cDllPedido>(resultResponse, oJsonSerializerOptions);
+            }
+            return result;
+        }
+        public static async Task<DKbase.dll.cDllPedido> TomarPedidoConIdCarritoIntranetAsync(int pIdCarrito, string pLoginCliente, string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, List<DKbase.dll.cDllProductosAndCantidad> pListaProducto, bool pIsUrgente)
+        {
+            DKbase.dll.cDllPedido result = null;
+            string name = "TomarPedidoConIdCarritoIntranet";
+            DKbase.Models.TomarPedidoConIdCarritoRequest parameter = new DKbase.Models.TomarPedidoConIdCarritoRequest() { pIdCarrito = pIdCarrito, pLoginCliente = pLoginCliente, pIdSucursal = pIdSucursal, pMensajeEnFactura = pMensajeEnFactura, pMensajeEnRemito = pMensajeEnRemito, pTipoEnvio = pTipoEnvio, pListaProducto = pListaProducto, pIsUrgente = pIsUrgente };
+            HttpResponseMessage response = await PostAsync(name, parameter);
+            if (response != null)
+            {
+                var resultResponse = response.Content.ReadAsStringAsync().Result;
+                result = JsonSerializer.Deserialize<DKbase.dll.cDllPedido>(resultResponse);
+                //result = JsonSerializer.Deserialize<DKbase.dll.cDllPedido>(resultResponse, oJsonSerializerOptions);
             }
             return result;
         }

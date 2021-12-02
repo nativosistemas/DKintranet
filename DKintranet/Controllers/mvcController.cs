@@ -541,7 +541,7 @@ namespace DKintranet.Controllers
                             oRepetido.Error = msgCarritoRepetido;
                             return Serializador.SerializarAJson(oRepetido);
                         }
-                        resultadoPedido = capaCore_decision.TomarPedidoConIdCarrito(item.car_id,cliente.cli_login, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, listaProductos, pIsUrgente);
+                        resultadoPedido = capaCore_decision.TomarPedidoConIdCarritoIntranetAsync(item.car_id,cliente.cli_login, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, listaProductos, pIsUrgente);
                         if (!capaWebServiceDLL.ValidarExistenciaDeCarritoWebPasado(item.car_id))
                             return null;
                         if (resultadoPedido == null)
