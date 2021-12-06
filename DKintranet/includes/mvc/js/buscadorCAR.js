@@ -60,6 +60,20 @@ var intColumnaOrdenar = -2;
 var timerProductoFacturacionDirecta = null;
 var htmlAltoCosto = '<span class="p_trazable">Alto Costo - Ventas comunicarse al <i class="fa fa-whatsapp linkWP_icon"></i><a class="linkWP" href="tel:3413631749">341 3631749</a></span>';//'<div><i class="fa fa-whatsapp fa_contacto_ftr"></i><a href="tel:3413631749">341 3631749</a></div>';
 
+$('body').on("keydown", function (e) {
+    if (e.ctrlKey && e.shiftKey && e.which === 83) {
+        //e.altKey
+        //resetCliente
+        alert("You pressed Ctrl + Shift + s");
+        e.preventDefault();
+    }
+});
+$('body').on("keydown", function (e) {
+    if (e.altKey && e.which === 83) { //s
+        resetCliente();
+        e.preventDefault();
+    }
+});
 $(document).ready(function () {
     $(document).keydown(function (e) {
         if (!e) {
@@ -209,7 +223,11 @@ $(document).ready(function () {
 
     //
 
-    document.getElementById('txtBuscador').focus();
+    if (cliente == null) {
+        $('#cmbCliente_intranet').select2('open');
+    } else {
+        document.getElementById('txtBuscador').focus();
+    }
 });
 
 function carritoNoHayCarritosCelular() {
@@ -705,7 +723,7 @@ function getHtmlTablaResolucionCelular() {
                 precioHabitual = '';
             }
             strHtml += '<td class="col-xs-2 text-center">' + precioHabitual + '</td>';
-       
+
 
             strHtml += '</tr>';
         }
@@ -1368,7 +1386,7 @@ function OnCallBackRecuperarProductos(args) {
             args = eval('(' + args + ')');
             listaSucursal = args.listaSucursal;
             listaProductosBuscados = args.listaProductos;
-
+            var hayProductosResultado = true;
 
             var cssTh_cabecera = ' class="col-lg-3 col-md-3 col-sm-3 col-xs-9 text-left no-padding" ';
             var cssTd_cabeceraBody = ' col-lg-5 col-md-5 text-left ';
@@ -1778,6 +1796,7 @@ function OnCallBackRecuperarProductos(args) {
                 }
             } else {
                 strHtml += '<tr><td colspan="8" class="text-center"><p class="color_red">La búsqueda no arroja resultados</p></td></tr>';
+                hayProductosResultado = false;
             }
             strHtml += '</tbody>';
 
@@ -1823,10 +1842,14 @@ function OnCallBackRecuperarProductos(args) {
 
             document.getElementById('divResultadoBuscador').innerHTML = strHtml + getHtmlTablaResolucionCelular();
             // Elejir el primer producto
-            $(".btn_buscar").focus();
-            if ($('#inputSuc0_0').length) {
-                $('#inputSuc0_0').focus();
-                selectedInput = document.getElementById('inputSuc0_0');
+            if (hayProductosResultado) {
+                $(".btn_buscar").focus();
+                if ($('#inputSuc0_0').length) {
+                    $('#inputSuc0_0').focus();
+                    selectedInput = document.getElementById('inputSuc0_0');
+                }
+            } else {
+                $("#txtBuscador").select();
             }
             if (isSubirPedido) {
                 setTimeout(function () { CargarUnidadesRenglones(); }, 300);

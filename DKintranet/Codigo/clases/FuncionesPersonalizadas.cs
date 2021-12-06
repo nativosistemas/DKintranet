@@ -576,9 +576,9 @@ namespace DKintranet.Codigo.clases
             fila["nroordenamiento"] = pTabla.Rows.Count + 1;
             return fila;
         }
-        public static ServiceReferenceDLL.cDllProductosAndCantidad ProductosEnCarrito_ToConvert_DllProductosAndCantidad(cProductosGenerico pValor)
+        public static DKbase.dll.cDllProductosAndCantidad ProductosEnCarrito_ToConvert_DllProductosAndCantidad(cProductosGenerico pValor)
         {
-            ServiceReferenceDLL.cDllProductosAndCantidad resultado = new ServiceReferenceDLL.cDllProductosAndCantidad();
+            DKbase.dll.cDllProductosAndCantidad resultado = new DKbase.dll.cDllProductosAndCantidad();
             resultado.cantidad = pValor.cantidad;
             resultado.codProductoNombre = pValor.pro_nombre;
             resultado.isOferta = (pValor.pro_ofeunidades == 0 && pValor.pro_ofeporcentaje == 0) ? false : true;

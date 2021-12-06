@@ -18,27 +18,27 @@ namespace DKintranet.Codigo.capaDatos
                 return _isCore;
             }
         }
-        public static ServiceReferenceDLL.cDllPedido TomarPedidoConIdCarrito(int pIdCarrito, string pLoginCliente, string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, List<ServiceReferenceDLL.cDllProductosAndCantidad> pListaProducto, bool pIsUrgente)
+        public static DKbase.dll.cDllPedido TomarPedidoTelefonistaAsync(int pIdCarrito, string pLoginCliente, string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, List<DKbase.dll.cDllProductosAndCantidad> pListaProducto, bool pIsUrgente)
         {
             try
             {
+                string pLoginTelefonista = string.Empty;
+                if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null)
+                {
+                    Usuario usuario = ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]);
+                    pLoginTelefonista = usuario.usu_login;
+                }
                 capaCAR.InicioCarritoEnProceso(pIdCarrito, Constantes.cAccionCarrito_TOMAR);
-                if (isCore)
+                List<DKbase.dll.cDllProductosAndCantidad> l_Productos = Codigo.clases.Generales.Serializador.DeserializarJson<List<DKbase.dll.cDllProductosAndCantidad>>(Codigo.clases.Generales.Serializador.SerializarAJson(pListaProducto));
+                var t = Task.Run(() => capaCore_WebService.TomarPedidoTelefonistaAsync(pIdCarrito, pLoginCliente, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, l_Productos, pLoginTelefonista));
+                t.Wait();
+                if (t.Result == null)
                 {
-                    List<DKbase.dll.cDllProductosAndCantidad> l_Productos = Codigo.clases.Generales.Serializador.DeserializarJson<List<DKbase.dll.cDllProductosAndCantidad>>(Codigo.clases.Generales.Serializador.SerializarAJson(pListaProducto));
-                    var t = Task.Run(() => capaCore_WebService.TomarPedidoConIdCarritoAsync(pIdCarrito, pLoginCliente, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, l_Productos, pIsUrgente));
-                    t.Wait();
-                    if (t.Result == null)
-                    {
-                        throw new Exception("Result == null");
-                    }
-                    DKbase.dll.cDllPedido objResult = t.Result;
-                    return Codigo.clases.Generales.Serializador.DeserializarJson<ServiceReferenceDLL.cDllPedido>(Codigo.clases.Generales.Serializador.SerializarAJson(objResult));
+                    throw new Exception("Result == null");
                 }
-                else
-                {
-                    return capaWebServiceDLL.TomarPedidoConIdCarrito(pIdCarrito, pLoginCliente, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pListaProducto, pIsUrgente);
-                }
+                DKbase.dll.cDllPedido objResult = t.Result;
+                //return Codigo.clases.Generales.Serializador.DeserializarJson<ServiceReferenceDLL.cDllPedido>(Codigo.clases.Generales.Serializador.SerializarAJson(objResult));
+                return objResult;
             }
             catch (Exception ex)
             {
@@ -50,24 +50,30 @@ namespace DKintranet.Codigo.capaDatos
                 capaCAR.EndCarritoEnProceso(pIdCarrito);
             }
         }
-        public static ServiceReferenceDLL.cDllPedido TomarPedidoConIdCarritoIntranetAsync(int pIdCarrito, string pLoginCliente, string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, List<ServiceReferenceDLL.cDllProductosAndCantidad> pListaProducto, bool pIsUrgente)
+        public static List<DKbase.dll.cDllPedidoTransfer> TomarPedidoDeTransfersTelefonistaAsync(int pIdCarrito, string pLoginCliente, string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, List<DKbase.dll.cDllProductosAndCantidad> pListaProducto)
         {
             try
             {
+                string pLoginTelefonista = string.Empty;
+                if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null)
+                {
+                    Usuario usuario = ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]);
+                    pLoginTelefonista = usuario.usu_login;
+                }
                 capaCAR.InicioCarritoEnProceso(pIdCarrito, Constantes.cAccionCarrito_TOMAR);
                 List<DKbase.dll.cDllProductosAndCantidad> l_Productos = Codigo.clases.Generales.Serializador.DeserializarJson<List<DKbase.dll.cDllProductosAndCantidad>>(Codigo.clases.Generales.Serializador.SerializarAJson(pListaProducto));
-                var t = Task.Run(() => capaCore_WebService.TomarPedidoConIdCarritoIntranetAsync(pIdCarrito, pLoginCliente, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, l_Productos, pIsUrgente));
+                var t = Task.Run(() => capaCore_WebService.TomarPedidoDeTransfersTelefonistaAsync(pIdCarrito, pLoginCliente, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, l_Productos, pLoginTelefonista));
                 t.Wait();
                 if (t.Result == null)
                 {
                     throw new Exception("Result == null");
                 }
-                DKbase.dll.cDllPedido objResult = t.Result;
-                return Codigo.clases.Generales.Serializador.DeserializarJson<ServiceReferenceDLL.cDllPedido>(Codigo.clases.Generales.Serializador.SerializarAJson(objResult));
+                List<DKbase.dll.cDllPedidoTransfer> objResult = t.Result;
+                return objResult;
             }
             catch (Exception ex)
             {
-                FuncionesPersonalizadas.grabarLog(MethodBase.GetCurrentMethod(), ex, DateTime.Now, pIdCarrito, pLoginCliente, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pListaProducto, pIsUrgente);
+                FuncionesPersonalizadas.grabarLog(MethodBase.GetCurrentMethod(), ex, DateTime.Now, pIdCarrito, pLoginCliente, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pListaProducto, pListaProducto);
                 return null;
             }
             finally

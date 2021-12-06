@@ -1182,3 +1182,39 @@ function ObtenerSaldoFinalADiciembrePorCliente(pCli_login) {
         }
     });
 }
+function CambiarCliente(pIdCliente) {
+    $.ajax({
+        type: "POST",
+        url: "/mvc/CambiarCliente",
+        data: { pIdCliente },
+        success:
+            function (response) {
+                //console.log(response);
+                location.href = '../mvc/Buscador';
+            },
+        failure: function (response) {
+            OnFail(response);
+        },
+        error: function (response) {
+            OnFail(response);
+        }
+    });
+}
+function resetCliente() {
+    $.ajax({
+        type: "POST",
+        url: "/mvc/resetCliente",
+        //data: { IdCliente },
+        success:
+            function (response) {
+                //console.log(response);
+                location.href = '../mvc/Buscador';
+            },
+        failure: function (response) {
+            OnFail(response);
+        },
+        error: function (response) {
+            OnFail(response);
+        }
+    });
+}

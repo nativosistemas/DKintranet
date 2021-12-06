@@ -85,57 +85,31 @@ namespace DKintranet.Codigo.capaDatos
             }
             return result;
         }
-        //public static async Task<DKbase.dll.cDllPedido> TomarPedidoConIdCarritoAsync_Get(int pIdCarrito, string pLoginCliente, string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, List<DKbase.dll.cDllProductosAndCantidad> pListaProducto, bool pIsUrgente)
-        //{
-        //    try
-        //    {
-        //        string name = "TomarPedidoConIdCarrito";
-        //        string url_api = url + name;
-        //        capaCAR.InicioCarritoEnProceso(pIdCarrito, Constantes.cAccionCarrito_TOMAR);
-        //        DKbase.dll.cDllPedido product = null;
-        //        HttpResponseMessage response = await client.GetAsync(url_api);
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            string data = await response.Content.ReadAsStringAsync();
-        //            product = JsonSerializer.Deserialize<DKbase.dll.cDllPedido>(data);
-        //        }
-        //        return product;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        FuncionesPersonalizadas.grabarLog(MethodBase.GetCurrentMethod(), ex, DateTime.Now, pIdCarrito, pLoginCliente, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pListaProducto, pIsUrgente);
-        //        return null;
-        //    }
-        //    finally
-        //    {
-        //        capaCAR.EndCarritoEnProceso(pIdCarrito);
-        //    }
-        //}
-        //  
-        public static async Task<DKbase.dll.cDllPedido> TomarPedidoConIdCarritoAsync(int pIdCarrito, string pLoginCliente, string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, List<DKbase.dll.cDllProductosAndCantidad> pListaProducto, bool pIsUrgente)
+
+        public static async Task<DKbase.dll.cDllPedido> TomarPedidoTelefonistaAsync(int pIdCarrito, string pLoginCliente, string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, List<DKbase.dll.cDllProductosAndCantidad> pListaProducto, string pLoginTelefonista)
         {
             DKbase.dll.cDllPedido result = null;
-            string name = "TomarPedidoConIdCarrito";
-            DKbase.Models.TomarPedidoConIdCarritoRequest parameter = new DKbase.Models.TomarPedidoConIdCarritoRequest() { pIdCarrito = pIdCarrito, pLoginCliente = pLoginCliente, pIdSucursal = pIdSucursal, pMensajeEnFactura = pMensajeEnFactura, pMensajeEnRemito = pMensajeEnRemito, pTipoEnvio = pTipoEnvio, pListaProducto = pListaProducto, pIsUrgente = pIsUrgente };
-            HttpResponseMessage response = await PostAsync(name, parameter);
-            if (response != null)
-            {
-                var resultResponse = response.Content.ReadAsStringAsync().Result;
-                result = JsonSerializer.Deserialize<DKbase.dll.cDllPedido>(resultResponse, oJsonSerializerOptions);
-            }
-            return result;
-        }
-        public static async Task<DKbase.dll.cDllPedido> TomarPedidoConIdCarritoIntranetAsync(int pIdCarrito, string pLoginCliente, string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, List<DKbase.dll.cDllProductosAndCantidad> pListaProducto, bool pIsUrgente)
-        {
-            DKbase.dll.cDllPedido result = null;
-            string name = "TomarPedidoConIdCarritoIntranet";
-            DKbase.Models.TomarPedidoConIdCarritoRequest parameter = new DKbase.Models.TomarPedidoConIdCarritoRequest() { pIdCarrito = pIdCarrito, pLoginCliente = pLoginCliente, pIdSucursal = pIdSucursal, pMensajeEnFactura = pMensajeEnFactura, pMensajeEnRemito = pMensajeEnRemito, pTipoEnvio = pTipoEnvio, pListaProducto = pListaProducto, pIsUrgente = pIsUrgente };
+            string name = "TomarPedidoTelefonista";
+            DKbase.Models.TomarPedidoConIdCarritoRequest parameter = new DKbase.Models.TomarPedidoConIdCarritoRequest() { pIdCarrito = pIdCarrito, pLoginCliente = pLoginCliente, pIdSucursal = pIdSucursal, pMensajeEnFactura = pMensajeEnFactura, pMensajeEnRemito = pMensajeEnRemito, pTipoEnvio = pTipoEnvio, pListaProducto = pListaProducto, pLoginTelefonista = pLoginTelefonista };
             HttpResponseMessage response = await PostAsync(name, parameter);
             if (response != null)
             {
                 var resultResponse = response.Content.ReadAsStringAsync().Result;
                 result = JsonSerializer.Deserialize<DKbase.dll.cDllPedido>(resultResponse);
                 //result = JsonSerializer.Deserialize<DKbase.dll.cDllPedido>(resultResponse, oJsonSerializerOptions);
+            }
+            return result;
+        }
+        public static async Task<List<DKbase.dll.cDllPedidoTransfer>> TomarPedidoDeTransfersTelefonistaAsync(int pIdCarrito, string pLoginCliente, string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, List<DKbase.dll.cDllProductosAndCantidad> pListaProducto, string pLoginTelefonista)
+        {
+            List<DKbase.dll.cDllPedidoTransfer> result = null;
+            string name = "TomarPedidoDeTransfersTelefonista";
+            DKbase.Models.TomarPedidoConIdCarritoRequest parameter = new DKbase.Models.TomarPedidoConIdCarritoRequest() { pIdCarrito = pIdCarrito, pLoginCliente = pLoginCliente, pIdSucursal = pIdSucursal, pMensajeEnFactura = pMensajeEnFactura, pMensajeEnRemito = pMensajeEnRemito, pTipoEnvio = pTipoEnvio, pListaProducto = pListaProducto, pLoginTelefonista = pLoginTelefonista };
+            HttpResponseMessage response = await PostAsync(name, parameter);
+            if (response != null)
+            {
+                var resultResponse = response.Content.ReadAsStringAsync().Result;
+                result = JsonSerializer.Deserialize<List<DKbase.dll.cDllPedidoTransfer>>(resultResponse);
             }
             return result;
         }

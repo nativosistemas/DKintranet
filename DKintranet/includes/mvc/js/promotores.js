@@ -29,7 +29,7 @@
 
     $("#cmbCliente_intranet").change(function () {
         var IdCliente = $(this).val().trim();
-
+        //CambiarCliente(IdCliente);
         $.ajax({
             type: "POST",
             url: "/mvc/CambiarCliente",

@@ -500,7 +500,7 @@ namespace DKintranet.Controllers
         }
         public string TomarPedidoCarrito_generico(string pTipo,string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, bool pIsUrgente)
         {
-            ServiceReferenceDLL.cDllPedido resultadoPedido = null;
+            DKbase.dll.cDllPedido resultadoPedido = null;
             if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
                 //System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null && 
@@ -529,7 +529,7 @@ namespace DKintranet.Controllers
                         }
 
 
-                        List<ServiceReferenceDLL.cDllProductosAndCantidad> listaProductos = new List<ServiceReferenceDLL.cDllProductosAndCantidad>();
+                        List<DKbase.dll.cDllProductosAndCantidad> listaProductos = new List<DKbase.dll.cDllProductosAndCantidad>();
                         foreach (cProductosGenerico itemProductos in item.listaProductos)
                         {
                             listaProductos.Add(FuncionesPersonalizadas.ProductosEnCarrito_ToConvert_DllProductosAndCantidad(itemProductos));
@@ -541,7 +541,7 @@ namespace DKintranet.Controllers
                             oRepetido.Error = msgCarritoRepetido;
                             return Serializador.SerializarAJson(oRepetido);
                         }
-                        resultadoPedido = capaCore_decision.TomarPedidoConIdCarritoIntranetAsync(item.car_id,cliente.cli_login, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, listaProductos, pIsUrgente);
+                        resultadoPedido = capaCore_decision.TomarPedidoTelefonistaAsync(item.car_id,cliente.cli_login, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, listaProductos, pIsUrgente);
                         if (!capaWebServiceDLL.ValidarExistenciaDeCarritoWebPasado(item.car_id))
                             return null;
                         if (resultadoPedido == null)
@@ -572,14 +572,14 @@ namespace DKintranet.Controllers
                                 resultadoPedido.Login = horarioCierre;
                                 // fin Obtener horario cierre
                                 // OPTIMIZAR //////////////////
-                                foreach (ServiceReferenceDLL.cDllPedidoItem itemFaltantes in resultadoPedido.Items)
+                                foreach (DKbase.dll.cDllPedidoItem itemFaltantes in resultadoPedido.Items)
                                 {
                                     if (itemFaltantes.Faltas > 0)
                                     {
                                         WebService.InsertarFaltantesProblemasCrediticios(item.lrc_id, pIdSucursal, cliente.cli_codigo, itemFaltantes.NombreObjetoComercial, itemFaltantes.Faltas, Constantes.cPEDIDO_FALTANTES);
                                     }
                                 }
-                                foreach (ServiceReferenceDLL.cDllPedidoItem itemConProblemasDeCreditos in resultadoPedido.ItemsConProblemasDeCreditos)
+                                foreach (DKbase.dll.cDllPedidoItem itemConProblemasDeCreditos in resultadoPedido.ItemsConProblemasDeCreditos)
                                 {
                                     int cantidadProblemaCrediticia = itemConProblemasDeCreditos.Cantidad + itemConProblemasDeCreditos.Faltas;
                                     if (cantidadProblemaCrediticia > 0)
@@ -623,12 +623,12 @@ namespace DKintranet.Controllers
         public string TomarTransferPedidoCarrito(bool pIsDiferido, string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio)
         {
             string tipo = pIsDiferido ? Constantes.cTipo_CarritoDiferidoTransfers : Constantes.cTipo_CarritoTransfers;
-            List<ServiceReferenceDLL.cDllPedidoTransfer> resultadoPedido = null;
+            List<DKbase.dll.cDllPedidoTransfer> resultadoPedido = null;
             int car_id_aux = 0;
             if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
                 DKintranet.Codigo.capaDatos.cClientes cliente = (DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]; 
-                List<ServiceReferenceDLL.cDllProductosAndCantidad> listaProductos = new List<ServiceReferenceDLL.cDllProductosAndCantidad>();
+                List<DKbase.dll.cDllProductosAndCantidad> listaProductos = new List<DKbase.dll.cDllProductosAndCantidad>();
 
                 List<cCarritoTransfer> listaCarrito = capaCAR_decision.RecuperarCarritosTransferPorIdCliente(cliente, tipo, pIdSucursal);
                 if (listaCarrito == null)
@@ -641,7 +641,7 @@ namespace DKintranet.Controllers
                         car_id_aux = item.car_id_aux;
                         foreach (cProductosGenerico itemProductos in item.listaProductos)
                         {
-                            ServiceReferenceDLL.cDllProductosAndCantidad objProductos = FuncionesPersonalizadas.ProductosEnCarrito_ToConvert_DllProductosAndCantidad(itemProductos);
+                            DKbase.dll.cDllProductosAndCantidad objProductos = FuncionesPersonalizadas.ProductosEnCarrito_ToConvert_DllProductosAndCantidad(itemProductos);
                             objProductos.IdTransfer = item.tfr_codigo;
                             listaProductos.Add(objProductos);
                             itemProductos.tfr_codigo = item.tfr_codigo;
@@ -653,22 +653,22 @@ namespace DKintranet.Controllers
                 } // fin   foreach (cCarritoTransfer item in listaCarrito)
                 if (capaCAR.IsCarritoEnProceso(car_id_aux))
                 {
-                    ServiceReferenceDLL.cDllPedidoTransfer oEnProceso = new ServiceReferenceDLL.cDllPedidoTransfer();
+                    DKbase.dll.cDllPedidoTransfer oEnProceso = new DKbase.dll.cDllPedidoTransfer();
                     oEnProceso.Error = msgCarritoEnProceso;
-                    resultadoPedido = new List<ServiceReferenceDLL.cDllPedidoTransfer>();
+                    resultadoPedido = new List<DKbase.dll.cDllPedidoTransfer>();
                     resultadoPedido.Add(oEnProceso);
                     return Serializador.SerializarAJson(resultadoPedido);
                 }
                 if (capaWebServiceDLL.ValidarExistenciaDeCarritoWebPasado(car_id_aux))
                 {
                     capaCAR.BorrarCarritoPorId_SleepTimer(car_id_aux, Constantes.cAccionCarrito_BORRAR_CARRRITO_REPETIDO);
-                    ServiceReferenceDLL.cDllPedidoTransfer oRepetido = new ServiceReferenceDLL.cDllPedidoTransfer();
+                    DKbase.dll.cDllPedidoTransfer oRepetido = new DKbase.dll.cDllPedidoTransfer();
                     oRepetido.Error = msgCarritoRepetido;
-                    resultadoPedido = new List<ServiceReferenceDLL.cDllPedidoTransfer>();
+                    resultadoPedido = new List<DKbase.dll.cDllPedidoTransfer>();
                     resultadoPedido.Add(oRepetido);
                     return Serializador.SerializarAJson(resultadoPedido);
                 }
-                List<ServiceReferenceDLL.cDllPedidoTransfer> listaCarritoAux = capaWebServiceDLL.TomarPedidoDeTransfersConIdCarrito(car_id_aux, cliente.cli_login, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, listaProductos);
+                List<DKbase.dll.cDllPedidoTransfer> listaCarritoAux = capaCore_decision.TomarPedidoDeTransfersTelefonistaAsync(car_id_aux, cliente.cli_login, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, listaProductos);
                 if (!capaWebServiceDLL.ValidarExistenciaDeCarritoWebPasado(car_id_aux))
                     return null;
 
@@ -690,7 +690,7 @@ namespace DKintranet.Controllers
                             }
                         }
                         // INICIO FALTANTE
-                        foreach (ServiceReferenceDLL.cDllPedidoTransfer itemPedidoTransferFaltante in listaCarritoAux)
+                        foreach (DKbase.dll.cDllPedidoTransfer itemPedidoTransferFaltante in listaCarritoAux)
                         {
                             if (itemPedidoTransferFaltante.Login == "REVISION")
                             {
@@ -975,6 +975,10 @@ namespace DKintranet.Controllers
                 o = lista_Clientes.FirstOrDefault(x => x.cli_codigo == IdCliente);
             }
             System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] = o;
+        }
+        public void resetCliente()
+        {
+            System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] = null;
         }
     }
 }
