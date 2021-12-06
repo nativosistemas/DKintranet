@@ -29,15 +29,13 @@ namespace DKintranet.Codigo.capaDatos
                     pLoginTelefonista = usuario.usu_login;
                 }
                 capaCAR.InicioCarritoEnProceso(pIdCarrito, Constantes.cAccionCarrito_TOMAR);
-                List<DKbase.dll.cDllProductosAndCantidad> l_Productos = Codigo.clases.Generales.Serializador.DeserializarJson<List<DKbase.dll.cDllProductosAndCantidad>>(Codigo.clases.Generales.Serializador.SerializarAJson(pListaProducto));
-                var t = Task.Run(() => capaCore_WebService.TomarPedidoTelefonistaAsync(pIdCarrito, pLoginCliente, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, l_Productos, pLoginTelefonista));
+                var t = Task.Run(() => capaCore_WebService.TomarPedidoTelefonistaAsync(pIdCarrito, pLoginCliente, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pListaProducto, pLoginTelefonista));
                 t.Wait();
                 if (t.Result == null)
                 {
                     throw new Exception("Result == null");
                 }
                 DKbase.dll.cDllPedido objResult = t.Result;
-                //return Codigo.clases.Generales.Serializador.DeserializarJson<ServiceReferenceDLL.cDllPedido>(Codigo.clases.Generales.Serializador.SerializarAJson(objResult));
                 return objResult;
             }
             catch (Exception ex)
@@ -61,8 +59,7 @@ namespace DKintranet.Codigo.capaDatos
                     pLoginTelefonista = usuario.usu_login;
                 }
                 capaCAR.InicioCarritoEnProceso(pIdCarrito, Constantes.cAccionCarrito_TOMAR);
-                List<DKbase.dll.cDllProductosAndCantidad> l_Productos = Codigo.clases.Generales.Serializador.DeserializarJson<List<DKbase.dll.cDllProductosAndCantidad>>(Codigo.clases.Generales.Serializador.SerializarAJson(pListaProducto));
-                var t = Task.Run(() => capaCore_WebService.TomarPedidoDeTransfersTelefonistaAsync(pIdCarrito, pLoginCliente, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, l_Productos, pLoginTelefonista));
+                var t = Task.Run(() => capaCore_WebService.TomarPedidoDeTransfersTelefonistaAsync(pIdCarrito, pLoginCliente, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pListaProducto, pLoginTelefonista));
                 t.Wait();
                 if (t.Result == null)
                 {
