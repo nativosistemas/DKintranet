@@ -44,6 +44,7 @@ function OnCallBackAgregarProductosTransfersAlCarritoDesdeBuscador(args) {
             $('#divContenedorBaseTransfer_' + resultArgs.oSucursalCarritoTransfer.Sucursal).html(AgregarCarritoTransfersPorSucursalHtml(indexTransferADD));
             setScrollFinDeCarritoTransfer(indexTransferADD);
         }
+        funActulizarHtmlCredito();
     } else {
         var msgProductos = '<ul>';
         for (var i = 0; i < resultArgs.listProductosAndCantidadError.length; i++) {
@@ -118,9 +119,11 @@ function AgregarCarritoTransfersPorSucursalHtml(pIndice) {
     strHTML += '<div class="div_carrito">';
     strHTML += '<div class="tit">';
     strHTML += 'Transfers ';
+    var indiceReferente = listaSucursalesDependienteInfo.length;
     for (var iNombreSucursal = 0; iNombreSucursal < listaSucursalesDependienteInfo.length; iNombreSucursal++) {
         if (listaSucursalesDependienteInfo[iNombreSucursal].sde_sucursal == listaCarritoTransferPorSucursal[pIndice].Sucursal) {
             strHTML += listaSucursalesDependienteInfo[iNombreSucursal].suc_nombre;
+            indiceReferente += iNombreSucursal;
             break;
         }
     }
@@ -206,8 +209,8 @@ function AgregarCarritoTransfersPorSucursalHtml(pIndice) {
     strHTML += '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-1 text-center"></div>';
     strHTML += '<div class="col-xs-12 div_total">Total<span class="pull-right">' + '$&nbsp;' + FormatoDecimalConDivisorMiles(nroTotalCarrito.toFixed(2)) + '</span></div>';
     strHTML += '<div class="col-xs-12 pad_lr_car">';
-    strHTML += '<a class="btn_confirmar" onclick="onclickIsPuedeUsarDllTransfer(' + pIndice + '); return false;" href="#">CONFIRMAR</a>';
-    strHTML += '<a class="btn_vaciar float-left" onclick="onclickVaciarCarritoTransfer(' + pIndice + '); return false;" href="#">VACIAR</a>';
+    strHTML += '<button type="button" id="btn_confirmar_' +  indiceReferente  + '" class="btn_confirmar" onclick="onclickIsPuedeUsarDllTransfer(' + pIndice + '); return false;" href="#">CONFIRMAR</button>';
+    strHTML += '<button type="button" id="btn_vaciar_' +  indiceReferente + '" class="btn_vaciar float-left" onclick="onclickVaciarCarritoTransfer(' + pIndice + '); return false;" href="#">VACIAR</button>';
     strHTML += '</div>';
     strHTML += '<div class="clear"></div>';
     //
@@ -336,6 +339,7 @@ function OnCallBackBorrarCarritoTransfer(args) {
             listaCarritoTransferPorSucursal[indiceCarritoTransferBorrar].Sucursal = '';
             modalModuloAlertHide();
             LimpiarTextBoxProductosBuscados(sucur);
+            funActulizarHtmlCredito();
         }
     }
 }
@@ -603,7 +607,7 @@ function AgregarTransferHtmlAlPopUp(pIndex) {
             if (cantBotonesSucursales == 0)
                 btn_confirmar_class = ' no-margin-r';
             if (listaSucursalesDependienteInfo[iSucursalNombre].suc_trabajaPerfumeria || (!listaSucursalesDependienteInfo[iSucursalNombre].suc_trabajaPerfumeria && !tienePerfu)) {
-                strHtmlTransfer += '<a class="btn_confirmar' + btn_confirmar_class + '" href="#"  onclick="onClickTransfer(' + pIndex + ',' + iSucursalNombre + '); return false;">' + btn_confirmar_sucursal + '<span class="hidden-xs">' + btn_confirmar_confirmar + '</span></a>';
+                strHtmlTransfer += '<button type="button" class="btn_confirmar' + btn_confirmar_class + '" href="#"  onclick="onClickTransfer(' + pIndex + ',' + iSucursalNombre + '); return false;">' + btn_confirmar_sucursal + '<span class="hidden-xs">' + btn_confirmar_confirmar + '</span></button>';
                 cantBotonesSucursales++;
             }
         }
@@ -676,6 +680,7 @@ function ValidarTransferTotal_sucursal(pIndice, pIndiceSursal) {
                 objProducto.cantidad = intMensajeProducto;
                 objProducto.indexAuxProducto = i;
                 objProducto.indexAuxTransfer = pIndice;
+                objProducto.obj = listaTransfer[pIndice].listaDetalle[i];
                 tempListaProductos.push(objProducto);
             }
         } else {
@@ -1005,8 +1010,8 @@ function CargarRespuestaDePedidoTransfer(pValor) {
         strHtmlPedidoFacturarseHabitual += '</div>';
 
 
-        strHtmlPedidoFacturarseHabitual += '<a class="btn_confirmar" onclick="onclickPedidoFacturarseHabitualConfirmar(); return false;" href="#">Confirmar</a>';
-        strHtmlPedidoFacturarseHabitual += '<a class="btn_confirmar" onclick="CerrarContenedorTransfer(); return false;"  href="#">Descartar</a>';
+        strHtmlPedidoFacturarseHabitual += '<button type="button" class="btn_confirmar" onclick="onclickPedidoFacturarseHabitualConfirmar(); return false;" href="#">Confirmar</button>';
+        strHtmlPedidoFacturarseHabitual += '<button type="button" class="btn_confirmar" onclick="CerrarContenedorTransfer(); return false;"  href="#">Descartar</button>';
         strHtmlPedidoFacturarseHabitual += '<div class="clear">';
         strHtmlPedidoFacturarseHabitual += '</div>';
         //document.getElementById('resultadoPedidoBotonOk').style.display = 'none';
@@ -1038,7 +1043,7 @@ function CargarRespuestaDePedidoTransfer(pValor) {
     strHtml_modal += '<div class="clear"></div>';
     //strHtml_modal += '<a class="btn_confirmar" href="#" onclick="modalModuloHide(); return false;">CONFIRMAR</a>';
     if (!isProductosPedidoFacturarseHabitual) {
-        strHtml_modal += '<a class="btn_confirmar" href="#" onclick="modalModuloHide(); return false;">CONFIRMAR</a>';
+        strHtml_modal += '<button type="button" class="btn_confirmar" href="#" onclick="modalModuloHide(); return false;">CONFIRMAR</button>';
     }
     strHtml_modal += '<div class="clear"></div>';
     strHtml_modal += '</div>';

@@ -3,6 +3,10 @@
 
     if (Session["clientesDefault_Cliente"] != null)
     {
+        resultadoHtmlCarritosTransfer += "<div  id=\"divContenedorBaseCredito\" >";//class=\"div_cierre_reparto\"
+        resultadoHtmlCarritosTransfer += "</div>";
+
+
         List<DKintranet.Codigo.capaDatos.cSucursal> listaSucursalDependiente = WebService.RecuperarTodasSucursalesDependientes().Where(x => x.sde_sucursal == ((DKintranet.Codigo.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_codsuc).ToList();
         //// Inicio S7
         List<string> ListaSucursal = DKintranet.Codigo.clases.FuncionesPersonalizadas.RecuperarSucursalesParaBuscadorDeCliente();

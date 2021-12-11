@@ -79,7 +79,7 @@ function RecuperarProductosOrdenar(pColumna, pOrden) {
         }
     });
 }
-function AgregarProductosTransfersAlCarrito(pListaProductosMasCantidad, pIdTransfers, pCodSucursal, pOnCallBack) {
+function AgregarProductosTransfersAlCarrito_ajax(pListaProductosMasCantidad, pIdTransfers, pCodSucursal, pOnCallBack) {
     $.ajax({
         type: "POST",
         url: "/mvc/AgregarProductosTransfersAlCarrito" + (isCarritoDiferido ? 'Diferido' : ''),

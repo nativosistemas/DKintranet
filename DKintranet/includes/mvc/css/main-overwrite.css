@@ -574,31 +574,158 @@ header .nav li {
 .nav_sec a.nuevoLanzamiento {
     color: #5ca679 !important;
 }
+
     .nav_sec a.nuevoLanzamiento.active {
         background-color: #5ca679 !important;
         color: #fff !important;
     }
+
         .nav_sec a.nuevoLanzamiento.active i {
             color: #fff !important;
-            
         }
+
 .divFondoLanzamiento {
     background-color: rgb(212,212,212);
     /*rgba(255, 255, 255, 0.5);*/
 }
+
 .divContenedorLanzamiento {
-    margin:10px;
+    margin: 10px;
 }
+
 .divFondoDescLanzamiento {
     /*background-color: rgba(255, 255, 255, 0.5);*/
 }
+
 .img-responsive-lanzamiento {
-margin:auto;
+    margin: auto;
 }
+
 .modal-lanzamiento {
-    width:auto;
+    width: auto;
 }
 /* fin nuevo lanzamientos */
 a.mtz {
     z-index: 0;
+}
+/*Intranet */
+.dropdown-menu:before {
+    right: unset;
+}
+
+
+button.btn_confirmar {
+    height: auto;
+    width: auto !important;
+    display: inline-block;
+    padding: 8px 18px 6px !important;
+    text-align: center;
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: 400;
+    color: #fff !important;
+    background-color: #1b82c5;
+    border: 1px solid #1b82c5;
+    cursor: pointer !important
+}
+
+    button.btn_confirmar:hover {
+        background-color: transparent;
+        color: #1b82c5 !important;
+        -webkit-transition-duration: .5s;
+        -moz-transition-duration: .5s;
+        -ms-transition-duration: .5s;
+        -o-transition-duration: .5s;
+        transition-duration: .5s
+    }
+
+@media (max-width:767px) {
+    button.btn_confirmar {
+        padding: 8px 10px 6px !important
+    }
+
+        button.btn_confirmar span {
+            display: none
+        }
+}
+
+button.btn_confirmar {
+    float: right;
+    margin-left: 12px;
+    padding: 8px 10px 6px !important
+}
+
+@media (max-width:1199px) {
+    button.btn_confirmar {
+        margin-left: 5px
+    }
+}
+
+button.btn_confirmar:before {
+    content: '\f00c';
+    font-family: FontAwesome;
+    float: left;
+    padding-right: 10px;
+    font-size: 13px !important
+}
+
+@media (max-width:1199px) {
+    button.btn_confirmar:before {
+        padding-right: 5px
+    }
+}
+
+button.btn_vaciar {
+    float: right;
+    margin-left: 12px;
+    height: auto;
+    width: auto !important;
+    display: inline-block;
+    padding: 8px 10px 6px !important;
+    text-align: center;
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: 400;
+    background-color: #98999a;
+    color: #fff !important;
+    border: 1px solid #98999a;
+    cursor: pointer !important
+}
+
+    button.btn_vaciar:hover {
+        background-color: transparent;
+        color: #98999a !important;
+        -webkit-transition-duration: .5s;
+        -moz-transition-duration: .5s;
+        -ms-transition-duration: .5s;
+        -o-transition-duration: .5s;
+        transition-duration: .5s
+    }
+
+@media (max-width:1199px) {
+    button.btn_vaciar {
+        margin-left: 5px;
+        padding: 8px 8px 6px !important
+    }
+}
+
+button.btn_vaciar:before {
+    content: '\f00d';
+    font-family: FontAwesome;
+    float: left;
+    padding-right: 10px;
+    font-size: 14px !important
+}
+
+@media (max-width:1199px) {
+    button.btn_vaciar:before {
+        padding-right: 5px
+    }
+}
+button.btn_confirmar:focus {
+    border: 3px solid #98999a;
+}
+
+button.btn_vaciar:focus {
+    border: 3px solid #98999a;
 }

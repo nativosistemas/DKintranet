@@ -40,6 +40,8 @@ var listaSucursales = null;
 var listaSucursalesDependienteInfo = null;
 var titulo_error = "Ha ocurrido un error, por favor intente de nuevo.";
 var cuerpo_error = "Los siguientes productos no se pudieron agregar correctamente:";
+var titulo_creditoInsuficiente = "EL CLIENTE HA SUPERADO EL CRÉDITO DISPONIBLE";
+var cuerpo_creditoInsuficiente = "Le recordaos que las ultimas unidades añadidas no fueron agregadas al carrito.";
 var mensajeCantidadSuperaElMaximoParametrizado1 = '¿Seguro que desea pedir más de ';
 var mensajeCantidadSuperaElMaximoParametrizado2 = ' unidades?';
 var mensajeCuandoSeMuestraError = 'Se produjo un error';
@@ -59,21 +61,37 @@ var indexSucursalTransferSeleccionado = null;
 var intColumnaOrdenar = -2;
 var timerProductoFacturacionDirecta = null;
 var htmlAltoCosto = '<span class="p_trazable">Alto Costo - Ventas comunicarse al <i class="fa fa-whatsapp linkWP_icon"></i><a class="linkWP" href="tel:3413631749">341 3631749</a></span>';//'<div><i class="fa fa-whatsapp fa_contacto_ftr"></i><a href="tel:3413631749">341 3631749</a></div>';
+var creditoInicial = null;
+var nameInput_focus_anterior = '';
+var btnCarrito_index = null;
+var btnCarrito_tipo = null;
+//var btnCarrito_focus = null;
 
 $('body').on("keydown", function (e) {
-    if (e.ctrlKey && e.shiftKey && e.which === 83) {
-        //e.altKey
-        //resetCliente
-        alert("You pressed Ctrl + Shift + s");
-        e.preventDefault();
-    }
+    //if (e.ctrlKey && e.shiftKey && e.which === 83) {
+    //    alert("You pressed Ctrl + Shift + s");
+    //    e.preventDefault();
+    //}
 });
 $('body').on("keydown", function (e) {
-    if (e.altKey && e.which === 83) { //s
+    if (e.altKey && e.which === 66) { // ALT + B
         resetCliente();
         e.preventDefault();
+    } else if (e.altKey && e.which === 86) { // ALT + V
+        focusVaciar();
+        e.preventDefault();
+    } else if (e.altKey && e.which === 67) { // ALT + C
+        focusConfirmar();
+        e.preventDefault();
     }
+
 });
+//$('body').on("keydown", function (e) {
+//    if (e.altKey && e.which === 18) { // ALT + V -86
+//        focusVaciar();
+//        e.preventDefault();
+//    }
+//});
 $(document).ready(function () {
     $(document).keydown(function (e) {
         if (!e) {
@@ -143,6 +161,13 @@ $(document).ready(function () {
         if (typeof listaSucursalesDependienteInfo == 'undefined') {
             listaSucursalesDependienteInfo = null;
         }
+    }
+    if (creditoInicial == null) {
+        creditoInicial = $('#hiddenCreditoInicial').val();
+        if (typeof creditoInicial == 'undefined') {
+            creditoInicial = 0;
+        }
+        creditoInicial = parseFloat(creditoInicial);
     }
     if (isCarritoDiferido == null) {
         isCarritoDiferido = $('#hiddenIsCarritoDiferido').val();
@@ -220,7 +245,7 @@ $(document).ready(function () {
     ObtenerHorarioCierreAndSiguiente(cli_codsuc());
     CargarCantidadCarritos_Celular();
     carritoNoHayCarritosCelular();
-
+    funActulizarHtmlCredito();
     //
 
     if (cliente == null) {
@@ -851,6 +876,7 @@ function onfocusSucursal(pValor) {
     selectInputCarrito = null;
     selectedInputTransfer = null;
     selectedInput = pValor;
+    nameInput_focus_anterior = document.activeElement.id;
     setTimeout(function () { selectedInput.select(); MarcarFilaSeleccionada(pValor); }, 5);
 }
 function MarcarFilaSeleccionada(pValor) {
@@ -974,16 +1000,6 @@ function onblurSucursal_base(pCantidad, pFila, pColumna) {
 
     }
     else {
-        //if (!isExcedeImporte) {
-        //    if (isEnterExcedeImporte) {
-        //        isEnterExcedeImporte = false;
-        //        if (!$("#divBody").hasClass("modal-open-Celular")) {
-        //            jQuery("#txtBuscador").val('');
-        //            onClickBuscar();
-        //            document.getElementById('txtBuscador').focus();
-        //        }
-        //    }
-        //}
         if (!isExcedeImporte) {
             if (isEnterExcedeImporte && isModificoBD == false) {
                 isEnterExcedeImporte = false;
@@ -1196,6 +1212,7 @@ function CargarProductoCantidadDependiendoTransfer_base(pFila, pColumna, pCantid
                         objProducto.codProductoNombre = listaProductosBuscados[pFila].tde_codpro; // Para la funcion en el servidor
                         objProducto.tde_codpro = listaProductosBuscados[pFila].tde_codpro;
                         objProducto.cantidad = cantidadCarritoTransfer;
+                        objProducto.obj = listaProductosBuscados[pFila];
                         tempListaProductos.push(objProducto);
                         //PageMethods.AgregarProductosTransfersAlCarrito(tempListaProductos, listaProductosBuscados[pFila].tde_codtfr, listaSucursal[pColumna], OnCallBackAgregarProductosTransfersAlCarritoDesdeBuscador, OnFail);
                         Log('CargarProductoCantidadDependiendoTransfer_base:' + '1');
@@ -1235,6 +1252,7 @@ function CargarProductoCantidadDependiendoTransfer_base(pFila, pColumna, pCantid
                         objProducto.codProductoNombre = listaProductosBuscados[pFila].tde_codpro; // Para la funcion en el servidor
                         objProducto.tde_codpro = listaProductosBuscados[pFila].tde_codpro;
                         objProducto.cantidad = cantidadCarritoTransfer;
+                        objProducto.obj = listaProductosBuscados[pFila];
                         tempListaProductos.push(objProducto);
                         //PageMethods.AgregarProductosTransfersAlCarrito(tempListaProductos, listaProductosBuscados[pFila].tde_codtfr, listaSucursal[pColumna], OnCallBackAgregarProductosTransfersAlCarritoDesdeBuscador, OnFail);
                         AgregarProductosTransfersAlCarrito(tempListaProductos, listaProductosBuscados[pFila].tde_codtfr, listaSucursal[pColumna], 'OnCallBackAgregarProductosTransfersAlCarritoDesdeBuscador');
@@ -1272,6 +1290,7 @@ function CargarProductoCantidadDependiendoTransfer_base(pFila, pColumna, pCantid
                         objProducto.codProductoNombre = listaProductosBuscados[pFila].tde_codpro; // Para la funcion en el servidor
                         objProducto.tde_codpro = listaProductosBuscados[pFila].tde_codpro;
                         objProducto.cantidad = cantidadCarritoTransfer;
+                        objProducto.obj = listaProductosBuscados[pFila];
                         tempListaProductos.push(objProducto);
                         //PageMethods.AgregarProductosTransfersAlCarrito(tempListaProductos, listaProductosBuscados[pFila].tde_codtfr, listaSucursal[pColumna], OnCallBackAgregarProductosTransfersAlCarritoDesdeBuscador, OnFail);
                         AgregarProductosTransfersAlCarrito(tempListaProductos, listaProductosBuscados[pFila].tde_codtfr, listaSucursal[pColumna], 'OnCallBackAgregarProductosTransfersAlCarritoDesdeBuscador');
@@ -1306,6 +1325,7 @@ function CargarProductoCantidadDependiendoTransfer_base(pFila, pColumna, pCantid
                         objProducto.codProductoNombre = listaProductosBuscados[pFila].tde_codpro; // Para la funcion en el servidor
                         objProducto.tde_codpro = listaProductosBuscados[pFila].tde_codpro;
                         objProducto.cantidad = cantidadCarritoTransfer;
+                        objProducto.obj = listaProductosBuscados[pFila];
                         tempListaProductos.push(objProducto);
                         //PageMethods.AgregarProductosTransfersAlCarrito(tempListaProductos, listaProductosBuscados[pFila].tde_codtfr, listaSucursal[pColumna], OnCallBackAgregarProductosTransfersAlCarritoDesdeBuscador, OnFail);
                         AgregarProductosTransfersAlCarrito(tempListaProductos, listaProductosBuscados[pFila].tde_codtfr, listaSucursal[pColumna], 'OnCallBackAgregarProductosTransfersAlCarritoDesdeBuscador');
@@ -1356,6 +1376,7 @@ function CargarProductoCantidadDependiendoTransfer_base(pFila, pColumna, pCantid
                 objProducto.codProductoNombre = listaProductosBuscados[pFila].tde_codpro; // Para la funcion en el servidor
                 objProducto.tde_codpro = listaProductosBuscados[pFila].tde_codpro;
                 objProducto.cantidad = 0;
+                objProducto.obj = listaProductosBuscados[pFila];
                 tempListaProductos.push(objProducto);
                 //PageMethods.AgregarProductosTransfersAlCarrito(tempListaProductos, listaProductosBuscados[pFila].tde_codtfr, listaSucursal[pColumna], OnCallBackAgregarProductosTransfersAlCarritoDesdeBuscador, OnFail);
                 AgregarProductosTransfersAlCarrito(tempListaProductos, listaProductosBuscados[pFila].tde_codtfr, listaSucursal[pColumna], 'OnCallBackAgregarProductosTransfersAlCarritoDesdeBuscador');
@@ -1957,10 +1978,44 @@ function AgregarAlHistorialProductoCarrito(pIndexProducto, pIndexSucursal, pCant
         //    HistorialProductoCarrito(listaProductosBuscados[pIndexProducto].pro_codigo, listaProductosBuscados[pIndexProducto].pro_nombre, listaSucursal[pIndexSucursal], pCantidadProducto);
         //}
         Log('AgregarAlHistorialProductoCarrito:' + '1' + ' - pCantidad: ' + pCantidadProducto);
-        CargarOActualizarListaCarrito(listaSucursal[pIndexSucursal], listaProductosBuscados[pIndexProducto].pro_codigo, pCantidadProducto, true);
+
+
+        CargarOActualizarListaCarrito(listaSucursal[pIndexSucursal], listaProductosBuscados[pIndexProducto], pCantidadProducto, true);
     }
 }
-function CargarOActualizarListaCarrito(pIdSucursal, pIdProduco, pCantidadProducto, pIsDesdeBuscador) {
+
+function CargarOActualizarListaCarrito(pIdSucursal, pProducto, pCantidadProducto, pIsDesdeBuscador) {
+    var isGrabarCantidad = isValidarCredito(pIdSucursal, pProducto, pCantidadProducto, pIsDesdeBuscador, false);
+    //var creditoRestante = getCreditoRestante();
+    //creditoRestante = creditoRestante + obtenerMontoProductoDeCarritoSucursal(pIdSucursal, pProducto);
+    //if (creditoRestante <= 0) {
+    //    isGrabarCantidad = false;
+    //} else {
+    //    var nroTotalProducto = CalcularPrecioProductosEnCarrito(pProducto.PrecioFinal, pCantidadProducto, pProducto.pro_ofeunidades, pProducto.pro_ofeporcentaje);
+    //    var creditoRestante_temp = creditoRestante - nroTotalProducto;
+    //    if (creditoRestante_temp <= 0) {
+    //        isGrabarCantidad = false;
+    //    }
+    //}
+
+    //if (!isGrabarCantidad) {
+    //    if (pIdSucursal != null && pProducto.pro_codigo != null && pCantidadProducto != null && pIsDesdeBuscador != null) {
+    //        if (pIsDesdeBuscador) {
+    //            volverCantidadAnterior_buscador(pIdSucursal, pProducto.pro_codigo);
+    //        } else {
+    //            volverCantidadAnterior_carrito(pIdSucursal, pProducto.pro_codigo);
+    //        }
+    //    }
+    //    var htmlMensaje = '<p>' + cuerpo_creditoInsuficiente + '</p>';//<ul><li>' + obtenerNombreProducto_buscador(pProducto.pro_codigo, pIdSucursal, pIsDesdeBuscador) + '</li></ul>
+    //    mensaje_credito(titulo_creditoInsuficiente, htmlMensaje);
+    //} else {
+    if (isGrabarCantidad) {
+        CargarOActualizarListaCarrito_base(pIdSucursal, pProducto.pro_codigo, pCantidadProducto, pIsDesdeBuscador);
+    }
+    //}
+
+}
+function CargarOActualizarListaCarrito_base(pIdSucursal, pIdProduco, pCantidadProducto, pIsDesdeBuscador) {
     tempIdSucursal = pIdSucursal;
     tempIdProduco = pIdProduco;
     tempCantidadProducto = parseInt(pCantidadProducto);
@@ -2198,6 +2253,8 @@ function OnCallBackActualizarProductoCarrito(args) {
                 }
                 actualizarCarrito(tempIdSucursal, tempIdProduco, tempCantidadProducto, tempIsDesdeBuscador);
             }
+            //
+            funActulizarHtmlCredito();
         }
         else {
             // error
@@ -2968,7 +3025,7 @@ function detalleProducto_celular(pIndex) {
     strHtml += '<div class="col-xs-12 mpbxs_dsc">';
     strHtml += '<div class="clear20"></div>';
     //strHtml += '<a class="btn_confirmar" href="#" onclick="onclickCargaCantidadProductoCelular(' + pIndex + '); return false;" >CONFIRMAR</a>';//onclick="onclickCargaCatidadProductoCelular(); return false;"   data-dismiss="modal"
-    strHtml += '<a class="btn_vaciar float-left" href="#" data-dismiss="modal" >CERRAR</a>';
+    strHtml += '<button type="button" class="btn_vaciar float-left" href="#" data-dismiss="modal" >CERRAR</button>';
     strHtml += '</div>';
     strHtml += '</div>';
     strHtml += '<div class="clear"></div>';
@@ -3112,4 +3169,267 @@ function CargarDatosProductosFacturacionDirecta(pIndice) {
 /// Fin facturacion directa detalle muestra
 function onclickAmpliarImagen(pIndice) {
     mensaje_AmpliarImagen(listaProductosBuscados[pIndice]);
+}
+
+// Intranet
+function getCreditoInicial() {
+    var result = creditoInicial;
+    return result;
+}
+function getCreditoUtilizado() {
+    var result = parseFloat(0);
+    if (listaCarritos != null) {
+        for (var i = 0; i < listaCarritos.length; i++) {
+            if (listaCarritos[i].codSucursal != '') {
+                result += getCreditoUtilizadoPorCarritoIndex(i);
+            }
+        }
+    }
+    if (listaCarritoTransferPorSucursal != null) {
+        for (var i = 0; i < listaCarritoTransferPorSucursal.length; i++) {
+            if (listaCarritoTransferPorSucursal[i].Sucursal != '') {
+                result += getCreditoUtilizadoPorCarritoTransfersIndex(i);
+            }
+        }
+    }
+    return result;
+}
+function getCreditoRestante() {
+    var result = parseFloat(0);
+    var creditoInicial = getCreditoInicial();
+    var creditoUtilizado = getCreditoUtilizado();
+    result = creditoInicial - creditoUtilizado;
+    return result;
+}
+
+function getCreditoUtilizadoPorCarritoIndex(pIndexCarrito) {
+    var nroTotalCarrito = parseFloat(0);
+    for (var iProductos = 0; iProductos < listaCarritos[pIndexCarrito].listaProductos.length; iProductos++) {
+        var nroTotalProducto = CalcularPrecioProductosEnCarrito(listaCarritos[pIndexCarrito].listaProductos[iProductos].PrecioFinal, listaCarritos[pIndexCarrito].listaProductos[iProductos].cantidad, listaCarritos[pIndexCarrito].listaProductos[iProductos].pro_ofeunidades, listaCarritos[pIndexCarrito].listaProductos[iProductos].pro_ofeporcentaje);
+        if (listaCarritos[pIndexCarrito].listaProductos[iProductos].stk_stock == 'N') {
+            nroTotalProducto = 0;
+        } else {
+            //strHtmlPrecioProducto = '$&nbsp;' + FormatoDecimalConDivisorMiles(nroTotalProducto.toFixed(2));
+        }
+        nroTotalCarrito = nroTotalCarrito + nroTotalProducto;
+    }
+    return nroTotalCarrito;
+}
+function getCreditoUtilizadoPorCarritoTransfersIndex(pIndice) {
+    var nroTotalCarrito = parseFloat(0);
+    for (var iTransfer = 0; iTransfer < listaCarritoTransferPorSucursal[pIndice].listaTransfer.length; iTransfer++) {
+        var nroTotalPrecioPorTransfer = 0;
+        for (var iTransferProductos = 0; iTransferProductos < listaCarritoTransferPorSucursal[pIndice].listaTransfer[iTransfer].listaProductos.length; iTransferProductos++) {
+            var PrecioTotalProductoTransfer = listaCarritoTransferPorSucursal[pIndice].listaTransfer[iTransfer].listaProductos[iTransferProductos].cantidad * listaCarritoTransferPorSucursal[pIndice].listaTransfer[iTransfer].listaProductos[iTransferProductos].PrecioFinalTransfer;
+
+            if (listaCarritoTransferPorSucursal[pIndice].listaTransfer[iTransfer].listaProductos[iTransferProductos].stk_stock == 'N') {
+                // nroTotalProducto = 0;
+            } else {
+                nroTotalCarrito += PrecioTotalProductoTransfer;
+            }
+        }
+    }
+    return nroTotalCarrito;
+}
+function getHtmlCreditoIntranet() {
+    var strHTML = '';
+    strHTML += '<table with="100%" class="table table-striped" style="background: #e1e1e1;">';
+    strHTML += '<thead>';
+    strHTML += '<tr style="height: 40px;"><th class="text-center">CRÉDITO<br></th><th class="text-center"></th></tr>';
+    strHTML += '</thead>';
+    strHTML += '<tbody class="table-striped">';
+    strHTML += '<tr style="height: 40px">';
+    strHTML += '<td class="text-left"> DISPONIBLE INICIAL </td>';
+    var strHtmlCreditoInicial = '$&nbsp;' + FormatoDecimalConDivisorMiles(getCreditoInicial().toFixed(2));
+    strHTML += '<td class="text-right">' + strHtmlCreditoInicial + '</td>';
+    strHTML += '</tr>';
+    strHTML += '<tr style="height: 40px">';
+    strHTML += '<td class="text-left"> UTILIZADO </td>';
+    var strHtmlCreditoUtilizado = '$&nbsp;' + FormatoDecimalConDivisorMiles(getCreditoUtilizado().toFixed(2));
+    strHTML += '<td class="text-right">' + strHtmlCreditoUtilizado + '</td>';
+    strHTML += '</tr>';
+    strHTML += '<tr style="height: 40px">';
+    strHTML += '<td class="text-left">RESTANTE </td>';
+    var strHtmlCreditoRestante = '$&nbsp;' + FormatoDecimalConDivisorMiles(getCreditoRestante().toFixed(2));
+    strHTML += '<td class="text-right">' + strHtmlCreditoRestante + '</td>';
+    strHTML += '</tr>';
+    strHTML += '</tbody>';
+    strHTML += '</table>';
+    return strHTML;
+}
+function funActulizarHtmlCredito() {
+    $('#divContenedorBaseCredito').html(getHtmlCreditoIntranet());
+}
+$('#modalModuloAlert').on('hidden.bs.modal', function () {
+    if (listaSucursales != null) {
+        for (var i = 0; i < listaSucursales.length; i++) {
+            LimpiarTextBoxProductosBuscados(listaSucursales[i].sde_sucursal);
+        }
+    }
+    if (isNotNullEmpty(nameInput_focus_anterior) && $('#' + nameInput_focus_anterior).length) {
+        $("#" + nameInput_focus_anterior).focus();
+        //setTimeout(function () { $("#" + nameInput_focus_anterior).focus(); }, 300);
+    }
+});
+//function getFocusCarrito_inicial() {
+//    if (btnCarrito_focus == null) {
+//        if (listaCarritos.length > 0) {
+//            btnCarrito_focus = listaCarritos[0].codSucursal;
+//        } else if (listaCarritoTransferPorSucursal.length > 0) {
+//            btnCarrito_focus = listaCarritoTransferPorSucursal[0].Sucursal;
+//        }
+//    }
+//    return btnCarrito_focus;
+//}
+//var btnCarrito_focus_tipo = null;
+//function nextFocusCarrito_inicial() {
+//    if (btnCarrito_focus == null) {
+//        if (listaCarritos.length > 0) {
+//            btnCarrito_focus = listaCarritos[0].codSucursal;
+//            btnCarrito_focus_tipo = '';
+//        } else if (listaCarritoTransferPorSucursal.length > 0) {
+//            btnCarrito_focus = listaCarritoTransferPorSucursal[0].Sucursal;
+//            btnCarrito_focus_tipo = 'transfer';
+//        }
+//    } else {
+//        var isAsignoSucursal = false;
+//        if (btnCarrito_focus_tipo === '') {
+//            for (var iCarritos = 0; iCarritos < listaCarritos.length; iCarritos++) {
+//                if (listaCarritos[iCarritos].codSucursal === btnCarrito_focus) {
+//                    if ((listaCarritos.length - 1) > iCarritos) {
+//                        btnCarrito_focus = listaCarritos[iCarritos + 1].codSucursal;
+//                        isAsignoSucursal = true;
+//                        btnCarrito_focus_tipo = '';
+//                    }
+//                    break;
+//                }
+//            }
+//        }
+//        if (!isAsignoSucursal) {
+//            var isPrimeraVez = false;
+//            if (btnCarrito_focus_tipo === '') {
+//                isPrimeraVez = true;
+//                if (listaCarritoTransferPorSucursal.length > 0) {
+//                    btnCarrito_focus = listaCarritoTransferPorSucursal[0].Sucursal;
+//                    isAsignoSucursal = true;
+//                    btnCarrito_focus_tipo = 'transfer';
+//                }
+//            }
+//            if (!isPrimeraVez) {
+//                for (var iCarritos = 0; iCarritos < listaCarritoTransferPorSucursal.length; iCarritos++) {
+//                    if (listaCarritoTransferPorSucursal[iCarritos].Sucursal === btnCarrito_focus) {
+//                        if ((listaCarritoTransferPorSucursal.length - 1) > iCarritos) {
+//                            btnCarrito_focus = listaCarritoTransferPorSucursal[iCarritos + 1].Sucursal;
+//                            isAsignoSucursal = true;
+//                            btnCarrito_focus_tipo = 'transfer';
+//                        }
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//        if (!isAsignoSucursal) {
+
+//        }
+//    }
+
+//    return btnCarrito_focus;
+//}
+//var btnCarrito_tipo = '';
+function getIndice_btnCarrito(pTipo) {
+    var result = null;
+    if (btnCarrito_index == null) {
+        btnCarrito_index = parseInt(-1);
+    }
+    if (btnCarrito_tipo == null) {
+        btnCarrito_tipo = pTipo;
+    }
+    if (pTipo == 'vaciar' && btnCarrito_tipo == 'confirmar') {
+
+        result = btnCarrito_index;
+    } else if (pTipo == 'confirmar' && btnCarrito_tipo == 'vaciar') {
+        result = btnCarrito_index;
+    } else {
+        var cantidadTotalCarritos = parseInt(listaSucursalesDependienteInfo.length * 2);
+        btnCarrito_index += parseInt(1);
+        if (btnCarrito_index >= cantidadTotalCarritos) {
+            btnCarrito_index = 0;
+        }
+        result = btnCarrito_index;
+    }
+    btnCarrito_tipo = pTipo;
+    btnCarrito_index = result;
+    //return result;
+}
+function focusVaciar() {
+    for (var i = 0; i < listaSucursalesDependienteInfo.length; i++) {
+        getIndice_btnCarrito('vaciar');
+        if ($('#btn_vaciar_' + btnCarrito_index).length) {
+            $('#btn_vaciar_' + btnCarrito_index).focus();
+            break;
+        }
+    }
+
+}
+function focusConfirmar() {
+    for (var i = 0; i < listaSucursalesDependienteInfo.length; i++) {
+        getIndice_btnCarrito('confirmar');
+        if ($('#btn_confirmar_' + btnCarrito_index).length) {
+            $('#btn_confirmar_' + btnCarrito_index).focus();
+            break;
+        }
+    }
+}
+function AgregarProductosTransfersAlCarrito(pListaProductosMasCantidad, pIdTransfers, pCodSucursal, pOnCallBack) {
+    var isGrabarCantidad = true;
+    for (var i = 0; i < pListaProductosMasCantidad.length; i++) {
+        var isGrabarCantidad_temp = isValidarCredito(pCodSucursal, pListaProductosMasCantidad[i].obj, pListaProductosMasCantidad[i].cantidad, false, true);
+        if (!isGrabarCantidad_temp) {
+            isGrabarCantidad = false;
+            break;
+        }
+    }
+    if (isGrabarCantidad) {
+        AgregarProductosTransfersAlCarrito_ajax(pListaProductosMasCantidad, pIdTransfers, pCodSucursal, pOnCallBack);
+    }
+}
+function isValidarCredito(pIdSucursal, pProducto, pCantidadProducto, pIsDesdeBuscador, pIsTransfer) {
+    var isGrabarCantidad = true;
+    var creditoRestante = getCreditoRestante();
+    if (pIsTransfer) {
+
+    } else {
+        creditoRestante = creditoRestante + obtenerMontoProductoDeCarritoSucursal(pIdSucursal, pProducto);
+    }
+    if (creditoRestante <= 0) {
+        isGrabarCantidad = false;
+    } else {
+        var nroTotalProducto = 0;
+        if (pIsTransfer) {
+            //nroTotalProducto = CalcularPrecioProductosEnCarrito(pProducto.PrecioFinal, pCantidadProducto, pProducto.pro_ofeunidades, pProducto.pro_ofeporcentaje);
+            nroTotalProducto = pCantidadProducto * pProducto.PrecioFinalTransfer;
+
+        } else {
+            nroTotalProducto = CalcularPrecioProductosEnCarrito(pProducto.PrecioFinal, pCantidadProducto, pProducto.pro_ofeunidades, pProducto.pro_ofeporcentaje);
+        }
+        var creditoRestante_temp = creditoRestante - nroTotalProducto;
+        if (creditoRestante_temp <= 0) {
+            isGrabarCantidad = false;
+        }
+    }
+
+    if (!isGrabarCantidad) {
+        if (pIsTransfer === false && pIdSucursal != null && pProducto.pro_codigo != null && pCantidadProducto != null && pIsDesdeBuscador != null) {
+            if (pIsDesdeBuscador) {
+                volverCantidadAnterior_buscador(pIdSucursal, pProducto.pro_codigo);
+            } else {
+                volverCantidadAnterior_carrito(pIdSucursal, pProducto.pro_codigo);
+            }
+        }
+        var htmlMensaje = '<p>' + cuerpo_creditoInsuficiente + '</p>';
+        mensaje_credito(titulo_creditoInsuficiente, htmlMensaje);
+    } else {
+
+    }
+    return isGrabarCantidad;
 }

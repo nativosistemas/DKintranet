@@ -3,7 +3,13 @@
     strHTML += '<div id="divContenedorCarrito_' + pIndexCarrito + '" class="div_carrito">';
     strHTML += '<div class="tit">';
     strHTML += getNombreSucursalCarrito(pIndexCarrito);
-
+    var indiceReferente = 0;
+    for (var iNombreSucursal = 0; iNombreSucursal < listaSucursalesDependienteInfo.length; iNombreSucursal++) {
+        if (listaSucursalesDependienteInfo[iNombreSucursal].sde_sucursal == listaCarritos[pIndexCarrito].codSucursal) {
+            indiceReferente += iNombreSucursal;
+            break;
+        }
+    }
 
     var isMostrarHorarioCierre = false;
     var visibleCssHorarioCierreTitulo = ' style="visibility:hidden;" ';
@@ -79,8 +85,8 @@
     strHTML += '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-1 text-center"></div>';
     strHTML += '<div class="col-xs-12 div_total">Total<span id="tdTotal' + pIndexCarrito + '" class="pull-right">' + '$&nbsp;' + FormatoDecimalConDivisorMiles(nroTotalCarrito.toFixed(2)) + '</span></div>';
     strHTML += '<div class="col-xs-12 pad_lr_car">';
-    strHTML += '<a class="btn_confirmar" onclick="onclickIsPuedeUsarDll(' + pIndexCarrito + '); return false;" href="#">CONFIRMAR</a>';
-    strHTML += '<a class="btn_vaciar float-left" onclick="onclickVaciarCarrito(' + pIndexCarrito + '); return false;" href="#">VACIAR</a>';
+    strHTML += '<button type="button" id="btn_confirmar_' + indiceReferente + '" class="btn_confirmar" onclick="onclickIsPuedeUsarDll(' + pIndexCarrito + '); return false;" href="#">CONFIRMAR</button>';
+    strHTML += '<button type="button" id="btn_vaciar_' + indiceReferente + '" class="btn_vaciar float-left" onclick="onclickVaciarCarrito(' + pIndexCarrito + '); return false;" href="#">VACIAR</button>';
     strHTML += '</div>';
     strHTML += '<div class="clear"></div>';
     //
@@ -88,9 +94,9 @@
     return strHTML;
 }
 function obtenerCarritoUnidades(pIndexCarrito) {
-    var cantProductosTotales = parseInt( 0);
+    var cantProductosTotales = parseInt(0);
     for (var iProductos = 0; iProductos < listaCarritos[pIndexCarrito].listaProductos.length; iProductos++) {
-        if (isNotNullEmpty(listaCarritos[pIndexCarrito].listaProductos[iProductos].cantidad)) { 
+        if (isNotNullEmpty(listaCarritos[pIndexCarrito].listaProductos[iProductos].cantidad)) {
             cantProductosTotales += parseInt(listaCarritos[pIndexCarrito].listaProductos[iProductos].cantidad);
         }
     }
@@ -124,11 +130,11 @@ function OnCallBackIsHacerPedidos(args) {
             location.href = '../mvc/Buscador'; //= 'PedidosBuscador.aspx';
         }
     } else if (args == 1) {
-        mensaje_informacion( mensajeTareasMantenimiento);
+        mensaje_informacion(mensajeTareasMantenimiento);
     }
 }
 function onclickConfirmarCarrito(pIndexCarrito) {
-    MostrarConfirmarCarrito(pIndexCarrito,false);
+    MostrarConfirmarCarrito(pIndexCarrito, false);
     onChangeTipoEnvio();
     $("#hiddenIndexCarrito").val(pIndexCarrito);
     //// Acutalizar horario reparto
@@ -191,7 +197,7 @@ function OnCallBackObtenerHorarioCierre(args) {
 }
 function MostrarConfirmarCarrito(pIndexCarrito, pIsTransfer) {
     var onclick = '';
-    var codSucursal ='';
+    var codSucursal = '';
     if (pIsTransfer) {
         onclick = 'onclickConfimarTransferPedidoOk()';
         codSucursal = listaCarritoTransferPorSucursal[pIndexCarrito].Sucursal;
@@ -229,7 +235,7 @@ function MostrarConfirmarCarrito(pIndexCarrito, pIsTransfer) {
     strHtml += '&nbsp;Es urgente';
     strHtml += '</div>';
     strHtml += '<div class="clear10"></div>';
-    strHtml += '<a class="btn_confirmar" onclick="' + onclick + '; return false;" href="#">HACER PEDIDO</a>';
+    strHtml += '<button type="button" class="btn_confirmar" onclick="' + onclick + '; return false;" href="#">HACER PEDIDO</button>';
     strHtml += '</div>'; // '<div class="modal-body">'
     strHtml += '<div class="clear"></div>';
     strHtml += '</div></div>'; //'<div class="modal-dialog modal-lg"><div class="modal-content">'
@@ -304,7 +310,7 @@ function ConfirmarCarrito(pIndexCarrito) {
             if (isCarritoDiferido) {
                 TomarPedidoCarritoDiferido(listaCarritos[pIndexCarrito].codSucursal, textFactura, textRemito, idTipoEnvio, isUrgente);
             }
-            else { 
+            else {
                 TomarPedidoCarrito(listaCarritos[pIndexCarrito].codSucursal, textFactura, textRemito, idTipoEnvio, isUrgente);
             }
             //
@@ -313,7 +319,7 @@ function ConfirmarCarrito(pIndexCarrito) {
             //
         } else {
             //alert('Para hacer el pedido se debe superar el monto mínimo de ' + '$ ' + montoMinimo);
-            mensaje_informacion( 'Para hacer el pedido se debe superar el monto mínimo de ' + '$ ' + montoMinimo);
+            mensaje_informacion('Para hacer el pedido se debe superar el monto mínimo de ' + '$ ' + montoMinimo);
             isBotonNoEstaEnProceso = true;
         }
     } // fin   if (isOkCadeteriaRestricciones) {
@@ -479,7 +485,7 @@ function CargarRespuestaDePedido(pValor) {
     strHtml += '<div class="modal-body">';
     //
     if (strHtmlProductosPedidos != '') {
- 
+
         strHtml += strHtmlProductosPedidos;
     }
     if (strHtmlProblemasCrediticios == '' && strHtmlFaltantes == '') {
@@ -497,7 +503,7 @@ function CargarRespuestaDePedido(pValor) {
     }
     //
     strHtml += '<div class="clear"></div>';
-    strHtml += '<a class="btn_confirmar" href="#" onclick="onclickBtnConfirmarResultadoPedido(); return false;">CONFIRMAR</a>';				
+    strHtml += '<button type="button" class="btn_confirmar" href="#" onclick="onclickBtnConfirmarResultadoPedido(); return false;">CONFIRMAR</button>';
     strHtml += '<div class="clear"></div>';
     strHtml += '</div>';
     strHtml += '<div class="clear"></div>';
@@ -557,7 +563,7 @@ function OnCallBackBorrarCarrito(args) {
         modalModuloAlertHide();
         LimpiarTextBoxProductosBuscados(sucur);
         carritoNoHayCarritosCelular();
-        
+        funActulizarHtmlCredito();
     }
 }
 
@@ -583,13 +589,14 @@ function CalcularPrecioProductosEnCarrito(pPrecioFinal, pCantidad, pOfertaPorUni
 function setScrollFinDeCarrito(pIndexCarrito) {
     //setTimeout(function () { $('#Scroll_' + pIndexCarrito).scrollTop($('#Scroll_' + pIndexCarrito).prop('scrollHeight')); }, 40);
     setTimeout(function () { $('#div_carrito_cont_' + pIndexCarrito).scrollTop($('#div_carrito_cont_' + pIndexCarrito).prop('scrollHeight')); }, 40);
-    setTimeout(function () { ReAjustarColumnasCarritos(listaCarritos[pIndexCarrito].codSucursal,false); }, 40);
+    setTimeout(function () { ReAjustarColumnasCarritos(listaCarritos[pIndexCarrito].codSucursal, false); }, 40);
 }
 function onfocusInputCarrito(pValor) {
     DesmarcarFilaSeleccionada();
     selectedInput = null;
     selectedInputTransfer = null;
     selectInputCarrito = pValor;
+    nameInput_focus_anterior = document.activeElement.id;
     setTimeout(function () { selectInputCarrito.select(); }, 20);
 }
 function onblurInputCarrito(pValor) {
@@ -601,7 +608,7 @@ function onblurInputCarrito(pValor) {
         var columna = parseInt(palabrasBase[0]);
 
         if (pValor.value != '') {
-     
+
             var cantidadProducto = parseInt(pValor.value);
             var cantidadAnterior_temp = listaCarritos[columna].listaProductos[fila].cantidad;
             if (cantidadProducto != cantidadAnterior_temp) {
@@ -630,15 +637,15 @@ function onblurInputCarrito(pValor) {
                     }
                     //Fin Cantidad producto parametrizada
                     if (!isCantidadMaximaParametrizada) {
-                            cantidadAnterior_carrito = listaCarritos[columna].listaProductos[fila].cantidad;
-                            var cantidadFinalCarrito = CargarProductoCantidadDependiendoTransferCarrito(fila, columna, cantidadProducto);
-                            if (cantidadFinalCarrito != cantidadProducto) {
-                                pValor.value = cantidadFinalCarrito;
-                            }
+                        cantidadAnterior_carrito = listaCarritos[columna].listaProductos[fila].cantidad;
+                        var cantidadFinalCarrito = CargarProductoCantidadDependiendoTransferCarrito(fila, columna, cantidadProducto);
+                        if (cantidadFinalCarrito != cantidadProducto) {
+                            pValor.value = cantidadFinalCarrito;
+                        }
                     }
                 } else {
                     //alert(MostrarTextoSuperaCantidadMaxima(listaCarritos[columna].listaProductos[fila].pro_nombre, listaCarritos[columna].listaProductos[fila].pro_canmaxima));
-                    mensaje_informacion( MostrarTextoSuperaCantidadMaxima(listaCarritos[columna].listaProductos[fila].pro_nombre, listaCarritos[columna].listaProductos[fila].pro_canmaxima));
+                    mensaje_informacion(MostrarTextoSuperaCantidadMaxima(listaCarritos[columna].listaProductos[fila].pro_nombre, listaCarritos[columna].listaProductos[fila].pro_canmaxima));
                     var cantidadAnterior = listaCarritos[columna].listaProductos[fila].cantidad;
                     if (cantidadAnterior != '') {
                         pValor.value = cantidadAnterior;
@@ -651,7 +658,7 @@ function onblurInputCarrito(pValor) {
             // Borrar en el carrito o colocarlo en 0     
             var cantidad = ObtenerCantidadProducto(listaCarritos[columna].codSucursal, listaCarritos[columna].listaProductos[fila].codProducto);
             if (cantidad != '') {
-                CargarOActualizarListaCarrito(listaCarritos[columna].codSucursal, listaCarritos[columna].listaProductos[fila].codProducto, 0, true);
+                CargarOActualizarListaCarrito(listaCarritos[columna].codSucursal, listaCarritos[columna].listaProductos[fila], 0, true);
                 CargarHtmlCantidadDeCarritoABuscador(listaCarritos[columna].codSucursal, listaCarritos[columna].listaProductos[fila].codProducto, 0);
                 //AgregarAlHistorialProductoCarrito(fila, columna, 0, true);
                 //isModificoBD = true;
@@ -662,8 +669,8 @@ function onblurInputCarrito(pValor) {
 function funMostrarMensajeCantidadSuperadaCarrito() {
     isMoverCursor = false;
     var htmlMensaje = '';
-    htmlMensaje += '<a onclick="funExcedeImporteAceptarCarrito(); return false;" class="btn_confirmar" href="#">Aceptar</a>';
-    htmlMensaje += '<a onclick="funExcedeImporteCancelarCarrito(); return false;" class="btn_vaciar" href="#">Cancelar</a>';
+    htmlMensaje += '<button type="button" onclick="funExcedeImporteAceptarCarrito(); return false;" class="btn_confirmar" href="#">Aceptar</button>';
+    htmlMensaje += '<button type="button" onclick="funExcedeImporteCancelarCarrito(); return false;" class="btn_vaciar" href="#">Cancelar</button>';
 
     mensaje(mensajeCantidadSuperaElMaximoParametrizado1 + cantidadMaximaParametrizada + mensajeCantidadSuperaElMaximoParametrizado2, htmlMensaje);
     //$('#divMensajeExcedeImporteCarrito').html(mensajeCantidadSuperaElMaximoParametrizado1 + cantidadMaximaParametrizada + mensajeCantidadSuperaElMaximoParametrizado2);
@@ -693,17 +700,17 @@ function funExcedeImporteCancelarCarrito() {
 }
 function funExcedeImporteAceptarCarrito() {
     if (ExcedeImporteColumnaCarrito != null && ExcedeImporteFilaCarrito != null && ExcedeImporteValorCarrito != null) {
-            var cantidadFinalCarrito = CargarProductoCantidadDependiendoTransferCarrito(ExcedeImporteFilaCarrito, ExcedeImporteColumnaCarrito, ExcedeImporteValorCarrito);
-            if (cantidadFinalCarrito != ExcedeImporteValorCarrito) {
-                var objCarrito = $("#inputCarrito" + ExcedeImporteIndiceCarrito + "_" + ExcedeImporteIndiceCarritoProducto);
-                if (objCarrito.length > 0) {
-                } else {
-                    objCarrito = null;
-                }
-                if (objCarrito != null) {
-                    objCarrito.val(cantidadFinalCarrito);
-                }
+        var cantidadFinalCarrito = CargarProductoCantidadDependiendoTransferCarrito(ExcedeImporteFilaCarrito, ExcedeImporteColumnaCarrito, ExcedeImporteValorCarrito);
+        if (cantidadFinalCarrito != ExcedeImporteValorCarrito) {
+            var objCarrito = $("#inputCarrito" + ExcedeImporteIndiceCarrito + "_" + ExcedeImporteIndiceCarritoProducto);
+            if (objCarrito.length > 0) {
+            } else {
+                objCarrito = null;
             }
+            if (objCarrito != null) {
+                objCarrito.val(cantidadFinalCarrito);
+            }
+        }
         $('#modalModulo').modal('hide');
 
         setTimeout('ActualizarFocusCarritoExcedeImporte()', 5);
@@ -806,16 +813,17 @@ function CargarProductoCantidadDependiendoTransferCarrito(pFila, pColumna, pCant
                         objProducto.codProductoNombre = listaCarritos[pColumna].listaProductos[pFila].tde_codpro; // Para la funcion en el servidor
                         objProducto.tde_codpro = listaCarritos[pColumna].listaProductos[pFila].tde_codpro;
                         objProducto.cantidad = cantidadCarritoTransfer; //  cantidadCarritoTransfer + cantidadTransfer;
+                        objProducto.obj = listaCarritos[pColumna].listaProductos[pFila];
                         tempListaProductos.push(objProducto);
                         AgregarProductosTransfersAlCarrito(tempListaProductos, listaCarritos[pColumna].listaProductos[pFila].tde_codtfr, listaCarritos[pColumna].codSucursal, 'OnCallBackAgregarProductosTransfersAlCarritoDesdeBuscador');
                     }
                     if (cantidadCarritoComun == 0) {
                         var cantidad = ObtenerCantidadProducto(listaCarritos[pColumna].codSucursal, listaCarritos[pColumna].listaProductos[pFila].codProducto);
                         if (cantidad != '') {
-                            CargarOActualizarListaCarrito(listaCarritos[pColumna].codSucursal, listaCarritos[pColumna].listaProductos[pFila].codProducto, 0, false);
+                            CargarOActualizarListaCarrito(listaCarritos[pColumna].codSucursal, listaCarritos[pColumna].listaProductos[pFila], 0, false);
                         }
                     } else {
-                        CargarOActualizarListaCarrito(listaCarritos[pColumna].codSucursal, listaCarritos[pColumna].listaProductos[pFila].codProducto, cantidadCarritoComun, false);
+                        CargarOActualizarListaCarrito(listaCarritos[pColumna].codSucursal, listaCarritos[pColumna].listaProductos[pFila], cantidadCarritoComun, false);
                     }
                     CargarHtmlCantidadDeCarritoABuscador(listaCarritos[pColumna].codSucursal, listaCarritos[pColumna].listaProductos[pFila].codProducto, parseInt(cantidadCarritoComun) + parseInt(cantidadCarritoTransfer));
                 } else {
@@ -841,15 +849,16 @@ function CargarProductoCantidadDependiendoTransferCarrito(pFila, pColumna, pCant
                     objProducto.codProductoNombre = listaCarritos[pColumna].listaProductos[pFila].tde_codpro; // Para la funcion en el servidor
                     objProducto.tde_codpro = listaCarritos[pColumna].listaProductos[pFila].tde_codpro;
                     objProducto.cantidad = cantidadCarritoTransfer;
+                    objProducto.obj = listaCarritos[pColumna].listaProductos[pFila];
                     tempListaProductos.push(objProducto);
-                    AgregarProductosTransfersAlCarrito(tempListaProductos, listaCarritos[pColumna].listaProductos[pFila].tde_codtfr, listaCarritos[pColumna].codSucursal,'OnCallBackAgregarProductosTransfersAlCarritoDesdeBuscador');
+                    AgregarProductosTransfersAlCarrito(tempListaProductos, listaCarritos[pColumna].listaProductos[pFila].tde_codtfr, listaCarritos[pColumna].codSucursal, 'OnCallBackAgregarProductosTransfersAlCarritoDesdeBuscador');
                     if (cantidadCarritoComun == 0) {
                         var cantidad = ObtenerCantidadProducto(listaCarritos[pColumna].codSucursal, listaCarritos[pColumna].listaProductos[pFila].codProducto);
                         if (cantidad != '') {
-                            CargarOActualizarListaCarrito(listaCarritos[pColumna].codSucursal, listaCarritos[pColumna].listaProductos[pFila].codProducto, 0, false);
+                            CargarOActualizarListaCarrito(listaCarritos[pColumna].codSucursal, listaCarritos[pColumna].listaProductos[pFila], 0, false);
                         }
                     } else {
-                        CargarOActualizarListaCarrito(listaCarritos[pColumna].codSucursal, listaCarritos[pColumna].listaProductos[pFila].codProducto, cantidadCarritoComun, false);
+                        CargarOActualizarListaCarrito(listaCarritos[pColumna].codSucursal, listaCarritos[pColumna].listaProductos[pFila], cantidadCarritoComun, false);
                     }
                     CargarHtmlCantidadDeCarritoABuscador(listaCarritos[pColumna].codSucursal, listaCarritos[pColumna].listaProductos[pFila].codProducto, parseInt(cantidadCarritoComun) + parseInt(cantidadCarritoTransfer));
                 } else {
@@ -859,6 +868,7 @@ function CargarProductoCantidadDependiendoTransferCarrito(pFila, pColumna, pCant
                         objProducto.codProductoNombre = listaCarritos[pColumna].listaProductos[pFila].tde_codpro;
                         objProducto.tde_codpro = listaCarritos[pColumna].listaProductos[pFila].tde_codpro;
                         objProducto.cantidad = 0;
+                        objProducto.obj = listaCarritos[pColumna].listaProductos[pFila];
                         tempListaProductos.push(objProducto);
                         AgregarProductosTransfersAlCarrito(tempListaProductos, listaCarritos[pColumna].listaProductos[pFila].tde_codtfr, listaCarritos[pColumna].codSucursal, 'OnCallBackAgregarProductosTransfersAlCarritoDesdeBuscador');
                         $('#divContenedorBaseTransfer_' + listaSucursal[pColumna]).html('');
@@ -885,15 +895,16 @@ function CargarProductoCantidadDependiendoTransferCarrito(pFila, pColumna, pCant
                     objProducto.codProductoNombre = listaCarritos[pColumna].listaProductos[pFila].tde_codpro; // Para la funcion en el servidor
                     objProducto.tde_codpro = listaCarritos[pColumna].listaProductos[pFila].tde_codpro;
                     objProducto.cantidad = cantidadCarritoTransfer;
+                    objProducto.obj = listaCarritos[pColumna].listaProductos[pFila];
                     tempListaProductos.push(objProducto);
                     AgregarProductosTransfersAlCarrito(tempListaProductos, listaCarritos[pColumna].listaProductos[pFila].tde_codtfr, listaCarritos[pColumna].codSucursal, 'OnCallBackAgregarProductosTransfersAlCarritoDesdeBuscador');
                     if (cantidadCarritoComun == 0) {
                         var cantidad = ObtenerCantidadProducto(listaCarritos[pColumna].codSucursal, listaCarritos[pColumna].listaProductos[pFila].codProducto);
                         if (cantidad != '') {
-                            CargarOActualizarListaCarrito(listaCarritos[pColumna].codSucursal, listaCarritos[pColumna].listaProductos[pFila].codProducto, 0, false);
+                            CargarOActualizarListaCarrito(listaCarritos[pColumna].codSucursal, listaCarritos[pColumna].listaProductos[pFila], 0, false);
                         }
                     } else {
-                        CargarOActualizarListaCarrito(listaCarritos[pColumna].codSucursal, listaCarritos[pColumna].listaProductos[pFila].codProducto, cantidadCarritoComun, false);
+                        CargarOActualizarListaCarrito(listaCarritos[pColumna].codSucursal, listaCarritos[pColumna].listaProductos[pFila], cantidadCarritoComun, false);
                     }
                     CargarHtmlCantidadDeCarritoABuscador(listaCarritos[pColumna].codSucursal, listaCarritos[pColumna].listaProductos[pFila].codProducto, parseInt(cantidadCarritoComun) + parseInt(cantidadCarritoTransfer));
                 } else {
@@ -903,6 +914,7 @@ function CargarProductoCantidadDependiendoTransferCarrito(pFila, pColumna, pCant
                         objProducto.codProductoNombre = listaCarritos[pColumna].listaProductos[pFila].tde_codpro;
                         objProducto.tde_codpro = listaCarritos[pColumna].listaProductos[pFila].tde_codpro;
                         objProducto.cantidad = 0;
+                        objProducto.obj = listaCarritos[pColumna].listaProductos[pFila];
                         tempListaProductos.push(objProducto);
                         AgregarProductosTransfersAlCarrito(tempListaProductos, listaCarritos[pColumna].listaProductos[pFila].tde_codtfr, listaCarritos[pColumna].codSucursal, 'OnCallBackAgregarProductosTransfersAlCarritoDesdeBuscador');
                         $('#divContenedorBaseTransfer_' + listaSucursal[pColumna]).html('');
@@ -926,15 +938,16 @@ function CargarProductoCantidadDependiendoTransferCarrito(pFila, pColumna, pCant
                     objProducto.codProductoNombre = listaCarritos[pColumna].listaProductos[pFila].tde_codpro; // Para la funcion en el servidor
                     objProducto.tde_codpro = listaCarritos[pColumna].listaProductos[pFila].tde_codpro;
                     objProducto.cantidad = cantidadCarritoTransfer;
+                    objProducto.obj = listaCarritos[pColumna].listaProductos[pFila];
                     tempListaProductos.push(objProducto);
                     AgregarProductosTransfersAlCarrito(tempListaProductos, listaCarritos[pColumna].listaProductos[pFila].tde_codtfr, listaCarritos[pColumna].codSucursal, 'OnCallBackAgregarProductosTransfersAlCarritoDesdeBuscador');
                     if (cantidadCarritoComun == 0) {
                         var cantidad = ObtenerCantidadProducto(listaCarritos[pColumna].codSucursal, listaCarritos[pColumna].listaProductos[pFila].codProducto);
                         if (cantidad != '') {
-                            CargarOActualizarListaCarrito(listaCarritos[pColumna].codSucursal, listaCarritos[pColumna].listaProductos[pFila].codProducto, 0, false);
+                            CargarOActualizarListaCarrito(listaCarritos[pColumna].codSucursal, listaCarritos[pColumna].listaProductos[pFila], 0, false);
                         }
                     } else {
-                        CargarOActualizarListaCarrito(listaCarritos[pColumna].codSucursal, listaCarritos[pColumna].listaProductos[pFila].codProducto, cantidadCarritoComun, false);
+                        CargarOActualizarListaCarrito(listaCarritos[pColumna].codSucursal, listaCarritos[pColumna].listaProductos[pFila], cantidadCarritoComun, false);
                     }
                     CargarHtmlCantidadDeCarritoABuscador(listaCarritos[pColumna].codSucursal, listaCarritos[pColumna].listaProductos[pFila].codProducto, parseInt(cantidadCarritoComun) + parseInt(cantidadCarritoTransfer));
                 } else {
@@ -944,6 +957,7 @@ function CargarProductoCantidadDependiendoTransferCarrito(pFila, pColumna, pCant
                         objProducto.codProductoNombre = listaCarritos[pColumna].listaProductos[pFila].tde_codpro;
                         objProducto.tde_codpro = listaCarritos[pColumna].listaProductos[pFila].tde_codpro;
                         objProducto.cantidad = 0;
+                        objProducto.obj = listaCarritos[pColumna].listaProductos[pFila];
                         tempListaProductos.push(objProducto);
                         AgregarProductosTransfersAlCarrito(tempListaProductos, listaCarritos[pColumna].listaProductos[pFila].tde_codtfr, listaCarritos[pColumna].codSucursal, 'OnCallBackAgregarProductosTransfersAlCarritoDesdeBuscador');
                         $('#divContenedorBaseTransfer_' + listaSucursal[pColumna]).html('');
@@ -961,7 +975,7 @@ function CargarProductoCantidadDependiendoTransferCarrito(pFila, pColumna, pCant
         isPasarDirectamente = true;
     }
     if (isPasarDirectamente) {
-        CargarOActualizarListaCarrito(listaCarritos[pColumna].codSucursal, listaCarritos[pColumna].listaProductos[pFila].codProducto, pCantidad, false);
+        CargarOActualizarListaCarrito(listaCarritos[pColumna].codSucursal, listaCarritos[pColumna].listaProductos[pFila], pCantidad, false);
         CargarHtmlCantidadDeCarritoABuscador(listaCarritos[pColumna].codSucursal, listaCarritos[pColumna].listaProductos[pFila].codProducto, parseInt(pCantidad) + parseInt(cantTransferViejo));
     }
     else {
@@ -990,4 +1004,17 @@ function ReAjustarColumnasCarritos(pSucursal, pIsTransfer) {
     $('.tdProducto' + nameTransfer + pSucursal).css('overflow-x', 'auto');
     $('.tdCant' + nameTransfer + pSucursal).css('overflow-x', 'auto');
     $('.tdPrecio' + nameTransfer + pSucursal).css('overflow-xh', 'auto');
+}
+function obtenerMontoProductoDeCarritoSucursal(pSucursal, pProducto) {
+    var result = parseInt(0);
+    for (var iCarritos = 0; iCarritos < listaCarritos.length; iCarritos++) {
+        if (isNotNullEmpty(listaCarritos[iCarritos].codSucursal)) {
+            for (var iProductos = 0; iProductos < listaCarritos[iCarritos].listaProductos.length; iProductos++) {
+                if (isNotNullEmpty(listaCarritos[iCarritos].listaProductos[iProductos].cantidad) && listaCarritos[iCarritos].listaProductos[iProductos].pro_codigo == pProducto.pro_codigo) {
+                    result = CalcularPrecioProductosEnCarrito(listaCarritos[iCarritos].listaProductos[iProductos].PrecioFinal, listaCarritos[iCarritos].listaProductos[iProductos].cantidad, listaCarritos[iCarritos].listaProductos[iProductos].pro_ofeunidades, listaCarritos[iCarritos].listaProductos[iProductos].pro_ofeporcentaje);
+                }
+            }
+        }//f (isNotNullEmpty(listaCarritos[iCarritos].codSucursal)) {
+    }//  for (var iCarritos = 0; iCarritos < listaCarritos.length; iCarritos++) {
+    return result;
 }

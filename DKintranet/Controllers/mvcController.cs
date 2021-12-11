@@ -211,7 +211,7 @@ namespace DKintranet.Controllers
         public ActionResult promocionescliente(string t)
         {
             Session["promocionescliente_TIPO"] = t;
-            
+
             return View();
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
@@ -498,7 +498,7 @@ namespace DKintranet.Controllers
         {
             return TomarPedidoCarrito_generico(Constantes.cTipo_Carrito, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pIsUrgente);
         }
-        public string TomarPedidoCarrito_generico(string pTipo,string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, bool pIsUrgente)
+        public string TomarPedidoCarrito_generico(string pTipo, string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, bool pIsUrgente)
         {
             DKbase.dll.cDllPedido resultadoPedido = null;
             if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
@@ -541,7 +541,7 @@ namespace DKintranet.Controllers
                             oRepetido.Error = msgCarritoRepetido;
                             return Serializador.SerializarAJson(oRepetido);
                         }
-                        resultadoPedido = capaCore_decision.TomarPedidoTelefonistaAsync(item.car_id,cliente.cli_login, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, listaProductos, pIsUrgente);
+                        resultadoPedido = capaCore_decision.TomarPedidoTelefonistaAsync(item.car_id, cliente.cli_login, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, listaProductos, pIsUrgente);
                         if (!capaWebServiceDLL.ValidarExistenciaDeCarritoWebPasado(item.car_id))
                             return null;
                         if (resultadoPedido == null)
@@ -587,7 +587,7 @@ namespace DKintranet.Controllers
                                         WebService.InsertarFaltantesProblemasCrediticios(item.lrc_id, pIdSucursal, cliente.cli_codigo, itemConProblemasDeCreditos.NombreObjetoComercial, cantidadProblemaCrediticia, Constantes.cPEDIDO_PROBLEMACREDITICIO);
                                     }
                                 }
-                            
+
                                 capaCAR_decision.GuardarPedidoBorrarCarrito(item, pTipo, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pIsUrgente);
                             }
                         }
@@ -627,7 +627,7 @@ namespace DKintranet.Controllers
             int car_id_aux = 0;
             if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
-                DKintranet.Codigo.capaDatos.cClientes cliente = (DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]; 
+                DKintranet.Codigo.capaDatos.cClientes cliente = (DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
                 List<DKbase.dll.cDllProductosAndCantidad> listaProductos = new List<DKbase.dll.cDllProductosAndCantidad>();
 
                 List<cCarritoTransfer> listaCarrito = capaCAR_decision.RecuperarCarritosTransferPorIdCliente(cliente, tipo, pIdSucursal);
@@ -742,21 +742,21 @@ namespace DKintranet.Controllers
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
         public string TomarPedidoCarritoFacturarseFormaHabitual(string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, bool pIsUrgente, string[] pListaNombreComercial, int[] pListaCantidad)
         {
-            ServiceReferenceDLL.cDllPedido resultadoPedido = null;
+            DKbase.dll.cDllPedido resultadoPedido = null;
             if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
                 DKintranet.Codigo.capaDatos.cClientes cliente = (DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
-                List<ServiceReferenceDLL.cDllProductosAndCantidad> listaProductos = new List<ServiceReferenceDLL.cDllProductosAndCantidad>();
+                List<DKbase.dll.cDllProductosAndCantidad> listaProductos = new List<DKbase.dll.cDllProductosAndCantidad>();
                 for (int i = 0; i < pListaNombreComercial.Count(); i++)
                 {
-                    ServiceReferenceDLL.cDllProductosAndCantidad obj = new ServiceReferenceDLL.cDllProductosAndCantidad();
+                    DKbase.dll.cDllProductosAndCantidad obj = new DKbase.dll.cDllProductosAndCantidad();
                     obj.codProductoNombre = pListaNombreComercial[i];
                     obj.cantidad = pListaCantidad[i];
                     cProductos objProductoBD = WebService.RecuperarProductoPorNombre(obj.codProductoNombre);
                     obj.isOferta = (objProductoBD.pro_ofeunidades == 0 && objProductoBD.pro_ofeporcentaje == 0) ? false : true;
                     listaProductos.Add(obj);
                 }
-                resultadoPedido = capaWebServiceDLL.TomarPedido(cliente.cli_login, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, listaProductos, pIsUrgente);
+                resultadoPedido = capaCore_decision.TomarPedidoTelefonistaAsync(0, cliente.cli_login, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, listaProductos, pIsUrgente);
                 if (resultadoPedido == null)
                     return null;
                 else if (resultadoPedido != null)
@@ -785,7 +785,7 @@ namespace DKintranet.Controllers
                         resultadoPedido.Login = horarioCierre;
                         // fin Obtener horario cierre
                         // OPTIMIZAR //////////////////
-                        foreach (ServiceReferenceDLL.cDllPedidoItem itemFaltantes in resultadoPedido.Items)
+                        foreach (DKbase.dll.cDllPedidoItem itemFaltantes in resultadoPedido.Items)
                         {
                             if (itemFaltantes.Faltas > 0)
                             {
@@ -793,7 +793,7 @@ namespace DKintranet.Controllers
                             }
                             //
                         }
-                        foreach (ServiceReferenceDLL.cDllPedidoItem itemConProblemasDeCreditos in resultadoPedido.ItemsConProblemasDeCreditos)
+                        foreach (DKbase.dll.cDllPedidoItem itemConProblemasDeCreditos in resultadoPedido.ItemsConProblemasDeCreditos)
                         {
                             int cantidadProblemaCrediticia = itemConProblemasDeCreditos.Cantidad + itemConProblemasDeCreditos.Faltas;
                             if (cantidadProblemaCrediticia > 0)
