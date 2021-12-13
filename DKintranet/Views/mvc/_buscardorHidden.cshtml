@@ -25,6 +25,7 @@
         // Fin Optimizar
         resultado += "<input type=\"hidden\" id=\"hiddenListaSucursalesDependienteInfo\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(listaSucursalInfo)) + "\" />";
         List<DKintranet.Codigo.clases.cCarrito> listaCarrito = new List<DKintranet.Codigo.clases.cCarrito>();
+        decimal sumaCarritoOtraSolapa = 0;
         if (DKintranet.Controllers.mvcController.isDiferido())
         {
             Session["clientesDefault_CarritoDiferido"] = DKintranet.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosDiferidosPorCliente(cliente.cli_codigo);
@@ -33,15 +34,16 @@
             if (DKintranet.Codigo.capaDatos.capaCAR_decision.isCAR) {
                 resultado += "<input type=\"hidden\" id=\"hiddenListaCarritosTransferPorSucursal\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(DKintranet.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(cliente, DKintranet.Codigo.clases.Constantes.cTipo_CarritoDiferidoTransfers))) + "\" />";
             }
-
+            sumaCarritoOtraSolapa = DKintranet.Codigo.capaDatos.capaCAR_WebService.getSumaCarritosOtraSolapa(DKintranet.Codigo.clases.Constantes.cTipo_CarritoDiferido);
         }
         else if (DKintranet.Controllers.mvcController.isBuscador())
         {
             Session["clientesDefault_Carrito"] = DKintranet.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosPorSucursalYProductos(cliente.cli_codigo);
             listaCarrito = (List<DKintranet.Codigo.clases.cCarrito>)Session["clientesDefault_Carrito"];
             resultado += "<input type=\"hidden\" id=\"hiddenListaCarritosTransferPorSucursal\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(DKintranet.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(cliente, DKintranet.Codigo.clases.Constantes.cTipo_CarritoTransfers))) + "\" />";
-
+            sumaCarritoOtraSolapa = DKintranet.Codigo.capaDatos.capaCAR_WebService.getSumaCarritosOtraSolapa(DKintranet.Codigo.clases.Constantes.cTipo_Carrito);
         }
+        resultado += "<input type=\"hidden\" id=\"hiddenSumaCarritosOtraSolapa\" value=\"" + Server.HtmlEncode(sumaCarritoOtraSolapa.ToString()) + "\" />";
         resultado += "<input type=\"hidden\" id=\"hiddenListaCarritos\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(listaCarrito)) + "\" />";
         resultado += "<input type=\"hidden\" id=\"hiddenListaSucursalesInfo\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(listaSucursal)) + "\" />";
         DKintranet.Codigo.capaDatos.cClientes oCliente = (DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];

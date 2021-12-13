@@ -65,8 +65,8 @@ var creditoInicial = null;
 var nameInput_focus_anterior = '';
 var btnCarrito_index = null;
 var btnCarrito_tipo = null;
-//var btnCarrito_focus = null;
-
+var sumaCarritosOtraSolapa = null;
+//hiddenSumaCarritosOtraSolapa
 $('body').on("keydown", function (e) {
     //if (e.ctrlKey && e.shiftKey && e.which === 83) {
     //    alert("You pressed Ctrl + Shift + s");
@@ -168,6 +168,13 @@ $(document).ready(function () {
             creditoInicial = 0;
         }
         creditoInicial = parseFloat(creditoInicial);
+    }
+    if (sumaCarritosOtraSolapa == null) {
+        sumaCarritosOtraSolapa = $('#hiddenSumaCarritosOtraSolapa').val();
+        if (typeof creditoInicial == 'undefined') {
+            sumaCarritosOtraSolapa = 0;
+        }
+        sumaCarritosOtraSolapa = parseFloat(sumaCarritosOtraSolapa.replace(',', '.'));
     }
     if (isCarritoDiferido == null) {
         isCarritoDiferido = $('#hiddenIsCarritoDiferido').val();
@@ -3192,6 +3199,9 @@ function getCreditoUtilizado() {
             }
         }
     }
+    if (sumaCarritosOtraSolapa != null) {
+        result += sumaCarritosOtraSolapa;
+    }
     return result;
 }
 function getCreditoRestante() {
@@ -3271,71 +3281,6 @@ $('#modalModuloAlert').on('hidden.bs.modal', function () {
         //setTimeout(function () { $("#" + nameInput_focus_anterior).focus(); }, 300);
     }
 });
-//function getFocusCarrito_inicial() {
-//    if (btnCarrito_focus == null) {
-//        if (listaCarritos.length > 0) {
-//            btnCarrito_focus = listaCarritos[0].codSucursal;
-//        } else if (listaCarritoTransferPorSucursal.length > 0) {
-//            btnCarrito_focus = listaCarritoTransferPorSucursal[0].Sucursal;
-//        }
-//    }
-//    return btnCarrito_focus;
-//}
-//var btnCarrito_focus_tipo = null;
-//function nextFocusCarrito_inicial() {
-//    if (btnCarrito_focus == null) {
-//        if (listaCarritos.length > 0) {
-//            btnCarrito_focus = listaCarritos[0].codSucursal;
-//            btnCarrito_focus_tipo = '';
-//        } else if (listaCarritoTransferPorSucursal.length > 0) {
-//            btnCarrito_focus = listaCarritoTransferPorSucursal[0].Sucursal;
-//            btnCarrito_focus_tipo = 'transfer';
-//        }
-//    } else {
-//        var isAsignoSucursal = false;
-//        if (btnCarrito_focus_tipo === '') {
-//            for (var iCarritos = 0; iCarritos < listaCarritos.length; iCarritos++) {
-//                if (listaCarritos[iCarritos].codSucursal === btnCarrito_focus) {
-//                    if ((listaCarritos.length - 1) > iCarritos) {
-//                        btnCarrito_focus = listaCarritos[iCarritos + 1].codSucursal;
-//                        isAsignoSucursal = true;
-//                        btnCarrito_focus_tipo = '';
-//                    }
-//                    break;
-//                }
-//            }
-//        }
-//        if (!isAsignoSucursal) {
-//            var isPrimeraVez = false;
-//            if (btnCarrito_focus_tipo === '') {
-//                isPrimeraVez = true;
-//                if (listaCarritoTransferPorSucursal.length > 0) {
-//                    btnCarrito_focus = listaCarritoTransferPorSucursal[0].Sucursal;
-//                    isAsignoSucursal = true;
-//                    btnCarrito_focus_tipo = 'transfer';
-//                }
-//            }
-//            if (!isPrimeraVez) {
-//                for (var iCarritos = 0; iCarritos < listaCarritoTransferPorSucursal.length; iCarritos++) {
-//                    if (listaCarritoTransferPorSucursal[iCarritos].Sucursal === btnCarrito_focus) {
-//                        if ((listaCarritoTransferPorSucursal.length - 1) > iCarritos) {
-//                            btnCarrito_focus = listaCarritoTransferPorSucursal[iCarritos + 1].Sucursal;
-//                            isAsignoSucursal = true;
-//                            btnCarrito_focus_tipo = 'transfer';
-//                        }
-//                        break;
-//                    }
-//                }
-//            }
-//        }
-//        if (!isAsignoSucursal) {
-
-//        }
-//    }
-
-//    return btnCarrito_focus;
-//}
-//var btnCarrito_tipo = '';
 function getIndice_btnCarrito(pTipo) {
     var result = null;
     if (btnCarrito_index == null) {
@@ -3397,7 +3342,7 @@ function isValidarCredito(pIdSucursal, pProducto, pCantidadProducto, pIsDesdeBus
     var isGrabarCantidad = true;
     var creditoRestante = getCreditoRestante();
     if (pIsTransfer) {
-
+        creditoRestante = creditoRestante + obtenerMontoProductoDeCarritoTransferSucursal(pIdSucursal, pProducto);
     } else {
         creditoRestante = creditoRestante + obtenerMontoProductoDeCarritoSucursal(pIdSucursal, pProducto);
     }

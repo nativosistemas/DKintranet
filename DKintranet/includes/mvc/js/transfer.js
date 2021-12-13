@@ -57,6 +57,7 @@ function OnCallBackAgregarProductosTransfersAlCarritoDesdeBuscador(args) {
     }
     //
     CargarCantidadCarritos_Celular();
+    funActulizarHtmlCredito();
 }
 
 function OnCallBackAgregarProductosTransfersAlCarrito(args) {
@@ -95,6 +96,7 @@ function OnCallBackAgregarProductosTransfersAlCarrito(args) {
         //MostrarMensajeGeneral(titulo_error, htmlMensaje);
         mensaje_error(titulo_error, htmlMensaje);
     }
+    funActulizarHtmlCredito();
 }
 function CerrarContenedorTransfer() {
     // OJO
@@ -316,6 +318,7 @@ function OnCallBackTomarTransferPedidoCarrito(args) {
             isHacerBorradoCarritos = true;
             //document.getElementById('divConfirmarPedidoTransferContenedorGeneral').style.display = 'none';
             CargarRespuestaDePedidoTransfer(args);
+            
         }
     }
     //    alert('O');
@@ -1082,4 +1085,35 @@ function onclickPedidoFacturarseHabitualConfirmar() {
 function OnCallBackTomarPedidoCarritoFacturarseFormaHabitual(args) {
     CerrarContenedorTransfer();
     OnCallBackTomarPedidoCarrito(args);
+}
+function obtenerMontoProductoDeCarritoTransferSucursal(pSucursal, pProducto) {
+    var result = parseInt(0);
+    for (var iSucursal = 0; iSucursal < listaCarritoTransferPorSucursal.length; iSucursal++) {
+        if (listaCarritoTransferPorSucursal[iSucursal].Sucursal == pSucursal) {
+            var isBreak = false;
+            for (var iTransfer = 0; iTransfer < listaCarritoTransferPorSucursal[iSucursal].listaTransfer.length; iTransfer++) {
+                var nroTotalPrecioPorTransfer = 0;
+                for (var iTransferProductos = 0; iTransferProductos < listaCarritoTransferPorSucursal[iSucursal].listaTransfer[iTransfer].listaProductos.length; iTransferProductos++) {
+                    if (listaCarritoTransferPorSucursal[iSucursal].listaTransfer[iTransfer].listaProductos[iTransferProductos].pro_nombre == pProducto.tde_codpro) {
+                        var PrecioTotalProductoTransfer = listaCarritoTransferPorSucursal[iSucursal].listaTransfer[iTransfer].listaProductos[iTransferProductos].cantidad * listaCarritoTransferPorSucursal[iSucursal].listaTransfer[iTransfer].listaProductos[iTransferProductos].PrecioFinalTransfer;
+
+                        result = PrecioTotalProductoTransfer;
+                        if (listaCarritoTransferPorSucursal[iSucursal].listaTransfer[iTransfer].listaProductos[iTransferProductos].stk_stock == 'N') {
+                            // nroTotalProducto = 0;
+                        } else {
+                            // nroTotalCarrito += PrecioTotalProductoTransfer;
+                            // strHtmlPrecioProducto = '$&nbsp;' + FormatoDecimalConDivisorMiles(PrecioTotalProductoTransfer.toFixed(2));
+                        }
+                        isBreak = true;
+                        break;
+                    }
+                }
+                if (isBreak) {
+                    break;
+                }
+            }
+            break;
+        }
+    }
+    return result;
 }

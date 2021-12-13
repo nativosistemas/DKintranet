@@ -147,5 +147,43 @@ namespace DKintranet.Codigo.capaDatos
             strXML += "</Root>";
             return capaCAR.SubirPedido(strXML, pIdCliente, pIdUsuario, Constantes.cTipo_Carrito, Constantes.cTipo_CarritoTransfers);
         }
+        public static decimal getSumaCarritosOtraSolapa(string pTipo)
+        {
+            decimal result = 0;
+            if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+            {
+                DKintranet.Codigo.capaDatos.cClientes cliente = (DKintranet.Codigo.capaDatos.cClientes)HttpContext.Current.Session["clientesDefault_Cliente"];
+                List<DKintranet.Codigo.clases.cCarrito> listaCarrito = new List<DKintranet.Codigo.clases.cCarrito>();
+                List<cSucursalCarritoTransfer> listaCarritoTransfer = new List<cSucursalCarritoTransfer>();
+                if (pTipo == DKintranet.Codigo.clases.Constantes.cTipo_Carrito)
+                {              
+                    listaCarrito = DKintranet.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosDiferidosPorCliente(cliente.cli_codigo);
+                    listaCarritoTransfer = DKintranet.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(cliente, DKintranet.Codigo.clases.Constantes.cTipo_CarritoDiferidoTransfers);
+                }
+                else if (pTipo == DKintranet.Codigo.clases.Constantes.cTipo_CarritoDiferido)
+                {
+                    listaCarrito = DKintranet.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosPorSucursalYProductos(cliente.cli_codigo);
+                    listaCarritoTransfer = DKintranet.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(cliente, DKintranet.Codigo.clases.Constantes.cTipo_CarritoTransfers);
+                }
+                foreach (var itemCarrito in listaCarrito)
+                {
+                    foreach (var itemProductos in itemCarrito.listaProductos)
+                    {
+                        result += Convert.ToDecimal( itemProductos.cantidad) * itemProductos.PrecioFinal;
+                    }
+                }
+                foreach (var itemCarritoTransfer in listaCarritoTransfer)
+                {
+                    foreach (var itemTransfer in itemCarritoTransfer.listaTransfer)
+                    {
+                        foreach (var itemTransferProductos in itemTransfer.listaProductos)
+                        {
+                            result += Convert.ToDecimal(itemTransferProductos.cantidad) * itemTransferProductos.PrecioFinalTransfer;
+                        }
+                    }
+                }
+            }
+            return result;
+        }
     }
 }
