@@ -68,9 +68,8 @@
         {
             resultado += "<input type=\"hidden\" id=\"hiddenhomeTipo\" value=\"" + Server.HtmlEncode(HttpContext.Current.Session["home_Tipo"].ToString()) + "\" />";
             HttpContext.Current.Session["home_Tipo"] = null;
-        }
-
-        resultado += "<input type=\"hidden\" id=\"hiddenCreditoInicial\" value=\"" + Server.HtmlEncode(Double.Parse("8880").ToString()) + "\" />";
+        }       
+        resultado += "<input type=\"hidden\" id=\"hiddenCreditoInicial\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.capaDatos.capaCore_decision.ObtenerCreditoDisponible(cliente.cli_login).ToString()) + "\" />";
     }
     resultado += "<input id=\"hiddenIndexCarrito\" type =\"hidden\" />";
 

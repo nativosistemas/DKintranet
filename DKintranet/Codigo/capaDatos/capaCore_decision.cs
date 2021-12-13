@@ -78,5 +78,21 @@ namespace DKintranet.Codigo.capaDatos
                 capaCAR.EndCarritoEnProceso(pIdCarrito);
             }
         }
+
+        public static decimal ObtenerCreditoDisponible(string pLoginWeb)
+        {
+            try
+            {
+                var t = Task.Run(() => capaCore_WebService.ObtenerCreditoDisponibleAsync(pLoginWeb));
+                t.Wait();
+                return t.Result;
+            }
+            catch (Exception ex)
+            {
+                FuncionesPersonalizadas.grabarLog(MethodBase.GetCurrentMethod(), ex, DateTime.Now, pLoginWeb);
+                return 0;
+            }
+        }
+
     }
 }

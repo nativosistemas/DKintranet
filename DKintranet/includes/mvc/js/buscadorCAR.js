@@ -165,14 +165,14 @@ $(document).ready(function () {
     if (creditoInicial == null) {
         creditoInicial = $('#hiddenCreditoInicial').val();
         if (typeof creditoInicial == 'undefined') {
-            creditoInicial = 0;
+            creditoInicial = "0";
         }
-        creditoInicial = parseFloat(creditoInicial);
+        creditoInicial = parseFloat(creditoInicial.replace(',', '.'));
     }
     if (sumaCarritosOtraSolapa == null) {
         sumaCarritosOtraSolapa = $('#hiddenSumaCarritosOtraSolapa').val();
-        if (typeof creditoInicial == 'undefined') {
-            sumaCarritosOtraSolapa = 0;
+        if (typeof sumaCarritosOtraSolapa == 'undefined') {
+            sumaCarritosOtraSolapa = "0";
         }
         sumaCarritosOtraSolapa = parseFloat(sumaCarritosOtraSolapa.replace(',', '.'));
     }

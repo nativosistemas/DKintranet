@@ -18,7 +18,7 @@ namespace DKintranet.Codigo.capaDatos
         private static readonly HttpClient client = new HttpClient();
         private static string url = System.Configuration.ConfigurationManager.AppSettings["url_DKcore"];
         private static JsonSerializerOptions oJsonSerializerOptions = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
-       // private static JsonSerializerOptions oJsonSerializerOptions_2 = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy. };
+        // private static JsonSerializerOptions oJsonSerializerOptions_2 = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy. };
         private static string _pass { get; set; }
         private static string _login { get; set; }
         public static void setDatosLogin(string login, string pass)
@@ -41,6 +41,31 @@ namespace DKintranet.Codigo.capaDatos
                 {
                     FuncionesPersonalizadas.grabarLog(MethodBase.GetCurrentMethod(), ex, DateTime.Now);
                 }
+            }
+        }
+        private static async Task<HttpResponseMessage> GetAsync(string name, string pParameter, bool isRepeatBecauseNotAuthorized = true)
+        {
+            try
+            {
+                string url_api = url + name + (string.IsNullOrEmpty(pParameter) ? string.Empty : "?" + pParameter);
+                HttpResponseMessage response = await client.GetAsync(url_api);
+                if (response.IsSuccessStatusCode)
+                    return response;
+                if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    DKbase.generales.Log.LogError(MethodBase.GetCurrentMethod(), "StatusCode == HttpStatusCode.Unauthorized", DateTime.Now, name, pParameter);
+                    if (isRepeatBecauseNotAuthorized)
+                    {
+                        await SetAuthorization();
+                        return await GetAsync(name, pParameter, false);
+                    }
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                FuncionesPersonalizadas.grabarLog(MethodBase.GetCurrentMethod(), ex, DateTime.Now, name, pParameter);
+                return null;
             }
         }
         private static async Task<HttpResponseMessage> PostAsync(string name, object pParameter, bool isRepeatBecauseNotAuthorized = true)
@@ -110,6 +135,19 @@ namespace DKintranet.Codigo.capaDatos
             {
                 var resultResponse = response.Content.ReadAsStringAsync().Result;
                 result = JsonSerializer.Deserialize<List<DKbase.dll.cDllPedidoTransfer>>(resultResponse);
+            }
+            return result;
+        }
+        public static async Task<decimal> ObtenerCreditoDisponibleAsync(string pLoginWeb)
+        {
+            decimal result = 0;
+            string name = "ObtenerCreditoDisponible";
+            string parameter = "loginWeb=" + pLoginWeb;
+            HttpResponseMessage response = await GetAsync(name, parameter);
+            if (response != null)
+            {
+                var resultResponse = response.Content.ReadAsStringAsync().Result;
+                result = Convert.ToDecimal(resultResponse.Replace(".",","));
             }
             return result;
         }
