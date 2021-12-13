@@ -3245,23 +3245,23 @@ function getHtmlCreditoIntranet() {
     var strHTML = '';
     strHTML += '<table with="100%" class="table table-striped" style="background: #e1e1e1;">';
     strHTML += '<thead>';
-    strHTML += '<tr style="height: 40px;"><th class="text-center">CRÉDITO<br></th><th class="text-center"></th></tr>';
+    strHTML += '<tr style="height: 40px;"><th class="text-center"><b>CRÉDITO</b><br></th><th class="text-center"></th></tr>';
     strHTML += '</thead>';
     strHTML += '<tbody class="table-striped">';
     strHTML += '<tr style="height: 40px">';
-    strHTML += '<td class="text-left"> DISPONIBLE INICIAL </td>';
+    strHTML += '<td class="text-left"><b> DISPONIBLE INICIAL </b></td>';
     var strHtmlCreditoInicial = '$&nbsp;' + FormatoDecimalConDivisorMiles(getCreditoInicial().toFixed(2));
-    strHTML += '<td class="text-right">' + strHtmlCreditoInicial + '</td>';
+    strHTML += '<td class="text-right"><b>' + strHtmlCreditoInicial + '</b></td>';
     strHTML += '</tr>';
     strHTML += '<tr style="height: 40px">';
-    strHTML += '<td class="text-left"> UTILIZADO </td>';
+    strHTML += '<td class="text-left color_emp_rd"> UTILIZADO </td>';
     var strHtmlCreditoUtilizado = '$&nbsp;' + FormatoDecimalConDivisorMiles(getCreditoUtilizado().toFixed(2));
-    strHTML += '<td class="text-right">' + strHtmlCreditoUtilizado + '</td>';
+    strHTML += '<td class="text-right color_emp_rd">' + strHtmlCreditoUtilizado + '</td>';
     strHTML += '</tr>';
     strHTML += '<tr style="height: 40px">';
-    strHTML += '<td class="text-left">RESTANTE </td>';
+    strHTML += '<td class="text-left color_red">RESTANTE </td>';
     var strHtmlCreditoRestante = '$&nbsp;' + FormatoDecimalConDivisorMiles(getCreditoRestante().toFixed(2));
-    strHTML += '<td class="text-right">' + strHtmlCreditoRestante + '</td>';
+    strHTML += '<td class="text-right color_red">' + strHtmlCreditoRestante + '</td>';
     strHTML += '</tr>';
     strHTML += '</tbody>';
     strHTML += '</table>';
@@ -3340,41 +3340,41 @@ function AgregarProductosTransfersAlCarrito(pListaProductosMasCantidad, pIdTrans
 }
 function isValidarCredito(pIdSucursal, pProducto, pCantidadProducto, pIsDesdeBuscador, pIsTransfer) {
     var isGrabarCantidad = true;
-    var creditoRestante = getCreditoRestante();
-    if (pIsTransfer) {
-        creditoRestante = creditoRestante + obtenerMontoProductoDeCarritoTransferSucursal(pIdSucursal, pProducto);
-    } else {
-        creditoRestante = creditoRestante + obtenerMontoProductoDeCarritoSucursal(pIdSucursal, pProducto);
-    }
-    if (creditoRestante <= 0) {
-        isGrabarCantidad = false;
-    } else {
-        var nroTotalProducto = 0;
-        if (pIsTransfer) {
-            //nroTotalProducto = CalcularPrecioProductosEnCarrito(pProducto.PrecioFinal, pCantidadProducto, pProducto.pro_ofeunidades, pProducto.pro_ofeporcentaje);
-            nroTotalProducto = pCantidadProducto * pProducto.PrecioFinalTransfer;
+    //var creditoRestante = getCreditoRestante();
+    //if (pIsTransfer) {
+    //    creditoRestante = creditoRestante + obtenerMontoProductoDeCarritoTransferSucursal(pIdSucursal, pProducto);
+    //} else {
+    //    creditoRestante = creditoRestante + obtenerMontoProductoDeCarritoSucursal(pIdSucursal, pProducto);
+    //}
+    //if (creditoRestante <= 0) {
+    //    isGrabarCantidad = false;
+    //} else {
+    //    var nroTotalProducto = 0;
+    //    if (pIsTransfer) {
+    //        //nroTotalProducto = CalcularPrecioProductosEnCarrito(pProducto.PrecioFinal, pCantidadProducto, pProducto.pro_ofeunidades, pProducto.pro_ofeporcentaje);
+    //        nroTotalProducto = pCantidadProducto * pProducto.PrecioFinalTransfer;
 
-        } else {
-            nroTotalProducto = CalcularPrecioProductosEnCarrito(pProducto.PrecioFinal, pCantidadProducto, pProducto.pro_ofeunidades, pProducto.pro_ofeporcentaje);
-        }
-        var creditoRestante_temp = creditoRestante - nroTotalProducto;
-        if (creditoRestante_temp <= 0) {
-            isGrabarCantidad = false;
-        }
-    }
+    //    } else {
+    //        nroTotalProducto = CalcularPrecioProductosEnCarrito(pProducto.PrecioFinal, pCantidadProducto, pProducto.pro_ofeunidades, pProducto.pro_ofeporcentaje);
+    //    }
+    //    var creditoRestante_temp = creditoRestante - nroTotalProducto;
+    //    if (creditoRestante_temp <= 0) {
+    //        isGrabarCantidad = false;
+    //    }
+    //}
 
-    if (!isGrabarCantidad) {
-        if (pIsTransfer === false && pIdSucursal != null && pProducto.pro_codigo != null && pCantidadProducto != null && pIsDesdeBuscador != null) {
-            if (pIsDesdeBuscador) {
-                volverCantidadAnterior_buscador(pIdSucursal, pProducto.pro_codigo);
-            } else {
-                volverCantidadAnterior_carrito(pIdSucursal, pProducto.pro_codigo);
-            }
-        }
-        var htmlMensaje = '<p>' + cuerpo_creditoInsuficiente + '</p>';
-        mensaje_credito(titulo_creditoInsuficiente, htmlMensaje);
-    } else {
+    //if (!isGrabarCantidad) {
+    //    if (pIsTransfer === false && pIdSucursal != null && pProducto.pro_codigo != null && pCantidadProducto != null && pIsDesdeBuscador != null) {
+    //        if (pIsDesdeBuscador) {
+    //            volverCantidadAnterior_buscador(pIdSucursal, pProducto.pro_codigo);
+    //        } else {
+    //            volverCantidadAnterior_carrito(pIdSucursal, pProducto.pro_codigo);
+    //        }
+    //    }
+    //    var htmlMensaje = '<p>' + cuerpo_creditoInsuficiente + '</p>';
+    //    mensaje_credito(titulo_creditoInsuficiente, htmlMensaje);
+    //} else {
 
-    }
+    //}
     return isGrabarCantidad;
 }

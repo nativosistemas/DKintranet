@@ -211,8 +211,8 @@ function AgregarCarritoTransfersPorSucursalHtml(pIndice) {
     strHTML += '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-1 text-center"></div>';
     strHTML += '<div class="col-xs-12 div_total">Total<span class="pull-right">' + '$&nbsp;' + FormatoDecimalConDivisorMiles(nroTotalCarrito.toFixed(2)) + '</span></div>';
     strHTML += '<div class="col-xs-12 pad_lr_car">';
-    strHTML += '<button type="button" id="btn_confirmar_' +  indiceReferente  + '" class="btn_confirmar" onclick="onclickIsPuedeUsarDllTransfer(' + pIndice + '); return false;" href="#">CONFIRMAR</button>';
-    strHTML += '<button type="button" id="btn_vaciar_' +  indiceReferente + '" class="btn_vaciar float-left" onclick="onclickVaciarCarritoTransfer(' + pIndice + '); return false;" href="#">VACIAR</button>';
+    strHTML += '<button type="button" id="btn_confirmar_' + indiceReferente + '" class="btn_confirmar" onclick="onclickIsPuedeUsarDllTransfer(' + pIndice + '); return false;" href="#">CONFIRMAR</button>';
+    strHTML += '<button type="button" id="btn_vaciar_' + indiceReferente + '" class="btn_vaciar float-left" onclick="onclickVaciarCarritoTransfer(' + pIndice + '); return false;" href="#">VACIAR</button>';
     strHTML += '</div>';
     strHTML += '<div class="clear"></div>';
     //
@@ -237,20 +237,16 @@ function OnCallBackIsHacerPedidosTransfer(args) {
     }
 }
 function onclickConfirmarCarritoTransfer(pIndice) {
-    MostrarConfirmarCarrito(pIndice, true);
-    indexSucursalTransferSeleccionado = pIndice;
-    ObtenerHorarioCierre(listaCarritoTransferPorSucursal[indexSucursalTransferSeleccionado].Sucursal, 'OnCallBackObtenerHorarioCierreTransfer');
-    onChangeTipoEnvio();
-    //$('#txtMensajeFacturaTransfer').val('');
-    //$('#txtMensajeRemitoTransfer').val('');
-    //CargarHtmlTipoEnvioTransfer(listaCarritoTransferPorSucursal[indexSucursalTransferSeleccionado].Sucursal);
-    //document.getElementById('divConfirmarPedidoTransferContenedorGeneral').style.display = 'block';
-    //var arraySizeDocumento = SizeDocumento();
-    //document.getElementById('divTransferContenedorGeneralFondo').style.height = arraySizeDocumento[1] + 'px';
-    //document.getElementById('divTransferContenedorGeneralFondo').style.display = 'block';
-    //// Actualizar horario cierre
-    //PageMethods.ObtenerHorarioCierre(listaCarritoTransferPorSucursal[indexSucursalTransferSeleccionado].Sucursal, OnCallBackObtenerHorarioCierreTransfer, OnFail);
-    //// fin actualizar horario cierre
+    var creditoRestante = getCreditoRestante();
+    if (creditoRestante < 0) {
+        var htmlMensaje = '<p>' + cuerpo_creditoInsuficiente + '</p>';
+        mensaje_credito(titulo_creditoInsuficiente, htmlMensaje);
+    } else {
+        MostrarConfirmarCarrito(pIndice, true);
+        indexSucursalTransferSeleccionado = pIndice;
+        ObtenerHorarioCierre(listaCarritoTransferPorSucursal[indexSucursalTransferSeleccionado].Sucursal, 'OnCallBackObtenerHorarioCierreTransfer');
+        onChangeTipoEnvio();
+    }
 }
 function OnCallBackObtenerHorarioCierreTransfer(args) {
     if (args != null) {
@@ -318,7 +314,7 @@ function OnCallBackTomarTransferPedidoCarrito(args) {
             isHacerBorradoCarritos = true;
             //document.getElementById('divConfirmarPedidoTransferContenedorGeneral').style.display = 'none';
             CargarRespuestaDePedidoTransfer(args);
-            
+
         }
     }
     //    alert('O');

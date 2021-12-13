@@ -122,13 +122,15 @@ function mensaje_alert_base(pMensaje, pOnclick) {
     strHtml += '<p class="text-center"><b>' + pMensaje + '</b></p>';
     strHtml += '<div class="clear10"></div>';
     strHtml += '<div class="clear20"></div>';
-    strHtml += '<a class="btn_confirmar" href="#" onclick="' + pOnclick + '; return false;">ACEPTAR</a>';
+    strHtml += '<button type="button" class="btn_confirmar" id="btn_confirmar_ACEPTAR" onclick="' + pOnclick + '; return false;">ACEPTAR</button>';
     strHtml += '</div>';
     strHtml += '<div class="clear"></div>';
     strHtml += '</div></div>';
     $('#modalModuloAlert').html(strHtml);
     $('#modalModuloAlert').modal();
     scrollModalPrincipal();
+
+    $('#btn_confirmar_ACEPTAR').focus();
 }
 function mensaje_alert_generic(pTitle, pMensaje) {
     var strHtml = '';
@@ -177,8 +179,8 @@ function mensaje_confirmar(pMensaje, clickbutton_aceptar, clickbutton_cancelar) 
     strHtml += '<p class="text-center"><b>' + pMensaje + '</b></p>';
     strHtml += '<div class="clear10"></div>';
     strHtml += '<div class="clear20"></div>';
-    strHtml += '<a class="btn_confirmar" href="#"  onclick="' + clickbutton_aceptar + '" >ACEPTAR</a>';
-    strHtml += '<a class="btn_vaciar float-left" href="#" data-dismiss="modal" onclick="' + clickbutton_cancelar + '">CANCELAR</a>';
+    strHtml += '<button type="button" class="btn_confirmar" id="btn_confirmar_ACEPTAR" onclick="' + clickbutton_aceptar + '" >ACEPTAR</button>';
+    strHtml += '<button type="button" class="btn_vaciar float-left"  data-dismiss="modal" onclick="' + clickbutton_cancelar + '">CANCELAR</button>';
     strHtml += '</div>';
     strHtml += '<div class="clear"></div>';
     strHtml += '</div></div>';
@@ -187,6 +189,8 @@ function mensaje_confirmar(pMensaje, clickbutton_aceptar, clickbutton_cancelar) 
 
 
     scrollModalPrincipal();
+
+    $('#btn_confirmar_ACEPTAR').focus();
 }
 function mensaje_informacion(pMensaje) {
     var strHtml = '';
@@ -206,7 +210,7 @@ function mensaje_informacion(pMensaje) {
     strHtml += '<p class="text-center"><b>' + pMensaje + '</b></p>';
     strHtml += '<div class="clear10"></div>';
     strHtml += '<div class="clear20"></div>';
-    strHtml += '<a class="btn_confirmar" href="#"  onclick="modalModuloAlertHide(); return false;" >ACEPTAR</a>';
+    strHtml += '<button type="button" class="btn_confirmar" id="btn_confirmar_ACEPTAR" onclick="modalModuloAlertHide(); return false;" >ACEPTAR</button>';
     strHtml += '</div>';//<div class="col-lg-12">
     strHtml += '</div>';
     strHtml += '<div class="clear"></div>';
@@ -214,6 +218,8 @@ function mensaje_informacion(pMensaje) {
     $('#modalModuloAlert').html(strHtml);
     $('#modalModuloAlert').modal();
     scrollModalPrincipal();
+
+    $('#btn_confirmar_ACEPTAR').focus();
 }
 function mensaje_error(pTitulo, pMensaje) {
     var strHtml = '';
@@ -233,7 +239,7 @@ function mensaje_error(pTitulo, pMensaje) {
     strHtml += '<p class="text-center"><b>' + pTitulo + '</b></p>';
     strHtml += '<div class="clear20"></div>';
     strHtml += pMensaje;
-    strHtml += '<a class="btn_confirmar" href="#"  onclick="modalModuloAlertHide(); return false;" >ACEPTAR</a>';
+    strHtml += '<button type="button" class="btn_confirmar" id="btn_confirmar_ACEPTAR" onclick="modalModuloAlertHide(); return false;" >ACEPTAR</button>';
     strHtml += '<div class="clear"></div>';
     strHtml += '</div>';//<div class="col-lg-12">
     strHtml += '</div>';
@@ -244,6 +250,7 @@ function mensaje_error(pTitulo, pMensaje) {
 
     scrollModalPrincipal();
 
+    $('#btn_confirmar_ACEPTAR').focus();
 }
 function mensaje_credito(pTitulo, pMensaje) {
 
@@ -254,14 +261,14 @@ function mensaje_credito(pTitulo, pMensaje) {
     strHtml += '<div class="row">';
     strHtml += '<div class="col-lg-12">';
     strHtml += '<div class="modulo_icon error"></div>';
-    strHtml += '<h4 class="color_red">' + pTitulo + '</h4>';
+    strHtml += '<h4 class="color_red"></h4>';
     strHtml += '</div>';
     strHtml += '</div>';
     strHtml += '<div class="close-modal" data-dismiss="modal"><i class="fa fa-times"></i></div>';
     strHtml += '</div>';
     strHtml += '<div class="modal-body">';
     strHtml += '<div class="col-lg-12">';
-    //strHtml += '<p class="text-center"><b>' + pTitulo + '</b></p>';
+    strHtml += '<p class="text-center color_red"><b>'  + pTitulo  + '</b></p>';
     strHtml += '<div class="clear20"></div>';
     strHtml += pMensaje;
     strHtml += '<button type="button" class="btn_confirmar" id="btn_confirmar_credito" href="#"  onclick="modalModuloAlertHide(); return false;" >ACEPTAR</button>';

@@ -134,14 +134,19 @@ function OnCallBackIsHacerPedidos(args) {
     }
 }
 function onclickConfirmarCarrito(pIndexCarrito) {
-    MostrarConfirmarCarrito(pIndexCarrito, false);
-    onChangeTipoEnvio();
-    $("#hiddenIndexCarrito").val(pIndexCarrito);
-    //// Acutalizar horario reparto
-    indexCarritoHorarioCierre = pIndexCarrito;
-    ObtenerHorarioCierre(listaCarritos[indexCarritoHorarioCierre].codSucursal, 'OnCallBackObtenerHorarioCierre');
-    //// fin Acutalizar horario reparto
-
+    var creditoRestante = getCreditoRestante();
+    if (creditoRestante < 0) {
+        var htmlMensaje = '<p>' + cuerpo_creditoInsuficiente + '</p>';
+        mensaje_credito(titulo_creditoInsuficiente, htmlMensaje);
+    } else {
+        MostrarConfirmarCarrito(pIndexCarrito, false);
+        onChangeTipoEnvio();
+        $("#hiddenIndexCarrito").val(pIndexCarrito);
+        //// Acutalizar horario reparto
+        indexCarritoHorarioCierre = pIndexCarrito;
+        ObtenerHorarioCierre(listaCarritos[indexCarritoHorarioCierre].codSucursal, 'OnCallBackObtenerHorarioCierre');
+        //// fin Acutalizar horario reparto
+    }
 }
 //function CargarHtmlTipoEnvio(pSucursal) {
 //    var strHtml = '';
@@ -235,12 +240,14 @@ function MostrarConfirmarCarrito(pIndexCarrito, pIsTransfer) {
     strHtml += '&nbsp;Es urgente';
     strHtml += '</div>';
     strHtml += '<div class="clear10"></div>';
-    strHtml += '<button type="button" class="btn_confirmar" onclick="' + onclick + '; return false;" href="#">HACER PEDIDO</button>';
+    strHtml += '<button type="button" class="btn_confirmar" id="btn_confirmar_HACER_PEDIDO" onclick="' + onclick + '; return false;" href="#">HACER PEDIDO</button>';
     strHtml += '</div>'; // '<div class="modal-body">'
     strHtml += '<div class="clear"></div>';
     strHtml += '</div></div>'; //'<div class="modal-dialog modal-lg"><div class="modal-content">'
     $('#modalModulo').html(strHtml);
     $('#modalModulo').modal();
+
+    $('#btn_confirmar_HACER_PEDIDO').focus();
 }
 function MensajeFacturaRemitoLength(ta) {
     if (ta.value.length > maxLengthMensajeFacturaRemito) {
