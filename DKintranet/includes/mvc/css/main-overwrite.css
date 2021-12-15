@@ -723,9 +723,9 @@ button.btn_vaciar:before {
     }
 }
 button.btn_confirmar:focus {
-    border: 3px solid #98999a;
+    border: 3px solid #db8e8e;
 }
 
 button.btn_vaciar:focus {
-    border: 3px solid #98999a;
+    border: 3px solid #db8e8e;
 }

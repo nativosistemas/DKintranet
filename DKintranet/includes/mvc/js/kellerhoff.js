@@ -37,7 +37,13 @@ function cProductosAndCantidad() {
     this.tde_codtfr = 0;
 }
 var cliente = null;
+$('body').on("keydown", function (e) {
+    if (e.altKey && e.which === 66) { // ALT + B
+        resetCliente();
+        e.preventDefault();
+    } 
 
+});
 $(document).ready(function () {
 
     novedades();
