@@ -674,17 +674,13 @@ function onblurInputCarrito(pValor) {
     }
 }
 function funMostrarMensajeCantidadSuperadaCarrito() {
-    isMoverCursor = false;
-    var htmlMensaje = '';
-    htmlMensaje += '<button type="button" onclick="funExcedeImporteAceptarCarrito(); return false;" class="btn_confirmar" href="#">Aceptar</button>';
-    htmlMensaje += '<button type="button" onclick="funExcedeImporteCancelarCarrito(); return false;" class="btn_vaciar" href="#">Cancelar</button>';
+    //isMoverCursor = false;
+    //var htmlMensaje = '';
+    //htmlMensaje += '<button type="button" onclick="funExcedeImporteAceptarCarrito(); return false;" class="btn_confirmar" href="#">Aceptar</button>';
+    //htmlMensaje += '<button type="button" onclick="funExcedeImporteCancelarCarrito(); return false;" class="btn_vaciar" href="#">Cancelar</button>';
 
-    mensaje(mensajeCantidadSuperaElMaximoParametrizado1 + cantidadMaximaParametrizada + mensajeCantidadSuperaElMaximoParametrizado2, htmlMensaje);
-    //$('#divMensajeExcedeImporteCarrito').html(mensajeCantidadSuperaElMaximoParametrizado1 + cantidadMaximaParametrizada + mensajeCantidadSuperaElMaximoParametrizado2);
-    //var arraySizeDocumento = SizeDocumento();
-    //document.getElementById('divContenedorExcedeImporte').style.height = arraySizeDocumento[1] + 'px';
-    //document.getElementById('divContenedorExcedeImporte').style.display = 'block';
-    //document.getElementById('divConfirmarExcedeImporteContenedorGeneralCarrito').style.display = 'block';
+   // mensaje(mensajeCantidadSuperaElMaximoParametrizado1 + cantidadMaximaParametrizada + mensajeCantidadSuperaElMaximoParametrizado2, htmlMensaje);
+
 }
 function funExcedeImporteCancelarCarrito() {
     if (ExcedeImporteColumnaCarrito != null && ExcedeImporteFilaCarrito != null && ExcedeImporteValorCarrito != null) {
