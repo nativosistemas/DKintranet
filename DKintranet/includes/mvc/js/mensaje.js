@@ -122,7 +122,7 @@ function mensaje_alert_base(pMensaje, pOnclick) {
     strHtml += '<p class="text-center"><b>' + pMensaje + '</b></p>';
     strHtml += '<div class="clear10"></div>';
     strHtml += '<div class="clear20"></div>';
-    strHtml += '<button type="button" class="btn_confirmar" id="btn_confirmar_ACEPTAR" onclick="' + pOnclick + '; return false;">ACEPTAR</button>';
+    strHtml += '<button type="button" class="btn_confirmar" id="btn_confirmar_ACEPTAR_base" onclick="' + pOnclick + '; return false;">ACEPTAR</button>';
     strHtml += '</div>';
     strHtml += '<div class="clear"></div>';
     strHtml += '</div></div>';
@@ -130,7 +130,7 @@ function mensaje_alert_base(pMensaje, pOnclick) {
     $('#modalModuloAlert').modal();
     scrollModalPrincipal();
 
-    $('#btn_confirmar_ACEPTAR').focus();
+    $('#btn_confirmar_ACEPTAR_base').focus();
 }
 function mensaje_alert_generic(pTitle, pMensaje) {
     var strHtml = '';
@@ -179,8 +179,8 @@ function mensaje_confirmar(pMensaje, clickbutton_aceptar, clickbutton_cancelar) 
     strHtml += '<p class="text-center"><b>' + pMensaje + '</b></p>';
     strHtml += '<div class="clear10"></div>';
     strHtml += '<div class="clear20"></div>';
-    strHtml += '<button type="button" class="btn_confirmar" id="btn_confirmar_ACEPTAR" onclick="' + clickbutton_aceptar + '" >ACEPTAR</button>';
-    strHtml += '<button type="button" class="btn_vaciar float-left"  data-dismiss="modal" onclick="' + clickbutton_cancelar + '">CANCELAR</button>';
+    strHtml += '<button type="button" class="btn_confirmar" id="btn_confirmar_ACEPTAR_confirmar" onclick="' + clickbutton_aceptar + '" >ACEPTAR</button>';
+    strHtml += '<button type="button" class="btn_vaciar float-left" id="btn_confirmar_CANCELAR_confirmar"  data-dismiss="modal" onclick="' + clickbutton_cancelar + '">CANCELAR</button>';
     strHtml += '</div>';
     strHtml += '<div class="clear"></div>';
     strHtml += '</div></div>';
@@ -190,7 +190,7 @@ function mensaje_confirmar(pMensaje, clickbutton_aceptar, clickbutton_cancelar) 
 
     scrollModalPrincipal();
 
-    $('#btn_confirmar_ACEPTAR').focus();
+    $('#btn_confirmar_ACEPTAR_confirmar').focus();
 }
 function mensaje_informacion(pMensaje) {
     var strHtml = '';
@@ -210,7 +210,7 @@ function mensaje_informacion(pMensaje) {
     strHtml += '<p class="text-center"><b>' + pMensaje + '</b></p>';
     strHtml += '<div class="clear10"></div>';
     strHtml += '<div class="clear20"></div>';
-    strHtml += '<button type="button" class="btn_confirmar" id="btn_confirmar_ACEPTAR" onclick="modalModuloAlertHide(); return false;" >ACEPTAR</button>';
+    strHtml += '<button type="button" class="btn_confirmar" id="btn_confirmar_ACEPTAR_info" onclick="modalModuloAlertHide(); return false;" >ACEPTAR</button>';
     strHtml += '</div>';//<div class="col-lg-12">
     strHtml += '</div>';
     strHtml += '<div class="clear"></div>';
@@ -219,7 +219,7 @@ function mensaje_informacion(pMensaje) {
     $('#modalModuloAlert').modal();
     scrollModalPrincipal();
 
-    $('#btn_confirmar_ACEPTAR').focus();
+    $('#btn_confirmar_ACEPTAR_info').focus();
 }
 function mensaje_error(pTitulo, pMensaje) {
     var strHtml = '';
@@ -239,7 +239,7 @@ function mensaje_error(pTitulo, pMensaje) {
     strHtml += '<p class="text-center"><b>' + pTitulo + '</b></p>';
     strHtml += '<div class="clear20"></div>';
     strHtml += pMensaje;
-    strHtml += '<button type="button" class="btn_confirmar" id="btn_confirmar_ACEPTAR" onclick="modalModuloAlertHide(); return false;" >ACEPTAR</button>';
+    strHtml += '<button type="button" class="btn_confirmar" id="btn_confirmar_ACEPTAR_error" onclick="modalModuloAlertHide(); return false;" >ACEPTAR</button>';
     strHtml += '<div class="clear"></div>';
     strHtml += '</div>';//<div class="col-lg-12">
     strHtml += '</div>';
@@ -250,10 +250,10 @@ function mensaje_error(pTitulo, pMensaje) {
 
     scrollModalPrincipal();
 
-    $('#btn_confirmar_ACEPTAR').focus();
+    $('#btn_confirmar_ACEPTAR_error').focus();
 }
 function mensaje_credito(pTitulo, pMensaje) {
-
+    is_credito_modal = true;
     var strHtml = '';
     strHtml += '<div class="modal-background">&nbsp;</div>';
     strHtml += '<div class="modal-dialog modal-md"><div class="modal-content">';
@@ -283,6 +283,47 @@ function mensaje_credito(pTitulo, pMensaje) {
     scrollModalPrincipal();
     $("#btn_confirmar_credito").focus();
     isEnterExcedeImporte = false;
+}
+function alert_credito(pTitulo, pMensaje) {
+
+    var strHtml = '';
+    strHtml += '<div id="alertCredito" class="alert alert-danger alert-fixed" role="alert">';
+
+    strHtml += '<b>' + pTitulo + '</b>';
+    strHtml += '<div class="clear20"></div>';
+    strHtml += pMensaje;
+    strHtml += '<button type="button" class="btn_confirmar" id="btn_alert_confirmar_credito" href="#"  onclick="closeAlert(); return false;" >CERRAR</button>';
+    strHtml += '<div class="clear"></div>';
+    strHtml += '</div>';
+    $('#divAlertaCredito').html(strHtml);
+    $('#alertCredito').alert();
+
+    $("#btn_alert_confirmar_credito").focus();
+    setTimeout(function () { closeAlert(); }, 600);
+    //scrollModalPrincipal();
+    //$("#btn_confirmar_credito").focus();
+    isEnterExcedeImporte = false;
+
+}
+function closeAlert() {
+
+    //if (isNotNullEmpty(nameInput_focus_anterior) && $('#' + nameInput_focus_anterior).length) {
+    //    $("#" + nameInput_focus_anterior).focus();
+    //}
+    isNotBuscadorEnProceso = true;
+
+    setTimeout(function () { focusInputAnterior(); }, 1000);
+}
+function focusInputAnterior() {
+    $('#alertCredito').alert('close');
+    if (listaSucursales != null) {
+        for (var i = 0; i < listaSucursales.length; i++) {
+            LimpiarTextBoxProductosBuscados(listaSucursales[i].sde_sucursal);
+        }
+    }
+    if (isNotNullEmpty(nameInput_focus_anterior) && $('#' + nameInput_focus_anterior).length) {
+        $("#" + nameInput_focus_anterior).focus();
+    }
 }
 
 function scrollModalPrincipal() {
