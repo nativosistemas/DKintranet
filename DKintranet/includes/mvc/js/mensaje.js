@@ -271,7 +271,7 @@ function mensaje_credito(pTitulo, pMensaje) {
     strHtml += '<p class="text-center color_red"><b>'  + pTitulo  + '</b></p>';
     strHtml += '<div class="clear20"></div>';
     strHtml += pMensaje;
-    strHtml += '<button type="button" class="btn_confirmar" id="btn_confirmar_credito" href="#"  onclick="modalModuloAlertHide(); return false;" >ACEPTAR</button>';
+    strHtml += '<button type="button" class="btn_confirmar" id="btn_confirmar_credito" onclick="modalModuloAlertHide(); return true;" >ACEPTAR</button>';
     strHtml += '<div class="clear"></div>';
     strHtml += '</div>';//<div class="col-lg-12">
     strHtml += '</div>';
@@ -281,7 +281,9 @@ function mensaje_credito(pTitulo, pMensaje) {
     $('#modalModuloAlert').modal();
 
     scrollModalPrincipal();
-    $("#btn_confirmar_credito").focus();
+    //if (!isEnterExcedeImporte) { 
+    //    $("#btn_confirmar_credito").focus();
+    //}
     isEnterExcedeImporte = false;
 }
 function alert_credito(pTitulo, pMensaje) {

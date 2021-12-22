@@ -66,6 +66,8 @@ var nameInput_focus_anterior = '';
 var btnCarrito_index = null;
 var btnCarrito_tipo = null;
 var sumaCarritosOtraSolapa = null;
+var tempIdSucursal = null;
+var tempIdProduco = null;
 //hiddenSumaCarritosOtraSolapa
 $('body').on("keydown", function (e) {
     //if (e.ctrlKey && e.shiftKey && e.which === 83) {
@@ -103,8 +105,8 @@ $('body').on("keydown", function (e) {
         document.getElementById('txtBuscador').focus();
         e.preventDefault();
     }
-    /* else if (e.which === 13 && isVentanasMensajesActivas()) {
-         $('#modalModuloAlert').modal('hide');
+    /*else if (e.which === 13 && is_credito_modal ) {
+         //$('#modalModuloAlert').modal('hide');
          e.preventDefault();
      }*/
     else {
@@ -2018,34 +2020,9 @@ function AgregarAlHistorialProductoCarrito(pIndexProducto, pIndexSucursal, pCant
 
 function CargarOActualizarListaCarrito(pIdSucursal, pProducto, pCantidadProducto, pIsDesdeBuscador) {
     var isGrabarCantidad = isValidarCredito(pIdSucursal, pProducto, pCantidadProducto, pIsDesdeBuscador, false);
-    //var creditoRestante = getCreditoRestante();
-    //creditoRestante = creditoRestante + obtenerMontoProductoDeCarritoSucursal(pIdSucursal, pProducto);
-    //if (creditoRestante <= 0) {
-    //    isGrabarCantidad = false;
-    //} else {
-    //    var nroTotalProducto = CalcularPrecioProductosEnCarrito(pProducto.PrecioFinal, pCantidadProducto, pProducto.pro_ofeunidades, pProducto.pro_ofeporcentaje);
-    //    var creditoRestante_temp = creditoRestante - nroTotalProducto;
-    //    if (creditoRestante_temp <= 0) {
-    //        isGrabarCantidad = false;
-    //    }
-    //}
-
-    //if (!isGrabarCantidad) {
-    //    if (pIdSucursal != null && pProducto.pro_codigo != null && pCantidadProducto != null && pIsDesdeBuscador != null) {
-    //        if (pIsDesdeBuscador) {
-    //            volverCantidadAnterior_buscador(pIdSucursal, pProducto.pro_codigo);
-    //        } else {
-    //            volverCantidadAnterior_carrito(pIdSucursal, pProducto.pro_codigo);
-    //        }
-    //    }
-    //    var htmlMensaje = '<p>' + cuerpo_creditoInsuficiente + '</p>';//<ul><li>' + obtenerNombreProducto_buscador(pProducto.pro_codigo, pIdSucursal, pIsDesdeBuscador) + '</li></ul>
-    //    mensaje_credito(titulo_creditoInsuficiente, htmlMensaje);
-    //} else {
     if (isGrabarCantidad) {
         CargarOActualizarListaCarrito_base(pIdSucursal, pProducto.pro_codigo, pCantidadProducto, pIsDesdeBuscador);
     }
-    //}
-
 }
 function CargarOActualizarListaCarrito_base(pIdSucursal, pIdProduco, pCantidadProducto, pIsDesdeBuscador) {
     tempIdSucursal = pIdSucursal;
@@ -3298,10 +3275,12 @@ $('#modalModuloAlert').on('hidden.bs.modal', function () {
     //    $("#" + nameInput_focus_anterior).focus();
     //}
     isNotBuscadorEnProceso = true;
-    setTimeout(function () { credito_hidden_bs_modal(); }, 1000);
+    credito_hidden_bs_modal();
+   // setTimeout(function () { credito_hidden_bs_modal(); }, 500);
 });
 var is_credito_modal = false;
 function credito_hidden_bs_modal() {
+    //isNotBuscadorEnProceso = true;
     if (is_credito_modal) {
         if (listaSucursales != null) {
             for (var i = 0; i < listaSucursales.length; i++) {
@@ -3455,8 +3434,8 @@ function isValidarCredito(pIdSucursal, pProducto, pCantidadProducto, pIsDesdeBus
             }
         }
         var htmlMensaje = '<p>' + cuerpo_creditoInsuficiente + '</p>';
-        alert_credito(titulo_creditoInsuficiente, htmlMensaje);
-        //mensaje_credito(titulo_creditoInsuficiente, htmlMensaje);
+        //alert_credito(titulo_creditoInsuficiente, htmlMensaje);
+        mensaje_credito(titulo_creditoInsuficiente, htmlMensaje);
         //setTimeout(function () { mensaje_credito(titulo_creditoInsuficiente, htmlMensaje); }, 100);
     } else {
 
