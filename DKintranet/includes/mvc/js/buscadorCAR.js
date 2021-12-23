@@ -101,9 +101,15 @@ $('body').on("keydown", function (e) {
     } else if (e.which == 27) { // Esc
         selectedInput = null;
         selectInputCarrito = null;
-
         document.getElementById('txtBuscador').focus();
+
+
         e.preventDefault();
+    } else if (e.altKey && e.which === 88) { // ALT + X
+        if ($('#modalModuloAlert').hasClass('in')) {
+            modalModuloAlertHide();
+        }
+        //e.preventDefault();
     }
     /*else if (e.which === 13 && is_credito_modal ) {
          //$('#modalModuloAlert').modal('hide');
@@ -2019,6 +2025,8 @@ function AgregarAlHistorialProductoCarrito(pIndexProducto, pIndexSucursal, pCant
 }
 
 function CargarOActualizarListaCarrito(pIdSucursal, pProducto, pCantidadProducto, pIsDesdeBuscador) {
+    tempIdSucursal = pIdSucursal;
+    tempIdProduco = pProducto.pro_codigo;
     var isGrabarCantidad = isValidarCredito(pIdSucursal, pProducto, pCantidadProducto, pIsDesdeBuscador, false);
     if (isGrabarCantidad) {
         CargarOActualizarListaCarrito_base(pIdSucursal, pProducto.pro_codigo, pCantidadProducto, pIsDesdeBuscador);
