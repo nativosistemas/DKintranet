@@ -674,12 +674,12 @@ function onblurInputCarrito(pValor) {
     }
 }
 function funMostrarMensajeCantidadSuperadaCarrito() {
-    //isMoverCursor = false;
-    //var htmlMensaje = '';
-    //htmlMensaje += '<button type="button" onclick="funExcedeImporteAceptarCarrito(); return false;" class="btn_confirmar" href="#">Aceptar</button>';
-    //htmlMensaje += '<button type="button" onclick="funExcedeImporteCancelarCarrito(); return false;" class="btn_vaciar" href="#">Cancelar</button>';
+    isMoverCursor = false;
+    var htmlMensaje = '';
+    htmlMensaje += '<button type="button" onclick="funExcedeImporteAceptarCarrito(); return false;" class="btn_confirmar" href="#">Aceptar</button>';
+    htmlMensaje += '<button type="button" onclick="funExcedeImporteCancelarCarrito(); return false;" class="btn_vaciar" href="#">Cancelar</button>';
 
-   // mensaje(mensajeCantidadSuperaElMaximoParametrizado1 + cantidadMaximaParametrizada + mensajeCantidadSuperaElMaximoParametrizado2, htmlMensaje);
+    mensaje(mensajeCantidadSuperaElMaximoParametrizado1 + cantidadMaximaParametrizada + mensajeCantidadSuperaElMaximoParametrizado2, htmlMensaje);
 
 }
 function funExcedeImporteCancelarCarrito() {
@@ -693,6 +693,11 @@ function funExcedeImporteCancelarCarrito() {
             objCarrito = null;
         }
         if (objCarrito != null) {
+
+            tempIdSucursal = listaCarritos[ExcedeImporteColumnaCarrito].codSucursal;
+            tempIdProduco = listaCarritos[ExcedeImporteColumnaCarrito].listaProductos[ExcedeImporteFilaCarrito].pro_codigo;
+            volverCantidadAnterior_carrito(listaCarritos[ExcedeImporteColumnaCarrito].codSucursal, listaCarritos[ExcedeImporteColumnaCarrito].listaProductos[ExcedeImporteFilaCarrito].pro_codigo);
+            // CargarProductoCantidadDependiendoTransferCarrito(pFila, pColumna, pCantidad) {
             objCarrito.select();
         }
         isMoverCursor = true;

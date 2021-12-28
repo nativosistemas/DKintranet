@@ -1185,6 +1185,7 @@
     <Content Include="Views\devoluciones\ReclamoFacturadoNoEnviado.cshtml" />
     <None Include="Service References\ServiceReferenceDLL\Service2.wsdl" />
     <Content Include="Views\config\LoginIntranet.cshtml" />
+    <Content Include="Views\Shared\_navHeader.cshtml" />
     <None Include="Web_config\Web.config_produccion">
       <SubType>Designer</SubType>
     </None>

@@ -69,12 +69,14 @@ var sumaCarritosOtraSolapa = null;
 var tempIdSucursal = null;
 var tempIdProduco = null;
 //hiddenSumaCarritosOtraSolapa
-$('body').on("keydown", function (e) {
-    //if (e.ctrlKey && e.shiftKey && e.which === 83) {
-    //    alert("You pressed Ctrl + Shift + s");
-    //    e.preventDefault();
-    //}
-});
+//document.onkeydown = function () {
+//    if (window.event && window.event.keyCode == 27) {
+//        return false;
+//    }//(e.which == 27)
+//    if (window.event && window.event.keyCode == 505) {
+//        return false;
+//    }
+//}
 $('body').on("keydown", function (e) {
     /*if (e.altKey && e.which === 66) { // ALT + B
         resetCliente();
@@ -99,12 +101,15 @@ $('body').on("keydown", function (e) {
         focusInputCantidadCarrito();
         e.preventDefault();
     } else if (e.which == 27) { // Esc
-        selectedInput = null;
-        selectInputCarrito = null;
-        document.getElementById('txtBuscador').focus();
-
-
         e.preventDefault();
+        if ($('#modalModuloAlert').hasClass('in') === false) {
+            selectedInput = null;
+            selectInputCarrito = null;
+            document.getElementById('txtBuscador').focus();
+        }
+
+
+     
     } else if (e.altKey && e.which === 88) { // ALT + X
         if ($('#modalModuloAlert').hasClass('in')) {
             modalModuloAlertHide();
