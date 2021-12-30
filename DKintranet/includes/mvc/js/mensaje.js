@@ -64,6 +64,30 @@ function mensaje(pTitulo, pMensaje) {
     $('#modalModulo').html(strHtml);
     $('#modalModulo').modal();
 }
+function mensaje_SuperaCantidad(pTitulo, pMensaje) {
+    var strHtml = '';
+    strHtml += '<div class="modal-background">&nbsp;</div>';
+    strHtml += '<div class="modal-dialog modal-md"><div class="modal-content">';
+    strHtml += '<div class="modal-header">';
+    strHtml += '<div class="row">';
+    strHtml += '<div class="col-lg-12">';
+    strHtml += '<h4>' + pTitulo + '</h4>';
+    strHtml += '</div>';
+    strHtml += '</div>';
+    strHtml += '<div class="close-modal" data-dismiss="modal"><i class="fa fa-times"></i></div>';
+    strHtml += '</div>';
+    strHtml += '<div class="modal-body"><div class="col-lg-12">';
+    strHtml += pMensaje;
+    strHtml += '</div></div>';
+    strHtml += '<div class="clear"></div>';
+    strHtml += '</div></div>';
+    $('#modalModulo').html(strHtml);
+    $('#modalModulo').modal();
+
+
+    setTimeout(function () { $('#btn_confirmar_ACEPTAR_CantidadSuperada').focus(); }, 300);
+   
+}
 function modalModuloHide() {
     $('#modalModulo').modal('hide');
 }
@@ -158,7 +182,9 @@ function mensaje_alert_generic(pTitle, pMensaje) {
 function modalModuloAlertHide() {
     $('#modalModuloAlert').modal('hide');
 }
-
+function modalModuloCreditoHide() {
+    $('#modalModuloCredito').modal('hide');
+}
 function mensaje_vaciarCarrito(clickButton) {
     mensaje_confirmar('¿Desea vaciar el carrito?', clickButton, 'modalModuloAlertHide(); return false;');
 }
@@ -271,19 +297,17 @@ function mensaje_credito(pTitulo, pMensaje) {
     strHtml += '<p class="text-center color_red"><b>'  + pTitulo  + '</b></p>';
     strHtml += '<div class="clear20"></div>';
     strHtml += pMensaje;
-    strHtml += '<button type="button" class="btn_confirmar" id="btn_confirmar_credito" onclick="modalModuloAlertHide(); return true;" >ACEPTAR</button>';
+    strHtml += '<button type="button" class="btn_confirmar" id="btn_confirmar_credito" onclick="modalModuloCreditoHide(); return true;" >ACEPTAR</button>';
     strHtml += '<div class="clear"></div>';
     strHtml += '</div>';//<div class="col-lg-12">
     strHtml += '</div>';
     strHtml += '<div class="clear"></div>';
     strHtml += '</div></div>';
-    $('#modalModuloAlert').html(strHtml);
-    $('#modalModuloAlert').modal();
+    $('#modalModuloCredito').html(strHtml);
+    $('#modalModuloCredito').modal();
 
-    scrollModalPrincipal();
-    //if (!isEnterExcedeImporte) { 
-    //    $("#btn_confirmar_credito").focus();
-    //}
+    scrollModalCreditoPrincipal();
+
     isEnterExcedeImporte = false;
 }
 function alert_credito(pTitulo, pMensaje) {
@@ -330,6 +354,12 @@ function focusInputAnterior() {
 
 function scrollModalPrincipal() {
     $('#modalModuloAlert').on('hidden.bs.modal', function (e) {
+        if ($("#modalModulo").css('display') == 'block')
+            $('body').addClass('modal-open');
+    });
+}
+function scrollModalCreditoPrincipal() {
+    $('#modalModuloCredito').on('hidden.bs.modal', function (e) {
         if ($("#modalModulo").css('display') == 'block')
             $('body').addClass('modal-open');
     });

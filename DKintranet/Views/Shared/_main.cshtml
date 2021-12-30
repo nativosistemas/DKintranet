@@ -52,6 +52,8 @@
     @*<div id="modalModuloCelular" class="modal md-effect-1 md-content portfolio-modal in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>*@
     <div id="modalModulo" class="modal md-effect-1 md-content portfolio-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
     <div id="modalModuloAlert" class="modal md-effect-1 md-content portfolio-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+    <div id="modalModuloCredito" class="modal md-effect-1 md-content portfolio-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+
     @* header *@
     @Html.Partial("_navHeader")
     @* header *@
@@ -60,200 +62,200 @@
         @*<div class="col-xs-9">*@
 
 
-            @* Inicio Promotores Y Encargados *@
-            @{
-                if (Session["clientesDefault_Usuario"] != null && ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR)
-                {
-                    <p class="TitleCliente">Seleccione un cliente</p>
-                    List<DKintranet.Codigo.capaDatos.cClientes> colClientes = WebService.spRecuperarTodosClientesByPromotor(((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).ApNombre);
+        @* Inicio Promotores Y Encargados *@
+        @{
+            if (Session["clientesDefault_Usuario"] != null && ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR)
+            {
+                <p class="TitleCliente">Seleccione un cliente</p>
+                List<DKintranet.Codigo.capaDatos.cClientes> colClientes = WebService.spRecuperarTodosClientesByPromotor(((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).ApNombre);
 
-                    <select class="form-control cmbCliente" id="cmbCliente" name="cmdCliente">
-                        @{
-                            foreach (DKintranet.Codigo.capaDatos.cClientes oCli in colClientes)
+                <select class="form-control cmbCliente" id="cmbCliente" name="cmdCliente">
+                    @{
+                        foreach (DKintranet.Codigo.capaDatos.cClientes oCli in colClientes)
+                        {
+                            string inhabilitado;
+
+                            if (oCli.cli_estado == "INH")
                             {
-                                string inhabilitado;
-
-                                if (oCli.cli_estado == "INH")
-                                {
-                                    inhabilitado = "<span style='color: red;'> (INHABILITADO) </span>";
-                                }
-                                else
-                                {
-                                    inhabilitado = "";
-                                }
-                                if (((DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo == oCli.cli_codigo)
-                                {
-                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }" selected>
-                                        @{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);}
-                                    </option>
-                                }
-                                else
-                                {
-                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }">@{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);} </option>
-                                }
+                                inhabilitado = "<span style='color: red;'> (INHABILITADO) </span>";
+                            }
+                            else
+                            {
+                                inhabilitado = "";
+                            }
+                            if (((DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo == oCli.cli_codigo)
+                            {
+                                <option value="@{ WriteLiteral(oCli.cli_codigo); }" selected>
+                                    @{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);}
+                                </option>
+                            }
+                            else
+                            {
+                                <option value="@{ WriteLiteral(oCli.cli_codigo); }">@{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);} </option>
                             }
                         }
-                    </select>
-                }
-
-                if (Session["clientesDefault_Usuario"] != null && ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL)
-                {
-                    <p class="TitleCliente">Seleccione un cliente</p>
-                    List<DKintranet.Codigo.capaDatos.cClientes> colClientes = WebService.RecuperarTodosClientes();
-
-                    <select class="form-control cmbCliente" id="cmbCliente" name="cmdCliente">
-                        @{
-                            foreach (DKintranet.Codigo.capaDatos.cClientes oCli in colClientes)
-                            {
-                                string inhabilitado;
-
-                                if (oCli.cli_estado == "INH")
-                                {
-                                    inhabilitado = "<span style='color: red;'> (INHABILITADO) </span>";
-                                }
-                                else
-                                {
-                                    inhabilitado = "";
-                                }
-                                if (((DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo == oCli.cli_codigo)
-                                {
-                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }" selected>
-                                        @{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);}
-                                    </option>
-                                }
-                                else
-                                {
-                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }">@{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);} </option>
-                                }
-                            }
-                        }
-                    </select>
-                }
-
-                if (Session["clientesDefault_Usuario"] != null && ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
-                {
-                    <p class="TitleCliente">Seleccione un cliente</p>
-                    string[] GrupoCliente;
-
-                    GrupoCliente = ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).NombreYApellido.Split(' ');
-
-                    List<DKintranet.Codigo.capaDatos.cClientes> colClientes = WebService.RecuperarTodosClientesByGrupoCliente(GrupoCliente[0]);
-                    <select class="form-control cmbCliente" id="cmbCliente" name="cmdCliente">
-                        @{
-                            foreach (DKintranet.Codigo.capaDatos.cClientes oCli in colClientes)
-                            {
-                                string inhabilitado;
-
-                                if (oCli.cli_estado == "INH")
-                                {
-                                    inhabilitado = "<span style='color: red;'> (INHABILITADO) </span>";
-                                }
-                                else
-                                {
-                                    inhabilitado = "";
-                                }
-                                if (((DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo == oCli.cli_codigo)
-                                {
-                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }" selected>
-                                        @{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);}
-                                    </option>
-                                }
-                                else
-                                {
-                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }">@{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);} </option>
-                                }
-                            }
-                        }
-                    </select>
-                }
-
-                if (Session["clientesDefault_Usuario"] != null && ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL)
-                {
-                    <p class="TitleCliente">Seleccione un cliente</p>
-                    string IdSuc;
-
-                    IdSuc = ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).NombreYApellido.Substring(9, 2);
-
-                    List<DKintranet.Codigo.capaDatos.cClientes> colClientes = WebService.RecuperarTodosClientesBySucursal(IdSuc);
-                    <select class="form-control cmbCliente" id="cmbCliente" name="cmdCliente">
-                        @{
-                            foreach (DKintranet.Codigo.capaDatos.cClientes oCli in colClientes)
-                            {
-                                string inhabilitado;
-
-                                if (oCli.cli_estado == "INH")
-                                {
-                                    inhabilitado = "<span style='color: red;'> (INHABILITADO) </span>";
-                                }
-                                else
-                                {
-                                    inhabilitado = "";
-                                }
-                                if (((DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo == oCli.cli_codigo)
-                                {
-                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }" selected>
-                                        @{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);}
-                                    </option>
-                                }
-                                else
-                                {
-                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }">@{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);} </option>
-                                }
-                            }
-                        }
-                    </select>
-                }
-                if (Session["clientesDefault_Usuario"] != null && DKintranet.Codigo.clases.FuncionesPersonalizadas.isUserTomaPedidoIntranet((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]))
-                {
-                    <p class="TitleCliente">Seleccione un cliente</p>
-                    List<DKintranet.Codigo.capaDatos.cClientes> colClientes = new List<DKintranet.Codigo.capaDatos.cClientes>(); //WebService.RecuperarTodosClientes();
-                    if (Session["usuario_TomarPedido_listaClientes"] != null)
-                    {
-                        colClientes = (List<DKintranet.Codigo.capaDatos.cClientes>)Session["usuario_TomarPedido_listaClientes"];
                     }
-                    DKintranet.Codigo.capaDatos.cClientes clienteActual = null;
-                    if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
-                    {
-                        clienteActual = ((DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]);
-                    }
-
-                    <select class="form-control cmbCliente" id="cmbCliente_intranet" name="cmbCliente_intranet">
-                        <option disabled value selected> -- Seleccione una opción -- </option>
-                        @{
-                            foreach (DKintranet.Codigo.capaDatos.cClientes oCli in colClientes)
-                            {
-                                string inhabilitado;
-
-                                if (oCli.cli_estado == "INH")
-                                {
-                                    inhabilitado = "<span style='color: red;'> (INHABILITADO) </span>";
-                                }
-                                else
-                                {
-                                    inhabilitado = "";
-                                }
-
-                                if (clienteActual != null && clienteActual.cli_codigo == oCli.cli_codigo)
-                                {
-                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }" selected>
-                                        @{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);}
-                                    </option>
-                                }
-                                else
-                                {
-                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }">@{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);} </option>
-                                }
-                            }
-                        }
-                    </select>
-                }
+                </select>
             }
 
-            @* Fin Promotores *@
+            if (Session["clientesDefault_Usuario"] != null && ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL)
+            {
+                <p class="TitleCliente">Seleccione un cliente</p>
+                List<DKintranet.Codigo.capaDatos.cClientes> colClientes = WebService.RecuperarTodosClientes();
+
+                <select class="form-control cmbCliente" id="cmbCliente" name="cmdCliente">
+                    @{
+                        foreach (DKintranet.Codigo.capaDatos.cClientes oCli in colClientes)
+                        {
+                            string inhabilitado;
+
+                            if (oCli.cli_estado == "INH")
+                            {
+                                inhabilitado = "<span style='color: red;'> (INHABILITADO) </span>";
+                            }
+                            else
+                            {
+                                inhabilitado = "";
+                            }
+                            if (((DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo == oCli.cli_codigo)
+                            {
+                                <option value="@{ WriteLiteral(oCli.cli_codigo); }" selected>
+                                    @{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);}
+                                </option>
+                            }
+                            else
+                            {
+                                <option value="@{ WriteLiteral(oCli.cli_codigo); }">@{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);} </option>
+                            }
+                        }
+                    }
+                </select>
+            }
+
+            if (Session["clientesDefault_Usuario"] != null && ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
+            {
+                <p class="TitleCliente">Seleccione un cliente</p>
+                string[] GrupoCliente;
+
+                GrupoCliente = ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).NombreYApellido.Split(' ');
+
+                List<DKintranet.Codigo.capaDatos.cClientes> colClientes = WebService.RecuperarTodosClientesByGrupoCliente(GrupoCliente[0]);
+                <select class="form-control cmbCliente" id="cmbCliente" name="cmdCliente">
+                    @{
+                        foreach (DKintranet.Codigo.capaDatos.cClientes oCli in colClientes)
+                        {
+                            string inhabilitado;
+
+                            if (oCli.cli_estado == "INH")
+                            {
+                                inhabilitado = "<span style='color: red;'> (INHABILITADO) </span>";
+                            }
+                            else
+                            {
+                                inhabilitado = "";
+                            }
+                            if (((DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo == oCli.cli_codigo)
+                            {
+                                <option value="@{ WriteLiteral(oCli.cli_codigo); }" selected>
+                                    @{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);}
+                                </option>
+                            }
+                            else
+                            {
+                                <option value="@{ WriteLiteral(oCli.cli_codigo); }">@{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);} </option>
+                            }
+                        }
+                    }
+                </select>
+            }
+
+            if (Session["clientesDefault_Usuario"] != null && ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL)
+            {
+                <p class="TitleCliente">Seleccione un cliente</p>
+                string IdSuc;
+
+                IdSuc = ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).NombreYApellido.Substring(9, 2);
+
+                List<DKintranet.Codigo.capaDatos.cClientes> colClientes = WebService.RecuperarTodosClientesBySucursal(IdSuc);
+                <select class="form-control cmbCliente" id="cmbCliente" name="cmdCliente">
+                    @{
+                        foreach (DKintranet.Codigo.capaDatos.cClientes oCli in colClientes)
+                        {
+                            string inhabilitado;
+
+                            if (oCli.cli_estado == "INH")
+                            {
+                                inhabilitado = "<span style='color: red;'> (INHABILITADO) </span>";
+                            }
+                            else
+                            {
+                                inhabilitado = "";
+                            }
+                            if (((DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo == oCli.cli_codigo)
+                            {
+                                <option value="@{ WriteLiteral(oCli.cli_codigo); }" selected>
+                                    @{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);}
+                                </option>
+                            }
+                            else
+                            {
+                                <option value="@{ WriteLiteral(oCli.cli_codigo); }">@{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);} </option>
+                            }
+                        }
+                    }
+                </select>
+            }
+            if (Session["clientesDefault_Usuario"] != null && DKintranet.Codigo.clases.FuncionesPersonalizadas.isUserTomaPedidoIntranet((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]))
+            {
+                <p class="TitleCliente">Seleccione un cliente</p>
+                List<DKintranet.Codigo.capaDatos.cClientes> colClientes = new List<DKintranet.Codigo.capaDatos.cClientes>(); //WebService.RecuperarTodosClientes();
+                if (Session["usuario_TomarPedido_listaClientes"] != null)
+                {
+                    colClientes = (List<DKintranet.Codigo.capaDatos.cClientes>)Session["usuario_TomarPedido_listaClientes"];
+                }
+                DKintranet.Codigo.capaDatos.cClientes clienteActual = null;
+                if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+                {
+                    clienteActual = ((DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]);
+                }
+
+                <select class="form-control cmbCliente" id="cmbCliente_intranet" name="cmbCliente_intranet">
+                    <option disabled value selected> -- Seleccione una opción -- </option>
+                    @{
+                        foreach (DKintranet.Codigo.capaDatos.cClientes oCli in colClientes)
+                        {
+                            string inhabilitado;
+
+                            if (oCli.cli_estado == "INH")
+                            {
+                                inhabilitado = "<span style='color: red;'> (INHABILITADO) </span>";
+                            }
+                            else
+                            {
+                                inhabilitado = "";
+                            }
+
+                            if (clienteActual != null && clienteActual.cli_codigo == oCli.cli_codigo)
+                            {
+                                <option value="@{ WriteLiteral(oCli.cli_codigo); }" selected>
+                                    @{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);}
+                                </option>
+                            }
+                            else
+                            {
+                                <option value="@{ WriteLiteral(oCli.cli_codigo); }">@{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);} </option>
+                            }
+                        }
+                    }
+                </select>
+            }
+        }
+
+        @* Fin Promotores *@
         @*</div>
-        <div class="col-xs-3">
-            @Html.Partial("_navHeader")
-        </div>*@
+            <div class="col-xs-3">
+                @Html.Partial("_navHeader")
+            </div>*@
 
 
         <div id="contenidoRender" class="container-fluid">
@@ -352,7 +354,7 @@
     <script src="~/includes/mvc/js/oferta.js?n=18" type="text/javascript"></script>
     <script src="~/includes/mvc/js/kellerhoff.js?n=55" type="text/javascript"></script>
     <script src="~/includes/mvc/js/ajax.js?n=46" type="text/javascript"></script>
-    <script src="~/includes/mvc/js/mensaje.js?n=37" type="text/javascript"></script>
+    <script src="~/includes/mvc/js/mensaje.js?n=39" type="text/javascript"></script>
     <script src="~/includes/mvc/js/promotores.js?n=6" type="text/javascript"></script>
 
     @RenderSection("scripts", required: false)

@@ -676,10 +676,12 @@ function onblurInputCarrito(pValor) {
 function funMostrarMensajeCantidadSuperadaCarrito() {
     isMoverCursor = false;
     var htmlMensaje = '';
-    htmlMensaje += '<button type="button" onclick="funExcedeImporteAceptarCarrito(); return false;" class="btn_confirmar" href="#">Aceptar</button>';
+    htmlMensaje += '<button type="button" id="btn_confirmar_ACEPTAR_CantidadSuperada" onclick="funExcedeImporteAceptarCarrito(); return false;" class="btn_confirmar" href="#">Aceptar</button>';
     htmlMensaje += '<button type="button" onclick="funExcedeImporteCancelarCarrito(); return false;" class="btn_vaciar" href="#">Cancelar</button>';
 
-    mensaje(mensajeCantidadSuperaElMaximoParametrizado1 + cantidadMaximaParametrizada + mensajeCantidadSuperaElMaximoParametrizado2, htmlMensaje);
+    mensaje_SuperaCantidad(mensajeCantidadSuperaElMaximoParametrizado1 + cantidadMaximaParametrizada + mensajeCantidadSuperaElMaximoParametrizado2, htmlMensaje);
+
+
 
 }
 function funExcedeImporteCancelarCarrito() {

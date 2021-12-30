@@ -111,8 +111,8 @@ $('body').on("keydown", function (e) {
 
      
     } else if (e.altKey && e.which === 88) { // ALT + X
-        if ($('#modalModuloAlert').hasClass('in')) {
-            modalModuloAlertHide();
+        if ($('#modalModuloCredito').hasClass('in')) {
+            modalModuloCreditoHide();
         }
         //e.preventDefault();
     }
@@ -1063,7 +1063,15 @@ function MostrarTextoSuperaCantidadMaxima(pNombreProducto, pCantidadMaxima) {
 }
 function funMostrarMensajeCantidadSuperada() {
     isMoverCursor = false;
-    mensaje_confirmar(mensajeCantidadSuperaElMaximoParametrizado1 + cantidadMaximaParametrizada + mensajeCantidadSuperaElMaximoParametrizado2, 'funExcedeImporteAceptar(); return false;', 'funExcedeImporteCancelar(); return false;');
+    //mensaje_confirmar(mensajeCantidadSuperaElMaximoParametrizado1 + cantidadMaximaParametrizada + mensajeCantidadSuperaElMaximoParametrizado2, 'funExcedeImporteAceptar(); return false;', 'funExcedeImporteCancelar(); return false;');
+    var htmlMensaje = '';
+    htmlMensaje += '<button type="button" id="btn_confirmar_ACEPTAR_CantidadSuperada" onclick="funExcedeImporteAceptar(); return false;" class="btn_confirmar" href="#">Aceptar</button>';
+    htmlMensaje += '<button type="button" onclick="funExcedeImporteCancelar(); return false;" class="btn_vaciar" href="#">Cancelar</button>';
+
+    mensaje_SuperaCantidad(mensajeCantidadSuperaElMaximoParametrizado1 + cantidadMaximaParametrizada + mensajeCantidadSuperaElMaximoParametrizado2, htmlMensaje);
+
+
+
 }
 function funExcedeImporteAceptar() {
     if (isNotNullEmpty(ExcedeImporteFila) && isNotNullEmpty(ExcedeImporteColumna) && isNotNullEmpty(ExcedeImporteValor)) {
@@ -1086,7 +1094,7 @@ function funExcedeImporteAceptar() {
             }
         }
 
-        modalModuloAlertHide();
+        modalModuloHide();
         if (isEnterExcedeImporte) {
             if (!$("#divBody").hasClass("modal-open-Celular")) {
                 jQuery("#txtBuscador").val('');
@@ -1170,6 +1178,11 @@ function genericInputSucGetValue(pFila, pColumna) {
 
 function funExcedeImporteCancelar() {
     if (ExcedeImporteFila != null && ExcedeImporteColumna != null && ExcedeImporteValor != null) {
+
+
+
+        volverCantidadAnterior_buscador(listaSucursal[ExcedeImporteColumna], listaProductosBuscados[ExcedeImporteFila].pro_codigo);
+
         genericInputSucSelect(ExcedeImporteFila, ExcedeImporteColumna);
         //var mytext = $("#inputSuc" + ExcedeImporteFila + "_" + ExcedeImporteColumna);
         //if (mytext.length > 0) {
@@ -1180,7 +1193,7 @@ function funExcedeImporteCancelar() {
         //    mytext.select();
         //}
 
-        modalModuloAlertHide();
+        modalModuloHide();
         isEnterExcedeImporte = false;
         isExcedeImporte = false;
         isMoverCursor = true;
@@ -3278,7 +3291,7 @@ function getHtmlCreditoIntranet() {
 function funActulizarHtmlCredito() {
     $('#divContenedorBaseCredito').html(getHtmlCreditoIntranet());
 }
-$('#modalModuloAlert').on('hidden.bs.modal', function () {
+$('#modalModuloCredito').on('hidden.bs.modal', function () {
     //if (listaSucursales != null) {
     //    for (var i = 0; i < listaSucursales.length; i++) {
     //        LimpiarTextBoxProductosBuscados(listaSucursales[i].sde_sucursal);
