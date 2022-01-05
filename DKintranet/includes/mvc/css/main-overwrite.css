@@ -737,6 +737,10 @@ button.btn_vaciar:focus {
     z-index: 9999;
     border-radius: 0px
 }
-/*.section-gris-claro {
+.section-gris-claro {
     padding: 0px;
-}*/
+}
+
+.divColorFondoBlanco {
+    background-color: white;
+}
