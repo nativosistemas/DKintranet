@@ -669,8 +669,8 @@ namespace DKintranet.Controllers
                     return Serializador.SerializarAJson(resultadoPedido);
                 }
                 List<DKbase.dll.cDllPedidoTransfer> listaCarritoAux = capaCore_decision.TomarPedidoDeTransfersTelefonistaAsync(car_id_aux, cliente.cli_login, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, listaProductos);
-                if (!capaWebServiceDLL.ValidarExistenciaDeCarritoWebPasado(car_id_aux))
-                    return null;
+                /*if (!capaWebServiceDLL.ValidarExistenciaDeCarritoWebPasado(car_id_aux))
+                    return null;*/
 
                 if (listaCarritoAux != null)
                 {
