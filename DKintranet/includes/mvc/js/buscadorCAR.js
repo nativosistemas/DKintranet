@@ -766,7 +766,7 @@ function getHtmlTablaResolucionCelular() {
                 strHtml += '<span class="p_erronero">REGISTRO ERRONEO</span>';
             }
             // Ver si mostrar input solo producto Transfer 
-            if (listaProductosBuscados[i].pro_vtasolotransfer) {
+            if (listaProductosBuscados[i].pro_vtasolotransfer && !listaProductosBuscados[i].isTablaTransfersClientes) {
                 isMostrarImput = false;
             }
 
@@ -1702,7 +1702,7 @@ function OnCallBackRecuperarProductos(args) {
                     }
 
                     // Ver si mostrar input solo producto Transfer 
-                    if (listaProductosBuscados[i].pro_vtasolotransfer) {
+                    if (listaProductosBuscados[i].pro_vtasolotransfer && !listaProductosBuscados[i].isTablaTransfersClientes) {
                         isMostrarImput = false;
                     }
 
@@ -2769,7 +2769,7 @@ function detalleProducto_celular(pIndex) {
     }
     // FIN + IVA
     // Ver si mostrar input solo producto Transfer 
-    if (listaProductosBuscados[pIndex].pro_vtasolotransfer) {
+    if (listaProductosBuscados[pIndex].pro_vtasolotransfer && !listaProductosBuscados[pIndex].isTablaTransfersClientes) {
         isMostrarImput = false;
     }
     //strHtml += '<div id="modalProd_xs_1" class="modal md-effect-1 md-content portfolio-modal in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">';

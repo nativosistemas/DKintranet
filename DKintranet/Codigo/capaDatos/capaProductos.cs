@@ -100,6 +100,7 @@ namespace DKintranet.Codigo.capaDatos
             base.tfr_fijunidades = pValor.tfr_fijunidades;
             base.tfr_facturaciondirecta = pValor.tfr_facturaciondirecta;
             base.tfr_descripcion = pValor.tfr_descripcion;
+            base.isTablaTransfersClientes = pValor.isTablaTransfersClientes;
         }
 
     }
