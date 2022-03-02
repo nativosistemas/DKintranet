@@ -542,8 +542,8 @@ namespace DKintranet.Controllers
                             return Serializador.SerializarAJson(oRepetido);
                         }
                         resultadoPedido = capaCore_decision.TomarPedidoTelefonistaAsync(item.car_id, cliente.cli_login, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, listaProductos, pIsUrgente);
-                        if (!capaWebServiceDLL.ValidarExistenciaDeCarritoWebPasado(item.car_id))
-                            return null;
+                        /*if (!capaWebServiceDLL.ValidarExistenciaDeCarritoWebPasado(item.car_id))
+                            return null;*/
                         if (resultadoPedido == null)
                             return null;
                         else if (resultadoPedido != null)
