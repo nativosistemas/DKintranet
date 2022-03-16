@@ -359,6 +359,8 @@ function OnCallBackTomarPedidoCarrito(args) {
         } else {
             isHacerBorradoCarritos = true;
             CargarRespuestaDePedido(args);
+            creditoInicial = args.CreditoInicial;
+            funActulizarHtmlCredito();
         }
     }
 }

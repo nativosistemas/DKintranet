@@ -591,11 +591,11 @@ namespace DKintranet.Controllers
                                 capaCAR_decision.GuardarPedidoBorrarCarrito(item, pTipo, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pIsUrgente);
                             }
                         }
+                        resultadoPedido.CreditoInicial = DKintranet.Codigo.capaDatos.capaCore_decision.ObtenerCreditoDisponible(cliente.cli_login);
                         break;
                     }
                 }
             }
-
             return Serializador.SerializarAJson(resultadoPedido);
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
@@ -735,7 +735,13 @@ namespace DKintranet.Controllers
                     }
                 }
                 else
+                {
                     return null;
+                }
+                if (resultadoPedido != null && resultadoPedido.Count > 0)
+                {
+                    resultadoPedido[0].CreditoInicial = DKintranet.Codigo.capaDatos.capaCore_decision.ObtenerCreditoDisponible(cliente.cli_login);
+                }
             }
             return Serializador.SerializarAJson(resultadoPedido);
         }
@@ -802,6 +808,10 @@ namespace DKintranet.Controllers
                             }
                         }
                     }
+                }
+                if (resultadoPedido != null)
+                {
+                    resultadoPedido.CreditoInicial = DKintranet.Codigo.capaDatos.capaCore_decision.ObtenerCreditoDisponible(cliente.cli_login);
                 }
             }
 

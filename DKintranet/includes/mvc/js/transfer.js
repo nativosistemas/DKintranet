@@ -312,7 +312,8 @@ function OnCallBackTomarTransferPedidoCarrito(args) {
             //location.href = '../mvc/Buscador';
         } else {
             isHacerBorradoCarritos = true;
-            //document.getElementById('divConfirmarPedidoTransferContenedorGeneral').style.display = 'none';
+            creditoInicial = args[0].CreditoInicial;
+            funActulizarHtmlCredito();
             CargarRespuestaDePedidoTransfer(args);
 
         }
