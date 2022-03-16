@@ -527,7 +527,7 @@ function onclickBtnConfirmarResultadoPedido() {
     $('#modalModulo').modal('hide');
 }
 function HacerLimpiezaDeCarritosDspDeConfirmarPedido() {
-    funActulizarHtmlCredito();
+
     if (isHacerBorradoCarritos) {
         if (indexSucursalTransferSeleccionado == null) {
             var indexCarrito = $("#hiddenIndexCarrito").val();
@@ -549,6 +549,7 @@ function HacerLimpiezaDeCarritosDspDeConfirmarPedido() {
         }
         isHacerBorradoCarritos = false;
     }
+    funActulizarHtmlCredito();
 }
 function onclickVaciarCarrito_ButtonOK(pIndexCarrito) {
     $('#hiddenIndexCarrito').val(pIndexCarrito);
