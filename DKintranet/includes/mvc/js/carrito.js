@@ -360,7 +360,7 @@ function OnCallBackTomarPedidoCarrito(args) {
             isHacerBorradoCarritos = true;
             CargarRespuestaDePedido(args);
             creditoInicial = args.CreditoInicial;
-            funActulizarHtmlCredito();
+ 
         }
     }
 }
@@ -527,6 +527,7 @@ function onclickBtnConfirmarResultadoPedido() {
     $('#modalModulo').modal('hide');
 }
 function HacerLimpiezaDeCarritosDspDeConfirmarPedido() {
+    funActulizarHtmlCredito();
     if (isHacerBorradoCarritos) {
         if (indexSucursalTransferSeleccionado == null) {
             var indexCarrito = $("#hiddenIndexCarrito").val();
