@@ -298,6 +298,12 @@ $(document).ready(function () {
         $('#cmbCliente_intranet').select2('open');
     } else {
         document.getElementById('txtBuscador').focus();
+
+        $('#tdCentralTelefonica').html(cliente.cli_NumeroCentralTelefonica);
+        $('#tdTelefono').html(cliente.cli_telefono);
+        $('#tdLocalidad').html(cliente.cli_localidad);
+        $('#tdReparto').html(cliente.cli_codrep);
+
     }
 });
 
@@ -450,11 +456,16 @@ function CargarDatosProductos(pIndice) {
     } else {
         $('#tdFamilia').html('');
     }
-    //
     if (listaProductosBuscados[pIndice].pro_PackDeVenta != null) {
         $('#tdPackDeVenta').html(listaProductosBuscados[pIndice].pro_PackDeVenta);
     } else {
         $('#tdPackDeVenta').html('');
+    }
+    //
+    if (listaProductosBuscados[pIndice].pro_UbicacionPrincipal != null) {
+        $('#tdUbicacionPrincipal').html('&nbsp;' + listaProductosBuscados[pIndice].pro_UbicacionPrincipal);
+    } else {
+        $('#tdUbicacionPrincipal').html('');
     }
     //
     // Inicio Imagen Producto
@@ -2860,21 +2871,26 @@ function detalleProducto_celular(pIndex) {
     }
     strHtml += '<div class="col-xs-4 no-padding">Trazable:</div>';
     strHtml += '<div class="col-xs-8 no-padding">' + Trazable + '</div>';
-    //
     var familia = '&nbsp;';
     if (listaProductosBuscados[pIndex].pro_Familia != null) {
         familia = listaProductosBuscados[pIndex].pro_Familia;
     }
     strHtml += '<div class="col-xs-4 no-padding">Familia:</div>';
     strHtml += '<div class="col-xs-8 no-padding">' + familia + '</div>';
-    //
-    //
+
     var packDeVenta = '&nbsp;';
     if (listaProductosBuscados[pIndex].pro_PackDeVenta != null) {
         packDeVenta = listaProductosBuscados[pIndex].pro_PackDeVenta;
     }
     strHtml += '<div class="col-xs-4 no-padding">Pack de venta:</div>';
     strHtml += '<div class="col-xs-8 no-padding">' + packDeVenta + '</div>';
+    //
+    var ubicacionPrincipal = '&nbsp;';
+    if (listaProductosBuscados[pIndex].pro_UbicacionPrincipal != null) {
+        ubicacionPrincipal = listaProductosBuscados[pIndex].pro_UbicacionPrincipal;
+    }
+    strHtml += '<div class="col-xs-4 no-padding"> Ubicación producto:</div>';
+    strHtml += '<div class="col-xs-8 no-padding">' + ubicacionPrincipal + '</div>';
     //
     // Detalle Transfer
     if (listaProductosBuscados[pIndex].tfr_descripcion != null) {
