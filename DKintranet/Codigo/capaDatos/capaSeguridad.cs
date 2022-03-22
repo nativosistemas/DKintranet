@@ -656,7 +656,7 @@ namespace DKintranet.Codigo.capaDatos
         }
         public static string obtenerStringEstado(int pIdEstado)
         {
-            return DKbase.web.capaDatos.capaSeguridad.obtenerStringEstado(pIdEstado);
+            return DKbase.web.capaDatos.capaSeguridad_base.obtenerStringEstado(pIdEstado);
         }
         public static int CambiarContraseñaPersonal(int pUsu_codigo, string pPasswordViejo, string pPasswordNuevo)
         {

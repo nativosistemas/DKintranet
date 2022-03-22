@@ -7,19 +7,6 @@ using System.Web;
 
 namespace DKintranet.Codigo.capaDatos
 {
-    public class cClientes : DKbase.web.capaDatos.cClientes
-    {
-        public cClientes()
-        {
-            cli_tipo = string.Empty;
-        }
-        public cClientes(int pCli_codigo, string pCli_nombre)
-        {
-            cli_codigo = pCli_codigo;
-            cli_nombre = pCli_nombre;
-            cli_tipo = string.Empty;
-        }
-    }
     public class cSucursal
     {
         public cSucursal()

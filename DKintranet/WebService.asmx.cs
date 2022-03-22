@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Services;
 using System.Web.Services.Protocols;
+using DKbase.web.capaDatos;
 using DKintranet.Codigo;
 using DKintranet.Codigo.capaDatos;
 using DKintranet.Codigo.clases;
@@ -63,7 +64,7 @@ namespace DKintranet
             string accion = arc_codRecurso == 0 ? Constantes.cSQL_INSERT : Constantes.cSQL_UPDATE;
             int codigoAccion = arc_codRecurso == 0 ? Constantes.cACCION_ALTA : Constantes.cACCION_MODIFICACION;
             int? codigoEstado = arc_codRecurso == 0 ? Constantes.cESTADO_ACTIVO : (int?)null;
-            DataSet dsResultado = capaRecurso.GestiónArchivo(arc_codRecurso, arc_codRelacion, arc_galeria, arc_tipo, arc_mime, arc_nombre, arc_titulo, arc_descripcion, arc_hash, arc_codUsuarioUltMov, codigoEstado, codigoAccion, null, accion);
+            DataSet dsResultado = Codigo.capaDatos.capaRecurso.GestiónArchivo(arc_codRecurso, arc_codRelacion, arc_galeria, arc_tipo, arc_mime, arc_nombre, arc_titulo, arc_descripcion, arc_hash, arc_codUsuarioUltMov, codigoEstado, codigoAccion, null, accion);
             int resultado = -1;
             if (arc_codRecurso == 0)
             {
@@ -257,7 +258,7 @@ namespace DKintranet
             if (pItem["arc_estado"] != DBNull.Value)
             {
                 obj.arc_estado = Convert.ToInt32(pItem["arc_estado"]);
-                obj.arc_estadoToString = capaSeguridad.obtenerStringEstado(obj.arc_estado);
+                obj.arc_estadoToString = Codigo.capaDatos.capaSeguridad.obtenerStringEstado(obj.arc_estado);
             }
             if (pItem["arc_accion"] != DBNull.Value)
             {
@@ -270,7 +271,7 @@ namespace DKintranet
             //if (VerificarPermisos(CredencialAutenticacion))
             //{
             List<cArchivo> lista = new List<cArchivo>();
-            DataSet dsResultado = capaRecurso.GestiónArchivo(null, pArc_codRelacion, pArc_galeria, null, null, null, null, null, null, null, null, null, pFiltro, Constantes.cSQL_SELECT);
+            DataSet dsResultado = Codigo.capaDatos.capaRecurso.GestiónArchivo(null, pArc_codRelacion, pArc_galeria, null, null, null, null, null, null, null, null, null, pFiltro, Constantes.cSQL_SELECT);
             if (dsResultado != null)
             {
                 foreach (DataRow item in dsResultado.Tables["Archivo"].Rows)
@@ -291,7 +292,7 @@ namespace DKintranet
             if (VerificarPermisos(CredencialAutenticacion))
             {
                 string accion = isSubir ? Constantes.cSQL_SUBIR : Constantes.cSQL_BAJAR;
-                DataSet dsResultado = capaRecurso.GestiónArchivo(pArc_codRecurso, pArc_codRelacion, pArc_galeria, null, null, null, null, null, null, pIdUsuarioSession, null, Constantes.cACCION_CAMBIOORDEN, null, accion);
+                DataSet dsResultado = Codigo.capaDatos.capaRecurso.GestiónArchivo(pArc_codRecurso, pArc_codRelacion, pArc_galeria, null, null, null, null, null, null, pIdUsuarioSession, null, Constantes.cACCION_CAMBIOORDEN, null, accion);
             }
         }
         public static void CambiarEstadoArchivoPorId(int pArc_codRecurso, int pIdUsuarioSession)
@@ -302,7 +303,7 @@ namespace DKintranet
                 if (obj != null)
                 {
                     int estado = obj.arc_estado == 2 ? 3 : 2;
-                    DataSet dsResultado = capaRecurso.GestiónArchivo(pArc_codRecurso, null, null, null, null, null, null, null, null, pIdUsuarioSession, estado, Constantes.cACCION_CAMBIOESTADO, null, Constantes.cSQL_ESTADO);
+                    DataSet dsResultado = Codigo.capaDatos.capaRecurso.GestiónArchivo(pArc_codRecurso, null, null, null, null, null, null, null, null, pIdUsuarioSession, estado, Constantes.cACCION_CAMBIOESTADO, null, Constantes.cSQL_ESTADO);
                 }
             }
         }
@@ -310,7 +311,7 @@ namespace DKintranet
         {
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                DataSet dsResultado = capaRecurso.GestiónArchivo(pArc_codRecurso, null, null, null, null, null, null, null, null, null, null, null, null, Constantes.cSQL_DELETE);
+                DataSet dsResultado = Codigo.capaDatos.capaRecurso.GestiónArchivo(pArc_codRecurso, null, null, null, null, null, null, null, null, null, null, null, null, Constantes.cSQL_DELETE);
             }
         }
         public static cArchivo RecuperarArchivoPorId(int pArc_codRecurso)
@@ -318,7 +319,7 @@ namespace DKintranet
             if (VerificarPermisos(CredencialAutenticacion))
             {
                 cArchivo obj = null;
-                DataSet dsResultado = capaRecurso.GestiónArchivo(pArc_codRecurso, null, null, null, null, null, null, null, null, null, null, null, null, Constantes.cSQL_SELECT);
+                DataSet dsResultado = Codigo.capaDatos.capaRecurso.GestiónArchivo(pArc_codRecurso, null, null, null, null, null, null, null, null, null, null, null, null, Constantes.cSQL_SELECT);
                 if (dsResultado != null)
                 {
                     foreach (DataRow item in dsResultado.Tables["Archivo"].Rows)
@@ -412,7 +413,7 @@ namespace DKintranet
             if (pItem["not_estado"] != DBNull.Value)
             {
                 obj.not_estado = Convert.ToInt32(pItem["not_estado"]);
-                obj.not_estadoToString = capaSeguridad.obtenerStringEstado(obj.not_estado);
+                obj.not_estadoToString = Codigo.capaDatos.capaSeguridad.obtenerStringEstado(obj.not_estado);
             }
             if (pItem["not_codUsuarioUltMov"] != DBNull.Value)
             {
@@ -655,7 +656,7 @@ namespace DKintranet
             if (pItem["lnk_estado"] != DBNull.Value)
             {
                 obj.lnk_estado = Convert.ToInt32(pItem["lnk_estado"]);
-                obj.lnk_estadoToString = capaSeguridad.obtenerStringEstado(obj.lnk_estado);
+                obj.lnk_estadoToString = Codigo.capaDatos.capaSeguridad.obtenerStringEstado(obj.lnk_estado);
             }
             if (pItem["lnk_codUsuarioUltMov"] != DBNull.Value)
             {
@@ -871,7 +872,7 @@ namespace DKintranet
             //if (VerificarPermisos(CredencialAutenticacion))
             //{
             List<cClientes> lista = new List<cClientes>();
-            DataSet dsResultado = capaClientes.MostrarProvincia(pFiltro);
+            DataSet dsResultado = Codigo.capaDatos.capaClientes.MostrarProvincia(pFiltro);
             if (dsResultado != null)
             {
                 foreach (DataRow item in dsResultado.Tables["Clientes"].Rows)
@@ -902,7 +903,7 @@ namespace DKintranet
             if (VerificarPermisos(CredencialAutenticacion))
             {
                 cClientes obj = null;
-                DataTable dtResultado = capaClientes.RecuperarClienteAdministradorPorIdUsuarios(pIdUsuario);
+                DataTable dtResultado = Codigo.capaDatos.capaClientes.RecuperarClienteAdministradorPorIdUsuarios(pIdUsuario);
                 if (dtResultado != null)
                 {
                     foreach (DataRow item in dtResultado.Rows)
@@ -922,7 +923,7 @@ namespace DKintranet
             //if (VerificarPermisos(CredencialAutenticacion))
             //{
             List<cClientes> lista = new List<cClientes>();
-            DataSet dsResultado = capaClientes.MostrarClientes(pIdCliente, tipo, pFiltro);
+            DataSet dsResultado = Codigo.capaDatos.capaClientes.MostrarClientes(pIdCliente, tipo, pFiltro);
             if (dsResultado != null)
             {
                 foreach (DataRow item in dsResultado.Tables["Clientes"].Rows)
@@ -943,7 +944,7 @@ namespace DKintranet
             if (VerificarPermisos(CredencialAutenticacion))
             {
                 List<cUsuario> lista = new List<cUsuario>();
-                DataSet dsResultado = capaClientes.RecuperarUsuariosDeCliente(usu_codRol, usu_codCliente, filtro);
+                DataSet dsResultado = Codigo.capaDatos.capaClientes.RecuperarUsuariosDeCliente(usu_codRol, usu_codCliente, filtro);
                 if (dsResultado != null)
                 {
                     foreach (DataRow item in dsResultado.Tables["UsuariosCliente"].Rows)
@@ -1055,7 +1056,7 @@ namespace DKintranet
             cProductos resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                DataTable tablaProductos = capaProductos.RecuperarProductoPorNombre(pNombreProducto);
+                DataTable tablaProductos = Codigo.capaDatos.capaProductos.RecuperarProductoPorNombre(pNombreProducto);
                 if (tablaProductos != null)
                 {
                     if (tablaProductos.Rows.Count > 0)
@@ -1073,7 +1074,7 @@ namespace DKintranet
             if (VerificarPermisos(CredencialAutenticacion))
             {
                 resultado = new List<cProductos>();
-                DataTable tablaProductos = capaProductos.RecuperarTodosProductos();
+                DataTable tablaProductos = Codigo.capaDatos.capaProductos.RecuperarTodosProductos();
                 if (tablaProductos != null)
                 {
                     for (int i = 0; i < tablaProductos.Rows.Count; i++)
@@ -1089,7 +1090,7 @@ namespace DKintranet
             cProductos resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                DataTable tablaProductos = capaProductos.RecuperadorProductoPorCodigo(pCodigoProducto);
+                DataTable tablaProductos = Codigo.capaDatos.capaProductos.RecuperadorProductoPorCodigo(pCodigoProducto);
                 if (tablaProductos != null)
                 {
                     if (tablaProductos.Rows.Count > 0)
@@ -1159,7 +1160,7 @@ namespace DKintranet
             List<cClientes> resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                DataTable tablaClientes = capaClientes.RecuperarTodosClientes();
+                DataTable tablaClientes = Codigo.capaDatos.capaClientes.RecuperarTodosClientes();
                 if (tablaClientes != null)
                 {
                     resultado = new List<cClientes>();
@@ -1176,7 +1177,7 @@ namespace DKintranet
             List<cClientes> resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                DataTable tablaClientes = capaClientes.RecuperarTodosClientesBySucursal(pSucursal);
+                DataTable tablaClientes = Codigo.capaDatos.capaClientes.RecuperarTodosClientesBySucursal(pSucursal);
                 if (tablaClientes != null)
                 {
                     resultado = new List<cClientes>();
@@ -1193,7 +1194,7 @@ namespace DKintranet
             List<cClientes> resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                DataTable tablaClientes = capaClientes.RecuperarTodosClientesByGrupoCliente(pGC);
+                DataTable tablaClientes = Codigo.capaDatos.capaClientes.RecuperarTodosClientesByGrupoCliente(pGC);
                 if (tablaClientes != null)
                 {
                     resultado = new List<cClientes>();
@@ -1210,7 +1211,7 @@ namespace DKintranet
             List<cClientes> resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                DataTable tablaClientes = DKbase.web.capaDatos.capaClientes.spRecuperarTodosClientesByPromotor(pPromotor);
+                DataTable tablaClientes = DKbase.web.capaDatos.capaClientes_base.spRecuperarTodosClientesByPromotor(pPromotor);
                 if (tablaClientes != null)
                 {
                     resultado = new List<cClientes>();
@@ -1227,7 +1228,7 @@ namespace DKintranet
             List<string> resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                DataTable tabla = capaClientes.RecuperarTodosCodigoReparto();
+                DataTable tabla = Codigo.capaDatos.capaClientes.RecuperarTodosCodigoReparto();
                 if (tabla != null)
                 {
                     resultado = new List<string>();
@@ -1247,7 +1248,7 @@ namespace DKintranet
             cClientes resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                DataTable tablaClientes = capaClientes.RecuperarClientePorId(pIdCliente);
+                DataTable tablaClientes = Codigo.capaDatos.capaClientes.RecuperarClientePorId(pIdCliente);
                 if (tablaClientes != null)
                 {
                     foreach (DataRow item in tablaClientes.Rows)
@@ -1265,9 +1266,9 @@ namespace DKintranet
             {
                 DataSet dsResultado = null;
                 if (pIdOferta == null)
-                    dsResultado = capaProductos.RecuperarTodosProductosBuscadorV3(pTxtBuscador, pListaColumna, pSucursal, pIdCliente, pCli_codprov);
+                    dsResultado = Codigo.capaDatos.capaProductos.RecuperarTodosProductosBuscadorV3(pTxtBuscador, pListaColumna, pSucursal, pIdCliente, pCli_codprov);
                 else
-                    dsResultado = capaProductos.RecuperarTodosProductosBuscadorOferta(pIdOferta.Value, pSucursal, pIdCliente, pCli_codprov);
+                    dsResultado = Codigo.capaDatos.capaProductos.RecuperarTodosProductosBuscadorOferta(pIdOferta.Value, pSucursal, pIdCliente, pCli_codprov);
                 if (dsResultado != null)
                 {
                     DataTable tablaProductos = dsResultado.Tables[2];
@@ -1301,11 +1302,11 @@ namespace DKintranet
                 DataSet dsResultado = null;
                 if (pIsOferta)
                 {
-                    dsResultado = capaProductos.RecuperarTodosProductosBuscadorEnOferta(pSucursal, pIdCliente, pCli_codprov);
+                    dsResultado = Codigo.capaDatos.capaProductos.RecuperarTodosProductosBuscadorEnOferta(pSucursal, pIdCliente, pCli_codprov);
                 }
                 else if (pIsTransfer)
                 {
-                    dsResultado = capaProductos.RecuperarTodosProductosBuscadorEnTransfer(pSucursal, pIdCliente, pCli_codprov);
+                    dsResultado = Codigo.capaDatos.capaProductos.RecuperarTodosProductosBuscadorEnTransfer(pSucursal, pIdCliente, pCli_codprov);
                 }
                 if (dsResultado != null)
                 {
@@ -1339,21 +1340,21 @@ namespace DKintranet
                 DataSet dsResultado = null;
                 if (pIsOferta)
                 {
-                    dsResultado = capaProductos.RecuperarTodosProductosBuscadorEnOferta(pSucursal, pIdCliente, pCli_codprov);
+                    dsResultado = Codigo.capaDatos.capaProductos.RecuperarTodosProductosBuscadorEnOferta(pSucursal, pIdCliente, pCli_codprov);
                 }
                 else if (pIsTransfer)
                 {
-                    dsResultado = capaProductos.RecuperarTodosProductosBuscadorEnTransfer(pSucursal, pIdCliente, pCli_codprov);
+                    dsResultado = Codigo.capaDatos.capaProductos.RecuperarTodosProductosBuscadorEnTransfer(pSucursal, pIdCliente, pCli_codprov);
                 }
                 else
                 {
                     if (pListaColumna == null)
                     {
-                        dsResultado = capaProductos.RecuperarTodosProductosBuscador(pTxtBuscador, pSucursal, pIdCliente, pCli_codprov);
+                        dsResultado = Codigo.capaDatos.capaProductos.RecuperarTodosProductosBuscador(pTxtBuscador, pSucursal, pIdCliente, pCli_codprov);
                     }
                     else
                     {
-                        dsResultado = capaProductos.RecuperarTodosProductosBuscadorConVariasColumnas(pTxtBuscador, pListaColumna, pSucursal, pIdCliente, pCli_codprov);
+                        dsResultado = Codigo.capaDatos.capaProductos.RecuperarTodosProductosBuscadorConVariasColumnas(pTxtBuscador, pListaColumna, pSucursal, pIdCliente, pCli_codprov);
                     }
                 }
                 if (dsResultado != null)
@@ -1484,7 +1485,7 @@ namespace DKintranet
             {
                 // Recuperar sucursales dependientes
                 List<cSucursal> listaSucursalDependiente = RecuperarTodasSucursalesDependientes().Where(x => x.sde_sucursal == pSucursal).ToList();
-                DataSet dsResultado = capaProductos.RecuperarTodosProductosBuscadorOptimizado(pTxtBuscador);
+                DataSet dsResultado = Codigo.capaDatos.capaProductos.RecuperarTodosProductosBuscadorOptimizado(pTxtBuscador);
                 if (dsResultado != null)
                 {
                     DataTable tablaProductos = dsResultado.Tables[0];
@@ -1636,7 +1637,7 @@ namespace DKintranet
             int resultado = -1;
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                resultado = capaSeguridad.CambiarContraseñaPersonal(pIdUsuario, pContraseñaVieja, pContraseñaNueva);
+                resultado = Codigo.capaDatos.capaSeguridad.CambiarContraseñaPersonal(pIdUsuario, pContraseñaVieja, pContraseñaNueva);
             }
             return resultado;
         }
@@ -2299,7 +2300,7 @@ namespace DKintranet
             if (VerificarPermisos(CredencialAutenticacion))
             {
                 string accion = sde_codigo == 0 ? Constantes.cSQL_INSERT : Constantes.cSQL_UPDATE;
-                DataSet dsResultado = capaClientes.GestiónSucursal(sde_codigo, sde_sucursal, sde_sucursalDependiente, accion);
+                DataSet dsResultado = Codigo.capaDatos.capaClientes.GestiónSucursal(sde_codigo, sde_sucursal, sde_sucursalDependiente, accion);
                 if (sde_codigo == 0)
                 {
                     if (dsResultado != null)
@@ -2322,7 +2323,7 @@ namespace DKintranet
             List<cSucursal> resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                DataSet dsResultado = capaClientes.GestiónSucursal(null, null, null, Constantes.cSQL_SELECT);
+                DataSet dsResultado = Codigo.capaDatos.capaClientes.GestiónSucursal(null, null, null, Constantes.cSQL_SELECT);
 
                 if (dsResultado != null)
                 {
@@ -2357,7 +2358,7 @@ namespace DKintranet
         {
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                return capaClientes.AgregarMontoMinimo(suc_codigo, suc_montoMinimo);
+                return Codigo.capaDatos.capaClientes.AgregarMontoMinimo(suc_codigo, suc_montoMinimo);
             }
             else
             {
@@ -2370,7 +2371,7 @@ namespace DKintranet
             if (VerificarPermisos(CredencialAutenticacion))
             {
                 List<cCadeteriaRestricciones> listaCadeteriaRestricciones = RecuperarTodosCadeteriaRestricciones();
-                DataTable tabla = capaClientes.RecuperarTodasSucursales();
+                DataTable tabla = Codigo.capaDatos.capaClientes.RecuperarTodasSucursales();
 
                 if (tabla != null)
                 {
@@ -2401,7 +2402,7 @@ namespace DKintranet
             List<cSucursal> resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                DataTable tabla = capaClientes.RecuperarTodasSucursales();
+                DataTable tabla = Codigo.capaDatos.capaClientes.RecuperarTodasSucursales();
 
                 if (tabla != null)
                 {
@@ -2466,7 +2467,7 @@ namespace DKintranet
         {
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                DataSet dsResultado = capaClientes.GestiónSucursal(sde_codigo, null, null, Constantes.cSQL_DELETE);
+                DataSet dsResultado = Codigo.capaDatos.capaClientes.GestiónSucursal(sde_codigo, null, null, Constantes.cSQL_DELETE);
             }
         }
         public static cTransfer ConvertToTransfer(DataRow pItem)
@@ -2546,132 +2547,7 @@ namespace DKintranet
         }
         public static cTransferDetalle ConvertToTransferDetalle(DataRow pItem)
         {
-            cTransferDetalle obj = new cTransferDetalle();
-            if (pItem["tde_codpro"] != DBNull.Value)
-            {
-                obj.tde_codpro = pItem["tde_codpro"].ToString();
-            }
-            if (pItem["tde_codtfr"] != DBNull.Value)
-            {
-                obj.tde_codtfr = Convert.ToInt32(pItem["tde_codtfr"]);
-            }
-            if (pItem["tde_descripcion"] != DBNull.Value)
-            {
-                obj.tde_descripcion = pItem["tde_descripcion"].ToString();
-            }
-            if (pItem["tde_fijuni"] != DBNull.Value)
-            {
-                obj.tde_fijuni = Convert.ToInt32(pItem["tde_fijuni"]);
-            }
-            if (pItem["tde_maxuni"] != DBNull.Value)
-            {
-                obj.tde_maxuni = Convert.ToInt32(pItem["tde_maxuni"]);
-            }
-            if (pItem["tde_minuni"] != DBNull.Value)
-            {
-                obj.tde_minuni = Convert.ToInt32(pItem["tde_minuni"]);
-            }
-            if (pItem["tde_muluni"] != DBNull.Value)
-            {
-                obj.tde_muluni = Convert.ToInt32(pItem["tde_muluni"]);
-            }
-            if (pItem["tde_predescuento"] != DBNull.Value)
-            {
-                obj.tde_predescuento = Convert.ToDecimal(pItem["tde_predescuento"]);
-            }
-            if (pItem["tde_prepublico"] != DBNull.Value)
-            {
-                obj.tde_prepublico = Convert.ToDecimal(pItem["tde_prepublico"]);
-            }
-            if (pItem["tde_proobligatorio"] != DBNull.Value)
-            {
-                obj.tde_proobligatorio = Convert.ToBoolean(pItem["tde_proobligatorio"]);
-            }
-            if (pItem.Table.Columns.Contains("tde_PorcDtoSobrePVP") && pItem["tde_PorcDtoSobrePVP"] != DBNull.Value)
-            {
-                obj.tde_PorcDtoSobrePVP = Convert.ToDecimal(pItem["tde_PorcDtoSobrePVP"]);
-            }
-            if (pItem.Table.Columns.Contains("pro_neto"))
-            {
-                if (pItem["pro_neto"] != DBNull.Value)
-                {
-                    obj.pro_neto = Convert.ToBoolean(pItem["pro_neto"]);
-                }
-            }
-            if (pItem.Table.Columns.Contains("pro_codtpopro"))
-            {
-                if (pItem["pro_codtpopro"] != DBNull.Value)
-                {
-                    obj.pro_codtpopro = Convert.ToString(pItem["pro_codtpopro"]);
-                }
-            }
-            if (pItem.Table.Columns.Contains("pro_codigo"))
-            {
-                if (pItem["pro_codigo"] != DBNull.Value)
-                {
-                    obj.pro_codigo = Convert.ToString(pItem["pro_codigo"]);
-                }
-            }
-            if (pItem.Table.Columns.Contains("pro_descuentoweb"))
-            {
-                if (pItem["pro_descuentoweb"] != DBNull.Value)
-                {
-                    obj.pro_descuentoweb = Convert.ToDecimal(pItem["pro_descuentoweb"]);
-                }
-            }
-            if (pItem.Table.Columns.Contains("pro_isTrazable"))
-            {
-                if (pItem["pro_isTrazable"] != DBNull.Value)
-                {
-                    obj.pro_isTrazable = Convert.ToBoolean(pItem["pro_isTrazable"]);
-                }
-            }
-            if (pItem.Table.Columns.Contains("tde_unidadesbonificadas"))
-            {
-                if (pItem["tde_unidadesbonificadas"] != DBNull.Value)
-                {
-                    obj.tde_unidadesbonificadas = Convert.ToInt32(pItem["tde_unidadesbonificadas"]);
-                }
-            }
-            if (pItem.Table.Columns.Contains("tde_unidadesbonificadasdescripcion"))
-            {
-                if (pItem["tde_unidadesbonificadasdescripcion"] != DBNull.Value)
-                {
-                    obj.tde_unidadesbonificadasdescripcion = Convert.ToString(pItem["tde_unidadesbonificadasdescripcion"]);
-                }
-            }
-            if (pItem.Table.Columns.Contains("tcl_IdTransfer"))
-            {
-                if (pItem["tcl_IdTransfer"] != DBNull.Value)
-                {
-                    obj.isTablaTransfersClientes = true;
-                }
-            }
-            if (pItem.Table.Columns.Contains("tde_DescripcionDeProducto"))
-            {
-                if (pItem["tde_DescripcionDeProducto"] != DBNull.Value)
-                {
-                    obj.tde_DescripcionDeProducto = Convert.ToString(pItem["tde_DescripcionDeProducto"]);
-                }
-            }
-            if (pItem.Table.Columns.Contains("pro_codtpovta"))
-            {
-                if (pItem["pro_codtpovta"] != DBNull.Value)
-                {
-                    obj.pro_codtpovta = Convert.ToString(pItem["pro_codtpovta"]);
-                }
-            }
-            if (pItem.Table.Columns.Contains("tde_PrecioConDescuentoDirecto") && pItem["tde_PrecioConDescuentoDirecto"] != DBNull.Value)
-                obj.tde_PrecioConDescuentoDirecto = Convert.ToDecimal(pItem["tde_PrecioConDescuentoDirecto"]);
-            if (pItem.Table.Columns.Contains("tde_PorcARestarDelDtoDeCliente") && pItem["tde_PorcARestarDelDtoDeCliente"] != DBNull.Value)
-                obj.tde_PorcARestarDelDtoDeCliente = Convert.ToDecimal(pItem["tde_PorcARestarDelDtoDeCliente"]);
-            if (pItem.Table.Columns.Contains("pro_PrecioBase") && pItem["pro_PrecioBase"] != DBNull.Value)
-                obj.pro_PrecioBase = Convert.ToDecimal(pItem["pro_PrecioBase"]);
-            if (pItem.Table.Columns.Contains("pro_PorcARestarDelDtoDeCliente") && pItem["pro_PorcARestarDelDtoDeCliente"] != DBNull.Value)
-                obj.pro_PorcARestarDelDtoDeCliente = Convert.ToDecimal(pItem["pro_PorcARestarDelDtoDeCliente"]);
-            if (pItem.Table.Columns.Contains("pro_AltoCosto") && pItem["pro_AltoCosto"] != DBNull.Value)
-                obj.pro_AltoCosto = Convert.ToBoolean(pItem["pro_AltoCosto"]);
-            return obj;
+            return DKbase.web.acceso.ConvertToTransferDetalle(pItem);
         }
         public static List<cTransfer> RecuperarTodosTransferMasDetallePorIdProducto(string pNombreProducto, cClientes pClientes)
         {
@@ -3049,7 +2925,7 @@ namespace DKintranet
             decimal? resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                resultado = capaClientes.RecuperarLimiteSaldo();
+                resultado = Codigo.capaDatos.capaClientes.RecuperarLimiteSaldo();
             }
             return resultado;
         }
@@ -3129,7 +3005,7 @@ namespace DKintranet
             if (VerificarPermisos(CredencialAutenticacion))
             {
                 string accion = sdh_SucursalDependienteHorario == 0 ? Constantes.cSQL_INSERT : Constantes.cSQL_UPDATE;
-                DataSet dsResultado = capaClientes.GestiónSucursalDependienteHorarios(sdh_SucursalDependienteHorario, sdh_sucursal, sdh_sucursalDependiente, sdh_codReparto, sdh_diaSemana, sdh_horario, accion);
+                DataSet dsResultado = Codigo.capaDatos.capaClientes.GestiónSucursalDependienteHorarios(sdh_SucursalDependienteHorario, sdh_sucursal, sdh_sucursalDependiente, sdh_codReparto, sdh_diaSemana, sdh_horario, accion);
 
                 if (sdh_SucursalDependienteHorario == 0)
                 {
@@ -3153,7 +3029,7 @@ namespace DKintranet
             List<cHorariosSucursal> resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                DataSet dsResultado = capaClientes.GestiónSucursalDependienteHorarios(null, null, null, null, null, null, Constantes.cSQL_SELECT);
+                DataSet dsResultado = Codigo.capaDatos.capaClientes.GestiónSucursalDependienteHorarios(null, null, null, null, null, null, Constantes.cSQL_SELECT);
 
                 if (dsResultado != null)
                 {
@@ -3715,7 +3591,7 @@ namespace DKintranet
             bool resultado = true;
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                DataTable tabla = capaSeguridad.RecuperarTablaBandera(pCodigoBandera);
+                DataTable tabla = Codigo.capaDatos.capaSeguridad.RecuperarTablaBandera(pCodigoBandera);
                 if (tabla != null)
                 {
                     if (tabla.Rows.Count > 0)
@@ -3805,7 +3681,7 @@ namespace DKintranet
             List<cUsuarioSinPermisosIntranet> resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                DataTable tabla = capaSeguridad.RecuperarSinPermisoUsuarioIntranetPorIdUsuario(pIdUsuario);
+                DataTable tabla = Codigo.capaDatos.capaSeguridad.RecuperarSinPermisoUsuarioIntranetPorIdUsuario(pIdUsuario);
 
                 if (tabla != null)
                 {
@@ -3837,7 +3713,7 @@ namespace DKintranet
             if (VerificarPermisos(CredencialAutenticacion))
             {
                 DataTable pTablaDetalle = FuncionesPersonalizadas.ConvertNombresSeccionToDataTable(pListaNombreSeccion);
-                capaSeguridad.InsertarSinPermisoUsuarioIntranetPorIdUsuario(pIdUsuario, pTablaDetalle);
+                Codigo.capaDatos.capaSeguridad.InsertarSinPermisoUsuarioIntranetPorIdUsuario(pIdUsuario, pTablaDetalle);
                 resultado = true;
             }
             return resultado;
@@ -4496,7 +4372,7 @@ namespace DKintranet
             int resultado = -1;
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                resultado = capaProductos.InsertarActualizarProductoParametrizadoCantidad(pCpc_cantidadParametrizada);
+                resultado = Codigo.capaDatos.capaProductos.InsertarActualizarProductoParametrizadoCantidad(pCpc_cantidadParametrizada);
             }
             return resultado;
         }
@@ -4506,7 +4382,7 @@ namespace DKintranet
             if (VerificarPermisos(CredencialAutenticacion))
             {
                 resultado = 0;
-                DataTable dtResultado = capaProductos.RecuperarProductoParametrizadoCantidad();
+                DataTable dtResultado = Codigo.capaDatos.capaProductos.RecuperarProductoParametrizadoCantidad();
                 if (dtResultado != null)
                 {
                     foreach (DataRow item in dtResultado.Rows)
@@ -4613,7 +4489,7 @@ namespace DKintranet
                         pTablaDetalle.Rows.Add(fila);
                     }
                 }
-                dsResultado = capaProductos.RecuperarProductosDesdeTabla(pTablaDetalle, pSucursalPerteneciente, pCli_codprov, pCli_codigo);
+                dsResultado = Codigo.capaDatos.capaProductos.RecuperarProductosDesdeTabla(pTablaDetalle, pSucursalPerteneciente, pCli_codprov, pCli_codigo);
                 if (dsResultado != null)
                 {
                     DataTable tablaProductos = dsResultado.Tables[0];
@@ -4735,7 +4611,7 @@ namespace DKintranet
             List<cProductos> resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                DataTable tabla = capaProductos.ObtenerProductosImagenesBusqueda(pTxtBuscador);
+                DataTable tabla = Codigo.capaDatos.capaProductos.ObtenerProductosImagenesBusqueda(pTxtBuscador);
                 if (tabla != null)
                 {
                     resultado = new List<cProductos>();
@@ -4754,7 +4630,7 @@ namespace DKintranet
             List<cProductos> resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                DataTable tabla = capaProductos.ObtenerProductosImagenes();
+                DataTable tabla = Codigo.capaDatos.capaProductos.ObtenerProductosImagenes();
                 if (tabla != null)
                 {
                     resultado = new List<cProductos>();
@@ -4772,14 +4648,14 @@ namespace DKintranet
         {
             bool? resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
-                resultado = capaProductos.ActualizarInsertarProductosImagen(pCodigoProducto, pNombreArchivo);
+                resultado = Codigo.capaDatos.capaProductos.ActualizarInsertarProductosImagen(pCodigoProducto, pNombreArchivo);
             return resultado;
         }
         public static bool? ElimimarProductoImagenPorId(string pCodigoProducto)
         {
             bool? resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
-                resultado = capaProductos.ElimimarProductoImagenPorId(pCodigoProducto);
+                resultado = Codigo.capaDatos.capaProductos.ElimimarProductoImagenPorId(pCodigoProducto);
             return resultado;
         }
         public static ServiceReferenceDLL.cObraSocialCliente ObtenerObraSocialCliente(string pNumeroObraSocialCliente, string pLoginWeb)
@@ -5594,7 +5470,7 @@ namespace DKintranet
         }
         public static List<cArchivo> RecuperarPopUpPorCliente(int pIdCliente, string pSucursal)
         {
-            List<DKintranet.Codigo.capaDatos.cArchivo> result = null;
+            List<DKbase.web.capaDatos.cArchivo> result = null;
             result = WebService.RecuperarTodosArchivos(1, "popup", string.Empty).Where(x => x.arc_estado == DKintranet.Codigo.clases.Constantes.cESTADO_ACTIVO).ToList();
             result = result.Where(x => string.IsNullOrWhiteSpace(x.arc_descripcion) || x.arc_descripcion.Contains("<" + pSucursal + ">")).ToList();
             foreach (var item in result)
@@ -5896,13 +5772,13 @@ namespace DKintranet
                     pri_ancho_ampliar = origImagen.Width;
                     pri_alto_ampliar = origImagen.Height;
                 }*/
-                capaProductos.ActualizarProductosImagenAnchoAlto(pri_codigo, pri_ancho_ampliar, pri_alto_ampliar);
+                Codigo.capaDatos.capaProductos.ActualizarProductosImagenAnchoAlto(pri_codigo, pri_ancho_ampliar, pri_alto_ampliar);
             }
 
         }
         public static void BorrarAnchoAltoImagen()
         {
-            capaProductos.BorrarAnchoAltoImagen();
+            Codigo.capaDatos.capaProductos.BorrarAnchoAltoImagen();
         }
     }
     public class Autenticacion : SoapHeader

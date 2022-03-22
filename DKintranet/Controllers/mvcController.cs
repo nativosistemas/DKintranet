@@ -1,4 +1,5 @@
-﻿using DKintranet.Codigo;
+﻿using DKbase.web.capaDatos;
+using DKintranet.Codigo;
 using DKintranet.Codigo.capaDatos;
 using DKintranet.Codigo.clases;
 using DKintranet.Codigo.clases.Generales;
@@ -372,7 +373,7 @@ namespace DKintranet.Controllers
             if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null && System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
                 Usuario usuario = ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]);
-                DKintranet.Codigo.capaDatos.cClientes cliente = (DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
+                DKbase.web.capaDatos.cClientes cliente = (DKbase.web.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
                 WebService.AgregarHistorialProductoCarritoTransfer(cliente.cli_codigo, pListaProductosMasCantidad, usuario.id);
                 objResult.isNotError = capaCAR_decision.AgregarProductosTransfersAlCarrito(pListaProductosMasCantidad, cliente.cli_codigo, usuario.id, pIdTransfers, pCodSucursal, Constantes.cTipo_CarritoTransfers);
                 objResult.oSucursalCarritoTransfer = capaCAR_decision.RecuperarCarritosTransferPorIdClienteIdSucursal(cliente, pCodSucursal, Constantes.cTipo_CarritoTransfers);
@@ -389,7 +390,7 @@ namespace DKintranet.Controllers
             if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null && System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
                 Usuario usuario = ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]);
-                DKintranet.Codigo.capaDatos.cClientes cliente = (DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
+                DKbase.web.capaDatos.cClientes cliente = (DKbase.web.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
                 WebService.AgregarHistorialProductoCarritoTransfer(cliente.cli_codigo, pListaProductosMasCantidad, usuario.id);
                 objResult.isNotError = capaCAR_decision.AgregarProductosTransfersAlCarrito(pListaProductosMasCantidad, cliente.cli_codigo, usuario.id, pIdTransfers, pCodSucursal, Constantes.cTipo_CarritoDiferidoTransfers);
                 objResult.oSucursalCarritoTransfer = capaCAR_decision.RecuperarCarritosTransferPorIdClienteIdSucursal(cliente, pCodSucursal, Constantes.cTipo_CarritoDiferidoTransfers);
@@ -404,7 +405,7 @@ namespace DKintranet.Controllers
             if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null && System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
                 Usuario usuario = ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]);
-                DKintranet.Codigo.capaDatos.cClientes cliente = (DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
+                DKbase.web.capaDatos.cClientes cliente = (DKbase.web.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
                 ResultCargaProducto result = result = new ResultCargaProducto();
                 result.isOk = capaCAR_decision.CargarCarritoDiferido(pIdSucursal, pNombreProducto, pCantidadProducto, cliente.cli_codigo, usuario.id);
                 return Serializador.SerializarAJson(result);
@@ -417,7 +418,7 @@ namespace DKintranet.Controllers
             if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null && System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
                 Usuario usuario = ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]);
-                DKintranet.Codigo.capaDatos.cClientes cliente = (DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
+                DKbase.web.capaDatos.cClientes cliente = (DKbase.web.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
                 ResultCargaProducto result = result = new ResultCargaProducto();
                 WebService.AgregarHistorialProductoCarrito(cliente.cli_codigo, pIdProducto, usuario.id);
                 result.isOk = capaCAR_decision.AgregarProductoAlCarrito(pCodSucursal, pIdProducto, pCantidadProducto, cliente.cli_codigo, usuario.id);
@@ -465,7 +466,7 @@ namespace DKintranet.Controllers
             string resultado = null;
             if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
-                DKintranet.Codigo.capaDatos.cClientes cliente = (DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
+                DKbase.web.capaDatos.cClientes cliente = (DKbase.web.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
                 resultado = FuncionesPersonalizadas.ObtenerHorarioCierre(cliente.cli_codsuc, pSucursalDependiente, cliente.cli_codrep);
             }
             return resultado;
@@ -483,7 +484,7 @@ namespace DKintranet.Controllers
             List<string> resultado = new List<string>();
             if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
-                DKintranet.Codigo.capaDatos.cClientes cliente = (DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
+                DKbase.web.capaDatos.cClientes cliente = (DKbase.web.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
                 string resultado1 = FuncionesPersonalizadas.ObtenerHorarioCierre(cliente.cli_codsuc, pSucursalDependiente, cliente.cli_codrep);
                 string resultado2 = FuncionesPersonalizadas.ObtenerHorarioCierreAnterior(cliente.cli_codsuc, pSucursalDependiente, cliente.cli_codrep, resultado1);
                 resultado.Add(resultado1);
@@ -505,7 +506,7 @@ namespace DKintranet.Controllers
             {
                 //System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null && 
                 //Usuario usuario = ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]);
-                DKintranet.Codigo.capaDatos.cClientes cliente = (DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
+                DKbase.web.capaDatos.cClientes cliente = (DKbase.web.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
                 List<cCarrito> listaCarrito = null;
                 if (pTipo == Constantes.cTipo_Carrito)
                 {
@@ -614,7 +615,7 @@ namespace DKintranet.Controllers
             List<cTransfer> listaTransfer = null;
             if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
-                DKintranet.Codigo.capaDatos.cClientes cliente = (DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
+                DKbase.web.capaDatos.cClientes cliente = (DKbase.web.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
                 listaTransfer = WebService.RecuperarTodosTransferMasDetallePorIdProducto(pNombreProducto, cliente).Where(x => x.tfr_facturaciondirecta == null ? true : !(bool)x.tfr_facturaciondirecta).ToList();
             }
             return Serializador.SerializarAJson(listaTransfer);
@@ -627,7 +628,7 @@ namespace DKintranet.Controllers
             int car_id_aux = 0;
             if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
-                DKintranet.Codigo.capaDatos.cClientes cliente = (DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
+                DKbase.web.capaDatos.cClientes cliente = (DKbase.web.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
                 List<DKbase.dll.cDllProductosAndCantidad> listaProductos = new List<DKbase.dll.cDllProductosAndCantidad>();
 
                 List<cCarritoTransfer> listaCarrito = capaCAR_decision.RecuperarCarritosTransferPorIdCliente(cliente, tipo, pIdSucursal);
@@ -751,7 +752,7 @@ namespace DKintranet.Controllers
             DKbase.dll.cDllPedido resultadoPedido = null;
             if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
-                DKintranet.Codigo.capaDatos.cClientes cliente = (DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
+                DKbase.web.capaDatos.cClientes cliente = (DKbase.web.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
                 List<DKbase.dll.cDllProductosAndCantidad> listaProductos = new List<DKbase.dll.cDllProductosAndCantidad>();
                 for (int i = 0; i < pListaNombreComercial.Count(); i++)
                 {
@@ -981,7 +982,7 @@ namespace DKintranet.Controllers
             cClientes o = null;
             if (Session["usuario_TomarPedido_listaClientes"] != null)
             {
-                List<DKintranet.Codigo.capaDatos.cClientes> lista_Clientes = (List<DKintranet.Codigo.capaDatos.cClientes>)Session["usuario_TomarPedido_listaClientes"];
+                List<DKbase.web.capaDatos.cClientes> lista_Clientes = (List<DKbase.web.capaDatos.cClientes>)Session["usuario_TomarPedido_listaClientes"];
                 o = lista_Clientes.FirstOrDefault(x => x.cli_codigo == IdCliente);
             }
             System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] = o;

@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using DKbase.web.capaDatos;
 using DKintranet.Codigo.capaDatos;
 using DKintranet.Codigo.clases;
 

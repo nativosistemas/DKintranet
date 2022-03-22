@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DKbase.web.capaDatos;
 
 namespace DKintranet.Controllers
 {
@@ -80,10 +81,10 @@ namespace DKintranet.Controllers
             if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
                 Parameters += "<" + "login" + ">";
-                Parameters += ((Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login;
+                Parameters += ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login;
                 Parameters += "</" + "login" + ">";
                 Parameters += "<" + "codigoCliente" + ">";
-                Parameters += ((Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo;
+                Parameters += ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo;
                 Parameters += "</" + "codigoCliente" + ">";
 
             }
@@ -199,7 +200,7 @@ namespace DKintranet.Controllers
             if ((System.Web.HttpContext.Current.Session["clientesDefault_CantListaMensaje"] == null ||
                 System.Web.HttpContext.Current.Session["clientesDefault_CantListaMensajeFechaHora"] == null)
                 && System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
-                Codigo.clases.FuncionesPersonalizadas.CargarMensajeActualizado(((Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo);
+                Codigo.clases.FuncionesPersonalizadas.CargarMensajeActualizado(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo);
             if (System.Web.HttpContext.Current.Session["clientesDefault_CantListaMensaje"] != null)
                 resultado = Convert.ToInt32(System.Web.HttpContext.Current.Session["clientesDefault_CantListaMensaje"]);
             return resultado;
@@ -385,7 +386,7 @@ namespace DKintranet.Controllers
         {
             if (Session["clientesDefault_Cliente"] == null)
                 return null;
-            List<DKintranet.Codigo.capaDatos.cUsuario> lista = DKintranet.Codigo.clases.AccesoGrilla.GetUsuariosDeCliente("usu_codigo", ((DKintranet.Codigo.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_codigo, null);
+            List<DKintranet.Codigo.capaDatos.cUsuario> lista = DKintranet.Codigo.clases.AccesoGrilla.GetUsuariosDeCliente("usu_codigo", ((DKbase.web.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_codigo, null);
             return Codigo.clases.Generales.Serializador.SerializarAJson(lista);
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
@@ -402,7 +403,7 @@ namespace DKintranet.Controllers
                 {
                     case 1:
                     case 5:
-                        dt = capaProductos.DescargaTodosProductos(((cClientes)Session["clientesDefault_Cliente"]).cli_codprov);
+                        dt = Codigo.capaDatos.capaProductos.DescargaTodosProductos(((cClientes)Session["clientesDefault_Cliente"]).cli_codprov);
                         if (id == 1)
                             nameFile = "Productos.xls";
                         else
@@ -410,7 +411,7 @@ namespace DKintranet.Controllers
                         break;
                     case 2:
                     case 6:
-                        dt = capaProductos.DescargaTodosProductosDrogueria(((cClientes)Session["clientesDefault_Cliente"]).cli_codprov);
+                        dt = Codigo.capaDatos.capaProductos.DescargaTodosProductosDrogueria(((cClientes)Session["clientesDefault_Cliente"]).cli_codprov);
                         if (id == 2)
                             nameFile = "ProductosDrogueria.xls";
                         else
@@ -418,7 +419,7 @@ namespace DKintranet.Controllers
                         break;
                     case 3:
                     case 7:
-                        dt = capaProductos.DescargaTodosProductosPerfumeria(((cClientes)Session["clientesDefault_Cliente"]).cli_codprov);
+                        dt = Codigo.capaDatos.capaProductos.DescargaTodosProductosPerfumeria(((cClientes)Session["clientesDefault_Cliente"]).cli_codprov);
                         if (id == 3)
                             nameFile = "ProductosPerfumeria.xls";
                         else
@@ -426,14 +427,14 @@ namespace DKintranet.Controllers
                         break;
                     case 4:
                     case 8:
-                        dt = capaProductos.DescargaTodosProductosEnOferta();
+                        dt = Codigo.capaDatos.capaProductos.DescargaTodosProductosEnOferta();
                         if (id == 4)
                             nameFile = "ProductosEnOferta.xls";
                         else
                             nameFile = "ProductosEnOferta.csv";
                         break;
                     case 9:
-                        dt = capaProductos.DescargaMedicamentosYAccesoriosNoIncluidosEnAlfaBeta();
+                        dt = Codigo.capaDatos.capaProductos.DescargaMedicamentosYAccesoriosNoIncluidosEnAlfaBeta();
                         nameFile = "MedicamentosYAccesoriosNoIncluidosEnAlfaBeta.csv";
                         break;
                     default:

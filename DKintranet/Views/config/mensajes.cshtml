@@ -7,7 +7,7 @@
     @{
         string resultado = string.Empty;
 
-        List<DKintranet.Codigo.capaDatos.cMensaje> lista = WebService.RecuperarTodosMensajesPorIdCliente(((DKintranet.Codigo.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_codigo);
+        List<DKbase.web.capaDatos.cMensaje> lista = WebService.RecuperarTodosMensajesPorIdCliente(((DKbase.web.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_codigo);
         if (lista != null)
         {
             lista = lista.Where(x => !x.tme_importante).ToList();

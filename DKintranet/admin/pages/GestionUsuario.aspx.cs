@@ -169,7 +169,7 @@ namespace DKintranet.admin.pages
             {
                 int codigoUsuarioEnSession = ((DKintranet.Codigo.capaDatos.Usuario)Session["BaseAdmin_Usuario"]).id;
                 DKintranet.Codigo.capaDatos.cUsuario objUsuario = null;
-                DKintranet.Codigo.capaDatos.cClientes objCliente = null;
+                DKbase.web.capaDatos.cClientes objCliente = null;
                 objUsuario = DKintranet.Codigo.clases.Seguridad.RecuperarUsuarioPorId(Convert.ToInt32(Session["GestionUsuario_Usu_codigo"]));
                 DKintranet.Codigo.clases.Seguridad.CambiarContraseñaUsuario(Convert.ToInt32(Session["GestionUsuario_Usu_codigo"]), txtContraseñaCambiar.Text, codigoUsuarioEnSession);
                 if (objUsuario.usu_codRol == Constantes.cROL_ADMINISTRADORCLIENTE)

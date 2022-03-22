@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
+using DKbase.web.capaDatos;
 using DKintranet.Codigo.capaDatos;
 
 namespace DKintranet.Codigo.clases

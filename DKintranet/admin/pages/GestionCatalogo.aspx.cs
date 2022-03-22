@@ -8,6 +8,7 @@ using System.Web.Services;
 using DKintranet.Codigo.clases;
 using DKintranet.Codigo.capaDatos;
 using System.IO;
+using DKbase.web.capaDatos;
 
 namespace DKintranet.admin.pages
 {
@@ -75,14 +76,14 @@ namespace DKintranet.admin.pages
                     {
                         if (FileUpload1.PostedFile.ContentType == Constantes.cMIME_pdf)
                         {
-                            string extencion = capaRecurso.obtenerExtencion(FileUpload1.FileName);
+                            string extencion = Codigo.capaDatos.capaRecurso.obtenerExtencion(FileUpload1.FileName);
                             string pathDestinoRaiz = Constantes.cRaizArchivos + @"\archivos\";
                             string pathDestino = pathDestinoRaiz + Constantes.cTABLA_CATALOGO;
                             if (Directory.Exists(pathDestino) == false)
                             {
                                 Directory.CreateDirectory(pathDestino);
                             }
-                            string filename = capaRecurso.nombreArchivoSinRepetir(pathDestino, FileUpload1.FileName);
+                            string filename = Codigo.capaDatos.capaRecurso.nombreArchivoSinRepetir(pathDestino, FileUpload1.FileName);
                             string nombreArchivo = filename;
                             string destino = pathDestino + @"\" + nombreArchivo; 
                             FileUpload1.SaveAs(destino);

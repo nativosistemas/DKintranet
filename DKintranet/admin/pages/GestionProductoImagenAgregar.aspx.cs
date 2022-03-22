@@ -8,6 +8,7 @@ using DKintranet.Codigo.clases;
 using DKintranet.Codigo.capaDatos;
 using System.Data;
 using System.IO;
+using DKbase.web.capaDatos;
 
 namespace DKintranet.admin.pages
 {

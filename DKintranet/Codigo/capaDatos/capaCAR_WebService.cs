@@ -1,4 +1,5 @@
-﻿using DKintranet.Codigo.clases;
+﻿using DKbase.web.capaDatos;
+using DKintranet.Codigo.clases;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -152,7 +153,7 @@ namespace DKintranet.Codigo.capaDatos
             decimal result = 0;
             if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
-                DKintranet.Codigo.capaDatos.cClientes cliente = (DKintranet.Codigo.capaDatos.cClientes)HttpContext.Current.Session["clientesDefault_Cliente"];
+                DKbase.web.capaDatos.cClientes cliente = (DKbase.web.capaDatos.cClientes)HttpContext.Current.Session["clientesDefault_Cliente"];
                 List<DKintranet.Codigo.clases.cCarrito> listaCarrito = new List<DKintranet.Codigo.clases.cCarrito>();
                 List<cSucursalCarritoTransfer> listaCarritoTransfer = new List<cSucursalCarritoTransfer>();
                 if (pTipo == DKintranet.Codigo.clases.Constantes.cTipo_Carrito)

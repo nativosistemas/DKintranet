@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using DKintranet.Codigo.clases;
 using System.Web.Services;
 using DKintranet.Codigo.capaDatos;
+using DKbase.web.capaDatos;
 
 namespace DKintranet.admin.pages
 {

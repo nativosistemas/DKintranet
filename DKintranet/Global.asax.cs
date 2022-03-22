@@ -1,4 +1,5 @@
 ﻿using DKbase.generales;
+using DKbase.web.capaDatos;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -37,10 +38,10 @@ namespace DKintranet
             if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
                 Parameters += "<" + "login" + ">";
-                Parameters += ((Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login;
+                Parameters += ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login;
                 Parameters += "</" + "login" + ">";
                 Parameters += "<" + "codigoCliente" + ">";
-                Parameters += ((Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo;
+                Parameters += ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo;
                 Parameters += "</" + "codigoCliente" + ">";
            
             }

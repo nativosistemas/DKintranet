@@ -2,7 +2,7 @@
     string resultado = string.Empty;
     if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
     {
-        Session["composicionsaldo_SaldosResultados"] = WebService.ObtenerSaldosPresentacionParaComposicion(((DKintranet.Codigo.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login, DateTime.Now);
+        Session["composicionsaldo_SaldosResultados"] = WebService.ObtenerSaldosPresentacionParaComposicion(((DKbase.web.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login, DateTime.Now);
 
         if (Session["composicionsaldo_SaldosResultados"] != null)
         {

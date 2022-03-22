@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DKbase.web.capaDatos;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;

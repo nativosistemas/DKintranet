@@ -22,7 +22,7 @@
         <div class="clear15"></div>
         <div id="divPanelNroComprobante">
             @{
-                int nroCliente = ((DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo;
+                int nroCliente = ((DKbase.web.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo;
 
                 <input type="hidden" name="txtNroCliente" id="txtNroCliente" value="@{ WriteLiteral(nroCliente); }" />
             }

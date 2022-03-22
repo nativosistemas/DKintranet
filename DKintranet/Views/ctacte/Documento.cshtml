@@ -15,7 +15,7 @@
             switch (Session["clientes_pages_Documento_TIPO"].ToString())
             {
                 case "FAC":
-                    resultadoObj = WebService.ObtenerFactura(Session["clientes_pages_Documento_ID"].ToString(), ((DKintranet.Codigo.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login);
+                    resultadoObj = WebService.ObtenerFactura(Session["clientes_pages_Documento_ID"].ToString(), ((DKbase.web.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login);
                     break;
                 case "PENDINTE":
                     if (HttpContext.Current.Session["estadopedidos_ListaPendienteDeFacturar"] != null)
@@ -24,19 +24,19 @@
                     }
                     break;
                 case "NCR":
-                    resultadoObj = WebService.ObtenerNotaDeCredito(Session["clientes_pages_Documento_ID"].ToString(), ((DKintranet.Codigo.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login);
+                    resultadoObj = WebService.ObtenerNotaDeCredito(Session["clientes_pages_Documento_ID"].ToString(), ((DKbase.web.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login);
                     break;
                 case "NDE":
-                    resultadoObj = WebService.ObtenerNotaDeDebito(Session["clientes_pages_Documento_ID"].ToString(), ((DKintranet.Codigo.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login);
+                    resultadoObj = WebService.ObtenerNotaDeDebito(Session["clientes_pages_Documento_ID"].ToString(), ((DKbase.web.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login);
                     break;
                 case "RES":
-                    resultadoObj = WebService.ObtenerResumenCerrado(Session["clientes_pages_Documento_ID"].ToString(), ((DKintranet.Codigo.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login);
+                    resultadoObj = WebService.ObtenerResumenCerrado(Session["clientes_pages_Documento_ID"].ToString(), ((DKbase.web.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login);
                     break;
                 case "OSC":
-                    resultadoObj = WebService.ObtenerObraSocialCliente(Session["clientes_pages_Documento_ID"].ToString(), ((DKintranet.Codigo.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login);
+                    resultadoObj = WebService.ObtenerObraSocialCliente(Session["clientes_pages_Documento_ID"].ToString(), ((DKbase.web.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login);
                     break;
                 case "REC":
-                    resultadoObj = WebService.ObtenerRecibo(Session["clientes_pages_Documento_ID"].ToString(), ((DKintranet.Codigo.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login);
+                    resultadoObj = WebService.ObtenerRecibo(Session["clientes_pages_Documento_ID"].ToString(), ((DKbase.web.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login);
                     break;
                 default:
                     break;

@@ -14,7 +14,7 @@
         string resultado = string.Empty;
         if (HttpContext.Current.Session["clientesDefault_Cliente"] != null)
         {
-            List<DKintranet.ServiceReferenceDLL.cResumen> objResumen = WebService.ObtenerUltimos10ResumenesDePuntoDeVenta(((DKintranet.Codigo.capaDatos.cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login);
+            List<DKintranet.ServiceReferenceDLL.cResumen> objResumen = WebService.ObtenerUltimos10ResumenesDePuntoDeVenta(((DKbase.web.capaDatos.cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login);
             if (objResumen != null)
             {
                 resultado += "<input type=\"hidden\" id=\"hiddenListaUltimosResumenes\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(objResumen)) + "\" />";

@@ -5,7 +5,7 @@
 @section sectionHidden{
     @{
         string resultado = string.Empty;
-        List<DKintranet.Codigo.capaDatos.cUsuario> lista = DKintranet.Codigo.clases.AccesoGrilla.GetUsuariosDeCliente("usu_codigo", ((DKintranet.Codigo.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_codigo, null);
+        List<DKintranet.Codigo.capaDatos.cUsuario> lista = DKintranet.Codigo.clases.AccesoGrilla.GetUsuariosDeCliente("usu_codigo", ((DKbase.web.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_codigo, null);
         if (lista != null)
         {
             resultado += "<input type=\"hidden\" id=\"hiddenListaUsuarios\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(lista)) + "\" />";

@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Xml.Linq;
+using DKbase.web.capaDatos;
 using DKintranet.Codigo.clases;
 
 namespace DKintranet.Codigo.capaDatos

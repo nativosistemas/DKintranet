@@ -1,4 +1,5 @@
-﻿using DKintranet.Codigo;
+﻿using DKbase.web.capaDatos;
+using DKintranet.Codigo;
 using DKintranet.Codigo.capaDatos;
 using DKintranet.Codigo.clases;
 using DKintranet.Codigo.clases.Generales;

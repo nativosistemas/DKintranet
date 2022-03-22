@@ -48,7 +48,7 @@
             {
                 semana = Convert.ToInt32(Request.QueryString["semana"]);
             }
-            string loginWeb = ((DKintranet.Codigo.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login;
+            string loginWeb = ((DKbase.web.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login;
             if (!string.IsNullOrEmpty(nombrePlan) && anio != null && mes != null && quincena == null)
             {
                 lista = WebService.ObtenerPlanillasObraSocialClientesDeObraSocialPorAnioMes(nombrePlan, loginWeb, anio.Value, mes.Value);

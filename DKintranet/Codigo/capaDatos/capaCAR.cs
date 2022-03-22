@@ -1,4 +1,5 @@
-﻿using DKintranet.Codigo.clases;
+﻿using DKbase.web.capaDatos;
+using DKintranet.Codigo.clases;
 using System;
 using System.Collections.Generic;
 using System.Data;

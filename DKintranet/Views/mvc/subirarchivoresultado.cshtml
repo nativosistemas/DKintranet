@@ -30,7 +30,7 @@
         string resultadoHidden = string.Empty;
         if (HttpContext.Current.Session["subirpedido_ListaProductos"] != null)
         {
-            DKintranet.Codigo.clases.cjSonBuscadorProductos obj = DKintranet.Codigo.clases.FuncionesPersonalizadas.RecuperarProductosGeneralSubirPedidos((List<DKintranet.Codigo.capaDatos.cProductosGenerico>)HttpContext.Current.Session["subirpedido_ListaProductos"]);
+            DKintranet.Codigo.clases.cjSonBuscadorProductos obj = DKintranet.Codigo.clases.FuncionesPersonalizadas.RecuperarProductosGeneralSubirPedidos((List<DKbase.web.capaDatos.cProductosGenerico>)HttpContext.Current.Session["subirpedido_ListaProductos"]);
             System.Web.HttpContext.Current.Session["PedidosBuscador_productosTodos"] = new DKintranet.Codigo.clases.cjSonBuscadorProductos(obj);
             int pPage = 1;
             System.Web.HttpContext.Current.Session["PedidosBuscador_pPage"] = pPage;

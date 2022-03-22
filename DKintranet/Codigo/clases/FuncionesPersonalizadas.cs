@@ -6,6 +6,7 @@ using System.Data;
 using System.IO;
 using DKintranet.Codigo.capaDatos;
 using System.Reflection;
+using DKbase.web.capaDatos;
 
 namespace DKintranet.Codigo.clases
 {
@@ -727,7 +728,7 @@ namespace DKintranet.Codigo.clases
                 {
                     listaProductos.Add(new cProductosAndCantidad { codProductoNombre = item.pro_codigo });
                 }
-                DataTable table = capaProductos.RecuperarStockPorProductosAndSucursal(ConvertNombresSeccionToDataTable(pListaSucursal), ConvertProductosAndCantidadToDataTable(listaProductos));
+                DataTable table = capaDatos.capaProductos.RecuperarStockPorProductosAndSucursal(ConvertNombresSeccionToDataTable(pListaSucursal), ConvertProductosAndCantidadToDataTable(listaProductos));
                 if (table != null)
                     for (int i = 0; i < pListaProductos.Count; i++)
                     {
@@ -800,7 +801,7 @@ namespace DKintranet.Codigo.clases
 
                 listaProductos.Add(new cProductosAndCantidad { codProductoNombre = pro_codigo });
                 List<string> ListaSucursal = RecuperarSucursalesParaBuscadorDeCliente();
-                DataTable table = capaProductos.RecuperarStockPorProductosAndSucursal(ConvertNombresSeccionToDataTable(ListaSucursal), ConvertProductosAndCantidadToDataTable(listaProductos));
+                DataTable table = capaDatos.capaProductos.RecuperarStockPorProductosAndSucursal(ConvertNombresSeccionToDataTable(ListaSucursal), ConvertProductosAndCantidadToDataTable(listaProductos));
                 if (table != null)
                     result = (from r in table.Select("stk_codpro = '" + pro_codigo + "'").AsEnumerable()
                               select new cSucursalStocks { stk_codpro = r["stk_codpro"].ToString(), stk_codsuc = r["stk_codsuc"].ToString(), stk_stock = r["stk_stock"].ToString() }).ToList();

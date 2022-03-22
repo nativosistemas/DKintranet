@@ -8,11 +8,6 @@ using DKintranet.Codigo.clases;
 
 namespace DKintranet.Codigo.capaDatos
 {
-
-    public class cArchivo : DKbase.web.capaDatos.cArchivo
-    {
-
-    }
     public class cNombreArchivos : DKbase.web.capaDatos.cNombreArchivos
     {
     }
@@ -20,7 +15,7 @@ namespace DKintranet.Codigo.capaDatos
     {
         public static DataSet GestiónArchivo(int? arc_codRecurso, int? arc_codRelacion, string arc_galeria, string arc_tipo, string arc_mime, string arc_nombre, string arc_titulo, string arc_descripcion, string arc_hash, int? arc_codUsuarioUltMov, int? arc_estado, int? arc_accion, string filtro, string accion)
         {
-            return DKbase.web.capaDatos.capaRecurso.GestiónArchivo(arc_codRecurso, arc_codRelacion, arc_galeria, arc_tipo, arc_mime, arc_nombre, arc_titulo, arc_descripcion, arc_hash, arc_codUsuarioUltMov, arc_estado, arc_accion, filtro, accion);
+            return DKbase.web.capaDatos.capaRecurso_base.GestiónArchivo(arc_codRecurso, arc_codRelacion, arc_galeria, arc_tipo, arc_mime, arc_nombre, arc_titulo, arc_descripcion, arc_hash, arc_codUsuarioUltMov, arc_estado, arc_accion, filtro, accion);
         }
         public static string obtenerExtencion(string pNombreArchivo)
         {

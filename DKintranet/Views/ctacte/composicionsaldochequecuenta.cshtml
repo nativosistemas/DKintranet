@@ -15,7 +15,7 @@
     string resultado_sub = string.Empty;
     if (HttpContext.Current.Session["clientesDefault_Cliente"] != null)
     {
-        List<DKintranet.ServiceReferenceDLL.cDllChequeRecibido> resultadoChequesEnCartera = WebService.ObtenerChequesEnCartera(((DKintranet.Codigo.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login);
+        List<DKintranet.ServiceReferenceDLL.cDllChequeRecibido> resultadoChequesEnCartera = WebService.ObtenerChequesEnCartera(((DKbase.web.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login);
         if (resultadoChequesEnCartera != null)
         {
             resultado_sub += "<input type=\"hidden\" id=\"hiddenChequesEnCartera\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(resultadoChequesEnCartera)) + "\" />";

@@ -1,4 +1,5 @@
-﻿using DKintranet.Codigo.capaDatos;
+﻿using DKbase.web.capaDatos;
+using DKintranet.Codigo.capaDatos;
 using DKintranet.Codigo.clases;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace DKintranet.Codigo.capaDatos
             int idCliente = 0;
             if (isIntranet && HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
-                DKintranet.Codigo.capaDatos.cClientes cliente = (DKintranet.Codigo.capaDatos.cClientes)HttpContext.Current.Session["clientesDefault_Cliente"];
+                DKbase.web.capaDatos.cClientes cliente = (DKbase.web.capaDatos.cClientes)HttpContext.Current.Session["clientesDefault_Cliente"];
                 idCliente = cliente.cli_codigo;
             }
             else if (HttpContext.Current.Session["clientesDefault_Usuario"] != null)

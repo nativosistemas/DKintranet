@@ -3,7 +3,7 @@
     string resultado = string.Empty;
     if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null )
     {
-        DKintranet.Codigo.capaDatos.cClientes cliente = (DKintranet.Codigo.capaDatos.cClientes)HttpContext.Current.Session["clientesDefault_Cliente"];
+        DKbase.web.capaDatos.cClientes cliente = (DKbase.web.capaDatos.cClientes)HttpContext.Current.Session["clientesDefault_Cliente"];
         List<DKintranet.Codigo.capaDatos.cSucursal> listaSucursal = WebService.RecuperarTodasSucursales();
         // Optimizar
         List<DKintranet.Codigo.capaDatos.cSucursal> listaSucursalInfoAux = WebService.RecuperarTodasSucursalesDependientes().Where(x => x.sde_sucursal == cliente.cli_codsuc).ToList();
@@ -46,7 +46,7 @@
         resultado += "<input type=\"hidden\" id=\"hiddenSumaCarritosOtraSolapa\" value=\"" + Server.HtmlEncode(sumaCarritoOtraSolapa.ToString()) + "\" />";
         resultado += "<input type=\"hidden\" id=\"hiddenListaCarritos\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(listaCarrito)) + "\" />";
         resultado += "<input type=\"hidden\" id=\"hiddenListaSucursalesInfo\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(listaSucursal)) + "\" />";
-        DKintranet.Codigo.capaDatos.cClientes oCliente = (DKintranet.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
+        DKbase.web.capaDatos.cClientes oCliente = (DKbase.web.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
         resultado += "<input type=\"hidden\" id=\"hiddenCliente\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(oCliente)) + "\" />";
         resultado += "<input type=\"hidden\" id=\"hiddenCantidadProductoParametrizado\" value=\"" + Server.HtmlEncode(WebService.RecuperarProductoParametrizadoCantidad().ToString()) + "\" />";
         resultado += "<input type=\"hidden\" id=\"hiddenListaTipoEnviosSucursales\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(DKintranet.Codigo.clases.FuncionesPersonalizadas.RecuperarTiposDeEnvios())) + "\" />";
