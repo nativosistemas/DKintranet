@@ -1289,7 +1289,7 @@ namespace DKintranet
                             }
                         }
                     }
-                    resultado = FuncionesPersonalizadas.cargarProductosBuscadorArchivos(tablaProductos, tablaSucursalStocks, listaTransferDetalle, Constantes.CargarProductosBuscador.isDesdeBuscador, null);
+                    resultado = FuncionesPersonalizadas.cargarProductosBuscadorArchivos(tablaProductos, tablaSucursalStocks, listaTransferDetalle, DKbase.generales.Constantes.CargarProductosBuscador.isDesdeBuscador, null);
                 }
             }
             return resultado;
@@ -1325,7 +1325,7 @@ namespace DKintranet
                             listaTransferDetalle.Add(objTransferDetalle);
                         }
                     }
-                    resultado = FuncionesPersonalizadas.cargarProductosBuscadorArchivos(tablaProductos, tablaSucursalStocks, listaTransferDetalle, Constantes.CargarProductosBuscador.isDesdeBuscador_OfertaTransfer, null);
+                    resultado = FuncionesPersonalizadas.cargarProductosBuscadorArchivos(tablaProductos, tablaSucursalStocks, listaTransferDetalle, DKbase.generales.Constantes.CargarProductosBuscador.isDesdeBuscador_OfertaTransfer, null);
                 }
                 if (resultado != null && pIsTransfer)
                     resultado = resultado.Where(x => x.isMostrarTransfersEnClientesPerf).OrderBy(x => x.pro_nombre).ToList();
@@ -1896,7 +1896,7 @@ namespace DKintranet
                         objTransferDetalle.CargarTransfer(ConvertToTransfer(itemTransferDetalle));
                         listaTransferDetalle.Add(objTransferDetalle);
                     }
-                    resultado = FuncionesPersonalizadas.cargarProductosBuscadorArchivos(tablaProductos, tablaSucursalStocks, listaTransferDetalle, Constantes.CargarProductosBuscador.isSubirArchivo, pSucursalElejida);
+                    resultado = FuncionesPersonalizadas.cargarProductosBuscadorArchivos(tablaProductos, tablaSucursalStocks, listaTransferDetalle, DKbase.generales.Constantes.CargarProductosBuscador.isSubirArchivo, pSucursalElejida);
                     //////////////
                     foreach (DataRow item in tablaProductosNoEncontrado.Rows)
                     {
@@ -2026,7 +2026,7 @@ namespace DKintranet
                                                                   }).ToList();
                 for (int iPrecioFinal = 0; iPrecioFinal < listaProductoCarrtios.Count; iPrecioFinal++)
                 {
-                    listaProductoCarrtios[iPrecioFinal].PrecioFinal = FuncionesPersonalizadas.ObtenerPrecioFinal(objClientes, listaProductoCarrtios[iPrecioFinal]);
+                    listaProductoCarrtios[iPrecioFinal].PrecioFinal = DKbase.web.FuncionesPersonalizadas_base.ObtenerPrecioFinal(objClientes, listaProductoCarrtios[iPrecioFinal]);
                 }
                 item.listaProductos = listaProductoCarrtios;
             }
@@ -2112,7 +2112,7 @@ namespace DKintranet
                     /// FIN Nuevo
                     for (int iPrecioFinal = 0; iPrecioFinal < listaProductoCarrtios.Count; iPrecioFinal++)
                     {
-                        listaProductoCarrtios[iPrecioFinal].PrecioFinal = FuncionesPersonalizadas.ObtenerPrecioFinal(objClientes, listaProductoCarrtios[iPrecioFinal]);
+                        listaProductoCarrtios[iPrecioFinal].PrecioFinal = DKbase.web.FuncionesPersonalizadas_base.ObtenerPrecioFinal(objClientes, listaProductoCarrtios[iPrecioFinal]);
                         /// Nuevo
                         listaProductoCarrtios[iPrecioFinal].isProductoFacturacionDirecta = false;
                         if (listaTransferDetalle != null)
@@ -2124,7 +2124,7 @@ namespace DKintranet
                                 listaProductoCarrtios[iPrecioFinal].CargarTransferYTransferDetalle(listaAUXtransferDetalle[0]);
                                 if (HttpContext.Current.Session["clientesDefault_Cliente"] != null)
                                 {
-                                    listaProductoCarrtios[iPrecioFinal].PrecioFinalTransfer = FuncionesPersonalizadas.ObtenerPrecioFinalTransferBase((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"], listaProductoCarrtios[iPrecioFinal].tfr_deshab, listaProductoCarrtios[iPrecioFinal].tfr_pordesadi, listaProductoCarrtios[iPrecioFinal].pro_neto, listaProductoCarrtios[iPrecioFinal].pro_codtpopro, listaProductoCarrtios[iPrecioFinal].pro_descuentoweb, listaProductoCarrtios[iPrecioFinal].tde_predescuento == null ? 0 : (decimal)listaProductoCarrtios[iPrecioFinal].tde_predescuento, listaProductoCarrtios[iPrecioFinal].tde_PrecioConDescuentoDirecto, listaProductoCarrtios[iPrecioFinal].tde_PorcARestarDelDtoDeCliente);
+                                    listaProductoCarrtios[iPrecioFinal].PrecioFinalTransfer = DKbase.web.FuncionesPersonalizadas_base.ObtenerPrecioFinalTransferBase((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"], listaProductoCarrtios[iPrecioFinal].tfr_deshab, listaProductoCarrtios[iPrecioFinal].tfr_pordesadi, listaProductoCarrtios[iPrecioFinal].pro_neto, listaProductoCarrtios[iPrecioFinal].pro_codtpopro, listaProductoCarrtios[iPrecioFinal].pro_descuentoweb, listaProductoCarrtios[iPrecioFinal].tde_predescuento == null ? 0 : (decimal)listaProductoCarrtios[iPrecioFinal].tde_predescuento, listaProductoCarrtios[iPrecioFinal].tde_PrecioConDescuentoDirecto, listaProductoCarrtios[iPrecioFinal].tde_PorcARestarDelDtoDeCliente);
                                 }
                             }
                         }
@@ -2167,7 +2167,7 @@ namespace DKintranet
                                                                               pro_ofeporcentaje = itemProductoCarrtios.IsNull("pro_ofeporcentaje") ? 0 : itemProductoCarrtios.Field<decimal>("pro_ofeporcentaje"),
                                                                               tde_prepublico = itemProductoCarrtios.IsNull("tde_prepublico") ? 0 : itemProductoCarrtios.Field<decimal>("tde_prepublico"),
                                                                               tde_predescuento = itemProductoCarrtios.IsNull("tde_predescuento") ? 0 : itemProductoCarrtios.Field<decimal>("tde_predescuento"),
-                                                                              PrecioFinalTransfer = FuncionesPersonalizadas.ObtenerPrecioFinalTransferBase(pCliente, item.tfr_deshab, item.tfr_pordesadi, itemProductoCarrtios.Field<bool>("pro_neto"), itemProductoCarrtios.Field<string>("pro_codtpopro"), itemProductoCarrtios.IsNull("pro_descuentoweb") ? 0 : itemProductoCarrtios.Field<decimal>("pro_descuentoweb"), itemProductoCarrtios.Field<decimal>("tde_predescuento"), itemProductoCarrtios.Field<decimal>("tde_PrecioConDescuentoDirecto"), itemProductoCarrtios.Field<decimal>("tde_PorcARestarDelDtoDeCliente"))
+                                                                              PrecioFinalTransfer = DKbase.web.FuncionesPersonalizadas_base.ObtenerPrecioFinalTransferBase(pCliente, item.tfr_deshab, item.tfr_pordesadi, itemProductoCarrtios.Field<bool>("pro_neto"), itemProductoCarrtios.Field<string>("pro_codtpopro"), itemProductoCarrtios.IsNull("pro_descuentoweb") ? 0 : itemProductoCarrtios.Field<decimal>("pro_descuentoweb"), itemProductoCarrtios.Field<decimal>("tde_predescuento"), itemProductoCarrtios.Field<decimal>("tde_PrecioConDescuentoDirecto"), itemProductoCarrtios.Field<decimal>("tde_PorcARestarDelDtoDeCliente"))
                                                                           }).ToList();
                         item.listaProductos = listaProductoCarrtios;
                     }
@@ -2238,7 +2238,7 @@ namespace DKintranet
                                                                           tde_prepublico = itemProductoCarrtios.IsNull("tde_prepublico") ? 0 : itemProductoCarrtios.Field<decimal>("tde_prepublico"),
                                                                           tde_predescuento = itemProductoCarrtios.IsNull("tde_predescuento") ? 0 : itemProductoCarrtios.Field<decimal>("tde_predescuento"),
                                                                           stk_stock = itemProductoCarrtios.Table.Columns.Contains("stk_stock") && !itemProductoCarrtios.IsNull("stk_stock") ? itemProductoCarrtios.Field<string>("stk_stock") : null,
-                                                                          PrecioFinalTransfer = FuncionesPersonalizadas.ObtenerPrecioFinalTransferBase(pCliente, item.tfr_deshab, item.tfr_pordesadi, itemProductoCarrtios.Field<bool>("pro_neto"), itemProductoCarrtios.Field<string>("pro_codtpopro"), itemProductoCarrtios.IsNull("pro_descuentoweb") ? 0 : itemProductoCarrtios.Field<decimal>("pro_descuentoweb"), itemProductoCarrtios.Field<decimal>("tde_predescuento"), itemProductoCarrtios.IsNull("tde_PrecioConDescuentoDirecto") ? 0 : itemProductoCarrtios.Field<decimal>("tde_PrecioConDescuentoDirecto"), itemProductoCarrtios.IsNull("tde_PorcARestarDelDtoDeCliente") ? 0 : itemProductoCarrtios.Field<decimal>("tde_PorcARestarDelDtoDeCliente"))
+                                                                          PrecioFinalTransfer = DKbase.web.FuncionesPersonalizadas_base.ObtenerPrecioFinalTransferBase(pCliente, item.tfr_deshab, item.tfr_pordesadi, itemProductoCarrtios.Field<bool>("pro_neto"), itemProductoCarrtios.Field<string>("pro_codtpopro"), itemProductoCarrtios.IsNull("pro_descuentoweb") ? 0 : itemProductoCarrtios.Field<decimal>("pro_descuentoweb"), itemProductoCarrtios.Field<decimal>("tde_predescuento"), itemProductoCarrtios.IsNull("tde_PrecioConDescuentoDirecto") ? 0 : itemProductoCarrtios.Field<decimal>("tde_PrecioConDescuentoDirecto"), itemProductoCarrtios.IsNull("tde_PorcARestarDelDtoDeCliente") ? 0 : itemProductoCarrtios.Field<decimal>("tde_PorcARestarDelDtoDeCliente"))
                                                                       }).ToList();
 
                     for (int iProductoCarrtios = 0; iProductoCarrtios < listaProductoCarrtios.Count; iProductoCarrtios++)
@@ -2992,7 +2992,7 @@ namespace DKintranet
                     obj.fpc_codSucursal = resultadoTemporalDistinct[i].fpc_codSucursal;
                     obj.suc_nombre = resultadoTemporalDistinct[i].suc_nombre;
                     obj.fpc_tipo = resultadoTemporalDistinct[i].fpc_tipo;
-                    obj.listaProductos = FuncionesPersonalizadas.cargarProductosBuscadorArchivos(tabla.AsEnumerable().Where(xRow => xRow.Field<string>("fpc_codSucursal") == obj.fpc_codSucursal).CopyToDataTable(), tablaSucursalStocks, listaTransferDetalle, Constantes.CargarProductosBuscador.isRecuperadorFaltaCredito, obj.fpc_codSucursal);
+                    obj.listaProductos = FuncionesPersonalizadas.cargarProductosBuscadorArchivos(tabla.AsEnumerable().Where(xRow => xRow.Field<string>("fpc_codSucursal") == obj.fpc_codSucursal).CopyToDataTable(), tablaSucursalStocks, listaTransferDetalle, DKbase.generales.Constantes.CargarProductosBuscador.isRecuperadorFaltaCredito, obj.fpc_codSucursal);
                     resultado.Add(obj);
                 }
             }
@@ -4503,7 +4503,7 @@ namespace DKintranet
                         objTransferDetalle.CargarTransfer(ConvertToTransfer(itemTransferDetalle));
                         listaTransferDetalle.Add(objTransferDetalle);
                     }
-                    resultado = FuncionesPersonalizadas.cargarProductosBuscadorArchivos(tablaProductos, tablaSucursalStocks, listaTransferDetalle, Constantes.CargarProductosBuscador.isDesdeTabla, null);
+                    resultado = FuncionesPersonalizadas.cargarProductosBuscadorArchivos(tablaProductos, tablaSucursalStocks, listaTransferDetalle, DKbase.generales.Constantes.CargarProductosBuscador.isDesdeTabla, null);
                 }
             }
             return resultado;
@@ -5317,7 +5317,7 @@ namespace DKintranet
                     /// FIN Nuevo
                     for (int iPrecioFinal = 0; iPrecioFinal < listaProductoCarrtios.Count; iPrecioFinal++)
                     {
-                        listaProductoCarrtios[iPrecioFinal].PrecioFinal = FuncionesPersonalizadas.ObtenerPrecioFinal(objClientes, listaProductoCarrtios[iPrecioFinal]);
+                        listaProductoCarrtios[iPrecioFinal].PrecioFinal = DKbase.web.FuncionesPersonalizadas_base.ObtenerPrecioFinal(objClientes, listaProductoCarrtios[iPrecioFinal]);
                         /// Nuevo
                         listaProductoCarrtios[iPrecioFinal].isProductoFacturacionDirecta = false;
                         if (listaTransferDetalle != null)
@@ -5329,7 +5329,7 @@ namespace DKintranet
                                 listaProductoCarrtios[iPrecioFinal].CargarTransferYTransferDetalle(listaAUXtransferDetalle[0]);
                                 if (HttpContext.Current.Session["clientesDefault_Cliente"] != null)
                                 {
-                                    listaProductoCarrtios[iPrecioFinal].PrecioFinalTransfer = FuncionesPersonalizadas.ObtenerPrecioFinalTransferBase((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"], listaProductoCarrtios[iPrecioFinal].tfr_deshab, listaProductoCarrtios[iPrecioFinal].tfr_pordesadi, listaProductoCarrtios[iPrecioFinal].pro_neto, listaProductoCarrtios[iPrecioFinal].pro_codtpopro, listaProductoCarrtios[iPrecioFinal].pro_descuentoweb, listaProductoCarrtios[iPrecioFinal].tde_predescuento == null ? 0 : (decimal)listaProductoCarrtios[iPrecioFinal].tde_predescuento, listaProductoCarrtios[iPrecioFinal].tde_PrecioConDescuentoDirecto, listaProductoCarrtios[iPrecioFinal].tde_PorcARestarDelDtoDeCliente);
+                                    listaProductoCarrtios[iPrecioFinal].PrecioFinalTransfer = DKbase.web.FuncionesPersonalizadas_base.ObtenerPrecioFinalTransferBase((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"], listaProductoCarrtios[iPrecioFinal].tfr_deshab, listaProductoCarrtios[iPrecioFinal].tfr_pordesadi, listaProductoCarrtios[iPrecioFinal].pro_neto, listaProductoCarrtios[iPrecioFinal].pro_codtpopro, listaProductoCarrtios[iPrecioFinal].pro_descuentoweb, listaProductoCarrtios[iPrecioFinal].tde_predescuento == null ? 0 : (decimal)listaProductoCarrtios[iPrecioFinal].tde_predescuento, listaProductoCarrtios[iPrecioFinal].tde_PrecioConDescuentoDirecto, listaProductoCarrtios[iPrecioFinal].tde_PorcARestarDelDtoDeCliente);
                                 }
                             }
                         }
@@ -5372,7 +5372,7 @@ namespace DKintranet
                                                                       }).ToList();
                     for (int iPrecioFinal = 0; iPrecioFinal < listaProductoCarrtios.Count; iPrecioFinal++)
                     {
-                        listaProductoCarrtios[iPrecioFinal].PrecioFinal = FuncionesPersonalizadas.ObtenerPrecioFinal(objClientes, listaProductoCarrtios[iPrecioFinal]);
+                        listaProductoCarrtios[iPrecioFinal].PrecioFinal = DKbase.web.FuncionesPersonalizadas_base.ObtenerPrecioFinal(objClientes, listaProductoCarrtios[iPrecioFinal]);
                     }
                     item.listaProductos = listaProductoCarrtios;
                 }
