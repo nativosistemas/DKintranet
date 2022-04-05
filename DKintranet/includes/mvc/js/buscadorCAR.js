@@ -109,7 +109,7 @@ $('body').on("keydown", function (e) {
         }
 
 
-     
+
     } else if (e.altKey && e.which === 88) { // ALT + X
         if ($('#modalModuloCredito').hasClass('in')) {
             modalModuloCreditoHide();
@@ -3334,7 +3334,7 @@ $('#modalModuloCredito').on('hidden.bs.modal', function () {
     //}
     isNotBuscadorEnProceso = true;
     credito_hidden_bs_modal();
-   // setTimeout(function () { credito_hidden_bs_modal(); }, 500);
+    // setTimeout(function () { credito_hidden_bs_modal(); }, 500);
 });
 var is_credito_modal = false;
 function credito_hidden_bs_modal() {
@@ -3420,18 +3420,36 @@ function focusInputCantidadCarrito() {
 function focusPrimerProductoHabilitado() {
     var isFocusFind = false;
     if (listaProductosBuscados != null && listaProductosBuscados.length > 0) {
-        for (var iSucursal = 0; iSucursal < listaSucursalesDependienteInfo.length; iSucursal++) {
-            for (var iProducto = 0; iProducto < listaProductosBuscados.length; iProducto++) {
-                var nameInput = 'inputSuc' + iSucursal + '_' + iProducto;
-                if ($('#' + nameInput).length) {
-                    $('#' + nameInput).focus();
-                    selectedInput = document.getElementById(nameInput);
-                    isFocusFind = true;
+        if ($('#checkBoxCCprioridad').length && $('#checkBoxCCprioridad').is(':checked')) {
+            for (var iSucursal = 0; iSucursal < listaSucursal.length; iSucursal++) {
+                if (listaSucursalesDependienteInfo[iSucursal].sde_sucursal == 'CC') {
+                    for (var iProducto = 0; iProducto < listaProductosBuscados.length; iProducto++) {
+                        var nameInput = 'inputSuc' + iProducto + '_' + iSucursal;
+                        if ($('#' + nameInput).length) {
+                            $('#' + nameInput).focus();
+                            selectedInput = document.getElementById(nameInput);
+                            isFocusFind = true;
+                            break;
+                        }
+                    }
                     break;
                 }
             }
-            if (isFocusFind) {
-                break;
+        }
+        if (!isFocusFind) {
+            for (var iSucursal = 0; iSucursal < listaSucursal.length; iSucursal++) {
+                for (var iProducto = 0; iProducto < listaProductosBuscados.length; iProducto++) {
+                    var nameInput = 'inputSuc' + iProducto + '_' +  iSucursal;
+                    if ($('#' + nameInput).length) {
+                        $('#' + nameInput).focus();
+                        selectedInput = document.getElementById(nameInput);
+                        isFocusFind = true;
+                        break;
+                    }
+                }
+                if (isFocusFind) {
+                    break;
+                }
             }
         }
     }

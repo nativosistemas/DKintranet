@@ -119,6 +119,14 @@
                 <a class="btn_a13-st" href="" onclick="onClickVerTransfer(); return false;">Todos los productos en transfer</a>
             }
         }
+        @{if (DKintranet.Controllers.mvcController.isClienteSucDistintoCC())
+            {
+                <div class="radio-checkbox rc_buscador">
+                    <input id="checkBoxCCprioridad" class="checkbox" type="checkbox" value="" checked>
+                    <label for="checkBoxCCprioridad" value="">Primero casa central</label>
+                </div>
+            }
+        }
         <div class="clear10"></div>
     </div>
 

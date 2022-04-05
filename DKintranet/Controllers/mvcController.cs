@@ -78,6 +78,13 @@ namespace DKintranet.Controllers
                 return true;
             return false;
         }
+        public static bool isClienteSucDistintoCC()
+        {
+            if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null &&
+                ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc != "CC")
+                return true;
+            return false;
+        }
         // GET: mvc
         public ActionResult Index()
         {
