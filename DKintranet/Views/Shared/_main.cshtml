@@ -35,10 +35,10 @@
 </head>
 @{
     if (Session["clientesDefault_Usuario"] != null &&
-        (((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR ||
-        ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL ||
-        ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL ||
-        ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE))
+        (((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR ||
+        ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL ||
+        ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL ||
+        ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE))
     {
         <style>
             .btn_confirmar {
@@ -64,10 +64,10 @@
 
         @* Inicio Promotores Y Encargados *@
         @{
-            if (Session["clientesDefault_Usuario"] != null && ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR)
+            if (Session["clientesDefault_Usuario"] != null && ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR)
             {
                 <p class="TitleCliente">Seleccione un cliente</p>
-                List<DKbase.web.capaDatos.cClientes> colClientes = WebService.spRecuperarTodosClientesByPromotor(((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).ApNombre);
+                List<DKbase.web.capaDatos.cClientes> colClientes = WebService.spRecuperarTodosClientesByPromotor(((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).ApNombre);
 
                 <select class="form-control cmbCliente" id="cmbCliente" name="cmdCliente">
                     @{
@@ -98,7 +98,7 @@
                 </select>
             }
 
-            if (Session["clientesDefault_Usuario"] != null && ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL)
+            if (Session["clientesDefault_Usuario"] != null && ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL)
             {
                 <p class="TitleCliente">Seleccione un cliente</p>
                 List<DKbase.web.capaDatos.cClientes> colClientes = WebService.RecuperarTodosClientes();
@@ -132,12 +132,12 @@
                 </select>
             }
 
-            if (Session["clientesDefault_Usuario"] != null && ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
+            if (Session["clientesDefault_Usuario"] != null && ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
             {
                 <p class="TitleCliente">Seleccione un cliente</p>
                 string[] GrupoCliente;
 
-                GrupoCliente = ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).NombreYApellido.Split(' ');
+                GrupoCliente = ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).NombreYApellido.Split(' ');
 
                 List<DKbase.web.capaDatos.cClientes> colClientes = WebService.RecuperarTodosClientesByGrupoCliente(GrupoCliente[0]);
                 <select class="form-control cmbCliente" id="cmbCliente" name="cmdCliente">
@@ -169,12 +169,12 @@
                 </select>
             }
 
-            if (Session["clientesDefault_Usuario"] != null && ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL)
+            if (Session["clientesDefault_Usuario"] != null && ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL)
             {
                 <p class="TitleCliente">Seleccione un cliente</p>
                 string IdSuc;
 
-                IdSuc = ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).NombreYApellido.Substring(9, 2);
+                IdSuc = ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).NombreYApellido.Substring(9, 2);
 
                 List<DKbase.web.capaDatos.cClientes> colClientes = WebService.RecuperarTodosClientesBySucursal(IdSuc);
                 <select class="form-control cmbCliente" id="cmbCliente" name="cmdCliente">
@@ -205,7 +205,7 @@
                     }
                 </select>
             }
-            if (Session["clientesDefault_Usuario"] != null && DKintranet.Codigo.clases.FuncionesPersonalizadas.isUserTomaPedidoIntranet((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]))
+            if (Session["clientesDefault_Usuario"] != null && DKintranet.Codigo.clases.FuncionesPersonalizadas.isUserTomaPedidoIntranet((DKbase.web.Usuario)Session["clientesDefault_Usuario"]))
             {
                 <p class="TitleCliente">Seleccione un cliente</p>
                 List<DKbase.web.capaDatos.cClientes> colClientes = new List<DKbase.web.capaDatos.cClientes>(); //WebService.RecuperarTodosClientes();

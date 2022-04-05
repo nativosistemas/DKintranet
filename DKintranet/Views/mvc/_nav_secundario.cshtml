@@ -50,10 +50,10 @@
             <a href="/mvc/Buscador" @{ WriteLiteral(classBuscador);}><i class="fa fa-search" title="BUSCADOR"></i><span class="hidden-sm hidden-xs">BUSCADOR</span></a>
             <div class="separate"></div>
             @{
-                if (((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR &&
-                    ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL &&
-                    ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL &&
-                    ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
+                if (((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR &&
+                    ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL &&
+                    ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL &&
+                    ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
                 {
                     <a href="/mvc/Diferido" @{WriteLiteral(classDiferido);}><i class="fa fa-shopping-basket" title="CARRO SECUNDARIO"></i><span class="hidden-sm hidden-xs">CARRO SECUNDARIO</span></a>
                     <div class="separate"></div>
@@ -66,10 +66,10 @@
                     <div class="separate"></div> }
             }
             @{
-                if (((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR &&
-                    ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL &&
-                    ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL &&
-                    ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE &&
+                if (((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR &&
+                    ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL &&
+                    ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL &&
+                    ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE &&
                     DKintranet.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion("PEDIDOS_RECUPERADOR"))
                 {
                     <a href="/mvc/recuperador?t=1" @{WriteLiteral(classRecuperador);}><i class="fa fa-recycle" title="RECUPERADOR"></i><span class="hidden-sm hidden-xs">RECUPERADOR</span></a>

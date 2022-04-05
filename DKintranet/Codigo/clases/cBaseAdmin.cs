@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using DKbase.web;
 using DKintranet.Codigo.capaDatos;
 using DKintranet.Codigo.clases.Generales;
 
@@ -19,7 +20,7 @@ namespace DKintranet.Codigo.clases
                 //Page.ClientScript.RegisterStartupScript(this.GetType(), "clientscriptSegurida", strVariables, true);
                 if (Session["BaseAdmin_PermisosRol"] != null)
                 {
-                    if (((capaDatos.ListaAcccionesRol)Session["BaseAdmin_PermisosRol"]).isActivo(pConsPalabraClave))
+                    if (((ListaAcccionesRol)Session["BaseAdmin_PermisosRol"]).isActivo(pConsPalabraClave))
                     {
                         Page.ClientScript.RegisterStartupScript(this.GetType(), "clientscriptSeguridad", cBaseAdmin.ObtenerPermisosPorPalabraClave(pConsPalabraClave), true);
                     }

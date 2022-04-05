@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using DKbase.web;
 using DKintranet.Codigo.clases;
 
 namespace DKintranet.admin.pages
@@ -41,7 +42,7 @@ namespace DKintranet.admin.pages
         }
         public override void Eliminar(int pIdRol)
         {
-            List<DKintranet.Codigo.capaDatos.cUsuario> listaUsuarioTemp = DKintranet.Codigo.clases.Seguridad.RecuperarTodosUsuarios(string.Empty);
+            List<cUsuario> listaUsuarioTemp = DKintranet.Codigo.clases.Seguridad.RecuperarTodosUsuarios(string.Empty);
             listaUsuarioTemp = listaUsuarioTemp.Where(x => x.usu_codRol == pIdRol).ToList();
             if (listaUsuarioTemp.Count == 0)
             {

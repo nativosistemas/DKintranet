@@ -4,16 +4,16 @@
     if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null )
     {
         DKbase.web.capaDatos.cClientes cliente = (DKbase.web.capaDatos.cClientes)HttpContext.Current.Session["clientesDefault_Cliente"];
-        List<DKintranet.Codigo.capaDatos.cSucursal> listaSucursal = WebService.RecuperarTodasSucursales();
+        List<DKbase.web.cSucursal> listaSucursal = WebService.RecuperarTodasSucursales();
         // Optimizar
-        List<DKintranet.Codigo.capaDatos.cSucursal> listaSucursalInfoAux = WebService.RecuperarTodasSucursalesDependientes().Where(x => x.sde_sucursal == cliente.cli_codsuc).ToList();
-        List<DKintranet.Codigo.capaDatos.cSucursal> listaSucursalInfo = new List<DKintranet.Codigo.capaDatos.cSucursal>();
+        List<DKbase.web.cSucursal> listaSucursalInfoAux = WebService.RecuperarTodasSucursalesDependientes().Where(x => x.sde_sucursal == cliente.cli_codsuc).ToList();
+        List<DKbase.web.cSucursal> listaSucursalInfo = new List<DKbase.web.cSucursal>();
         //// Inicio S7
         List<string> ListaSucursalOptimizar = DKintranet.Codigo.clases.FuncionesPersonalizadas.RecuperarSucursalesParaBuscadorDeCliente();
         //// Fin S7
         foreach (string itemSucursalOptimizar in ListaSucursalOptimizar)
         {
-            foreach (DKintranet.Codigo.capaDatos.cSucursal itemSucursalInfoAux in listaSucursal)
+            foreach (DKbase.web.cSucursal itemSucursalInfoAux in listaSucursal)
             {
                 if (itemSucursalOptimizar == itemSucursalInfoAux.sde_sucursal)
                 {
@@ -24,12 +24,12 @@
         }
         // Fin Optimizar
         resultado += "<input type=\"hidden\" id=\"hiddenListaSucursalesDependienteInfo\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(listaSucursalInfo)) + "\" />";
-        List<DKintranet.Codigo.clases.cCarrito> listaCarrito = new List<DKintranet.Codigo.clases.cCarrito>();
+        List<DKbase.web.capaDatos.cCarrito> listaCarrito = new List<DKbase.web.capaDatos.cCarrito>();
         decimal sumaCarritoOtraSolapa = 0;
         if (DKintranet.Controllers.mvcController.isDiferido())
         {
             Session["clientesDefault_CarritoDiferido"] = DKintranet.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosDiferidosPorCliente(cliente.cli_codigo);
-            listaCarrito = (List<DKintranet.Codigo.clases.cCarrito>)Session["clientesDefault_CarritoDiferido"];
+            listaCarrito = (List<DKbase.web.capaDatos.cCarrito>)Session["clientesDefault_CarritoDiferido"];
             resultado += "<input type=\"hidden\" id=\"hiddenIsCarritoDiferido\" value=\"" + Server.HtmlEncode("true") + "\" />";
             if (DKintranet.Codigo.capaDatos.capaCAR_decision.isCAR) {
                 resultado += "<input type=\"hidden\" id=\"hiddenListaCarritosTransferPorSucursal\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(DKintranet.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(cliente, DKintranet.Codigo.clases.Constantes.cTipo_CarritoDiferidoTransfers))) + "\" />";
@@ -39,7 +39,7 @@
         else if (DKintranet.Controllers.mvcController.isBuscador())
         {
             Session["clientesDefault_Carrito"] = DKintranet.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosPorSucursalYProductos(cliente.cli_codigo);
-            listaCarrito = (List<DKintranet.Codigo.clases.cCarrito>)Session["clientesDefault_Carrito"];
+            listaCarrito = (List<DKbase.web.capaDatos.cCarrito>)Session["clientesDefault_Carrito"];
             resultado += "<input type=\"hidden\" id=\"hiddenListaCarritosTransferPorSucursal\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(DKintranet.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(cliente, DKintranet.Codigo.clases.Constantes.cTipo_CarritoTransfers))) + "\" />";
             sumaCarritoOtraSolapa = DKintranet.Codigo.capaDatos.capaCAR_WebService.getSumaCarritosOtraSolapa(DKintranet.Codigo.clases.Constantes.cTipo_Carrito);
         }

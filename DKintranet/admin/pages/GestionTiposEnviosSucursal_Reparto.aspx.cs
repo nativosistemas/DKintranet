@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Web.Services;
 using DKintranet.Codigo.clases;
 using DKintranet.Codigo.capaDatos;
+using DKbase.web;
 
 namespace DKintranet.admin.pages
 {
@@ -46,7 +47,7 @@ namespace DKintranet.admin.pages
         [WebMethod(EnableSession = true)]
         public static string RecuperarExcepciones(int pIdSucursalDependienteTipoEnvioCliente, string pTdr_codReparto)
         {
-            List<DKintranet.Codigo.clases.Generales.cCombo> resultado = WebService.RecuperarSucursalDependienteTipoEnvioCliente_TipoEnvios_Excepciones_paraAdmin(pIdSucursalDependienteTipoEnvioCliente, pTdr_codReparto);
+            List<cCombo> resultado = WebService.RecuperarSucursalDependienteTipoEnvioCliente_TipoEnvios_Excepciones_paraAdmin(pIdSucursalDependienteTipoEnvioCliente, pTdr_codReparto);
             return DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(resultado);
         }
         [WebMethod(EnableSession = true)]

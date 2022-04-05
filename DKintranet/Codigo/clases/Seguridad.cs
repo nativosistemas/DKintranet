@@ -5,6 +5,7 @@ using System.Web;
 using System.Data;
 using DKintranet.Codigo.capaDatos;
 using DKintranet.Codigo.clases.Generales;
+using DKbase.web;
 
 namespace DKintranet.Codigo.clases
 {
@@ -284,10 +285,10 @@ namespace DKintranet.Codigo.clases
             }
             return lista;
         }
-        public static capaDatos.ListaAcccionesRol RecuperarTodasAccionesPorIdRol(int pIdRol)
+        public static ListaAcccionesRol RecuperarTodasAccionesPorIdRol(int pIdRol)
         {
             DataTable tablaAcciones = capaDatos.capaSeguridad.RecuperarTodasAccionesRol(pIdRol);
-            capaDatos.ListaAcccionesRol listaAcciones = new capaDatos.ListaAcccionesRol();
+            ListaAcccionesRol listaAcciones = new ListaAcccionesRol();
             foreach (DataRow item in tablaAcciones.Rows)
             {
                 capaDatos.AcccionesRol acRol = new capaDatos.AcccionesRol();
@@ -483,9 +484,9 @@ namespace DKintranet.Codigo.clases
             }
             return resultado;
         }
-        public static capaDatos.cUsuario ConvertToUsuario(DataRow pItem)
+        public static cUsuario ConvertToUsuario(DataRow pItem)
         {
-            capaDatos.cUsuario obj = new capaDatos.cUsuario();
+            cUsuario obj = new cUsuario();
             if (pItem["usu_codigo"] != DBNull.Value)
             {
                 obj.usu_codigo = Convert.ToInt32(pItem["usu_codigo"]);
@@ -545,9 +546,9 @@ namespace DKintranet.Codigo.clases
             }
             return obj;
         }
-        public static List<capaDatos.cUsuario> RecuperarTodosUsuarios(string pFiltro)
+        public static List<cUsuario> RecuperarTodosUsuarios(string pFiltro)
         {
-            List<capaDatos.cUsuario> lista = new List<capaDatos.cUsuario>();
+            List<cUsuario> lista = new List<cUsuario>();
             DataSet dsResultado = capaSeguridad.GestiónUsuario(null, null, null, null, null, null, null, null, null, null, null, null, pFiltro, Constantes.cSQL_SELECT);
             if (dsResultado != null)
             {
@@ -558,9 +559,9 @@ namespace DKintranet.Codigo.clases
             }
             return lista;
         }
-        public static capaDatos.cUsuario RecuperarUsuarioPorId(int pIdUsuario)
+        public static cUsuario RecuperarUsuarioPorId(int pIdUsuario)
         {
-            capaDatos.cUsuario obj = null;
+            cUsuario obj = null;
             DataSet dsResultado = capaSeguridad.GestiónUsuario(pIdUsuario, null, null, null, null, null, null, null, null, null, null, null, null, Constantes.cSQL_SELECT);
             if (dsResultado != null)
             {

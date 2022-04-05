@@ -1,4 +1,5 @@
-﻿using DKbase.web.capaDatos;
+﻿using DKbase.web;
+using DKbase.web.capaDatos;
 using DKintranet.Codigo;
 using DKintranet.Codigo.capaDatos;
 using DKintranet.Codigo.clases;
@@ -378,6 +379,7 @@ namespace DKintranet.Controllers
                 objResult.isNotError = capaCAR_decision.AgregarProductosTransfersAlCarrito(pListaProductosMasCantidad, cliente.cli_codigo, usuario.id, pIdTransfers, pCodSucursal, Constantes.cTipo_CarritoTransfers);
                 objResult.oSucursalCarritoTransfer = capaCAR_decision.RecuperarCarritosTransferPorIdClienteIdSucursal(cliente, pCodSucursal, Constantes.cTipo_CarritoTransfers);
                 objResult.listProductosAndCantidadError = pListaProductosMasCantidad;
+                objResult.codSucursal = pCodSucursal;
                 resultado = Serializador.SerializarAJson(objResult);
             }
             return resultado;
@@ -395,6 +397,7 @@ namespace DKintranet.Controllers
                 objResult.isNotError = capaCAR_decision.AgregarProductosTransfersAlCarrito(pListaProductosMasCantidad, cliente.cli_codigo, usuario.id, pIdTransfers, pCodSucursal, Constantes.cTipo_CarritoDiferidoTransfers);
                 objResult.oSucursalCarritoTransfer = capaCAR_decision.RecuperarCarritosTransferPorIdClienteIdSucursal(cliente, pCodSucursal, Constantes.cTipo_CarritoDiferidoTransfers);
                 objResult.listProductosAndCantidadError = pListaProductosMasCantidad;
+                objResult.codSucursal = pCodSucursal;
                 resultado = Serializador.SerializarAJson(objResult);
             }
             return resultado;
@@ -522,7 +525,7 @@ namespace DKintranet.Controllers
                 {
                     if (item.codSucursal == pIdSucursal)
                     {
-                        if (capaCAR.IsCarritoEnProceso(item.car_id))
+                        if (capaCAR_base.IsCarritoEnProceso(item.car_id))
                         {
                             ServiceReferenceDLL.cDllPedido oEnProceso = new ServiceReferenceDLL.cDllPedido();
                             oEnProceso.Error = msgCarritoEnProceso;
@@ -537,7 +540,7 @@ namespace DKintranet.Controllers
                         }
                         if (capaWebServiceDLL.ValidarExistenciaDeCarritoWebPasado(item.car_id))
                         {
-                            capaCAR.BorrarCarritoPorId_SleepTimer(item.car_id, Constantes.cAccionCarrito_BORRAR_CARRRITO_REPETIDO);
+                            capaCAR_base.BorrarCarritoPorId_SleepTimer(item.car_id, Constantes.cAccionCarrito_BORRAR_CARRRITO_REPETIDO);
                             ServiceReferenceDLL.cDllPedido oRepetido = new ServiceReferenceDLL.cDllPedido();
                             oRepetido.Error = msgCarritoRepetido;
                             return Serializador.SerializarAJson(oRepetido);
@@ -652,7 +655,7 @@ namespace DKintranet.Controllers
                         }
                     }
                 } // fin   foreach (cCarritoTransfer item in listaCarrito)
-                if (capaCAR.IsCarritoEnProceso(car_id_aux))
+                if (capaCAR_base.IsCarritoEnProceso(car_id_aux))
                 {
                     DKbase.dll.cDllPedidoTransfer oEnProceso = new DKbase.dll.cDllPedidoTransfer();
                     oEnProceso.Error = msgCarritoEnProceso;
@@ -662,7 +665,7 @@ namespace DKintranet.Controllers
                 }
                 if (capaWebServiceDLL.ValidarExistenciaDeCarritoWebPasado(car_id_aux))
                 {
-                    capaCAR.BorrarCarritoPorId_SleepTimer(car_id_aux, Constantes.cAccionCarrito_BORRAR_CARRRITO_REPETIDO);
+                    capaCAR_base.BorrarCarritoPorId_SleepTimer(car_id_aux, Constantes.cAccionCarrito_BORRAR_CARRRITO_REPETIDO);
                     DKbase.dll.cDllPedidoTransfer oRepetido = new DKbase.dll.cDllPedidoTransfer();
                     oRepetido.Error = msgCarritoRepetido;
                     resultadoPedido = new List<DKbase.dll.cDllPedidoTransfer>();

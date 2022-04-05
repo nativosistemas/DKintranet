@@ -48,7 +48,7 @@
                     {
                         List<string> ListaSucursal = DKintranet.Codigo.clases.FuncionesPersonalizadas.RecuperarSucursalesParaBuscadorDeCliente();
 
-                        List<DKintranet.Codigo.capaDatos.cSucursal> listaSucursal = WebService.RecuperarTodasSucursales();
+                        List<DKbase.web.cSucursal> listaSucursal = WebService.RecuperarTodasSucursales();
                         bool isChecked = true;
                         foreach (string item in ListaSucursal)
                         {

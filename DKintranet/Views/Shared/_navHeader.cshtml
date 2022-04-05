@@ -14,7 +14,7 @@
                             <span>Bienvenido!</span><div class="clear"></div>@{
                                 if (Session["clientesDefault_Usuario"] != null)
                                 {
-                                    WriteLiteral(((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).NombreYApellido);
+                                    WriteLiteral(((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).NombreYApellido);
                                 }}
                         </div>
                         <div class="col-xs-1"><div class="clear15"></div><a class="user_xs" href="#"><i class="fa fa-user-circle-o"></i></a></div>
@@ -121,7 +121,7 @@
                                 <li><a class="off" href="#" onclick="onclickSignOff(); return false;"><i class="fa fa-power-off"></i>SALIR</a></li>
                             </ul>
                         </li>
-                        <li><a @{ WriteLiteral(classPedidos);} href="#"><h3>@{WriteLiteral(((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).NombreYApellido);}</h3></a></li>
+                        <li><a @{ WriteLiteral(classPedidos);} href="#"><h3>@{WriteLiteral(((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).NombreYApellido);}</h3></a></li>
                     </ul>
                 </div>
             </div>

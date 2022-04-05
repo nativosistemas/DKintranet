@@ -8,6 +8,7 @@ using DKintranet.Codigo.clases;
 using System.Web.Services;
 using DKintranet.Codigo.capaDatos;
 using DKbase.web.capaDatos;
+using DKbase.web;
 
 namespace DKintranet.admin.pages
 {
@@ -54,7 +55,7 @@ namespace DKintranet.admin.pages
                 if ((codigoMensaje == 0 && DKintranet.Codigo.clases.cBaseAdmin.isAgregar(consPalabraClave)) || (codigoMensaje != 0 && DKintranet.Codigo.clases.cBaseAdmin.isEditar(consPalabraClave)))
                 {
 
-                    int codigoUsuarioEnSession = ((DKintranet.Codigo.capaDatos.Usuario)Session["BaseAdmin_Usuario"]).id;
+                    int codigoUsuarioEnSession = ((Usuario)Session["BaseAdmin_Usuario"]).id;
                     DateTime? fechaDesde = null;
                     DateTime? fechaHasta = null;
                     bool importante = checkboxImportante.Checked;

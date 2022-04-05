@@ -1,4 +1,5 @@
-﻿using DKbase.web.capaDatos;
+﻿using DKbase.web;
+using DKbase.web.capaDatos;
 using DKintranet.Codigo.capaDatos;
 using System;
 using System.Collections.Generic;
@@ -150,7 +151,7 @@ namespace DKintranet.Codigo.clases
                     {
                         string sucElegida = pSucursal;// HiddenFieldSucursalEleginda.Value;
                         HttpContext.Current.Session["subirpedido_SucursalEleginda"] = sucElegida;
-                        HttpContext.Current.Session["subirpedido_ListaProductos"] = WebService.AgregarProductoAlCarritoDesdeArchivoPedidosV5(sucElegida, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc, tablaArchivoPedidos, TipoArchivo, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codprov, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_isGLN, ((capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).id);
+                        HttpContext.Current.Session["subirpedido_ListaProductos"] = WebService.AgregarProductoAlCarritoDesdeArchivoPedidosV5(sucElegida, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc, tablaArchivoPedidos, TipoArchivo, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codprov, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_isGLN, ((Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).id);
 
 
                         //if (pIsNombreRepetido == null || pIsNombreRepetido.Value)

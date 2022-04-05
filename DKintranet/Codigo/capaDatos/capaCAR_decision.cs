@@ -1,4 +1,5 @@
-﻿using DKbase.web.capaDatos;
+﻿using DKbase.web;
+using DKbase.web.capaDatos;
 using DKintranet.Codigo.capaDatos;
 using DKintranet.Codigo.clases;
 using System;
@@ -37,7 +38,8 @@ namespace DKintranet.Codigo.capaDatos
             int idCliente = idCliente_Actual();
             if (isIntranet)
             {
-                return capaCAR_intranet.BorrarCarrito(idCliente, lrc_codSucursal, Constantes.cTipo_Carrito, Constantes.cAccionCarrito_VACIAR);
+                Usuario user = (Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"];
+                return capaCAR_intranet_base.BorrarCarrito(user, idCliente, lrc_codSucursal, Constantes.cTipo_Carrito, Constantes.cAccionCarrito_VACIAR);
             }
             else
             {
@@ -49,7 +51,8 @@ namespace DKintranet.Codigo.capaDatos
             int idCliente = idCliente_Actual();
             if (isIntranet)
             {
-                return capaCAR_intranet.BorrarCarrito(idCliente, lrc_codSucursal, Constantes.cTipo_CarritoDiferido, Constantes.cAccionCarrito_VACIAR);
+                Usuario user = (Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"];
+                return capaCAR_intranet_base.BorrarCarrito(user, idCliente, lrc_codSucursal, Constantes.cTipo_CarritoDiferido, Constantes.cAccionCarrito_VACIAR);
             }
             else
             {
@@ -61,7 +64,8 @@ namespace DKintranet.Codigo.capaDatos
             int idCliente = idCliente_Actual();
             if (isIntranet)
             {
-                return capaCAR_intranet.BorrarCarrito(idCliente, pSucursal, Constantes.cTipo_CarritoTransfers, Constantes.cAccionCarrito_VACIAR);
+                Usuario user = (Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"];
+                return capaCAR_intranet_base.BorrarCarrito(user, idCliente, pSucursal, Constantes.cTipo_CarritoTransfers, Constantes.cAccionCarrito_VACIAR);
             }
             else
             {
@@ -73,39 +77,44 @@ namespace DKintranet.Codigo.capaDatos
             int idCliente = idCliente_Actual();
             if (isIntranet)
             {
-                return capaCAR_intranet.BorrarCarrito(idCliente, pSucursal, Constantes.cTipo_CarritoDiferidoTransfers, Constantes.cAccionCarrito_VACIAR);
+                Usuario user = (Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"];
+                return capaCAR_intranet_base.BorrarCarrito(user, idCliente, pSucursal, Constantes.cTipo_CarritoDiferidoTransfers, Constantes.cAccionCarrito_VACIAR);
             }
             else
             {
-                return capaCAR.BorrarCarrito(idCliente, pSucursal, Constantes.cTipo_CarritoDiferidoTransfers, Constantes.cAccionCarrito_VACIAR);
+                return capaCAR_base.BorrarCarrito(idCliente, pSucursal, Constantes.cTipo_CarritoDiferidoTransfers, Constantes.cAccionCarrito_VACIAR);
             }
         }
         public static void GuardarPedidoBorrarCarrito(List<cProductosGenerico> pListaProductos, int car_id, string pSucursal, string pTipo, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, bool pIsUrgente)
         {
-            capaCAR.BorrarCarritoPorId_SleepTimer(car_id, Constantes.cAccionCarrito_TOMAR);
+            capaCAR_base.BorrarCarritoPorId_SleepTimer(car_id, Constantes.cAccionCarrito_TOMAR);
             capaCAR.guardarPedido(pListaProductos, car_id, pSucursal, pTipo, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pIsUrgente);
         }
         public static void guardarPedido_base_decision(string strXML, int car_id, string codSucursal, string pTipo, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, bool pIsUrgente)
         {
             if (isIntranet)
             {
-                capaCAR_intranet.guardarPedido_base(strXML, car_id, codSucursal, pTipo, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pIsUrgente);
+                Usuario user = (Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"];
+                int usu_codCliente = (int)((Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente;
+                capaCAR_intranet_base.guardarPedido_base(user, usu_codCliente, strXML, car_id, codSucursal, pTipo, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pIsUrgente);
             }
             else
             {
-                capaCAR.guardarPedido_base(strXML, car_id, codSucursal, pTipo, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pIsUrgente);
+                Usuario user = (Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"];
+                capaCAR_base.guardarPedido_base(user.id, strXML, car_id, codSucursal, pTipo, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pIsUrgente);
             }
         }
         public static void GuardarPedidoBorrarCarrito(cCarrito pCarrito, string pTipo, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, bool pIsUrgente)
         {
-            capaCAR.BorrarCarritoPorId_SleepTimer(pCarrito.car_id, Constantes.cAccionCarrito_TOMAR);
+            capaCAR_base.BorrarCarritoPorId_SleepTimer(pCarrito.car_id, Constantes.cAccionCarrito_TOMAR);
             capaCAR.guardarPedido(pCarrito, pTipo, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pIsUrgente);
         }
         public static cSucursalCarritoTransfer RecuperarCarritosTransferPorIdClienteIdSucursal(cClientes pCliente, string pCodSucursal, string pTipo)
         {
             if (isIntranet)
             {
-                return capaCAR_intranet.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(pCliente, pTipo).Where(x => x.Sucursal == pCodSucursal).FirstOrDefault();
+                Usuario user = (Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"];
+                return capaCAR_intranet_base.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(user, pCliente, pTipo).Where(x => x.Sucursal == pCodSucursal).FirstOrDefault();
             }
             else
             {
@@ -116,14 +125,14 @@ namespace DKintranet.Codigo.capaDatos
         {
             if (isIntranet)
             {
-                return capaCAR_intranet.AgregarProductosTransfersAlCarrito(pListaProductosMasCantidad, pIdCliente, pIdUsuario, pIdTransfers, pCodSucursal, pTipo);
+                return capaCAR_intranet_base.AgregarProductosTransfersAlCarrito(pListaProductosMasCantidad, pIdCliente, pIdUsuario, pIdTransfers, pCodSucursal, pTipo);
             }
             else
             {
                 if (WebService.VerificarPermisos(WebService.CredencialAutenticacion))
                 {
-                    DataTable pTablaDetalle = FuncionesPersonalizadas.ConvertProductosAndCantidadToDataTable(pListaProductosMasCantidad);
-                    return capaCAR.AgregarProductosTransfersAlCarrito(pTablaDetalle, pIdCliente, pIdUsuario, pIdTransfers, pCodSucursal, pTipo);
+                    DataTable pTablaDetalle = FuncionesPersonalizadas_base.ConvertProductosAndCantidadToDataTable(pListaProductosMasCantidad);
+                    return capaCAR_base.AgregarProductosTransfersAlCarrito(pTablaDetalle, pIdCliente, pIdUsuario, pIdTransfers, pCodSucursal, pTipo);
                 }
                 return false;
             }
@@ -132,22 +141,22 @@ namespace DKintranet.Codigo.capaDatos
         {
             if (isIntranet)
             {
-                return capaCAR_intranet.CargarCarritoDiferido(pSucursal, pIdProducto, pCantidadProducto, pIdCliente, pIdUsuario);
+                return capaCAR_intranet_base.CargarCarritoDiferido(pSucursal, pIdProducto, pCantidadProducto, pIdCliente, pIdUsuario);
             }
             else
             {
-                return capaCAR.CargarCarritoDiferido(pSucursal, pIdProducto, pCantidadProducto, pIdCliente, pIdUsuario);
+                return capaCAR_base.CargarCarritoDiferido(pSucursal, pIdProducto, pCantidadProducto, pIdCliente, pIdUsuario);
             }
         }
         public static bool AgregarProductoAlCarrito(string pSucursal, string pIdProducto, int pCantidadProducto, int pIdCliente, int? pIdUsuario)
         {
             if (isIntranet)
             {
-                return capaCAR_intranet.AgregarProductoAlCarrito(pSucursal, pIdProducto, pCantidadProducto, pIdCliente, pIdUsuario);
+                return capaCAR_intranet_base.AgregarProductoAlCarrito(pSucursal, pIdProducto, pCantidadProducto, pIdCliente, pIdUsuario);
             }
             else
             {
-                return capaCAR.AgregarProductoAlCarrito(pSucursal, pIdProducto, pCantidadProducto, pIdCliente, pIdUsuario);
+                return capaCAR_base.AgregarProductoAlCarrito(pSucursal, pIdProducto, pCantidadProducto, pIdCliente, pIdUsuario);
             }
         }
         public static List<cCarrito> RecuperarCarritosDiferidosPorCliente(int pIdCliente)
@@ -162,22 +171,24 @@ namespace DKintranet.Codigo.capaDatos
         {
             if (isIntranet)
             {
-                return capaCAR_intranet.RecuperarCarritosPorSucursalYProductos(pIdCliente);
+                Usuario user = (Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"];
+                return capaCAR_intranet_base.RecuperarCarritosPorSucursalYProductos(user, pIdCliente);
             }
             else
             {
-                return capaCAR.RecuperarCarritosPorSucursalYProductos(pIdCliente);
+                return capaCAR_base.RecuperarCarritosPorSucursalYProductos(pIdCliente);
             }
         }
         public static DataSet RecuperarCarritosDiferidosPorCliente_decision(int pIdCliente)
         {
             if (isIntranet)
             {
-                return capaCAR_intranet.RecuperarCarritosDiferidosPorCliente(pIdCliente);
+                Usuario user = (Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"];
+                return capaCAR_intranet_base.RecuperarCarritosDiferidosPorCliente(user, pIdCliente);
             }
             else
             {
-                return capaCAR.RecuperarCarritosDiferidosPorCliente(pIdCliente);
+                return capaCAR_base.RecuperarCarritosDiferidosPorCliente(pIdCliente);
             }
         }
 
@@ -185,7 +196,8 @@ namespace DKintranet.Codigo.capaDatos
         {
             if (isIntranet)
             {
-                return capaCAR_intranet.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(pCliente, pTipo);
+                Usuario user = (Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"];
+                return capaCAR_intranet_base.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(user, pCliente, pTipo);
             }
             else
             {
@@ -197,7 +209,8 @@ namespace DKintranet.Codigo.capaDatos
             cSucursalCarritoTransfer o = null;
             if (isIntranet)
             {
-                o = capaCAR_intranet.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(pCliente, pTipo).Where(x => x.Sucursal == pIdSucursal).FirstOrDefault();
+                Usuario user = (Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"];
+                o = capaCAR_intranet_base.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(user, pCliente, pTipo).Where(x => x.Sucursal == pIdSucursal).FirstOrDefault();
             }
             else
             {

@@ -29,10 +29,10 @@
             <div class="separate"></div>
             <a href="/devoluciones/DevolucionesFacturadoNoEnviado" @{WriteLiteral(classDevolucionesFNE);}><i class="fa fa-file-text" title="DEVOLUCIONES FACTURADO NO ENVIADO"></i><span class="hidden-sm hidden-xs">HISTORIAL FACTURADO NO ENVIADO</span></a>
             @{
-                if (((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR &&
-                    ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL &&
-                    ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL &&
-                    ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
+                if (((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR &&
+                    ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL &&
+                    ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL &&
+                    ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
                 {
                     <div class="separate"></div>
                     <a href="/devoluciones/ReclamoFacturadoNoEnviado" @{WriteLiteral(classReclamo);}><i class="fa fa-file-o" title="DEVOLUCIÓN NORMAL"></i><span class="hidden-sm hidden-xs">RECLAMAR FACTURADO NO ENVIADO</span></a>

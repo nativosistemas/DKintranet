@@ -7,7 +7,7 @@
         resultadoHtmlCarritosTransfer += "</div>";
 
 
-        List<DKintranet.Codigo.capaDatos.cSucursal> listaSucursalDependiente = WebService.RecuperarTodasSucursalesDependientes().Where(x => x.sde_sucursal == ((DKbase.web.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_codsuc).ToList();
+        List<DKbase.web.cSucursal> listaSucursalDependiente = WebService.RecuperarTodasSucursalesDependientes().Where(x => x.sde_sucursal == ((DKbase.web.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_codsuc).ToList();
         //// Inicio S7
         List<string> ListaSucursal = DKintranet.Codigo.clases.FuncionesPersonalizadas.RecuperarSucursalesParaBuscadorDeCliente();
         //// Fin S7
@@ -15,10 +15,10 @@
             resultadoHtmlCarritosTransfer += "<div class=\"div_cierre_reparto\" id=\"divContenedorBaseCuentaRegresiva\" >";
             resultadoHtmlCarritosTransfer += "</div>";
         }
-        if (((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR &&
-            ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL &&
-            ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL &&
-            ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
+        if (((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR &&
+            ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL &&
+            ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL &&
+            ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
         {
             foreach (string item in ListaSucursal)
             {

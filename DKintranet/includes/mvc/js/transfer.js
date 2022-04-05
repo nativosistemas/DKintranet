@@ -28,23 +28,32 @@ function OnCallBackAgregarProductosTransfersAlCarritoDesdeBuscador(args) {
     //var resultArgs = eval('(' + args + ')');
     var resultArgs = args;
     if (resultArgs.isNotError) {
-        var isEncontroEnLista = false;
-        for (var i = 0; i < listaCarritoTransferPorSucursal.length; i++) {
-            if (listaCarritoTransferPorSucursal[i].Sucursal == resultArgs.oSucursalCarritoTransfer.Sucursal) {
-                isEncontroEnLista = true;
-                listaCarritoTransferPorSucursal[i] = resultArgs.oSucursalCarritoTransfer;
-                $('#divContenedorBaseTransfer_' + resultArgs.oSucursalCarritoTransfer.Sucursal).html(AgregarCarritoTransfersPorSucursalHtml(i));
-                setScrollFinDeCarritoTransfer(i);
-                break;
+        if (resultArgs.oSucursalCarritoTransfer == null) {
+            for (var i = 0; i < listaCarritoTransferPorSucursal.length; i++) {
+                if (listaCarritoTransferPorSucursal[i].Sucursal == resultArgs.codSucursal) {
+                    listaCarritoTransferPorSucursal[i].Sucursal = '';
+                    break;
+                }
             }
+        } else {
+            var isEncontroEnLista = false;
+            for (var i = 0; i < listaCarritoTransferPorSucursal.length; i++) {
+                if (listaCarritoTransferPorSucursal[i].Sucursal == resultArgs.oSucursalCarritoTransfer.Sucursal) {
+                    isEncontroEnLista = true;
+                    listaCarritoTransferPorSucursal[i] = resultArgs.oSucursalCarritoTransfer;
+                    $('#divContenedorBaseTransfer_' + resultArgs.oSucursalCarritoTransfer.Sucursal).html(AgregarCarritoTransfersPorSucursalHtml(i));
+                    setScrollFinDeCarritoTransfer(i);
+                    break;
+                }
+            }
+            if (!isEncontroEnLista) {
+                listaCarritoTransferPorSucursal.push(resultArgs.oSucursalCarritoTransfer);
+                var indexTransferADD = listaCarritoTransferPorSucursal.length - 1;
+                $('#divContenedorBaseTransfer_' + resultArgs.oSucursalCarritoTransfer.Sucursal).html(AgregarCarritoTransfersPorSucursalHtml(indexTransferADD));
+                setScrollFinDeCarritoTransfer(indexTransferADD);
+            }
+            funActulizarHtmlCredito();
         }
-        if (!isEncontroEnLista) {
-            listaCarritoTransferPorSucursal.push(resultArgs.oSucursalCarritoTransfer);
-            var indexTransferADD = listaCarritoTransferPorSucursal.length - 1;
-            $('#divContenedorBaseTransfer_' + resultArgs.oSucursalCarritoTransfer.Sucursal).html(AgregarCarritoTransfersPorSucursalHtml(indexTransferADD));
-            setScrollFinDeCarritoTransfer(indexTransferADD);
-        }
-        funActulizarHtmlCredito();
     } else {
         var msgProductos = '<ul>';
         for (var i = 0; i < resultArgs.listProductosAndCantidadError.length; i++) {

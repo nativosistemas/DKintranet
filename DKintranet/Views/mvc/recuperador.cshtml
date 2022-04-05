@@ -6,7 +6,7 @@
 @section sectionHidden{
     @{
         string resultado = string.Empty;
-        List<DKintranet.Codigo.capaDatos.cSucursal> listaSucursal = WebService.RecuperarTodasSucursales();
+        List<DKbase.web.cSucursal> listaSucursal = WebService.RecuperarTodasSucursales();
         resultado += "<input type=\"hidden\" id=\"hiddenListaSucursalesInfo\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(listaSucursal)) + "\" />";
 
         if (System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_Tipo"] != null)

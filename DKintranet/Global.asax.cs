@@ -1,4 +1,5 @@
 ﻿using DKbase.generales;
+using DKbase.web;
 using DKbase.web.capaDatos;
 using System;
 using System.Collections.Generic;
@@ -48,7 +49,7 @@ namespace DKintranet
             if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null)
             {
                 Parameters += "<" + "idUsuarioLog" + ">";
-                Parameters += ((Codigo.capaDatos.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).idUsuarioLog;
+                Parameters += ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).idUsuarioLog;
                 Parameters += "</" + "idUsuarioLog" + ">";
             }
             // Codigo.clases.FuncionesPersonalizadas.grabarLog(System.Reflection.MethodBase.GetCurrentMethod(), exception, DateTime.Now, login, codigoCliente, idUsuarioLog);

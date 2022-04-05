@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using DKbase.web;
 using DKintranet.Codigo.clases;
 
 namespace DKintranet.admin.pages
@@ -57,7 +58,7 @@ namespace DKintranet.admin.pages
         public override void Modificar(int pIdUsuario)
         {
             Session["GestionUsuario_Usu_codigo"] = pIdUsuario;
-            DKintranet.Codigo.capaDatos.cUsuario usuario = DKintranet.Codigo.clases.Seguridad.RecuperarUsuarioPorId(pIdUsuario);
+            cUsuario usuario = DKintranet.Codigo.clases.Seguridad.RecuperarUsuarioPorId(pIdUsuario);
             txtNombre.Text = usuario.usu_nombre;
             txtApellido.Text = usuario.usu_apellido;
             txtObservaciones1.Text = usuario.usu_observacion;
@@ -108,8 +109,8 @@ namespace DKintranet.admin.pages
         {
             if (Session["BaseAdmin_Usuario"] != null)
             {
-                int codigoUsuarioEnSession = ((DKintranet.Codigo.capaDatos.Usuario)Session["BaseAdmin_Usuario"]).id;
-                DKintranet.Codigo.capaDatos.cUsuario usuario = DKintranet.Codigo.clases.Seguridad.RecuperarUsuarioPorId(pIdUsuario);
+                int codigoUsuarioEnSession = ((Usuario)Session["BaseAdmin_Usuario"]).id;
+                cUsuario usuario = DKintranet.Codigo.clases.Seguridad.RecuperarUsuarioPorId(pIdUsuario);
                 int estadoUsuario = usuario.usu_estado == Constantes.cESTADO_ACTIVO ? Constantes.cESTADO_INACTIVO : Constantes.cESTADO_ACTIVO;
                 DKintranet.Codigo.clases.Seguridad.CambiarEstadoUsuarioPorId(usuario.usu_codigo, estadoUsuario, codigoUsuarioEnSession);
                 gv_datos.DataBind();
@@ -132,7 +133,7 @@ namespace DKintranet.admin.pages
                     if ((codUsuario == 0 && DKintranet.Codigo.clases.cBaseAdmin.isAgregar(consPalabraClave)) || (codUsuario != 0 && DKintranet.Codigo.clases.cBaseAdmin.isEditar(consPalabraClave)))
                     {
                         int? codCliente = Convert.ToInt32(cmbCliente.SelectedValue) != -1 ? (int?)Convert.ToInt32(cmbCliente.SelectedValue) : null;
-                        int? codigoUsuarioEnSession = ((DKintranet.Codigo.capaDatos.Usuario)Session["BaseAdmin_Usuario"]).id;
+                        int? codigoUsuarioEnSession = ((Usuario)Session["BaseAdmin_Usuario"]).id;
                         DKintranet.Codigo.clases.Seguridad.InsertarActualizarUsuario(codUsuario, Convert.ToInt32(cmbRol.SelectedValue), codCliente, txtNombre.Text, txtApellido.Text, txtMail.Text, txtLogin.Text, txtContraseña.Text, txtObservaciones1.Text, codigoUsuarioEnSession);
                     }
                 }
@@ -167,8 +168,8 @@ namespace DKintranet.admin.pages
         {
             if (Session["GestionUsuario_Usu_codigo"] != null && Session["BaseAdmin_Usuario"] != null)
             {
-                int codigoUsuarioEnSession = ((DKintranet.Codigo.capaDatos.Usuario)Session["BaseAdmin_Usuario"]).id;
-                DKintranet.Codigo.capaDatos.cUsuario objUsuario = null;
+                int codigoUsuarioEnSession = ((Usuario)Session["BaseAdmin_Usuario"]).id;
+                cUsuario objUsuario = null;
                 DKbase.web.capaDatos.cClientes objCliente = null;
                 objUsuario = DKintranet.Codigo.clases.Seguridad.RecuperarUsuarioPorId(Convert.ToInt32(Session["GestionUsuario_Usu_codigo"]));
                 DKintranet.Codigo.clases.Seguridad.CambiarContraseñaUsuario(Convert.ToInt32(Session["GestionUsuario_Usu_codigo"]), txtContraseñaCambiar.Text, codigoUsuarioEnSession);

@@ -61,9 +61,14 @@
         strHTML += '<td class="col-lg-7 col-md-3 col-sm-3 text-left ' + htmlColor + ' tdProducto' + listaCarritos[pIndexCarrito].codSucursal + '">' + listaCarritos[pIndexCarrito].listaProductos[iProductos].pro_nombre + '</td>';
         strHTML += '<td class="col-lg-2 col-md-1 col-sm-1 col-xs-1 text-center tdCant' + listaCarritos[pIndexCarrito].codSucursal + '">';
         var typeInput = ' type="text" ';
-        if (isMobile())
+        if (isMobile()) if (isMobile()) {
             typeInput = ' type="number" ';
-        strHTML += '<input class="form-shop w_100" id="inputCarrito' + pIndexCarrito + '_' + iProductos + '" ' + typeInput + '  value="' + listaCarritos[pIndexCarrito].listaProductos[iProductos].cantidad + '" onblur="onblurInputCarrito(this)" onfocus="onfocusInputCarrito(this)" onkeypress="return onKeypressCantProductos(event)" />';
+        }
+        var typeInput_SoloTransferFacturacionDirecta = '';
+        if (isSoloTransferFacturacionDirecta(listaCarritos[pIndexCarrito].listaProductos[iProductos], listaCarritos[pIndexCarrito].codSucursal, listaCarritos[pIndexCarrito].listaProductos[iProductos].cantidad, false)) {
+            typeInput_SoloTransferFacturacionDirecta = ' disabled ';
+        }
+        strHTML += '<input ' + typeInput_SoloTransferFacturacionDirecta + ' class="form-shop w_100" id="inputCarrito' + pIndexCarrito + '_' + iProductos + '" ' + typeInput + '  value="' + listaCarritos[pIndexCarrito].listaProductos[iProductos].cantidad + '" onblur="onblurInputCarrito(this)" onfocus="onfocusInputCarrito(this)" onkeypress="return onKeypressCantProductos(event)" />';
         strHTML += '</td>';
         var strHtmlPrecioProducto = '';
         if (listaCarritos[pIndexCarrito].listaProductos[iProductos].stk_stock == 'N') {

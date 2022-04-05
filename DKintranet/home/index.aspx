@@ -281,7 +281,7 @@
                                         <u>C.P.A.</u>: S2001CFM<br />
                                         <u>Conmutador General</u>: 0341-4239234/4239280<br />
                                         <u>Cuentas Corrientes</u>: 0341-4203329 / 0341-4203336<br />
-                                        <u>WhatsApp Ventas Alto Costo</u>: 341-3631749<br />
+                                        <u>WhatsApp Ventas Alto Costo</u>: 341-6100365<br />
                                         <u>E-mail</u>: dkinstitucional@DKintranet.com.ar<br />
                                         <u>Horarios</u>: L a J de 08:00 a 17:00 - Viernes de 08:00 a 16:00<br />
                                     </div>

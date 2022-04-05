@@ -1,4 +1,5 @@
-﻿using DKbase.web.capaDatos;
+﻿using DKbase.web;
+using DKbase.web.capaDatos;
 using DKintranet.Codigo.clases;
 using System;
 using System.Collections.Generic;
@@ -97,7 +98,7 @@ namespace DKintranet.Codigo.capaDatos
         {
             if (WebService.VerificarPermisos(WebService.CredencialAutenticacion))
             {
-                return capaCAR.BorrarCarrito(pIdCliente, pSucursal, Constantes.cTipo_CarritoTransfers, pAccion);
+                return capaCAR_base.BorrarCarrito(pIdCliente, pSucursal, Constantes.cTipo_CarritoTransfers, pAccion);
             }
             return -1;
         }
@@ -105,7 +106,7 @@ namespace DKintranet.Codigo.capaDatos
         {
             if (WebService.VerificarPermisos(WebService.CredencialAutenticacion))
             {
-                return capaCAR.BorrarCarrito(pIdCliente, pSucursal, Constantes.cTipo_Carrito, pAccion);
+                return capaCAR_base.BorrarCarrito(pIdCliente, pSucursal, Constantes.cTipo_Carrito, pAccion);
             }
             return -1;
         }
@@ -113,7 +114,7 @@ namespace DKintranet.Codigo.capaDatos
         {
             if (WebService.VerificarPermisos(WebService.CredencialAutenticacion))
             {
-                return capaCAR.BorrarCarrito(pIdCliente, pSucursal, Constantes.cTipo_CarritoDiferido, pAccion);
+                return capaCAR_base.BorrarCarrito(pIdCliente, pSucursal, Constantes.cTipo_CarritoDiferido, pAccion);
             }
             return -1;
         }
@@ -122,8 +123,8 @@ namespace DKintranet.Codigo.capaDatos
             if (WebService.VerificarPermisos(WebService.CredencialAutenticacion))
             {
 
-                DataSet dsProductoCarrito = capaCAR.RecuperarCarritoTransferPorIdCliente(pCliente.cli_codigo, pTipo);
-                return WebService.convertDataSetToSucursalCarritoTransfer(pCliente, dsProductoCarrito);
+                DataSet dsProductoCarrito = capaCAR_base.RecuperarCarritoTransferPorIdCliente(pCliente.cli_codigo, pTipo);
+                return acceso.convertDataSetToSucursalCarritoTransfer(pCliente, dsProductoCarrito);
             }
             // sin no valida la credencial
             return null;
@@ -146,7 +147,7 @@ namespace DKintranet.Codigo.capaDatos
                 strXML += nodo.ToString();
             }
             strXML += "</Root>";
-            return capaCAR.SubirPedido(strXML, pIdCliente, pIdUsuario, Constantes.cTipo_Carrito, Constantes.cTipo_CarritoTransfers);
+            return capaCAR_base.SubirPedido(strXML, pIdCliente, pIdUsuario, Constantes.cTipo_Carrito, Constantes.cTipo_CarritoTransfers);
         }
         public static decimal getSumaCarritosOtraSolapa(string pTipo)
         {
@@ -154,7 +155,7 @@ namespace DKintranet.Codigo.capaDatos
             if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
                 DKbase.web.capaDatos.cClientes cliente = (DKbase.web.capaDatos.cClientes)HttpContext.Current.Session["clientesDefault_Cliente"];
-                List<DKintranet.Codigo.clases.cCarrito> listaCarrito = new List<DKintranet.Codigo.clases.cCarrito>();
+                List<cCarrito> listaCarrito = new List<cCarrito>();
                 List<cSucursalCarritoTransfer> listaCarritoTransfer = new List<cSucursalCarritoTransfer>();
                 if (pTipo == DKintranet.Codigo.clases.Constantes.cTipo_Carrito)
                 {              

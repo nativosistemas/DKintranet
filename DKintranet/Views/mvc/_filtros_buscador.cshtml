@@ -18,10 +18,10 @@
 }
 
 @{
-    if (((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR ||
-        ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL ||
-        ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL ||
-        ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
+    if (((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR ||
+        ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL ||
+        ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL ||
+        ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
     {
         <style>
             input[type=number], .cant_trasf_combo, .btn_confirmar, .cssFocusCantProdCarrito {
@@ -56,10 +56,10 @@
     <div class="col-lg-5 col-xs-6 no-padding"><div class="clear10 visible-xs"></div> <a id="opciones_avanzadas" class="btn_a14-g" href="#">Opciones avanzadas<i id="eye_opciones_avanzadas" class="fa fa-eye-slash"></i></a></div>
     <div class="col-lg-7 no-padding text-right hidden-xs"><div class="div-pt_buscador no-margin-r">Sin stock</div><div class="pt_sin_stock pt_buscador"></div><div class="div-pt_buscador">Crítico</div><div class="pt_critico pt_buscador"></div><div class="div-pt_buscador">Stock</div><div class="pt_stock pt_buscador"></div></div>
     @{
-        if (((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR &&
-            ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL &&
-            ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL &&
-            ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
+        if (((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR &&
+            ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL &&
+            ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL &&
+            ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
         {
             <div class="col-xs-6 no-padding text-right visible-xs"><a class="btn_carrito_cant" href=@{ WriteLiteral(hrefCarritoGenerico);}>Carrito<span id="spanCarritoCantidad"></span></a></div>
         }

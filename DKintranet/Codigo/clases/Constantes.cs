@@ -8,12 +8,6 @@ namespace DKintranet.Codigo.clases
 
     public static class Constantes
     {
-        //isDesdeBuscador;
-        //isDesdeBuscador_OfertaTransfer
-        //isSubirArchivo
-        //isDesdeTabla
-    // public  enum CargarProductosBuscador { isDesdeBuscador = 1, isDesdeBuscador_OfertaTransfer, isSubirArchivo, isDesdeTabla, isRecuperadorFaltaCredito };
-
         public static string cSQL_INSERT
         {
             get { return "INSERT"; }
@@ -292,34 +286,6 @@ namespace DKintranet.Codigo.clases
         public static string cRaizArchivos
         {
             get { return System.Configuration.ConfigurationManager.AppSettings["raiz_archivos"].ToString(); }
-        }
-        public static string cDIASEMANA_Lunes
-        {
-            get { return "LU"; }
-        }
-        public static string cDIASEMANA_Martes
-        {
-            get { return "MA"; }
-        }
-        public static string cDIASEMANA_Miercoles
-        {
-            get { return "MI"; }
-        }
-        public static string cDIASEMANA_Jueves
-        {
-            get { return "JU"; }
-        }
-        public static string cDIASEMANA_Viernes
-        {
-            get { return "VI"; }
-        }
-        public static string cDIASEMANA_Sabado
-        {
-            get { return "SA"; }
-        }
-        public static string cDIASEMANA_Domingo
-        {
-            get { return "DO"; }
         }
         public static string cESTADO_HAB
         {

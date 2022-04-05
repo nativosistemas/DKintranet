@@ -9,6 +9,7 @@ using DKintranet.Codigo.clases;
 using DKintranet.Codigo.capaDatos;
 using System.IO;
 using DKbase.web.capaDatos;
+using DKbase.web;
 
 namespace DKintranet.admin.pages
 {

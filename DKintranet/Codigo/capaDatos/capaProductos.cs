@@ -13,93 +13,6 @@ namespace DKintranet.Codigo.capaDatos
     /// </summary>
     public class capaProductos
     {
-        public static DataSet RecuperarTodosProductosBuscadorV3(string pTextoBuscador, List<string> pListaColumna, string pSucursalPerteneciente, int? pIdCliente, string pCli_codprov)
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("Productos.spRecuperarTodosProductosBuscadorV3", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
-
-            SqlParameter paWhere = cmdComandoInicio.Parameters.Add("@Where", SqlDbType.NVarChar, 4000);
-            paWhere.Value = pListaColumna == null ? FuncionesPersonalizadas.GenerarWhereLikeConColumna(pTextoBuscador, "pop_columnaWhereDefault") : FuncionesPersonalizadas.GenerarWhereLikeConVariasColumnas(pTextoBuscador, pListaColumna);
-
-            SqlParameter paWherePrimeraOrdenacion = cmdComandoInicio.Parameters.Add("@WherePrimeraOrdenacion", SqlDbType.NVarChar, 4000);
-            paWherePrimeraOrdenacion.Value = FuncionesPersonalizadas.GenerarWhereLikeConColumna_EmpiezaCon(pTextoBuscador, "pro_nombre");
-
-            SqlParameter paSucursal = cmdComandoInicio.Parameters.Add("@Sucursal", SqlDbType.NVarChar, 2);
-            SqlParameter paIdCliente = cmdComandoInicio.Parameters.Add("@codCliente", SqlDbType.Int);
-            SqlParameter paCli_codprov = cmdComandoInicio.Parameters.Add("@cli_codprov", SqlDbType.NVarChar, 75);
-            paSucursal.Value = pSucursalPerteneciente;
-            if (pIdCliente == null)
-            {
-                paIdCliente.Value = DBNull.Value;
-            }
-            else
-            {
-                paIdCliente.Value = (int)pIdCliente;
-            }
-            paCli_codprov.Value = pCli_codprov;
-            try
-            {
-                Conn.Open();
-                DataSet dsResultado = new DataSet();
-                SqlDataAdapter da = new SqlDataAdapter(cmdComandoInicio);
-                da.Fill(dsResultado, "ProductosBuscador");
-                return dsResultado;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
-        public static DataSet RecuperarTodosProductosBuscadorOferta(int pIdOferta, string pSucursalPerteneciente, int? pIdCliente, string pCli_codprov)
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("Productos.spRecuperarTodosProductosBuscadorOferta", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
-
-            SqlParameter paIdOferta = cmdComandoInicio.Parameters.Add("@ofe_idOferta", SqlDbType.Int);
-
-            SqlParameter paSucursal = cmdComandoInicio.Parameters.Add("@Sucursal", SqlDbType.NVarChar, 2);
-            SqlParameter paIdCliente = cmdComandoInicio.Parameters.Add("@codCliente", SqlDbType.Int);
-            SqlParameter paCli_codprov = cmdComandoInicio.Parameters.Add("@cli_codprov", SqlDbType.NVarChar, 75);
-            paIdOferta.Value = pIdOferta;
-            paSucursal.Value = pSucursalPerteneciente;
-            if (pIdCliente == null)
-            {
-                paIdCliente.Value = DBNull.Value;
-            }
-            else
-            {
-                paIdCliente.Value = (int)pIdCliente;
-            }
-            paCli_codprov.Value = pCli_codprov;
-            try
-            {
-                Conn.Open();
-                DataSet dsResultado = new DataSet();
-                SqlDataAdapter da = new SqlDataAdapter(cmdComandoInicio);
-                da.Fill(dsResultado, "ProductosBuscador");
-                return dsResultado;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
         public static DataSet RecuperarTodosProductosBuscadorV2(string pTextoBuscador, string pSucursalPerteneciente, int? pIdCliente, string pCli_codprov)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
@@ -108,12 +21,12 @@ namespace DKintranet.Codigo.capaDatos
 
             SqlParameter paWhere = cmdComandoInicio.Parameters.Add("@Where", SqlDbType.NVarChar, 4000);
             string strWhere = string.Empty;
-            strWhere += FuncionesPersonalizadas.GenerarWhereLikeConColumna(pTextoBuscador, "pop_columnaWhereDefault"); // pop_columnaWhere
+            strWhere += DKbase.web.FuncionesPersonalizadas_base.GenerarWhereLikeConColumna(pTextoBuscador, "pop_columnaWhereDefault"); // pop_columnaWhere
             paWhere.Value = strWhere;
 
             SqlParameter paWherePrimeraOrdenacion = cmdComandoInicio.Parameters.Add("@WherePrimeraOrdenacion", SqlDbType.NVarChar, 4000);
             string strWherePrimeraOrdenacion = string.Empty;
-            strWherePrimeraOrdenacion += FuncionesPersonalizadas.GenerarWhereLikeConColumna_EmpiezaCon(pTextoBuscador, "pro_nombre");
+            strWherePrimeraOrdenacion += DKbase.web.FuncionesPersonalizadas_base.GenerarWhereLikeConColumna_EmpiezaCon(pTextoBuscador, "pro_nombre");
             paWherePrimeraOrdenacion.Value = strWherePrimeraOrdenacion;
 
 
@@ -160,7 +73,7 @@ namespace DKintranet.Codigo.capaDatos
             SqlParameter paWhere = cmdComandoInicio.Parameters.Add("@Where", SqlDbType.NVarChar, 4000);
             string strWhere = string.Empty;
 
-            strWhere += FuncionesPersonalizadas.GenerarWhereLikeConColumna(pTextoBuscador, "pop_columnaWhereDefault"); // pop_columnaWhere
+            strWhere += DKbase.web.FuncionesPersonalizadas_base.GenerarWhereLikeConColumna(pTextoBuscador, "pop_columnaWhereDefault"); // pop_columnaWhere
 
             //strWhere += FuncionesPersonalizadas.GenerarWhereLikeConColumna(pTextoBuscador, "pro_nombre"); // Nombre producto
             //strWhere +=  " OR " + FuncionesPersonalizadas.GenerarWhereLikeConColumna(pTextoBuscador, "pro_codigo"); // Código
@@ -211,12 +124,12 @@ namespace DKintranet.Codigo.capaDatos
 
             SqlParameter paWhere = cmdComandoInicio.Parameters.Add("@Where", SqlDbType.NVarChar, 4000);
             string strWhere = string.Empty;
-            strWhere += FuncionesPersonalizadas.GenerarWhereLikeConVariasColumnas(pTextoBuscador, pListaColumna);
+            strWhere += DKbase.web.FuncionesPersonalizadas_base.GenerarWhereLikeConVariasColumnas(pTextoBuscador, pListaColumna);
             paWhere.Value = strWhere;
 
             SqlParameter paWherePrimeraOrdenacion = cmdComandoInicio.Parameters.Add("@WherePrimeraOrdenacion", SqlDbType.NVarChar, 4000);
             string strWherePrimeraOrdenacion = string.Empty;
-            strWherePrimeraOrdenacion += FuncionesPersonalizadas.GenerarWhereLikeConColumna_EmpiezaCon(pTextoBuscador, "pro_nombre");
+            strWherePrimeraOrdenacion += DKbase.web.FuncionesPersonalizadas_base.GenerarWhereLikeConColumna_EmpiezaCon(pTextoBuscador, "pro_nombre");
             paWherePrimeraOrdenacion.Value = strWherePrimeraOrdenacion;
 
             SqlParameter paSucursal = cmdComandoInicio.Parameters.Add("@Sucursal", SqlDbType.NVarChar, 2);
@@ -261,7 +174,7 @@ namespace DKintranet.Codigo.capaDatos
             SqlParameter paWhere = cmdComandoInicio.Parameters.Add("@Where", SqlDbType.NVarChar, 4000);
             string strWhere = string.Empty;
 
-            strWhere += FuncionesPersonalizadas.GenerarWhereLikeConVariasColumnas(pTextoBuscador, pListaColumna);
+            strWhere += DKbase.web.FuncionesPersonalizadas_base.GenerarWhereLikeConVariasColumnas(pTextoBuscador, pListaColumna);
             paWhere.Value = strWhere;
 
             SqlParameter paSucursal = cmdComandoInicio.Parameters.Add("@Sucursal", SqlDbType.NVarChar, 2);
@@ -384,7 +297,7 @@ namespace DKintranet.Codigo.capaDatos
             SqlParameter paWhere = cmdComandoInicio.Parameters.Add("@Where", SqlDbType.NVarChar, 4000);
             string strWhere = string.Empty;
 
-            strWhere += FuncionesPersonalizadas.GenerarWhereLikeConColumna(pTextoBuscador, "pop_columnaWhereDefault"); //pop_columnaWhere
+            strWhere += DKbase.web.FuncionesPersonalizadas_base.GenerarWhereLikeConColumna(pTextoBuscador, "pop_columnaWhereDefault"); //pop_columnaWhere
 
             paWhere.Value = strWhere;
 
@@ -736,36 +649,7 @@ namespace DKintranet.Codigo.capaDatos
         }
         public static DataTable RecuperarStockPorProductosAndSucursal(DataTable pTablaSucursales, DataTable pTablaProductos)
         {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("Productos.spRecuperarStockPorProductosAndSucursal", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
-
-            SqlParameter paTabla_Sucursales = cmdComandoInicio.Parameters.Add("@Tabla_Sucursales", SqlDbType.Structured);
-            SqlParameter paTabla_Productos = cmdComandoInicio.Parameters.Add("@Tabla_Productos", SqlDbType.Structured);
-            paTabla_Sucursales.Value = pTablaSucursales;
-            paTabla_Productos.Value = pTablaProductos;
-
-            try
-            {
-                Conn.Open();
-                DataTable dt = new DataTable();
-                SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
-                dt.Load(LectorSQLdata);
-                return dt;
-
-            }
-            catch (Exception ex)
-            {
-                //throw ex;
-                return null;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
+            return DKbase.web.capaDatos.capaProductos_base.RecuperarStockPorProductosAndSucursal(pTablaSucursales, pTablaProductos);
         }
         // Nuevo
         public static DataTable ObtenerProductosImagenesBusqueda(string pTxtBuscador)
@@ -778,7 +662,7 @@ namespace DKintranet.Codigo.capaDatos
             pListaColumna.Add("pro_nombre");
             pListaColumna.Add("pro_codigo");
             pListaColumna.Add("pro_codigobarra");
-            paWhere.Value = FuncionesPersonalizadas.GenerarWhereLikeConVariasColumnas(pTxtBuscador, pListaColumna);
+            paWhere.Value = DKbase.web.FuncionesPersonalizadas_base.GenerarWhereLikeConVariasColumnas(pTxtBuscador, pListaColumna);
             try
             {
                 Conn.Open();

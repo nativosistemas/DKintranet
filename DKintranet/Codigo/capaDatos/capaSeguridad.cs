@@ -9,20 +9,6 @@ using DKintranet.Codigo.clases;
 
 namespace DKintranet.Codigo.capaDatos
 {
-    public class Usuario:DKbase.web.Usuario
-    {
-        public Usuario()
-        {
-            id = -1;
-            //User = string.Empty;
-            NombreYApellido = string.Empty;
-            idUsuarioLog = -1;
-        }
-
-}
-    public class cUsuario : DKbase.web.cUsuario
-    {
-    }
     public class cRegla : DKbase.web.cRegla
     {
         public cRegla()
@@ -39,48 +25,6 @@ namespace DKintranet.Codigo.capaDatos
     {
 
 
-    }
-    public class ListaAcccionesRol
-    {
-        public ListaAcccionesRol()
-        {
-            lista = new List<AcccionesRol>();
-        }
-        public List<AcccionesRol> lista { get; set; }
-
-        public void Agregar(AcccionesRol pAcccionesRol)
-        {
-            lista.Add(pAcccionesRol);
-        }
-        public AcccionesRol Buscar(string pPalabraClave)
-        {
-            AcccionesRol resultado = new AcccionesRol();
-            foreach (AcccionesRol item in lista)
-            {
-                if (item.palabraClave == pPalabraClave)
-                {
-                    resultado = item;
-                    break;
-                }
-            }
-            return resultado;
-        }
-        public bool isActivo(string pPalabraClave)
-        {
-            return Buscar(pPalabraClave).isActivo;
-        }
-        public bool isAgregar(string pPalabraClave)
-        {
-            return Buscar(pPalabraClave).isAgregar;
-        }
-        public bool isEditar(string pPalabraClave)
-        {
-            return Buscar(pPalabraClave).isEditar;
-        }
-        public bool isEliminar(string pPalabraClave)
-        {
-            return Buscar(pPalabraClave).isEliminar;
-        }
     }
     [DataContract]
     public class ListaCheck

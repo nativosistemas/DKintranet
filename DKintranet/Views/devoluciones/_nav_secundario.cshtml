@@ -36,10 +36,10 @@
         <div class="nav_sec">
             <a href="/devoluciones/Devoluciones" @{ WriteLiteral(classDevoluciones);}><i class="fa fa-file-text" title="DEVOLUCIONES"></i><span class="hidden-sm hidden-xs">HISTORIAL DE DEVOLUCIONES</span></a>
             @{
-                if (((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR &&
-                    ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL &&
-                    ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL &&
-                    ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
+                if (((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR &&
+                    ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL &&
+                    ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL &&
+                    ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
                 {
                     <div class="separate"></div>
                     <a href="/devoluciones/NuevaDevolucion" @{WriteLiteral(classNuevaDevolucion);}><i class="fa fa-reply" title="DEVOLUCIÓN NORMAL"></i><span class="hidden-sm hidden-xs">DEVOLUCIÓN POR RECLAMO</span></a>

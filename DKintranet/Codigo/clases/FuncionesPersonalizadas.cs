@@ -7,6 +7,7 @@ using System.IO;
 using DKintranet.Codigo.capaDatos;
 using System.Reflection;
 using DKbase.web.capaDatos;
+using DKbase.web;
 
 namespace DKintranet.Codigo.clases
 {
@@ -43,74 +44,6 @@ namespace DKintranet.Codigo.clases
             resultado.AddRange(WebService.RecuperarTodosClientes());
             return resultado;
         }
-        public static string GenerarWhereLikeConColumna(string pTxtBuscador, string pColumna)
-        {
-            string where = string.Empty;
-            string[] palabras = pTxtBuscador.Split(new char[] { ' ' });
-            bool isPrimerWhere = true;
-            foreach (string item in palabras)
-            {
-                if (item != string.Empty)
-                {
-                    if (isPrimerWhere)
-                    {
-                        isPrimerWhere = false;
-                    }
-                    else
-                    {
-                        where += " AND ";
-                    }
-                    where += " " + pColumna + " collate SQL_Latin1_General_Cp1_CI_AI like '%" + item + "%' ";
-                }
-            }
-            return where;
-        }
-        public static string GenerarWhereLikeConColumna_EmpiezaCon(string pTxtBuscador, string pColumna)
-        {
-            string where = string.Empty;
-            string[] palabras = pTxtBuscador.Split(new char[] { ' ' });
-            //bool isPrimerWhere = true;
-            foreach (string item in palabras)
-            {
-                if (item != string.Empty)
-                {
-                    where += " " + pColumna + " collate SQL_Latin1_General_Cp1_CI_AI like '" + item + "%' ";
-                    break;
-                }
-            }
-            return where;
-        }
-        public static string GenerarWhereLikeConVariasColumnas(string pTxtBuscador, List<string> pListaColumna)
-        {
-            string where = string.Empty;
-            string[] palabras = pTxtBuscador.Split(new char[] { ' ' });
-            bool isPrimerWhere = true;
-            foreach (string item in palabras)
-            {
-                if (item != string.Empty)
-                {
-                    if (isPrimerWhere)
-                    {
-                        isPrimerWhere = false;
-                        where += " ( ";
-                    }
-                    else
-                    {
-                        where += " AND ( ";
-                    }
-                    for (int i = 0; i < pListaColumna.Count; i++)
-                    {
-                        if (i != 0)
-                        {
-                            where += " OR ";
-                        }
-                        where += " " + pListaColumna[i] + " collate SQL_Latin1_General_Cp1_CI_AI like '%" + item + "%' ";
-                    }
-                    where += " ) ";
-                }
-            }
-            return where;
-        }
         public static List<string> RecuperarPalabrasYaBuscadaSinRepetir(int? pIdUsuario, string pNombreTabla)
         {
             var listaPalabras = WebService.RecuperarTodasPalabrasYaBuscada(pIdUsuario, pNombreTabla);
@@ -138,35 +71,9 @@ namespace DKintranet.Codigo.clases
             resultado = resultado.Replace("9", string.Empty);
             return resultado;
         }
-        public static DataTable ConvertProductosAndCantidadToDataTable(List<cProductosAndCantidad> pListaProductosMasCantidad)
-        {
-
-            DataTable pTablaDetalle = new DataTable();
-            pTablaDetalle.Columns.Add(new DataColumn("codProducto", System.Type.GetType("System.String")));
-            pTablaDetalle.Columns.Add(new DataColumn("cantidad", System.Type.GetType("System.Int32")));
-            foreach (cProductosAndCantidad item in pListaProductosMasCantidad)
-            {
-                DataRow fila = pTablaDetalle.NewRow();
-                fila["codProducto"] = item.codProductoNombre;
-                fila["cantidad"] = item.cantidad;
-                pTablaDetalle.Rows.Add(fila);
-            }
-            return pTablaDetalle;
-        }
         public static DataTable ConvertNombresSeccionToDataTable(List<string> pListaNombreSeccion)
         {
-            DataTable pTablaDetalle = new DataTable();
-            pTablaDetalle.Columns.Add(new DataColumn("NombreSeccion", System.Type.GetType("System.String")));
-            if (pListaNombreSeccion != null)
-            {
-                foreach (string item in pListaNombreSeccion)
-                {
-                    DataRow fila = pTablaDetalle.NewRow();
-                    fila["NombreSeccion"] = item;
-                    pTablaDetalle.Rows.Add(fila);
-                }
-            }
-            return pTablaDetalle;
+            return DKbase.web.FuncionesPersonalizadas_base.ConvertNombresSeccionToDataTable(pListaNombreSeccion);
         }
         public static DataTable ObtenerDataTableProductosCarritoArchivosPedidos()
         {
@@ -223,26 +130,6 @@ namespace DKintranet.Codigo.clases
                     //List<cMensaje> lista = ((List<cMensaje>)(Session["clientesDefault_ListaMensaje"])).Where(x => x.tme_estado == Convert.ToInt32(Constantes.cESTADO_SINLEER)).ToList();
                     HttpContext.Current.Session["clientesDefault_CantListaMensaje"] = listaMensaje.Where(x => (x.tme_estado == Convert.ToInt32(Constantes.cESTADO_SINLEER) && !x.tme_importante)).ToList().Count;
                     HttpContext.Current.Session["clientesDefault_CantListaMensajeFechaHora"] = DateTime.Now;
-                }
-            }
-        }
-        public static void CargarRecuperadorFaltaActualizado(int pIdCliente)
-        {
-            bool isAgregar = true;
-            if (HttpContext.Current.Session["clientesDefault_CantRecuperadorFaltaFechaHora"] != null)
-            {
-                if (((DateTime)HttpContext.Current.Session["clientesDefault_CantRecuperadorFaltaFechaHora"]) < DateTime.Now.AddMinutes(-5))
-                {
-                    isAgregar = false;
-                }
-            }
-            if (isAgregar && System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
-            {
-                List<cFaltantesConProblemasCrediticiosPadre> listaRecuperador = WebService.RecuperarFaltasProblemasCrediticios(pIdCliente, 1, 14, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc); ;
-                if (listaRecuperador != null)
-                {
-                    HttpContext.Current.Session["clientesDefault_CantRecuperadorFalta"] = listaRecuperador.Count;
-                    HttpContext.Current.Session["clientesDefault_CantRecuperadorFaltaFechaHora"] = DateTime.Now;
                 }
             }
         }
@@ -348,7 +235,7 @@ namespace DKintranet.Codigo.clases
                 {
                     listaProductos.Add(new cProductosAndCantidad { codProductoNombre = item.pro_codigo });
                 }
-                DataTable table = capaDatos.capaProductos.RecuperarStockPorProductosAndSucursal(ConvertNombresSeccionToDataTable(pListaSucursal), ConvertProductosAndCantidadToDataTable(listaProductos));
+                DataTable table = capaDatos.capaProductos.RecuperarStockPorProductosAndSucursal(ConvertNombresSeccionToDataTable(pListaSucursal),DKbase.web.FuncionesPersonalizadas_base.ConvertProductosAndCantidadToDataTable(listaProductos));
                 if (table != null)
                     for (int i = 0; i < pListaProductos.Count; i++)
                     {
@@ -361,7 +248,7 @@ namespace DKintranet.Codigo.clases
         public static List<cProductosGenerico> ActualizarStockListaProductos_SubirArchico(List<string> pListaSucursal, List<cProductosGenerico> pListaProductos, string pSucursalElegida)
         {
             pListaProductos = ActualizarStockListaProductos(pListaSucursal, pListaProductos);
-            List<DKintranet.Codigo.capaDatos.cSucursal> listaSucursal = WebService.RecuperarTodasSucursales();
+            List<cSucursal> listaSucursal = WebService.RecuperarTodasSucursales();
             bool trabajaPerfumeria = true;
             for (int i = 0; i < listaSucursal.Count; i++)
             {
@@ -421,7 +308,7 @@ namespace DKintranet.Codigo.clases
 
                 listaProductos.Add(new cProductosAndCantidad { codProductoNombre = pro_codigo });
                 List<string> ListaSucursal = RecuperarSucursalesParaBuscadorDeCliente();
-                DataTable table = capaDatos.capaProductos.RecuperarStockPorProductosAndSucursal(ConvertNombresSeccionToDataTable(ListaSucursal), ConvertProductosAndCantidadToDataTable(listaProductos));
+                DataTable table = capaDatos.capaProductos.RecuperarStockPorProductosAndSucursal(ConvertNombresSeccionToDataTable(ListaSucursal), DKbase.web.FuncionesPersonalizadas_base.ConvertProductosAndCantidadToDataTable(listaProductos));
                 if (table != null)
                     result = (from r in table.Select("stk_codpro = '" + pro_codigo + "'").AsEnumerable()
                               select new cSucursalStocks { stk_codpro = r["stk_codpro"].ToString(), stk_codsuc = r["stk_codsuc"].ToString(), stk_stock = r["stk_stock"].ToString() }).ToList();
@@ -429,67 +316,13 @@ namespace DKintranet.Codigo.clases
             }
             return result;
         }
-
-        //
-        //
-
-
-
-
         public static cjSonBuscadorProductos RecuperarProductosGeneral_V3(int? pIdOferta, string pTxtBuscador, List<string> pListaColumna, bool pIsOrfeta, bool pIsTransfer)
         {
             cjSonBuscadorProductos resultado = null;
             if (HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
-
-                List<cProductosGenerico> listaProductosBuscador = WebService.RecuperarTodosProductosDesdeBuscadorV3(pIdOferta, pTxtBuscador, pListaColumna, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, pIsOrfeta, pIsTransfer, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codprov);
-                if (listaProductosBuscador != null)
-                {
-                    // TIPO CLIENTE
-                    if (((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_tipo == Constantes.cTipoCliente_Perfumeria) // Solamente perfumeria
-                    {
-                        listaProductosBuscador = listaProductosBuscador.Where(x => x.pro_codtpopro == Constantes.cTIPOPRODUCTO_Perfumeria || x.pro_codtpopro == Constantes.cTIPOPRODUCTO_PerfumeriaCuentaYOrden).ToList();
-                    }
-                    else if (((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_tipo == Constantes.cTipoCliente_Todos) // Todos los productos
-                    {
-                        // Si el cliente no toma perfumeria
-                        if (!((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_tomaPerfumeria)
-                        {
-                            listaProductosBuscador = listaProductosBuscador.Where(x => x.pro_codtpopro != Constantes.cTIPOPRODUCTO_Perfumeria && x.pro_codtpopro != Constantes.cTIPOPRODUCTO_PerfumeriaCuentaYOrden).ToList();
-                        }
-                        // fin Si el cliente no toma perfumeria
-                    }
-                    // FIN TIPO CLIENTE
-                    for (int iPrecioFinal = 0; iPrecioFinal < listaProductosBuscador.Count; iPrecioFinal++)
-                    {
-                        listaProductosBuscador[iPrecioFinal].PrecioFinal = DKbase.web.FuncionesPersonalizadas_base.ObtenerPrecioFinal(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]), listaProductosBuscador[iPrecioFinal]);
-                        listaProductosBuscador[iPrecioFinal].PrecioConDescuentoOferta = DKbase.web.FuncionesPersonalizadas_base.ObtenerPrecioUnitarioConDescuentoOferta(listaProductosBuscador[iPrecioFinal].PrecioFinal, listaProductosBuscador[iPrecioFinal]);
-                    }
-
-                    List<cProductos> listaProductosConImagen = WebService.ObtenerProductosImagenes();
-                    for (int iImagen = 0; iImagen < listaProductosBuscador.Count; iImagen++)
-                    {
-                        cProductos objImagen = listaProductosConImagen.Where(x => x.pro_codigo == listaProductosBuscador[iImagen].pro_codigo).FirstOrDefault();
-                        if (objImagen != null)
-                        {
-                            listaProductosBuscador[iImagen].pri_nombreArchivo = objImagen.pri_nombreArchivo;
-                            listaProductosBuscador[iImagen].pri_ancho_ampliar = objImagen.pri_ancho_ampliar;
-                            listaProductosBuscador[iImagen].pri_alto_ampliar = objImagen.pri_alto_ampliar;
-                            listaProductosBuscador[iImagen].pri_ancho_ampliar_original = objImagen.pri_ancho_ampliar_original;
-                            listaProductosBuscador[iImagen].pri_alto_ampliar_original = objImagen.pri_alto_ampliar_original;
-                        }
-                    }
-
-                    // Inicio 17/02/2016
-                    List<string> ListaSucursal = RecuperarSucursalesParaBuscadorDeCliente();
-                    listaProductosBuscador = ActualizarStockListaProductos(ListaSucursal, listaProductosBuscador);
-                    // Fin 17/02/2016
-
-                    cjSonBuscadorProductos ResultadoObj = new cjSonBuscadorProductos();
-                    ResultadoObj.listaSucursal = ListaSucursal;
-                    ResultadoObj.listaProductos = listaProductosBuscador;
-                    resultado = ResultadoObj;
-                }
+                cClientes oClientes = (cClientes)HttpContext.Current.Session["clientesDefault_Cliente"];
+                resultado = DKbase.web.FuncionesPersonalizadas_base.RecuperarProductosGeneral_V3(oClientes, pIdOferta, pTxtBuscador, pListaColumna, pIsOrfeta, pIsTransfer);
             }
             return resultado;
         }
@@ -499,7 +332,7 @@ namespace DKintranet.Codigo.clases
             if (!string.IsNullOrEmpty(pTxtBuscador) || pIdOferta != null)
             {
                 if (!string.IsNullOrEmpty(pTxtBuscador) && pTxtBuscador.Trim() != string.Empty && HttpContext.Current.Session["clientesDefault_Usuario"] != null)
-                    HttpContext.Current.Session["clientesPages_Buscador"] = WebService.InsertarPalabraBuscada(pTxtBuscador.ToUpper(), ((capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).id, Constantes.cTABLA_PRODUCTO);
+                    HttpContext.Current.Session["clientesPages_Buscador"] = WebService.InsertarPalabraBuscada(pTxtBuscador.ToUpper(), ((Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).id, Constantes.cTABLA_PRODUCTO);
 
                 resultado = FuncionesPersonalizadas.RecuperarProductosGeneral_V3(pIdOferta, pTxtBuscador, pListaColumna, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_tomaOfertas, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_tomaTransfers);
                 if (pIsBuscarConOferta || pIsBuscarConTransfer)
@@ -527,294 +360,13 @@ namespace DKintranet.Codigo.clases
             }
             return resultado;
         }
-        //public static cjSonBuscadorProductos RecuperarProductosBase(string pTxtBuscador, List<string> pListaColumna, bool pIsBuscarConOferta, bool pIsBuscarConTransfer)
-        //{
-        //    cjSonBuscadorProductos resultado = null;
-        //    if (!string.IsNullOrEmpty(pTxtBuscador))
-        //    {
-        //        if (pTxtBuscador.Trim() != string.Empty)
-        //        {
-        //            if (HttpContext.Current.Session["clientesDefault_Usuario"] != null)
-        //            {
-        //                HttpContext.Current.Session["clientesPages_Buscador"] = WebService.InsertarPalabraBuscada(pTxtBuscador.ToUpper(), ((capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).id, Constantes.cTABLA_PRODUCTO);
-        //            }
-        //            resultado = FuncionesPersonalizadas.RecuperarProductosGeneral(pTxtBuscador, pListaColumna, false, false);
-        //            if (pIsBuscarConOferta || pIsBuscarConTransfer)
-        //            {
-        //                if (resultado != null)
-        //                {
-        //                    if (pIsBuscarConOferta && pIsBuscarConTransfer)
-        //                    {
-        //                        resultado.listaProductos = resultado.listaProductos.Where(x => x.pro_ofeporcentaje > 0 || x.isTieneTransfer).ToList();
-        //                    }
-        //                    else
-        //                    {
-        //                        if (pIsBuscarConOferta)
-        //                        {
-        //                            resultado.listaProductos = resultado.listaProductos.Where(x => x.pro_ofeporcentaje > 0).ToList();
-        //                        }
-        //                        else if (pIsBuscarConTransfer)
-        //                        {
-        //                            resultado.listaProductos = resultado.listaProductos.Where(x => x.isTieneTransfer).ToList();
-        //                        }
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-        //    return resultado;
-        //}
-
-        public static string ObtenerHorarioCierre_base(string pSucursal, string pSucursalDependiente, string pCodigoReparto, DateTime fechaActual)
-        {
-            string resultado = null;
-            List<cHorariosSucursal> listaHorariosSucursal = WebService.RecuperarTodosHorariosSucursalDependiente().Where(x => x.sdh_sucursal == pSucursal && x.sdh_sucursalDependiente == pSucursalDependiente && x.sdh_codReparto == pCodigoReparto).ToList();
-            string day = string.Empty;
-            bool isEncontroEnFechaHoy = false;
-            switch (fechaActual.DayOfWeek)
-            {
-                case DayOfWeek.Monday:
-                    day = Constantes.cDIASEMANA_Lunes;
-                    break;
-                case DayOfWeek.Tuesday:
-                    day = Constantes.cDIASEMANA_Martes;
-                    break;
-                case DayOfWeek.Wednesday:
-                    day = Constantes.cDIASEMANA_Miercoles;
-                    break;
-                case DayOfWeek.Thursday:
-                    day = Constantes.cDIASEMANA_Jueves;
-                    break;
-                case DayOfWeek.Friday:
-                    day = Constantes.cDIASEMANA_Viernes;
-                    break;
-                case DayOfWeek.Saturday:
-                    day = Constantes.cDIASEMANA_Sabado;
-                    break;
-                case DayOfWeek.Sunday:
-                    day = Constantes.cDIASEMANA_Domingo;
-                    break;
-                default:
-                    break;
-            }
-            if (day != string.Empty)
-            {
-                foreach (cHorariosSucursal itemHorariosSucursal in listaHorariosSucursal)
-                {
-                    if (itemHorariosSucursal.sdh_diaSemana == day)
-                    {
-                        if (itemHorariosSucursal.listaHorarios != null)
-                        {
-                            foreach (string itemHorarios in itemHorariosSucursal.listaHorarios)
-                            {
-                                string[] tiempo = itemHorarios.Split(':');
-                                if (tiempo.Count() > 1)
-                                {
-                                    DateTime fechaCierre = new DateTime(fechaActual.Year, fechaActual.Month, fechaActual.Day, Convert.ToInt32(tiempo[0]), Convert.ToInt32(tiempo[1]), 30);
-                                    if (fechaCierre > fechaActual)
-                                    {
-                                        isEncontroEnFechaHoy = true;
-                                        resultado = itemHorarios + " hs. ";
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                        break;
-                    }
-                }
-
-            }
-            int SumaDia = 0;
-            while (!isEncontroEnFechaHoy)
-            {
-                day = string.Empty;
-                SumaDia += 1;
-                //DateTime fechaOtroDia = new DateTime(fechaActual.Year, fechaActual.Month, fechaActual.Day + SumaDia, fechaActual.Hour, fechaActual.Minute, fechaActual.Second);
-                DateTime fechaOtroDia = fechaActual.AddDays(SumaDia);
-                switch (fechaOtroDia.DayOfWeek)
-                {
-                    case DayOfWeek.Monday:
-                        day = Constantes.cDIASEMANA_Lunes;
-                        break;
-                    case DayOfWeek.Tuesday:
-                        day = Constantes.cDIASEMANA_Martes;
-                        break;
-                    case DayOfWeek.Wednesday:
-                        day = Constantes.cDIASEMANA_Miercoles;
-                        break;
-                    case DayOfWeek.Thursday:
-                        day = Constantes.cDIASEMANA_Jueves;
-                        break;
-                    case DayOfWeek.Friday:
-                        day = Constantes.cDIASEMANA_Viernes;
-                        break;
-                    case DayOfWeek.Saturday:
-                        day = Constantes.cDIASEMANA_Sabado;
-                        break;
-                    case DayOfWeek.Sunday:
-                        day = Constantes.cDIASEMANA_Domingo;
-                        break;
-                    default:
-                        break;
-                }
-                if (day != string.Empty)
-                {
-                    foreach (cHorariosSucursal itemHorariosSucursal in listaHorariosSucursal)
-                    {
-                        if (itemHorariosSucursal.sdh_diaSemana == day)
-                        {
-                            if (itemHorariosSucursal.listaHorarios != null)
-                            {
-                                foreach (string itemHorarios in itemHorariosSucursal.listaHorarios)
-                                {
-                                    string[] tiempo = itemHorarios.Split(':');
-                                    if (tiempo.Count() > 1)
-                                    {
-                                        DateTime fechaCierre = new DateTime(fechaOtroDia.Year, fechaOtroDia.Month, fechaOtroDia.Day, Convert.ToInt32(tiempo[0]), Convert.ToInt32(tiempo[1]), 30);
-                                        if (fechaCierre > fechaActual)
-                                        {
-                                            isEncontroEnFechaHoy = true;
-                                            resultado = itemHorarios + " hs. " + day;
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-
-                            break;
-                        }
-                    }
-                }
-                if (SumaDia > 7)
-                {
-                    isEncontroEnFechaHoy = true;
-                }
-            } // fin while (!isEncontroEnFechaHoy)
-
-            // Inicio S7
-            if (((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codrep == "S7" && pSucursalDependiente == "SF")
-            {
-                DateTime fechaCierre = new DateTime(fechaActual.Year, fechaActual.Month, fechaActual.Day, 22, 15, 30);
-                resultado = "22:15" + " hs. ";
-                switch (fechaActual.DayOfWeek)
-                {
-                    case DayOfWeek.Monday:
-                        if (fechaCierre < fechaActual)
-                            resultado = "22:15" + " hs. " + "MA";
-                        break;
-                    case DayOfWeek.Tuesday:
-                        if (fechaCierre < fechaActual)
-                            resultado = "22:15" + " hs. " + "MI";
-                        break;
-                    case DayOfWeek.Wednesday:
-                        if (fechaCierre < fechaActual)
-                            resultado = "22:15" + " hs. " + "JU";
-                        break;
-                    case DayOfWeek.Thursday:
-                        if (fechaCierre < fechaActual)
-                            resultado = "22:15" + " hs. " + "VI";
-                        break;
-                    case DayOfWeek.Friday:
-                        if (fechaCierre < fechaActual)
-                            resultado = "22:15" + " hs. " + "LU";
-                        break;
-                    case DayOfWeek.Saturday:
-                        resultado = "22:15" + " hs. " + "LU";
-                        break;
-                    case DayOfWeek.Sunday:
-                        resultado = "22:15" + " hs. " + "LU";
-                        break;
-                    default:
-                        break;
-                }
-            }
-            // Fin S7
-            return resultado;
-        }
-
         public static string ObtenerHorarioCierre(string pSucursal, string pSucursalDependiente, string pCodigoReparto)
         {
-            return ObtenerHorarioCierre_base(pSucursal, pSucursalDependiente, pCodigoReparto, DateTime.Now);
+            return DKbase.web.FuncionesPersonalizadas_base.ObtenerHorarioCierre(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]), pSucursal, pSucursalDependiente, pCodigoReparto);
         }
         public static string ObtenerHorarioCierreAnterior(string pSucursal, string pSucursalDependiente, string pCodigoReparto, string pHorarioCierre)
         {
-            if (string.IsNullOrEmpty(pHorarioCierre))
-                return string.Empty;
-            string result = string.Empty;
-            try
-            {
-
-
-                DateTime fechaCuentaRegresiva;
-                DateTime hoy = DateTime.Now;
-                if (pHorarioCierre.Length == 12)
-                {
-                    var diaSemana = pHorarioCierre.Substring(10, 2);
-                    var diaSemanaNro = -1;
-                    //Note: Sunday is 0, Monday is 1, and so on || from 0 to 6
-                    // LU = 1
-                    // MA = 2
-                    // MI = 3
-                    // JU = 4
-                    // VI = 5
-                    // SA = 6
-                    // DO = 0
-                    switch (diaSemana)
-                    {
-                        case "LU":
-                            diaSemanaNro = 1;
-                            break;
-                        case "MA":
-                            diaSemanaNro = 2;
-                            break;
-                        case "MI":
-                            diaSemanaNro = 3;
-                            break;
-                        case "JU":
-                            diaSemanaNro = 4;
-                            break;
-                        case "VI":
-                            diaSemanaNro = 5;
-                            break;
-                        case "SA":
-                            diaSemanaNro = 6;
-                            break;
-                        case "DO":
-                            diaSemanaNro = 0;
-                            break;
-                        default:
-                            break;
-                    }
-                    pHorarioCierre = pHorarioCierre.Replace(" hs. " + diaSemana, "");
-                    var values = pHorarioCierre.Split(':');
-                    var d = new DateTime(hoy.Year, hoy.Month, hoy.Day, Convert.ToInt32(values[0]), Convert.ToInt32(values[1]), 0);// mes 0 = enero
-                                                                                                                                  //var n = d.DayOfWeek;
-                    var sumaDia = 0;
-                    while ((int)d.DayOfWeek != diaSemanaNro)
-                    {
-                        sumaDia++;
-                        d = new DateTime(hoy.Year, hoy.Month, hoy.Day + sumaDia, Convert.ToInt32(values[0]), Convert.ToInt32(values[1]), 50);// mes 0 = enero
-                        if (sumaDia > 7 || (int)d.DayOfWeek == diaSemanaNro)
-                            break;
-                    }
-                    fechaCuentaRegresiva = d;
-
-                }
-                else
-                {
-                    pHorarioCierre = pHorarioCierre.Replace(" hs.", "");
-                    var values = pHorarioCierre.Split(':');
-                    fechaCuentaRegresiva = new DateTime(hoy.Year, hoy.Month, hoy.Day, Convert.ToInt32(values[0]), Convert.ToInt32(values[1]), 50);// mes 0 = enero
-                }
-                result = ObtenerHorarioCierre_base(pSucursal, pSucursalDependiente, pCodigoReparto, fechaCuentaRegresiva);
-            }
-            catch (Exception ex)
-            {
-
-                var oo = 1;
-            }
-            return result;
+            return DKbase.web.FuncionesPersonalizadas_base.ObtenerHorarioCierreAnterior(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]), pSucursal, pSucursalDependiente, pCodigoReparto, pHorarioCierre);
         }
         public static void GenerarCSV()
         {
@@ -893,7 +445,7 @@ namespace DKintranet.Codigo.clases
             }
             if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null)
             {
-                Codigo.capaDatos.Usuario user = (Codigo.capaDatos.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"];
+                Usuario user = (Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"];
                 if (isUserTomaPedidoIntranet(user))
                 {
                     switch (pNombreSeccion)
@@ -912,7 +464,7 @@ namespace DKintranet.Codigo.clases
 
             return resultado;
         }
-        public static bool isUserTomaPedidoIntranet(Codigo.capaDatos.Usuario pUser)
+        public static bool isUserTomaPedidoIntranet(Usuario pUser)
         {
             bool result = false;
             if (pUser != null && pUser.rol_Nombre == DKbase.generales.Constantes.cTomarPedidoCC)
@@ -1236,6 +788,30 @@ namespace DKintranet.Codigo.clases
                     break;
             }
             return result;
+        }
+        public static cjSonBuscadorProductos RecuperarProductosGeneralSubirPedidos(List<cProductosGenerico> pListaProveedor)
+        {
+            cjSonBuscadorProductos resultado = null;
+            if (HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+            {
+
+                List<cProductosGenerico> listaProductosBuscador = pListaProveedor;
+                // fin Si el cliente no toma perfumeria
+                for (int iPrecioFinal = 0; iPrecioFinal < listaProductosBuscador.Count; iPrecioFinal++)
+                {
+                    listaProductosBuscador[iPrecioFinal].PrecioFinal = DKbase.web.FuncionesPersonalizadas_base.ObtenerPrecioFinal(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]), listaProductosBuscador[iPrecioFinal]);
+                    listaProductosBuscador[iPrecioFinal].PrecioConDescuentoOferta = DKbase.web.FuncionesPersonalizadas_base.ObtenerPrecioUnitarioConDescuentoOferta(listaProductosBuscador[iPrecioFinal].PrecioFinal, listaProductosBuscador[iPrecioFinal]);
+                }
+                // Inicio 17/02/2016
+                List<string> ListaSucursal = RecuperarSucursalesParaBuscadorDeCliente();
+                listaProductosBuscador = ActualizarStockListaProductos_SubirArchico(ListaSucursal, listaProductosBuscador, HttpContext.Current.Session["subirpedido_SucursalEleginda"].ToString());
+                // Fin 17/02/2016
+                cjSonBuscadorProductos ResultadoObj = new cjSonBuscadorProductos();
+                ResultadoObj.listaSucursal = ListaSucursal;
+                ResultadoObj.listaProductos = listaProductosBuscador;
+                resultado = ResultadoObj;
+            }
+            return resultado;
         }
     }
 

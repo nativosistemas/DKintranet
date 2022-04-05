@@ -30,8 +30,8 @@
         string resultadoHidden = string.Empty;
         if (HttpContext.Current.Session["subirpedido_ListaProductos"] != null)
         {
-            DKintranet.Codigo.clases.cjSonBuscadorProductos obj = DKintranet.Codigo.clases.FuncionesPersonalizadas.RecuperarProductosGeneralSubirPedidos((List<DKbase.web.capaDatos.cProductosGenerico>)HttpContext.Current.Session["subirpedido_ListaProductos"]);
-            System.Web.HttpContext.Current.Session["PedidosBuscador_productosTodos"] = new DKintranet.Codigo.clases.cjSonBuscadorProductos(obj);
+            DKbase.web.cjSonBuscadorProductos obj = DKintranet.Codigo.clases.FuncionesPersonalizadas.RecuperarProductosGeneralSubirPedidos((List<DKbase.web.capaDatos.cProductosGenerico>)HttpContext.Current.Session["subirpedido_ListaProductos"]);
+            System.Web.HttpContext.Current.Session["PedidosBuscador_productosTodos"] = new DKbase.web.cjSonBuscadorProductos(obj);
             int pPage = 1;
             System.Web.HttpContext.Current.Session["PedidosBuscador_pPage"] = pPage;
             resultadoHidden += "<input type=\"hidden\" id=\"hiddenArchivoSubirListaProductos\" value=\"" + Server.HtmlEncode(DKintranet.Controllers.mvcController.RecuperarProductos_generarPaginador(obj, pPage)) + "\" />";

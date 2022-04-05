@@ -55,7 +55,7 @@
             </asp:ObjectDataSource>
             <asp:Panel ID="pnl_grilla" runat="server">
                 <asp:GridView ID="gv_datos" runat="server" CssClass="grilla" AllowPaging="True" AllowSorting="False"
-                    PageSize="30" CellPadding="2" AutoGenerateColumns="False" OnRowCommand="gv_datos_RowCommand">
+                    PageSize="30" CellPadding="2" AutoGenerateColumns="False" OnRowCommand="gv_datos_RowCommand" OnSelectedIndexChanged="gv_datos_SelectedIndexChanged">
                     <AlternatingRowStyle BackColor="#F9F9F9" />
                     <Columns>
                         <asp:TemplateField>

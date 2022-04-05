@@ -10,6 +10,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DKbase.web.capaDatos;
+using DKbase.web;
 
 namespace DKintranet.Controllers
 {
@@ -91,7 +92,7 @@ namespace DKintranet.Controllers
             if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null)
             {
                 Parameters += "<" + "idUsuarioLog" + ">";
-                Parameters += ((Codigo.capaDatos.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).idUsuarioLog;
+                Parameters += ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).idUsuarioLog;
                 Parameters += "</" + "idUsuarioLog" + ">";
             }
             string funFlecha = string.Empty;
@@ -108,7 +109,7 @@ namespace DKintranet.Controllers
             string userAgent = System.Web.HttpContext.Current.Request.UserAgent;
             string ip = System.Web.HttpContext.Current.Server.HtmlEncode(System.Web.HttpContext.Current.Request.UserHostAddress);
             string hostName = System.Web.HttpContext.Current.Request.UserHostName;
-            Codigo.capaDatos.Usuario user = Codigo.clases.Seguridad.Login(pName, pPass, ip, hostName, userAgent);
+            Usuario user = Codigo.clases.Seguridad.Login(pName, pPass, ip, hostName, userAgent);
             if (user != null)
             {
                 if (user.id != -1)
@@ -172,7 +173,7 @@ namespace DKintranet.Controllers
         {
             if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null)
             {
-                ListaAcccionesRol listaAcciones = Codigo.clases.Seguridad.RecuperarTodasAccionesPorIdRol((((Codigo.capaDatos.Usuario)(System.Web.HttpContext.Current.Session["clientesDefault_Usuario"])).idRol));
+                ListaAcccionesRol listaAcciones = Codigo.clases.Seguridad.RecuperarTodasAccionesPorIdRol((((Usuario)(System.Web.HttpContext.Current.Session["clientesDefault_Usuario"])).idRol));
                 System.Web.HttpContext.Current.Session["BaseAdmin_PermisosRol"] = listaAcciones;
             }
         }
@@ -386,7 +387,7 @@ namespace DKintranet.Controllers
         {
             if (Session["clientesDefault_Cliente"] == null)
                 return null;
-            List<DKintranet.Codigo.capaDatos.cUsuario> lista = DKintranet.Codigo.clases.AccesoGrilla.GetUsuariosDeCliente("usu_codigo", ((DKbase.web.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_codigo, null);
+            List<cUsuario> lista = DKintranet.Codigo.clases.AccesoGrilla.GetUsuariosDeCliente("usu_codigo", ((DKbase.web.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_codigo, null);
             return Codigo.clases.Generales.Serializador.SerializarAJson(lista);
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]

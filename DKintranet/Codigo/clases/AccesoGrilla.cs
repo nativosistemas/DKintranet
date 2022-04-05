@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using DKbase.web;
 using DKbase.web.capaDatos;
 using DKintranet.Codigo.capaDatos;
 
@@ -190,7 +191,7 @@ namespace DKintranet.Codigo.clases
             return query;
         }
 
-        public static List<capaDatos.cUsuario> GetUsuarios(string sortExpression, string pFiltro)
+        public static List<cUsuario> GetUsuarios(string sortExpression, string pFiltro)
         {
             ordenamientoExpresion order = new ordenamientoExpresion(sortExpression);
             string filtro = string.Empty;
@@ -761,7 +762,7 @@ namespace DKintranet.Codigo.clases
             }
             return query;
         }
-        public static List<capaDatos.cUsuario> GetUsuariosDeCliente(string sortExpression, int pIdCliente, string pFiltro)
+        public static List<cUsuario> GetUsuariosDeCliente(string sortExpression, int pIdCliente, string pFiltro)
         {
             ordenamientoExpresion order = new ordenamientoExpresion(sortExpression);
             string filtro = string.Empty;

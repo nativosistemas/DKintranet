@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DKbase.web;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,7 +18,7 @@ namespace DKintranet.master
             }
             else
             {
-                lblNombreUsuario.Text = ((Codigo.capaDatos.Usuario)Session["BaseAdmin_Usuario"]).NombreYApellido;
+                lblNombreUsuario.Text = ((Usuario)Session["BaseAdmin_Usuario"]).NombreYApellido;
             }
         }
     }

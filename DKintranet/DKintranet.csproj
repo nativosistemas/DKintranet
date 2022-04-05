@@ -1547,7 +1547,6 @@
     <Compile Include="Codigo\capaDatos\capaAuditoria.cs" />
     <Compile Include="Codigo\capaDatos\capaCAR.cs" />
     <Compile Include="Codigo\capaDatos\CapaCarritoDiferido.cs" />
-    <Compile Include="Codigo\capaDatos\capaCAR_intranet.cs" />
     <Compile Include="Codigo\capaDatos\capaCAR_WebService.cs" />
     <Compile Include="Codigo\capaDatos\capaCatalogo.cs" />
     <Compile Include="Codigo\capaDatos\capaClientes.cs" />
@@ -1576,7 +1575,9 @@
     <Compile Include="Codigo\clases\cHomePage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Codigo\clases\ClasesPersonalizadas.cs" />
+    <Compile Include="Codigo\clases\ClasesPersonalizadas.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Codigo\clases\Constantes.cs" />
     <Compile Include="Codigo\clases\cSubirpedido.cs" />
     <Compile Include="Codigo\clases\cThumbnail.cs" />

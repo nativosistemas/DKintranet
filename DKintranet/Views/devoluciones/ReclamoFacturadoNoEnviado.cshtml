@@ -4,10 +4,10 @@
 }
 
 @{
-    if (((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR ||
-        ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL ||
-        ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL ||
-        ((DKintranet.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
+    if (((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR ||
+        ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL ||
+        ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL ||
+        ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
     {
         Response.Redirect("/config/sinpermiso");
     }

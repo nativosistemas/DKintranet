@@ -1,4 +1,6 @@
-﻿using DKintranet.Codigo.clases;
+﻿using DKbase.web;
+using DKbase.web.capaDatos;
+using DKintranet.Codigo.clases;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +30,7 @@ namespace DKintranet.Codigo.capaDatos
                     Usuario usuario = ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]);
                     pLoginTelefonista = usuario.usu_login;
                 }
-                capaCAR.InicioCarritoEnProceso(pIdCarrito, Constantes.cAccionCarrito_TOMAR);
+                capaCAR_base.InicioCarritoEnProceso(pIdCarrito, Constantes.cAccionCarrito_TOMAR);
                 var t = Task.Run(() => capaCore_WebService.TomarPedidoTelefonistaAsync(pIdCarrito, pLoginCliente, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pListaProducto, pLoginTelefonista));
                 t.Wait();
                 if (t.Result == null)
@@ -45,7 +47,7 @@ namespace DKintranet.Codigo.capaDatos
             }
             finally
             {
-                capaCAR.EndCarritoEnProceso(pIdCarrito);
+                capaCAR_base.EndCarritoEnProceso(pIdCarrito);
             }
         }
         public static List<DKbase.dll.cDllPedidoTransfer> TomarPedidoDeTransfersTelefonistaAsync(int pIdCarrito, string pLoginCliente, string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, List<DKbase.dll.cDllProductosAndCantidad> pListaProducto)
@@ -58,7 +60,7 @@ namespace DKintranet.Codigo.capaDatos
                     Usuario usuario = ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]);
                     pLoginTelefonista = usuario.usu_login;
                 }
-                capaCAR.InicioCarritoEnProceso(pIdCarrito, Constantes.cAccionCarrito_TOMAR);
+                capaCAR_base.InicioCarritoEnProceso(pIdCarrito, Constantes.cAccionCarrito_TOMAR);
                 var t = Task.Run(() => capaCore_WebService.TomarPedidoDeTransfersTelefonistaAsync(pIdCarrito, pLoginCliente, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pListaProducto, pLoginTelefonista));
                 t.Wait();
                 if (t.Result == null)
@@ -75,7 +77,7 @@ namespace DKintranet.Codigo.capaDatos
             }
             finally
             {
-                capaCAR.EndCarritoEnProceso(pIdCarrito);
+                capaCAR_base.EndCarritoEnProceso(pIdCarrito);
             }
         }
 
