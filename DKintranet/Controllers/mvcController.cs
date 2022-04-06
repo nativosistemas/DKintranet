@@ -990,6 +990,7 @@ namespace DKintranet.Controllers
         public void CambiarCliente(int IdCliente)
         {
             cClientes o = null;
+            resetCliente();
             if (Session["usuario_TomarPedido_listaClientes"] != null)
             {
                 List<DKbase.web.capaDatos.cClientes> lista_Clientes = (List<DKbase.web.capaDatos.cClientes>)Session["usuario_TomarPedido_listaClientes"];
@@ -1000,6 +1001,8 @@ namespace DKintranet.Controllers
         public void resetCliente()
         {
             System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] = null;
+            System.Web.HttpContext.Current.Session["intranet_listaSucursales"] = null;
+            //System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] = null;
         }
     }
 }

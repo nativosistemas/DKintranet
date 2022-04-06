@@ -1953,10 +1953,6 @@ function OnCallBackRecuperarProductos(args) {
             // Elejir el primer producto
             if (hayProductosResultado) {
                 $(".btn_buscar").focus();
-                //if ($('#inputSuc0_0').length) {
-                //    $('#inputSuc0_0').focus();
-                //    selectedInput = document.getElementById('inputSuc0_0');
-                //}
                 focusPrimerProductoHabilitado();
             } else {
                 $("#txtBuscador").select();
@@ -3420,9 +3416,19 @@ function focusInputCantidadCarrito() {
 function focusPrimerProductoHabilitado() {
     var isFocusFind = false;
     if (listaProductosBuscados != null && listaProductosBuscados.length > 0) {
-        if ($('#checkBoxCCprioridad').length && $('#checkBoxCCprioridad').is(':checked')) {
+       
+        var objRadioSucursalFoco = document.querySelectorAll("input[name='radioSucursalFoco']");
+        var sucursalSelec = '';
+        for (const radioButton of objRadioSucursalFoco) {
+            if (radioButton.checked) {
+                sucursalSelec =  radioButton.value;
+                break;
+            }
+        }
+
+        if (sucursalSelec != '') {
             for (var iSucursal = 0; iSucursal < listaSucursal.length; iSucursal++) {
-                if (listaSucursalesDependienteInfo[iSucursal].sde_sucursal == 'CC') {
+                if (listaSucursalesDependienteInfo[iSucursal].sde_sucursal == sucursalSelec) {
                     for (var iProducto = 0; iProducto < listaProductosBuscados.length; iProducto++) {
                         var nameInput = 'inputSuc' + iProducto + '_' + iSucursal;
                         if ($('#' + nameInput).length) {

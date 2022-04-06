@@ -20,7 +20,7 @@ namespace DKintranet.Codigo.clases
             {
                 oClientes = (cClientes)HttpContext.Current.Session["clientesDefault_Cliente"];
             }
-            return DKbase.web.acceso.cargarProductosBuscadorArchivos(oClientes, tablaProductos,  tablaSucursalStocks, listaTransferDetalle, pCargarProductosBuscador,  pSucursalElejida);
+            return DKbase.web.acceso.cargarProductosBuscadorArchivos(oClientes, tablaProductos, tablaSucursalStocks, listaTransferDetalle, pCargarProductosBuscador, pSucursalElejida);
         }
         public static void grabarLog(MethodBase method, Exception pException, DateTime pFechaActual, params object[] values)
         {
@@ -177,46 +177,41 @@ namespace DKintranet.Codigo.clases
 
         public static List<string> RecuperarSucursalesParaBuscadorDeCliente()
         {
-            // Optimizar
             List<string> ListaSucursal = new List<string>();
-            ListaSucursal.Add(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc);
-
-            if (((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codrep == "S7")//((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codtpoenv == "R" && 
+            if (HttpContext.Current.Session["intranet_listaSucursales"] == null)
             {
-                if (!ListaSucursal.Contains("SF"))
-                    ListaSucursal.Add("SF");
-                if (!ListaSucursal.Contains("CC"))
-                    ListaSucursal.Add("CC");
-            }
-            //else if (((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc == "CD" && ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codprov != "ENTRE RIOS")// cli_codsuc == "CD" concordia y de la provincia de entre rios
-            //{
-            //    List<cSucursal> listaSucursalesAUX = WebService.RecuperarTodasSucursalesDependientes().Where(x => x.sde_sucursal == ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc).ToList();
-            //    foreach (cSucursal itemSucursalesAUX in listaSucursalesAUX)
-            //    {
-            //        if (itemSucursalesAUX.sde_sucursalDependiente != ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc && itemSucursalesAUX.sde_sucursalDependiente != "CO") // CO = Concepción del Uruguay
-            //        {
-            //            ListaSucursal.Add(itemSucursalesAUX.sde_sucursalDependiente);
-            //        }
-            //    }
-            //}
-            else
-            {
-                List<cSucursal> listaSucursalesAUX = WebService.RecuperarTodasSucursalesDependientes().Where(x => x.sde_sucursal == ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc).ToList();
-                foreach (cSucursal itemSucursalesAUX in listaSucursalesAUX)
+                // Optimizar
+                ListaSucursal.Add(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc);
+                if (((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codrep == "S7")//((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codtpoenv == "R" && 
                 {
-                    if (itemSucursalesAUX.sde_sucursalDependiente != ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc)
+                    if (!ListaSucursal.Contains("SF"))
+                        ListaSucursal.Add("SF");
+                    if (!ListaSucursal.Contains("CC"))
+                        ListaSucursal.Add("CC");
+                }
+                else
+                {
+                    List<cSucursal> listaSucursalesAUX = WebService.RecuperarTodasSucursalesDependientes().Where(x => x.sde_sucursal == ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc).ToList();
+                    foreach (cSucursal itemSucursalesAUX in listaSucursalesAUX)
                     {
-                        ListaSucursal.Add(itemSucursalesAUX.sde_sucursalDependiente);
+                        if (itemSucursalesAUX.sde_sucursalDependiente != ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc)
+                        {
+                            ListaSucursal.Add(itemSucursalesAUX.sde_sucursalDependiente);
+                        }
+                    }
+                    if (((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_IdSucursalAlternativa != null &&
+                        !ListaSucursal.Contains(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_IdSucursalAlternativa))
+                    {
+                        ListaSucursal.Add(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_IdSucursalAlternativa);
                     }
                 }
-                if (((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_IdSucursalAlternativa != null &&
-                    !ListaSucursal.Contains(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_IdSucursalAlternativa))
-                {
-                    ListaSucursal.Add(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_IdSucursalAlternativa);
-                }
+                HttpContext.Current.Session["intranet_listaSucursales"] = ListaSucursal;
+                // Fin Optimizar
+            }
+            else {
+                ListaSucursal = (List<string>)HttpContext.Current.Session["intranet_listaSucursales"];
             }
             return ListaSucursal;
-            // Fin Optimizar
         }
         //
         public static List<cProductosGenerico> ActualizarStockListaProductos(List<string> pListaSucursal, List<cProductosGenerico> pListaProductos)
@@ -235,7 +230,7 @@ namespace DKintranet.Codigo.clases
                 {
                     listaProductos.Add(new cProductosAndCantidad { codProductoNombre = item.pro_codigo });
                 }
-                DataTable table = capaDatos.capaProductos.RecuperarStockPorProductosAndSucursal(ConvertNombresSeccionToDataTable(pListaSucursal),DKbase.web.FuncionesPersonalizadas_base.ConvertProductosAndCantidadToDataTable(listaProductos));
+                DataTable table = capaDatos.capaProductos.RecuperarStockPorProductosAndSucursal(ConvertNombresSeccionToDataTable(pListaSucursal), DKbase.web.FuncionesPersonalizadas_base.ConvertProductosAndCantidadToDataTable(listaProductos));
                 if (table != null)
                     for (int i = 0; i < pListaProductos.Count; i++)
                     {

@@ -31,6 +31,7 @@
             .pt_transf_combo {
                 width: 100%;
             }
+
             .pt_stock, .pt_sin_stock, .pt_critico {
                 float: none;
             }
@@ -42,7 +43,7 @@
     <div id="divContenedorBaseCuentaRegresivaCelular" style="display:none;" class="div_cierre_reparto">
     </div>
     <div class="col-lg-12 no-padding">
-        @{ 
+        @{
             string disabledBuscador = "";
             if (Session["clientesDefault_Cliente"] == null)
             {
@@ -121,11 +122,24 @@
         }
         @{if (DKintranet.Controllers.mvcController.isClienteSucDistintoCC())
             {
-                <div class="radio-checkbox rc_buscador">
-                    <input id="checkBoxCCprioridad" class="checkbox" type="checkbox" value="" checked>
-                    <label for="checkBoxCCprioridad" value="">Primero casa central</label>
-                </div>
-            }
+                var listaSucursal = DKintranet.Codigo.clases.FuncionesPersonalizadas.RecuperarSucursalesParaBuscadorDeCliente();
+                foreach (string itemSucursal in listaSucursal)
+                {
+                    string name_id = " id=\"checkBoxSucursal"+ itemSucursal + "\" ";
+                    string name_for = " for=\"checkBoxSucursal" + itemSucursal + "\" ";
+                    string name_value = " value=\"" + itemSucursal + "\" ";
+                    string label = "Foco " + itemSucursal ;//checked
+                    string strChecked = "";
+                    if (itemSucursal == "CC") {
+                        strChecked = " checked ";
+                    }
+                    <div class="radio-checkbox rc_buscador">
+                        <input @{WriteLiteral(name_id);} name="radioSucursalFoco" class="checkbox" type="radio" @{WriteLiteral(name_value);}  @{WriteLiteral(strChecked);} >
+                        <label @{WriteLiteral(name_for);} value=""> @{WriteLiteral(label);} </label>
+                    </div>
+                }
+
+        }
         }
         <div class="clear10"></div>
     </div>
