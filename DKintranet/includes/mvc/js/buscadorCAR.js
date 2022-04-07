@@ -777,16 +777,12 @@ function getHtmlTablaResolucionCelular() {
                 strHtml += '<span class="p_erronero">REGISTRO ERRONEO</span>';
             }
             // Ver si mostrar input solo producto Transfer 
-            /*if (listaProductosBuscados[i].pro_vtasolotransfer && !listaProductosBuscados[i].isTablaTransfersClientes) {
+            if (listaProductosBuscados[i].pro_vtasolotransfer && !isMostrarSoloTransfer_FacturacionDirecta(listaProductosBuscados[i])) {//if (listaProductosBuscados[i].pro_vtasolotransfer && !listaProductosBuscados[i].isTablaTransfersClientes) 
                 isMostrarImput = false;
-            }*/
+            }
 
-            //strHtml += '</div>';
-            //strHtml += '</td>'; 
-
-            // strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 text-center"  OnMouseMove="OnMouseMoveProdructo(event)" OnMouseOver="OnMouseOverProdructo(' + i + ')" OnMouseOut="OnMouseOutProdructo()" onclick="RecuperarTransfer(' + i + ')" class="' + strHtmlColorFondo + ' cssFilaBuscadorDesmarcar cssFilaBuscador_' + i + ' porCamara_cabeceraYfila">';
-            if (listaProductosBuscados[i].pri_nombreArchivo !== null) {// onclick="onclickAmpliarImagen(\'' + listaProductosBuscados[i].pri_nombreArchivo + '\');"
-                strHtml += '<i class="fa fa-camera color_emp_st pull-right"></i>';//style="width:20px;height:20px; "
+            if (listaProductosBuscados[i].pri_nombreArchivo !== null) {
+                strHtml += '<i class="fa fa-camera color_emp_st pull-right"></i>';
             }
             strHtml += '</td>';
             //
@@ -1069,6 +1065,14 @@ function onblurSucursal_base(pCantidad, pFila, pColumna) {
             }
         }
     }
+}
+function isMostrarSoloTransfer_FacturacionDirecta(pProducto) {
+    var result = false;
+    if (pProducto.pro_vtasolotransfer != null && pProducto.pro_vtasolotransfer == 1
+        && pProducto.tfr_facturaciondirecta != null && pProducto.tfr_facturaciondirecta == 1) {
+        result = true;
+    }
+    return result;
 }
 function funValidarSoloTransferFacturacionDirecta(pProducto, pIdSucursal, pCantidad, pIsDesdeBuscador) {
     var result = true;
@@ -1732,9 +1736,9 @@ function OnCallBackRecuperarProductos(args) {
                     }
 
                     // Ver si mostrar input solo producto Transfer 
-                    /*if (listaProductosBuscados[i].pro_vtasolotransfer && !listaProductosBuscados[i].isTablaTransfersClientes) {
+                    if (listaProductosBuscados[i].pro_vtasolotransfer && !isMostrarSoloTransfer_FacturacionDirecta(listaProductosBuscados[i])) {//if (listaProductosBuscados[i].pro_vtasolotransfer && !listaProductosBuscados[i].isTablaTransfersClientes) 
                         isMostrarImput = false;
-                    }*/
+                    }
 
                     if (listaProductosBuscados[i].pri_nombreArchivo !== null) {//onclickAmpliarImagen(\'' + listaProductosBuscados[i].pri_nombreArchivo + '\')
                         strHtml += '<i class="fa fa-camera color_emp_st pull-right" onclick="onclickAmpliarImagen(' + i + ');"></i>';//style="width:20px;height:20px; "
