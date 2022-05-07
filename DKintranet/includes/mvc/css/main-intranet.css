@@ -1,0 +1,18 @@
+﻿.table > tbody > tr.grs td div.col_small, .table > tbody > tr.rosa td div.col_small, .table > tbody > tr.violeta td div.col_small, .table > tbody > tr.wht td div.col_small {
+    min-height: 30px !important;
+}
+
+.table.popup > tbody > tr, .table > tbody > tr {
+    height: 30px;
+    min-height: 30px !important;
+}
+
+.table > thead.pagos > tr > td, .table > thead.pagos > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+padding:0px!important;
+}
+.table.carrito > tbody > tr {
+    height: 30px !important;
+}
+.div_carrito .tit {
+  padding: 5px 5px;
+}

@@ -67,7 +67,7 @@
     }
 
     <div class="clear15"></div>
-    <div id="filtros_opciones_avanzadas" class="col-lg-12 no-padding">
+    <div id="filtros_opciones_avanzadas" class="col-lg-12 no-padding" style="display:none;" >
         <div class="radio-checkbox rc_buscador">
             <input id="checkNombre" class="checkbox" type="checkbox" value="pro_nombre" checked>
             <label for="checkNombre" value="">Nombre</label>
@@ -125,21 +125,22 @@
                 var listaSucursal = DKintranet.Codigo.clases.FuncionesPersonalizadas.RecuperarSucursalesParaBuscadorDeCliente();
                 foreach (string itemSucursal in listaSucursal)
                 {
-                    string name_id = " id=\"checkBoxSucursal"+ itemSucursal + "\" ";
+                    string name_id = " id=\"checkBoxSucursal" + itemSucursal + "\" ";
                     string name_for = " for=\"checkBoxSucursal" + itemSucursal + "\" ";
                     string name_value = " value=\"" + itemSucursal + "\" ";
-                    string label = "Foco " + itemSucursal ;//checked
+                    string label = "Foco " + itemSucursal;//checked
                     string strChecked = "";
-                    if (itemSucursal == "CC") {
+                    if (itemSucursal == "CC")
+                    {
                         strChecked = " checked ";
                     }
                     <div class="radio-checkbox rc_buscador">
-                        <input @{WriteLiteral(name_id);} name="radioSucursalFoco" class="checkbox" type="radio" @{WriteLiteral(name_value);}  @{WriteLiteral(strChecked);} >
+                        <input @{WriteLiteral(name_id);} name="radioSucursalFoco" class="checkbox" type="radio" @{WriteLiteral(name_value);} @{WriteLiteral(strChecked);}>
                         <label @{WriteLiteral(name_for);} value=""> @{WriteLiteral(label);} </label>
                     </div>
                 }
 
-        }
+            }
         }
         <div class="clear10"></div>
     </div>

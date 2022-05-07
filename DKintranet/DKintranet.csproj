@@ -597,6 +597,7 @@
     <Content Include="includes\js\subirarchivoresultado.js" />
     <Content Include="includes\js\subirpedido.js" />
     <Content Include="includes\js\subirpedido_v2.js" />
+    <Content Include="includes\mvc\css\main-intranet.css" />
     <Content Include="includes\mvc\css\main-overwrite.css" />
     <Content Include="includes\mvc\css\main.css" />
     <Content Include="includes\mvc\css\select2.min.css" />

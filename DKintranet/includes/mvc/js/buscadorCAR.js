@@ -138,6 +138,10 @@ $(document).ready(function () {
     //    }
     //    teclaPresionada_enPagina(e);
     //});
+    //$("#filtros_opciones_avanzadas").css("display", "none");
+    $("#eye_opciones_avanzadas" ).removeClass("fa fa-eye-slash");
+    $("#eye_opciones_avanzadas").addClass("fa fa-eye");
+
     $('#opciones_avanzadas').click(function () {
         var nodo = $(this).attr("id");
         if ($("#filtros_" + nodo).is(":visible")) {
@@ -3298,20 +3302,20 @@ function getHtmlCreditoIntranet() {
     var strHTML = '';
     strHTML += '<table with="100%" class="table table-striped" style="background: #e1e1e1;">';
     strHTML += '<thead>';
-    strHTML += '<tr style="height: 40px;"><th class="text-center"><b>CRÉDITO</b><br></th><th class="text-center"></th></tr>';
+    strHTML += '<tr style="height: 20px;"><th class="text-center"><b>CRÉDITO</b><br></th><th class="text-center"></th></tr>';
     strHTML += '</thead>';
     strHTML += '<tbody class="table-striped">';
-    strHTML += '<tr style="height: 40px">';
+    strHTML += '<tr style="height: 20px">';
     strHTML += '<td class="text-left"><b> DISPONIBLE INICIAL </b></td>';
     var strHtmlCreditoInicial = '$&nbsp;' + FormatoDecimalConDivisorMiles(getCreditoInicial().toFixed(2));
     strHTML += '<td class="text-right"><b>' + strHtmlCreditoInicial + '</b></td>';
     strHTML += '</tr>';
-    strHTML += '<tr style="height: 40px">';
+    strHTML += '<tr style="height: 20px">';
     strHTML += '<td class="text-left color_emp_rd"> UTILIZADO </td>';
     var strHtmlCreditoUtilizado = '$&nbsp;' + FormatoDecimalConDivisorMiles(getCreditoUtilizado().toFixed(2));
     strHTML += '<td class="text-right color_emp_rd">' + strHtmlCreditoUtilizado + '</td>';
     strHTML += '</tr>';
-    strHTML += '<tr style="height: 40px">';
+    strHTML += '<tr style="height: 20px">';
     strHTML += '<td class="text-left color_red">RESTANTE </td>';
     var strHtmlCreditoRestante = '$&nbsp;' + FormatoDecimalConDivisorMiles(getCreditoRestante().toFixed(2));
     strHTML += '<td class="text-right color_red">' + strHtmlCreditoRestante + '</td>';
