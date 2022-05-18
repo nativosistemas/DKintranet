@@ -100,6 +100,12 @@ $('body').on("keydown", function (e) {
 
         focusInputCantidadCarrito();
         e.preventDefault();
+    } else if (e.altKey && e.which === 80) { // ALT + P
+        selectedInput = null;
+        selectInputCarrito = null;
+        RecuperarUltimoProductoSeleccionado();
+
+        e.preventDefault();
     } else if (e.which == 27) { // Esc
         e.preventDefault();
         if ($('#modalModuloAlert').hasClass('in') === false) {
@@ -139,7 +145,7 @@ $(document).ready(function () {
     //    teclaPresionada_enPagina(e);
     //});
     //$("#filtros_opciones_avanzadas").css("display", "none");
-    $("#eye_opciones_avanzadas" ).removeClass("fa fa-eye-slash");
+    $("#eye_opciones_avanzadas").removeClass("fa fa-eye-slash");
     $("#eye_opciones_avanzadas").addClass("fa fa-eye");
 
     $('#opciones_avanzadas').click(function () {
@@ -2294,6 +2300,84 @@ function CargarCarritos() {
         }
     }
 }
+function CargarContenedorBaseTotales() {
+    var strHTML = '';
+    if ($('#divContenedorBase_TOTALES').html() == '') {
+        var isAdd = false;
+        if (listaCarritos != null) {
+            for (var i = 0; i < listaCarritos.length; i++) {
+                if (listaCarritos[i].codSucursal != '') {
+                    isAdd = true;
+                    break;
+                }
+            }
+        }
+        if (!isAdd) {
+            if (listaCarritoTransferPorSucursal != null) {
+                for (var i = 0; i < listaCarritoTransferPorSucursal.length; i++) {
+                    if (listaCarritoTransferPorSucursal[i].Sucursal != '') {
+                        isAdd = true;
+                        break;
+                    }
+                }
+            }
+        }
+        if (isAdd) {
+            strHTML += '<button type="button" id="btn_confirmar_TOTALES" class="btn_confirmar" onclick="onclickIsPuedeUsarDll(' + '0' + '); return false;" href="#">CONFIRMAR TODOS</button>';
+            strHTML += '<button type="button" id="btn_vaciar_TOTALES" class="btn_vaciar float-left" onclick="onclickVaciarCarritoTODOS(); return false;" href="#">VACIAR TODOS</button>';
+            $('#divContenedorBase_TOTALES').html(strHTML);
+        }
+    }
+}
+function CargarContenedorBaseTotales_borrar() {
+    var strHTML = '';
+    $('#divContenedorBase_TOTALES').html('');
+    var isAdd = false;
+    if (listaCarritos != null) {
+        for (var i = 0; i < listaCarritos.length; i++) {
+            if (listaCarritos[i].codSucursal != '') {
+                isAdd = true;
+                break;
+            }
+        }
+    }
+    if (!isAdd) {
+        if (listaCarritoTransferPorSucursal != null) {
+            for (var i = 0; i < listaCarritoTransferPorSucursal.length; i++) {
+                if (listaCarritoTransferPorSucursal[i].Sucursal != '') {
+                    isAdd = true;
+                    break;
+                }
+            }
+        }
+    }
+    if (isAdd) {
+        strHTML += '<button type="button" id="btn_confirmar_TOTALES" class="btn_confirmar" onclick="onclickIsPuedeUsarDll(' + '0' + '); return false;" href="#">CONFIRMAR TODOS</button>';
+        strHTML += '<button type="button" id="btn_vaciar_TOTALES" class="btn_vaciar float-left" onclick="onclickVaciarCarritoTODOS(); return false;" href="#">VACIAR TODOS</button>';
+        $('#divContenedorBase_TOTALES').html(strHTML);
+    }
+}
+function onclickVaciarCarritoTODOS() {
+    var clickButton = 'return onclickVaciarCarrito_ButtonOK_TODOS();';
+    mensaje_confirmar('¿Desea vaciar todos los carritos?', clickButton, 'modalModuloAlertHide(); return false;');
+}
+function onclickVaciarCarrito_ButtonOK_TODOS() {
+    BorrarCarritoTODOS();
+    return false;
+}
+function OnCallBackBorrarCarritoTODOS(args) {
+    if (args) {
+        location.reload();
+        //var indexCarrito = $("#hiddenIndexCarrito").val();
+        //$('#divContenedorCarrito_' + indexCarrito).remove();
+        //var sucur = listaCarritos[indexCarrito].codSucursal;
+        //listaCarritos[indexCarrito].codSucursal = '';
+        //modalModuloAlertHide();
+        //LimpiarTextBoxProductosBuscados(sucur);
+        //carritoNoHayCarritosCelular();
+        //funActulizarHtmlCredito();
+    }
+}
 function OnCallBackCargarCarritoDiferido(args) {
     OnCallBackActualizarProductoCarrito(args);
 }
@@ -3424,12 +3508,12 @@ function focusInputCantidadCarrito() {
 function focusPrimerProductoHabilitado() {
     var isFocusFind = false;
     if (listaProductosBuscados != null && listaProductosBuscados.length > 0) {
-       
+
         var objRadioSucursalFoco = document.querySelectorAll("input[name='radioSucursalFoco']");
         var sucursalSelec = '';
         for (const radioButton of objRadioSucursalFoco) {
             if (radioButton.checked) {
-                sucursalSelec =  radioButton.value;
+                sucursalSelec = radioButton.value;
                 break;
             }
         }
@@ -3453,7 +3537,7 @@ function focusPrimerProductoHabilitado() {
         if (!isFocusFind) {
             for (var iSucursal = 0; iSucursal < listaSucursal.length; iSucursal++) {
                 for (var iProducto = 0; iProducto < listaProductosBuscados.length; iProducto++) {
-                    var nameInput = 'inputSuc' + iProducto + '_' +  iSucursal;
+                    var nameInput = 'inputSuc' + iProducto + '_' + iSucursal;
                     if ($('#' + nameInput).length) {
                         $('#' + nameInput).focus();
                         selectedInput = document.getElementById(nameInput);

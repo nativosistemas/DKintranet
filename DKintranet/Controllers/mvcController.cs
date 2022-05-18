@@ -1004,5 +1004,20 @@ namespace DKintranet.Controllers
             System.Web.HttpContext.Current.Session["intranet_listaSucursales"] = null;
             //System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] = null;
         }
+        [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
+        public string RecuperarUltimoProductoSeleccionado()
+        {
+            if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null)
+            {
+                Usuario usuario = ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]);
+                return DKbase.web.acceso.RecuperarUltimoProductoSeleccionado(usuario.id);
+            }
+            return null;
+        }
+        [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
+        public int BorrarCarritoTODOS()
+        {
+            return capaCAR_decision.BorrarCarritoTODOS();
+        }
     }
 }

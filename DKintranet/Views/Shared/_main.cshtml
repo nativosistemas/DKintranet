@@ -60,153 +60,153 @@
     @* header *@
     <section class="section-gris-claro wrapCelular">
 
-        <div class="col-xs-9 divColorFondoBlanco">
+        <div class="col-xs-8 divColorFondoBlanco">
 
 
-        @* Inicio Promotores Y Encargados *@
-        @{
-            if (Session["clientesDefault_Usuario"] != null && ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR)
-            {
-                <p class="TitleCliente">Seleccione un cliente</p>
-                List<DKbase.web.capaDatos.cClientes> colClientes = WebService.spRecuperarTodosClientesByPromotor(((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).ApNombre);
+            @* Inicio Promotores Y Encargados *@
+            @{
+                if (Session["clientesDefault_Usuario"] != null && ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_PROMOTOR)
+                {
+                    <p class="TitleCliente">Seleccione un cliente</p>
+                    List<DKbase.web.capaDatos.cClientes> colClientes = WebService.spRecuperarTodosClientesByPromotor(((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).ApNombre);
 
-                <select class="form-control cmbCliente" id="cmbCliente" name="cmdCliente">
-                    @{
-                        foreach (DKbase.web.capaDatos.cClientes oCli in colClientes)
-                        {
-                            string inhabilitado;
+                    <select class="form-control cmbCliente" id="cmbCliente" name="cmdCliente">
+                        @{
+                            foreach (DKbase.web.capaDatos.cClientes oCli in colClientes)
+                            {
+                                string inhabilitado;
 
-                            if (oCli.cli_estado == "INH")
-                            {
-                                inhabilitado = "<span style='color: red;'> (INHABILITADO) </span>";
-                            }
-                            else
-                            {
-                                inhabilitado = "";
-                            }
-                            if (((DKbase.web.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo == oCli.cli_codigo)
-                            {
-                                <option value="@{ WriteLiteral(oCli.cli_codigo); }" selected>
-                                    @{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);}
-                                </option>
-                            }
-                            else
-                            {
-                                <option value="@{ WriteLiteral(oCli.cli_codigo); }">@{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);} </option>
+                                if (oCli.cli_estado == "INH")
+                                {
+                                    inhabilitado = "<span style='color: red;'> (INHABILITADO) </span>";
+                                }
+                                else
+                                {
+                                    inhabilitado = "";
+                                }
+                                if (((DKbase.web.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo == oCli.cli_codigo)
+                                {
+                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }" selected>
+                                        @{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);}
+                                    </option>
+                                }
+                                else
+                                {
+                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }">@{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);} </option>
+                                }
                             }
                         }
-                    }
-                </select>
-            }
+                    </select>
+                }
 
-            if (Session["clientesDefault_Usuario"] != null && ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL)
-            {
-                <p class="TitleCliente">Seleccione un cliente</p>
-                List<DKbase.web.capaDatos.cClientes> colClientes = WebService.RecuperarTodosClientes();
+                if (Session["clientesDefault_Usuario"] != null && ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_ENCGRAL)
+                {
+                    <p class="TitleCliente">Seleccione un cliente</p>
+                    List<DKbase.web.capaDatos.cClientes> colClientes = WebService.RecuperarTodosClientes();
 
-                <select class="form-control cmbCliente" id="cmbCliente" name="cmdCliente">
-                    @{
-                        foreach (DKbase.web.capaDatos.cClientes oCli in colClientes)
-                        {
-                            string inhabilitado;
+                    <select class="form-control cmbCliente" id="cmbCliente" name="cmdCliente">
+                        @{
+                            foreach (DKbase.web.capaDatos.cClientes oCli in colClientes)
+                            {
+                                string inhabilitado;
 
-                            if (oCli.cli_estado == "INH")
-                            {
-                                inhabilitado = "<span style='color: red;'> (INHABILITADO) </span>";
-                            }
-                            else
-                            {
-                                inhabilitado = "";
-                            }
-                            if (((DKbase.web.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo == oCli.cli_codigo)
-                            {
-                                <option value="@{ WriteLiteral(oCli.cli_codigo); }" selected>
-                                    @{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);}
-                                </option>
-                            }
-                            else
-                            {
-                                <option value="@{ WriteLiteral(oCli.cli_codigo); }">@{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);} </option>
+                                if (oCli.cli_estado == "INH")
+                                {
+                                    inhabilitado = "<span style='color: red;'> (INHABILITADO) </span>";
+                                }
+                                else
+                                {
+                                    inhabilitado = "";
+                                }
+                                if (((DKbase.web.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo == oCli.cli_codigo)
+                                {
+                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }" selected>
+                                        @{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);}
+                                    </option>
+                                }
+                                else
+                                {
+                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }">@{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);} </option>
+                                }
                             }
                         }
-                    }
-                </select>
-            }
+                    </select>
+                }
 
-            if (Session["clientesDefault_Usuario"] != null && ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
-            {
-                <p class="TitleCliente">Seleccione un cliente</p>
-                string[] GrupoCliente;
+                if (Session["clientesDefault_Usuario"] != null && ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
+                {
+                    <p class="TitleCliente">Seleccione un cliente</p>
+                    string[] GrupoCliente;
 
-                GrupoCliente = ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).NombreYApellido.Split(' ');
+                    GrupoCliente = ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).NombreYApellido.Split(' ');
 
-                List<DKbase.web.capaDatos.cClientes> colClientes = WebService.RecuperarTodosClientesByGrupoCliente(GrupoCliente[0]);
-                <select class="form-control cmbCliente" id="cmbCliente" name="cmdCliente">
-                    @{
-                        foreach (DKbase.web.capaDatos.cClientes oCli in colClientes)
-                        {
-                            string inhabilitado;
+                    List<DKbase.web.capaDatos.cClientes> colClientes = WebService.RecuperarTodosClientesByGrupoCliente(GrupoCliente[0]);
+                    <select class="form-control cmbCliente" id="cmbCliente" name="cmdCliente">
+                        @{
+                            foreach (DKbase.web.capaDatos.cClientes oCli in colClientes)
+                            {
+                                string inhabilitado;
 
-                            if (oCli.cli_estado == "INH")
-                            {
-                                inhabilitado = "<span style='color: red;'> (INHABILITADO) </span>";
-                            }
-                            else
-                            {
-                                inhabilitado = "";
-                            }
-                            if (((DKbase.web.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo == oCli.cli_codigo)
-                            {
-                                <option value="@{ WriteLiteral(oCli.cli_codigo); }" selected>
-                                    @{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);}
-                                </option>
-                            }
-                            else
-                            {
-                                <option value="@{ WriteLiteral(oCli.cli_codigo); }">@{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);} </option>
-                            }
-                        }
-                    }
-                </select>
-            }
-
-            if (Session["clientesDefault_Usuario"] != null && ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL)
-            {
-                <p class="TitleCliente">Seleccione un cliente</p>
-                string IdSuc;
-
-                IdSuc = ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).NombreYApellido.Substring(9, 2);
-
-                List<DKbase.web.capaDatos.cClientes> colClientes = WebService.RecuperarTodosClientesBySucursal(IdSuc);
-                <select class="form-control cmbCliente" id="cmbCliente" name="cmdCliente">
-                    @{
-                        foreach (DKbase.web.capaDatos.cClientes oCli in colClientes)
-                        {
-                            string inhabilitado;
-
-                            if (oCli.cli_estado == "INH")
-                            {
-                                inhabilitado = "<span style='color: red;'> (INHABILITADO) </span>";
-                            }
-                            else
-                            {
-                                inhabilitado = "";
-                            }
-                            if (((DKbase.web.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo == oCli.cli_codigo)
-                            {
-                                <option value="@{ WriteLiteral(oCli.cli_codigo); }" selected>
-                                    @{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);}
-                                </option>
-                            }
-                            else
-                            {
-                                <option value="@{ WriteLiteral(oCli.cli_codigo); }">@{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);} </option>
+                                if (oCli.cli_estado == "INH")
+                                {
+                                    inhabilitado = "<span style='color: red;'> (INHABILITADO) </span>";
+                                }
+                                else
+                                {
+                                    inhabilitado = "";
+                                }
+                                if (((DKbase.web.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo == oCli.cli_codigo)
+                                {
+                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }" selected>
+                                        @{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);}
+                                    </option>
+                                }
+                                else
+                                {
+                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }">@{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);} </option>
+                                }
                             }
                         }
-                    }
-                </select>
-            }
-            if (Session["clientesDefault_Usuario"] != null && DKintranet.Codigo.clases.FuncionesPersonalizadas.isUserTomaPedidoIntranet((DKbase.web.Usuario)Session["clientesDefault_Usuario"]))
+                    </select>
+                }
+
+                if (Session["clientesDefault_Usuario"] != null && ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol == DKintranet.Codigo.clases.Constantes.cROL_ENCSUCURSAL)
+                {
+                    <p class="TitleCliente">Seleccione un cliente</p>
+                    string IdSuc;
+
+                    IdSuc = ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).NombreYApellido.Substring(9, 2);
+
+                    List<DKbase.web.capaDatos.cClientes> colClientes = WebService.RecuperarTodosClientesBySucursal(IdSuc);
+                    <select class="form-control cmbCliente" id="cmbCliente" name="cmdCliente">
+                        @{
+                            foreach (DKbase.web.capaDatos.cClientes oCli in colClientes)
+                            {
+                                string inhabilitado;
+
+                                if (oCli.cli_estado == "INH")
+                                {
+                                    inhabilitado = "<span style='color: red;'> (INHABILITADO) </span>";
+                                }
+                                else
+                                {
+                                    inhabilitado = "";
+                                }
+                                if (((DKbase.web.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo == oCli.cli_codigo)
+                                {
+                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }" selected>
+                                        @{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);}
+                                    </option>
+                                }
+                                else
+                                {
+                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }">@{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);} </option>
+                                }
+                            }
+                        }
+                    </select>
+                }
+                @*if (Session["clientesDefault_Usuario"] != null && DKintranet.Codigo.clases.FuncionesPersonalizadas.isUserTomaPedidoIntranet((DKbase.web.Usuario)Session["clientesDefault_Usuario"]))
             {
                 <p class="TitleCliente">Seleccione un cliente</p>
                 List<DKbase.web.capaDatos.cClientes> colClientes = new List<DKbase.web.capaDatos.cClientes>(); //WebService.RecuperarTodosClientes();
@@ -249,12 +249,12 @@
                         }
                     }
                 </select>
+            }*@
             }
-        }
-
-        @* Fin Promotores *@
+            @Html.Partial("_filtros_buscador")
+            @* Fin Promotores *@
         </div>
-            <div class="col-xs-3 divColorFondoBlanco">
+            <div class="col-xs-4 divColorFondoBlanco">
                 @Html.Partial("_navHeader")
             </div>
 
@@ -354,7 +354,7 @@
     <script src="~/includes/mvc/js/libreria.js?n=22" type="text/javascript"></script>
     <script src="~/includes/mvc/js/oferta.js?n=18" type="text/javascript"></script>
     <script src="~/includes/mvc/js/kellerhoff.js?n=55" type="text/javascript"></script>
-    <script src="~/includes/mvc/js/ajax.js?n=46" type="text/javascript"></script>
+    <script src="~/includes/mvc/js/ajax.js?n=47" type="text/javascript"></script>
     <script src="~/includes/mvc/js/mensaje.js?n=39" type="text/javascript"></script>
     <script src="~/includes/mvc/js/promotores.js?n=6" type="text/javascript"></script>
 

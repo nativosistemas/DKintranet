@@ -16,3 +16,13 @@ padding:0px!important;
 .div_carrito .tit {
   padding: 5px 5px;
 }
+.divColorFondoBlanco {
+    background-color: #ededed
+}
+.col_PedidosBuscador {
+padding-top:10px;
+}
+.col_PedidosBuscador_carrito {
+    float: right;
+    padding-top: 10px;
+}

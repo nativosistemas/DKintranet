@@ -8,15 +8,6 @@ using System.Web;
 
 namespace DKintranet.Codigo.capaDatos
 {
-
-    public class cPalabraBusqueda
-    {
-        public int hbp_id { get; set; }
-        public string hbp_Palabra { get; set; }
-        //public string hbp_NombreTabla { get; set; }
-        //public int hbp_codUsuario { get; set; }
-        //public DateTime? hbp_Fecha { get; set; }
-    }
     public class cHistorialProcesos
     {
         public int his_id { get; set; }

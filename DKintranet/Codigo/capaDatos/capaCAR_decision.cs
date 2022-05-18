@@ -19,6 +19,16 @@ namespace DKintranet.Codigo.capaDatos
         {
             return true;
         }
+        public static DKbase.web.capaDatos.cClientes getCliente_Actual()
+        {
+            DKbase.web.capaDatos.cClientes o = null;
+            if (HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+            {
+                DKbase.web.capaDatos.cClientes cliente = (DKbase.web.capaDatos.cClientes)HttpContext.Current.Session["clientesDefault_Cliente"];
+                o = cliente;
+            }
+            return o;
+        }
         public static int idCliente_Actual()
         {
             int idCliente = 0;
@@ -45,6 +55,21 @@ namespace DKintranet.Codigo.capaDatos
             {
                 return capaCAR_WebService.BorrarCarrito(idCliente, lrc_codSucursal, Constantes.cAccionCarrito_VACIAR);
             }
+        }
+        public static int BorrarCarritoTODOS()
+        {
+            int idCliente = idCliente_Actual();
+            cClientes oCliente = getCliente_Actual();
+            Usuario user = (Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"];
+            List<string> ListaSucursal = Codigo.clases.FuncionesPersonalizadas.RecuperarSucursalesParaBuscadorDeCliente();
+            foreach (string itemSucursal in ListaSucursal)
+            {
+                capaCAR_intranet_base.BorrarCarrito(user, oCliente.cli_codigo, itemSucursal, Constantes.cTipo_Carrito, Constantes.cAccionCarrito_VACIAR);
+                capaCAR_intranet_base.BorrarCarrito(user, oCliente.cli_codigo, itemSucursal, Constantes.cTipo_CarritoTransfers, Constantes.cAccionCarrito_VACIAR);
+            }
+            return 0;
+
+
         }
         public static int BorrarCarritosDiferidos(int lrc_id, string lrc_codSucursal)
         {

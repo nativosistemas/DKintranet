@@ -1218,3 +1218,51 @@ function resetCliente() {
         }
     });
 }
+function RecuperarUltimoProductoSeleccionado() {   
+    $.ajax({
+        type: "POST",
+        url: "/mvc/RecuperarUltimoProductoSeleccionado",
+        success:
+            function (response) {
+                //hideCargandoBuscador();
+                document.getElementById('txtBuscador').value =response;
+                document.getElementById('txtBuscador').focus();
+            },
+        failure: function (response) {
+            //hideCargandoBuscador();
+            OnFail(response);
+        },
+        error: function (response) {
+            //hideCargandoBuscador();
+            OnFail(response);
+        }
+    });
+}
+function BorrarCarritoTODOS() {
+    modalModuloAlertHide();
+    showCargandoBuscador();
+    $.ajax({
+        type: "POST",
+        url: "/mvc/BorrarCarritoTODOS",
+        //data: { lrc_id: lrc_id, lrc_codSucursal: lrc_codSucursal },
+        success:
+            function (response) {
+                hideCargandoBuscador();
+                if (response == -1) {
+
+                    mensaje('INFORMACIÓN', "<div style='font-size:1.5em'>" + objMensajeIntentaNuevamente + "</div>");
+                }
+                else {
+                    OnCallBackBorrarCarritoTODOS(response);
+                }
+            },
+        failure: function (response) {
+            hideCargandoBuscador();
+            OnFail(response);
+        },
+        error: function (response) {
+            hideCargandoBuscador();
+            OnFail(response);
+        }
+    });
+}

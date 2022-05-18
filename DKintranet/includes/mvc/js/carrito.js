@@ -96,6 +96,9 @@
     strHTML += '<div class="clear"></div>';
     //
     strHTML += '</div>';// class="div_carrito"
+    //
+    CargarContenedorBaseTotales();
+    //
     return strHTML;
 }
 function obtenerCarritoUnidades(pIndexCarrito) {
@@ -580,6 +583,7 @@ function OnCallBackBorrarCarrito(args) {
         LimpiarTextBoxProductosBuscados(sucur);
         carritoNoHayCarritosCelular();
         funActulizarHtmlCredito();
+        CargarContenedorBaseTotales_borrar();
     }
 }
 

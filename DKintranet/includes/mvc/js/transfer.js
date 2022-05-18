@@ -226,6 +226,9 @@ function AgregarCarritoTransfersPorSucursalHtml(pIndice) {
     strHTML += '<div class="clear"></div>';
     //
     strHTML += '</div>';// class="div_carrito"
+    //
+    CargarContenedorBaseTotales();
+    //
     return strHTML;
 }
 function setScrollFinDeCarritoTransfer(pIndexCarrito) {
@@ -349,6 +352,7 @@ function OnCallBackBorrarCarritoTransfer(args) {
             modalModuloAlertHide();
             LimpiarTextBoxProductosBuscados(sucur);
             funActulizarHtmlCredito();
+            CargarContenedorBaseTotales_borrar();
         }
     }
 }

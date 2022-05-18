@@ -2,55 +2,59 @@
     <nav id="hdr_r" class="navbar navbar-default navbar-static-top" role="navigation">
         <div class="container-fluid">
             <div class="row">
-                @*<div class="col-xs-12 visible-xs">
-                    <div class="col-xs-2 no-padding-left">
-                        <a id="menu-toggle" href="#" class="navbar-toggle float-left"><i class="fa fa-bars"></i></a>
-                    </div>
-                    <div class="col-xs-1 no-padding">
-                        <a class="float-left" style="margin-top:5px"><img src="/../../img/mvc/logos/logo_ch.png" /></a>
-                    </div>
-                    <div class="col-xs-9 no-padding text-right">
-                        <div class="col-xs-11 bienv_xs">
-                            <span>Bienvenido!</span><div class="clear"></div>@{
-                                if (Session["clientesDefault_Usuario"] != null)
-                                {
-                                    WriteLiteral(((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).NombreYApellido);
-                                }}
-                        </div>
-                        <div class="col-xs-1"><div class="clear15"></div><a class="user_xs" href="#"><i class="fa fa-user-circle-o"></i></a></div>
-                    </div>
-                </div>*@
-                <div class="col-lg-8 col-md-8 col-sm-8 hidden-xs">
-                    <table class="cont_po" width="100%">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <b> Central telefónica:</b>
-                                </td>
-                                <td id="tdCentralTelefonica"></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <b>   Teléfono:</b>
-                                </td>
-                                <td id="tdTelefono"></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <b>  Localidad:</b>
-                                </td>
-                                <td id="tdLocalidad"></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <b>  Reparto:</b>
-                                </td>
-                                <td id="tdReparto"></td>
-                            </tr>
-                        </tbody>
-                    </table>
+
+                <div class="col-lg-9 col-md-9 col-sm-9 ">
+                    @{ if (Session["clientesDefault_Usuario"] != null && DKintranet.Codigo.clases.FuncionesPersonalizadas.isUserTomaPedidoIntranet((DKbase.web.Usuario)Session["clientesDefault_Usuario"]))
+                        {
+
+                            <p class="TitleCliente">Seleccione un cliente</p>
+                            List<DKbase.web.capaDatos.cClientes>
+                                colClientes = new List<DKbase.web.capaDatos.cClientes>
+                                    (); //WebService.RecuperarTodosClientes();
+                            if (Session["usuario_TomarPedido_listaClientes"] != null)
+                            {
+                                colClientes = (List<DKbase.web.capaDatos.cClientes>
+                                    )Session["usuario_TomarPedido_listaClientes"];
+                            }
+                            DKbase.web.capaDatos.cClientes clienteActual = null;
+                            if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+                            {
+                                clienteActual = ((DKbase.web.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]);
+                            }
+
+                            <select class="form-control cmbCliente" id="cmbCliente_intranet" name="cmbCliente_intranet">
+                                <option disabled value selected> -- Seleccione una opción -- </option>
+                                @{
+                                    foreach (DKbase.web.capaDatos.cClientes oCli in colClientes)
+                                    {
+                                        string inhabilitado;
+
+                                        if (oCli.cli_estado == "INH")
+                                        {
+                                            inhabilitado = "<span style='color: red;'> (INHABILITADO) </span>";
+                                        }
+                                        else
+                                        {
+                                            inhabilitado = "";
+                                        }
+
+                                        if (clienteActual != null && clienteActual.cli_codigo == oCli.cli_codigo)
+                                        {
+                                            <option value="@{ WriteLiteral(oCli.cli_codigo); }" selected>
+                                                @{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);}
+                                            </option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@{ WriteLiteral(oCli.cli_codigo); }">@{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);} </option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        }
+                    }
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 hidden-xs">
+                <div class="col-lg-3 col-md-3 col-sm-3 hidden-xs">
                     <ul class="nav navbar-nav navbar-left">
                         @{
                             string classPedidos = "";
@@ -124,8 +128,56 @@
                         <li><a @{ WriteLiteral(classPedidos);} href="#"><h3>@{WriteLiteral(((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).NombreYApellido);}</h3></a></li>
                     </ul>
                 </div>
+                @*<div class="col-xs-12 visible-xs">
+            <div class="col-xs-2 no-padding-left">
+                <a id="menu-toggle" href="#" class="navbar-toggle float-left"><i class="fa fa-bars"></i></a>
             </div>
-        </div>
+            <div class="col-xs-1 no-padding">
+                <a class="float-left" style="margin-top:5px"><img src="/../../img/mvc/logos/logo_ch.png" /></a>
+            </div>
+            <div class="col-xs-9 no-padding text-right">
+                <div class="col-xs-11 bienv_xs">
+                    <span>Bienvenido!</span><div class="clear"></div>@{
+                        if (Session["clientesDefault_Usuario"] != null)
+                        {
+                            WriteLiteral(((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).NombreYApellido);
+                        }}
+                </div>
+                <div class="col-xs-1"><div class="clear15"></div><a class="user_xs" href="#"><i class="fa fa-user-circle-o"></i></a></div>
+            </div>
+        </div>*@
+                <div class="col-lg-8 col-md-8 col-sm-8 hidden-xs">
+                    <table class="cont_po" width="100%">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <b> Central telefónica:</b>
+                                </td>
+                                <td id="tdCentralTelefonica"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>   Teléfono:</b>
+                                </td>
+                                <td id="tdTelefono"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>  Localidad:</b>
+                                </td>
+                                <td id="tdLocalidad"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>  Reparto:</b>
+                                </td>
+                                <td id="tdReparto"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+                    </div>
     </nav>
     <!-- menu mobile -->
     <nav id="sidebar-wrapper">
