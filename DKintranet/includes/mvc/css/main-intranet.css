@@ -26,9 +26,10 @@ padding-top:10px;
     float: right;
     padding-top: 10px;
 }
-#btn_vaciar_TOTALES {
+/*#btn_vaciar_TOTALES {
     display:none;
 }
+*/
 #btn_confirmar_TOTALES {
     display: none;
 }

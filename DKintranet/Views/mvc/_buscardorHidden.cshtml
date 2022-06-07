@@ -69,7 +69,7 @@
             resultado += "<input type=\"hidden\" id=\"hiddenhomeTipo\" value=\"" + Server.HtmlEncode(HttpContext.Current.Session["home_Tipo"].ToString()) + "\" />";
             HttpContext.Current.Session["home_Tipo"] = null;
         }
-        resultado += "<input type=\"hidden\" id=\"hiddenCreditoInicial\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.capaDatos.capaCore_decision.ObtenerCreditoDisponible(cliente.cli_login).ToString()) + "\" />";//"50000" 
+        resultado += "<input type=\"hidden\" id=\"hiddenCreditoInicial\" value=\"" + Server.HtmlEncode("50000") + "\" />";//"50000" //DKintranet.Codigo.capaDatos.capaCore_decision.ObtenerCreditoDisponible(cliente.cli_login).ToString()
     }
     resultado += "<input id=\"hiddenIndexCarrito\" type =\"hidden\" />";
 
@@ -81,6 +81,11 @@
     {
         resultado += "<input type=\"hidden\" id=\"hiddenIsSubirPedido\" value=\"" + Server.HtmlEncode("true") + "\" />";
     }
+    //if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null)
+    //{
+    //    DKbase.web.Usuario oUsuario = (DKbase.web.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"];
+    //    resultado += "<input type=\"hidden\" id=\"hiddenListaClientesCarritos\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(DKbase.web.acceso.RecuperarIdClientesConCarritos(oUsuario.id))) + "\" />";
 
+    //}
     WriteLiteral(resultado);
 }

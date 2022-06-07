@@ -1186,7 +1186,7 @@ function CambiarCliente(pIdCliente) {
     $.ajax({
         type: "POST",
         url: "/mvc/CambiarCliente",
-        data: { pIdCliente },
+        data: { IdCliente: pIdCliente },
         success:
             function (response) {
                 //console.log(response);
@@ -1265,4 +1265,11 @@ function BorrarCarritoTODOS() {
             OnFail(response);
         }
     });
+}
+function RecuperarClientesConCarritos() {
+    fetch('/mvc/RecuperarClientesConCarritos')
+        .then(response => response.json())
+        .then(data => listaClientesConCarritos = data)
+        .then(data => { onclickCARROS_ABIERTOS(); });
+
 }

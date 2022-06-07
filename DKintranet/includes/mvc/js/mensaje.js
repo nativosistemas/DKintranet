@@ -626,3 +626,25 @@ function mensaje_AmpliarImagen(pObjeto) {
 
     // }
 }
+function mensaje_carros_abiertos(pTitle, pMensaje) {
+    var strHtml = '';
+    strHtml += '<div class="modal-background">&nbsp;</div>';
+    strHtml += '<div class="modal-dialog modal-lg"><div class="modal-content">';
+    strHtml += '<div class="modal-header no-padding-bottom">';
+    strHtml += '<div class="row">';
+    strHtml += '<div class="col-lg-12">';
+    //strHtml += '<div class="modulo_icon alert"></div>';
+    strHtml += '<h4>' + pTitle + '</h4>';
+    strHtml += '</div>';
+    strHtml += '</div>';
+    strHtml += '<div class="close-modal" data-dismiss="modal"><i class="fa fa-times"></i></div>';
+    strHtml += '</div>';
+    strHtml += pMensaje;
+    strHtml += '<div class="clear"></div>';
+    strHtml += '</div></div>';
+    $('#modalModuloAlert').html(strHtml);
+    $('#modalModuloAlert').modal();
+
+
+    scrollModalPrincipal();
+}

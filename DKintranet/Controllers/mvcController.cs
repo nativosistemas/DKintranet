@@ -987,7 +987,8 @@ namespace DKintranet.Controllers
             else
                 return null;
         }
-        public void CambiarCliente(int IdCliente)
+        [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
+        public int CambiarCliente(int IdCliente)
         {
             cClientes o = null;
             resetCliente();
@@ -997,6 +998,7 @@ namespace DKintranet.Controllers
                 o = lista_Clientes.FirstOrDefault(x => x.cli_codigo == IdCliente);
             }
             System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] = o;
+            return 0;
         }
         public void resetCliente()
         {
@@ -1018,6 +1020,20 @@ namespace DKintranet.Controllers
         public int BorrarCarritoTODOS()
         {
             return capaCAR_decision.BorrarCarritoTODOS();
+        }
+        [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
+        public string RecuperarClientesConCarritos()
+        {
+            string result = null;
+            if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null)
+            {
+                DKbase.web.Usuario oUsuario = (DKbase.web.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"];
+                List<cClientes> l = DKbase.web.acceso.RecuperarIdClientesConCarritos(oUsuario.id);
+                if (l != null) { 
+                    result = Serializador.SerializarAJson(l);
+                }
+            }
+            return result;
         }
     }
 }

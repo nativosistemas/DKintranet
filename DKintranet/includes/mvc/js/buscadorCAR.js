@@ -68,6 +68,7 @@ var btnCarrito_tipo = null;
 var sumaCarritosOtraSolapa = null;
 var tempIdSucursal = null;
 var tempIdProduco = null;
+var listaClientesConCarritos = null;
 //hiddenSumaCarritosOtraSolapa
 //document.onkeydown = function () {
 //    if (window.event && window.event.keyCode == 27) {
@@ -291,6 +292,15 @@ $(document).ready(function () {
     else
         homeTipo = parseInt($('#hiddenhomeTipo').val());
 
+    //
+    //if (listaClientesConCarritos == null) {
+    //    listaClientesConCarritos = eval('(' + $('#hiddenListaClientesCarritos').val() + ')');
+    //    if (typeof listaClientesConCarritos == 'undefined') {
+    //        listaClientesConCarritos = null;
+    //    }
+    //}
+    //
+
     CargarCarritos();
 
     if (typeof CargarCarritosTransfersPorSucursal == 'function') { // isCarritoDiferido == false
@@ -315,6 +325,8 @@ $(document).ready(function () {
         $('#tdReparto').html(cliente.cli_codrep);
 
     }
+    //
+    renderClientesConCarritos();
 });
 
 function carritoNoHayCarritosCelular() {
@@ -3615,4 +3627,25 @@ function isValidarCredito(pIdSucursal, pProducto, pCantidadProducto, pIsDesdeBus
 
     }
     return isGrabarCantidad;
+}
+function renderClientesConCarritos() {
+    var html = '&nbsp;&nbsp;&nbsp;';
+    html += '<button type="button"  onclick="onclickRecuperarClientesConCarritos(); return false;">' + 'CARROS ABIERTOS' + '</button>';
+    $('#divClientesConCarritos').html(html);
+}
+function onclickRecuperarClientesConCarritos() {
+    RecuperarClientesConCarritos();
+}
+function onclickCARROS_ABIERTOS() {
+    if (listaClientesConCarritos != null && listaClientesConCarritos.length > 0) {
+        var html = '<br>';
+        for (var i = 0; i < listaClientesConCarritos.length; i++) {
+            html += '<button class="btn btn-primary" type="button"  onclick="onclickCambiarCliente(' + listaClientesConCarritos[i].cli_codigo + '); return false;">' + listaClientesConCarritos[i].cli_nombre + '</button><br><br>';
+        }
+        var titulo = 'CLIENTES CON CARRITOS SIN CONFIRMAR';
+        mensaje_carros_abiertos(titulo, html);
+    }
+}
+function onclickCambiarCliente(pIdCliente) {
+    CambiarCliente(pIdCliente);
 }

@@ -29,25 +29,7 @@
 
     $("#cmbCliente_intranet").change(function () {
         var IdCliente = $(this).val().trim();
-        //CambiarCliente(IdCliente);
-        $.ajax({
-            type: "POST",
-            url: "/mvc/CambiarCliente",
-            data: { IdCliente },
-            success:
-                function (response) {
-                    console.log(response);                    
-                    location.href = '../mvc/Buscador';//window.location.href = "/mvc/Buscador";//
-                },
-            failure: function (response) {
-                //hideCargandoBuscador();
-                OnFail(response);
-            },
-            error: function (response) {
-                //hideCargandoBuscador();
-                OnFail(response);
-            }
-        });
+        CambiarCliente(IdCliente);
     })
 });
 
