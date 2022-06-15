@@ -607,6 +607,8 @@ namespace DKintranet.Controllers
                     }
                 }
             }
+            if (resultadoPedido == null)
+                return null;
             return Serializador.SerializarAJson(resultadoPedido);
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
@@ -1034,6 +1036,37 @@ namespace DKintranet.Controllers
                 }
             }
             return result;
+        }
+        [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
+        public string TomarPedidoCarritoTODOS( string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio)
+        {
+            string result = string.Empty;
+            List<string> l = new List<string>();
+            List<string> ListaSucursalOptimizar = DKintranet.Codigo.clases.FuncionesPersonalizadas.RecuperarSucursalesParaBuscadorDeCliente();
+            foreach (string itemSucursal in ListaSucursalOptimizar)
+            {
+                l.Add(itemSucursal);
+                result += itemSucursal ;
+                string carrito = TomarPedidoCarrito_generico(Constantes.cTipo_Carrito, itemSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, false);
+                if (string.IsNullOrEmpty(carrito)) { 
+                    l.Add(string.Empty);
+                }
+                else {
+                    l.Add(carrito);
+                    result += carrito;
+                }
+                string transfer = TomarTransferPedidoCarrito(false, itemSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio);
+                if (string.IsNullOrEmpty(transfer))
+                {
+                    l.Add(string.Empty);
+                }
+                else
+                {
+                    result += transfer;
+                    l.Add(transfer);
+                }
+            }
+            return  Serializador.SerializarAJson(l);//result;//
         }
     }
 }

@@ -368,7 +368,7 @@ function OnCallBackTomarPedidoCarrito(args) {
             isHacerBorradoCarritos = true;
             CargarRespuestaDePedido(args);
             creditoInicial = args.CreditoInicial;
- 
+
         }
     }
 }
@@ -1040,4 +1040,292 @@ function obtenerMontoProductoDeCarritoSucursal(pSucursal, pProducto) {
         }//f (isNotNullEmpty(listaCarritos[iCarritos].codSucursal)) {
     }//  for (var iCarritos = 0; iCarritos < listaCarritos.length; iCarritos++) {
     return result;
+}
+
+function ConfirmarCarritoTODOS() {
+    isBotonNoEstaEnProceso = false;
+    var montoMinimo = '';
+    var precio = ObtenerPrecioConFormato($('#tdTotal' + pIndexCarrito).html());
+    var isTomarPedido = true;
+    textTipoEnvioCarrito = $('#comboTipoEnvio option:selected').text();
+    var codTipoEnvioCarrito = $('#comboTipoEnvio option:selected').val();
+    var isOkCadeteriaRestricciones = true;
+    var msgCategoriaRestricciones = '';
+    if (cli_codtpoenv() != 'C') { // C -> cadeteria
+        if (codTipoEnvioCarrito == 'C') {
+            for (var i = 0; i < listaCadeteriaRestricciones.length; i++) {
+                if (listaCadeteriaRestricciones[i].tcr_codigoSucursal == listaCarritos[pIndexCarrito].codSucursal) {
+                    if (listaCadeteriaRestricciones[i].tcr_MontoIgnorar <= precio) {
+                        isOkCadeteriaRestricciones = true;
+                    } else {
+                        var unidades = obtenerCarritoUnidades(pIndexCarrito);// parseInt($('#tdUnidades' + pIndexCarrito).html().replace(textUnidades, ''));
+                        if (listaCadeteriaRestricciones[i].tcr_UnidadesMinimas > unidades) {
+                            isOkCadeteriaRestricciones = false;
+                            msgCategoriaRestricciones = 'Para seleccionar Cadetería como Tipo de Envío el pedido debe tener ' + listaCadeteriaRestricciones[i].tcr_UnidadesMinimas + ' unidades mínimas y ' + listaCadeteriaRestricciones[i].tcr_UnidadesMaximas + ' unidades máximas'; //'UnidadesMinimas';
+                        } else if (listaCadeteriaRestricciones[i].tcr_UnidadesMaximas < unidades) {
+                            isOkCadeteriaRestricciones = false;
+                            msgCategoriaRestricciones = 'Para seleccionar Cadetería como Tipo de Envío el pedido debe tener ' + listaCadeteriaRestricciones[i].tcr_UnidadesMinimas + ' unidades mínimas y ' + listaCadeteriaRestricciones[i].tcr_UnidadesMaximas + ' unidades máximas'; //'UnidadesMaximas';
+                        } else if (listaCadeteriaRestricciones[i].tcr_MontoMinimo > precio) {
+                            isOkCadeteriaRestricciones = false;
+                            msgCategoriaRestricciones = 'Para seleccionar Cadetería como Tipo de Envío el pedido debe superar los $ ' + listaCadeteriaRestricciones[i].tcr_MontoMinimo;  //'MontoMinimo';
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+    }
+    if (isOkCadeteriaRestricciones) {
+        if (textTipoEnvioCarrito == 'Mostrador') {
+            if (listaSucursales != null) {
+                for (var i = 0; i < listaSucursales.length; i++) {
+                    if (listaSucursales[i].suc_codigo == listaCarritos[pIndexCarrito].codSucursal) {
+                        if (listaSucursales[i].suc_montoMinimo > 0) {
+                            if (listaSucursales[i].suc_montoMinimo > precio) {
+                                isTomarPedido = false;
+                                montoMinimo = listaSucursales[i].suc_montoMinimo;
+                            }
+                        }
+                        break;
+                    } // fin  if (listaSucursales[i].suc_codigo == listaCarritos[pIndexCarrito].codSucursal) {
+                }
+            }
+        }
+        if (isTomarPedido) {
+            var textFactura = $('#txtMensajeFactura').val();
+            var textRemito = $('#txtMensajeRemito').val();
+            var isUrgente = $('#checkboxIsUrgentePedido').is(":checked");
+            var idTipoEnvio = $('#comboTipoEnvio').val();
+            if (isCarritoDiferido) {
+                TomarPedidoCarritoDiferido(listaCarritos[pIndexCarrito].codSucursal, textFactura, textRemito, idTipoEnvio, isUrgente);
+            }
+            else {
+                TomarPedidoCarrito(listaCarritos[pIndexCarrito].codSucursal, textFactura, textRemito, idTipoEnvio, isUrgente);
+            }
+            //
+            $('#modalModulo').modal('hide');
+            showCargando();
+            //
+        } else {
+            //alert('Para hacer el pedido se debe superar el monto mínimo de ' + '$ ' + montoMinimo);
+            mensaje_informacion('Para hacer el pedido se debe superar el monto mínimo de ' + '$ ' + montoMinimo);
+            isBotonNoEstaEnProceso = true;
+        }
+    } // fin   if (isOkCadeteriaRestricciones) {
+    else {
+        //alert(msgCategoriaRestricciones);
+        mensaje_informacion(msgCategoriaRestricciones);
+        isBotonNoEstaEnProceso = true;
+    }
+}
+function MostrarConfirmarCarrito_todos() {
+    var onclick = '';
+    var codSucursal = '';
+    onclick = 'onclickConfimarTransferPedidoOk_todos()';
+    //if (pIsTransfer) {
+    //    onclick = 'onclickConfimarTransferPedidoOk()';
+    //    codSucursal = listaCarritoTransferPorSucursal[pIndexCarrito].Sucursal;
+    //}
+    //else {
+    //    onclick = 'onclickHacerPedido()';
+    //    codSucursal = listaCarritos[pIndexCarrito].codSucursal;
+    //}
+    var strHtml = '';
+    strHtml += '<div class="modal-background">&nbsp;</div>';
+    strHtml += '<div class="modal-dialog modal-lg"><div class="modal-content">';
+    strHtml += '<div class="modal-header no-padding-bottom">';
+    strHtml += '<div class="row">';
+    strHtml += '<div class="col-lg-12">';
+    strHtml += '<div class="modulo_icon check"></div>';
+    strHtml += '<h4>Confirmar</h4>';
+    strHtml += '</div>';
+    strHtml += '</div>';
+    strHtml += '<div class="close-modal" data-dismiss="modal"><i class="fa fa-times"></i></div>';
+    strHtml += '</div>';
+    strHtml += '<div class="modal-body">';
+    strHtml += '<div class="col-md-6 div_msj">';
+    strHtml += '<textarea class="" id="txtMensajeFactura" name="txtMensajeFactura" placeholder="Mensaje en factura" maxlength="40" onchange="MensajeFacturaRemitoLength(this)" onkeyup="MensajeFacturaRemitoLength(this)" onpaste="MensajeFacturaRemitoLength(this)"></textarea>';
+    strHtml += '</div>';
+    strHtml += '<div class="col-md-6 div_msj">';
+    strHtml += '<textarea class="" id="txtMensajeRemito" name="txtMensajeRemito" placeholder="Mensaje en remito" maxlength="40" onchange="MensajeFacturaRemitoLength(this)" onkeyup="MensajeFacturaRemitoLength(this)" onpaste="MensajeFacturaRemitoLength(this)"></textarea>';
+    strHtml += '</div>';
+    strHtml += '<div class="col-md-6">Tipo de envio:&nbsp;';
+    strHtml += '<select class="form-shop" name="comboTipoEnvio" id="comboTipoEnvio" onchange="onChangeTipoEnvio()" style="width:200px">';
+    strHtml += CargarHtmlOptionTipoEnvio_todos();
+    strHtml += '</select>';
+    strHtml += '</div>';
+    //strHtml += '<div id="tdIsUrgente" class="col-md-6">';
+    //strHtml += '<input id="checkboxIsUrgentePedido" type="checkbox" style="width: 16px; height: 16px;" />';
+    //strHtml += '&nbsp;Es urgente';
+    //strHtml += '</div>';
+    strHtml += '<div class="clear10"></div>';
+    strHtml += '<button type="button" class="btn_confirmar" id="btn_confirmar_HACER_PEDIDO" onclick="' + onclick + '; return false;" href="#">HACER PEDIDO</button>';
+    strHtml += '</div>'; // '<div class="modal-body">'
+    strHtml += '<div class="clear"></div>';
+    strHtml += '</div></div>'; //'<div class="modal-dialog modal-lg"><div class="modal-content">'
+    $('#modalModulo').html(strHtml);
+    $('#modalModulo').modal();
+
+    $('#btn_confirmar_HACER_PEDIDO').focus();
+}
+function CargarHtmlOptionTipoEnvio_todos() {
+    var strHtml = '';
+    if (listaTipoEnviosSucursal != null) {
+        //var isSeEncontro = false;
+        for (var i = 0; i < listaTipoEnviosSucursal.length; i++) {
+            if (listaTipoEnviosSucursal[i].sucursal == cli_codsuc() && listaTipoEnviosSucursal[i].tipoEnvio == null) {
+                //isSeEncontro = true;
+                for (var y = 0; y < listaTipoEnviosSucursal[i].lista.length; y++) {
+                    strHtml += '<option value="' + listaTipoEnviosSucursal[i].lista[y].env_codigo + '">' + listaTipoEnviosSucursal[i].lista[y].env_nombre + '</option>';
+                }
+                //break;
+            }
+        }
+        //if (!isSeEncontro) {
+        //    for (var i = 0; i < listaTipoEnviosSucursal.length; i++) {
+        //        if (listaTipoEnviosSucursal[i].sucursal == pSucursal && listaTipoEnviosSucursal[i].tipoEnvio == null) {
+        //            for (var y = 0; y < listaTipoEnviosSucursal[i].lista.length; y++) {
+        //                strHtml += '<option value="' + listaTipoEnviosSucursal[i].lista[y].env_codigo + '">' + listaTipoEnviosSucursal[i].lista[y].env_nombre + '</option>';
+        //            }
+        //            break;
+        //        }
+        //    }
+        //}
+    }
+    return strHtml;
+}
+function onclickConfimarTransferPedidoOk_todos() {
+    isBotonNoEstaEnProceso = false;
+    textTipoEnvioCarrito = $('#comboTipoEnvio option:selected').text();
+    var codTipoEnvioCarrito = $('#comboTipoEnvio option:selected').val();
+
+
+    var textFactura = $('#txtMensajeFactura').val();
+    var textRemito = $('#txtMensajeRemito').val();
+    var idTipoEnvio = $('#comboTipoEnvio').val();
+
+    TomarPedidoCarritoTODOS(textFactura, textRemito, idTipoEnvio);
+
+    //
+    $('#modalModulo').modal('hide');
+    showCargando();
+    //
+}
+
+function OnCallBackTomarPedidoCarritoTODOS(args) {
+    isBotonNoEstaEnProceso = true;
+    /// mostrar faltantes y problema crediticio
+    if (!isNotNullEmpty(args)) {
+        args = null;
+    } else {
+        args = eval('(' + args + ')');
+    }
+    if (args == null) {
+        mensaje_alert_base(mensajeCuandoSeMuestraError, 'volverBuscador()');
+    } else {
+
+        isHacerBorradoCarritos = true;
+        $('#divCargandoContenedorGeneralFondo').css('display', 'none');
+        var strHTML = '';
+        var index = 0;
+        var max = (args.length + 1) / 3;
+        strHTML += '<div class="modal-background">&nbsp;</div>';
+        strHTML += '<div class="modal-dialog modal-lg"><div class="modal-content">';
+        strHTML += '<div class="modal-header no-padding-bottom">';
+        strHTML += '<div class="modulo_icon ok"></div>';
+        strHTML += '<div class="clear"></div>';
+        for (var i = 0; i < (args.length + 1) / 3; i++) {
+            if (i == 0) {
+                index = 0;
+            } else {
+                index = index + 3;
+            }
+            if (index >= (max + 3)) {
+                break;
+            }
+            var strHTML_sucursal = '';
+            var isCarritoSucursal = false;
+            strHTML_sucursal += listaSucursales[index].sde_sucursal + '<br>';
+            var resultCarrrito = args[index + 1];
+            if (resultCarrrito != '') {
+                resultCarrrito = eval('(' + resultCarrrito + ')');
+                strHTML_sucursal += CargarRespuestaDePedido_todos(resultCarrrito);
+                isCarritoSucursal = true;
+            }
+            strHTML_sucursal += '<br>';
+            var resultTransfer = args[index + 2];
+            if (resultTransfer != '') {
+                resultTransfer = eval('(' + resultTransfer + ')');
+                strHTML_sucursal += CargarRespuestaDePedidoTransfer_todos(resultTransfer);
+                isCarritoSucursal = true;
+            }
+            if (isCarritoSucursal) {
+                strHTML +=  strHTML_sucursal;
+            }
+        }
+        strHTML += '<div class="clear"></div>';
+        strHTML += '<a class="btn_vaciar float-left" href="#" data-dismiss="modal">CERRAR</a>';
+
+        strHTML += '</div>';
+        strHTML += '<div class="clear"></div>';
+        strHTML += '</div></div>';
+        $('#modalModulo').html(strHTML);
+        $('#modalModulo').modal();
+    }
+}
+function CargarRespuestaDePedido_todos(pValor) {
+    var strHtmlProductosPedidos = getHtml_ProductosFacturados(pValor);
+    var strHtmlFaltantes = getHtml_ProductosEnFalta(pValor);
+    var strHtmlProblemasCrediticios = getHtml_ProductosConProblemasDeCredito(pValor);
+    var strHtml = '';
+    //strHtml += '<div class="modal-background">&nbsp;</div>';
+    //strHtml += '<div class="modal-dialog modal-lg"><div class="modal-content">';
+    //strHtml += '<div class="modal-header no-padding-bottom">';
+    strHtml += '<div class="row">';
+    strHtml += '<div class="col-lg-12">';
+    if (strHtmlProblemasCrediticios == '' && strHtmlFaltantes == '') {
+        strHtml += '<div class="modulo_icon ok"></div>';
+    } else {
+        strHtml += '<div class="modulo_icon alert"></div>';
+    }
+    strHtml += '<h4>Resultado del pedido</h4>';
+    strHtml += '</div>';
+    strHtml += '</div>';
+    strHtml += '<div class="close-modal" data-dismiss="modal"><i class="fa fa-times"></i></div>';
+    strHtml += '</div>';
+    strHtml += '<div class="modal-body">';
+    //
+    if (strHtmlProductosPedidos != '') {
+
+        strHtml += strHtmlProductosPedidos;
+    }
+    if (strHtmlProblemasCrediticios == '' && strHtmlFaltantes == '') {
+        strHtml += '<div class="col-xs-12"><div class="alert alert-success">';
+        strHtml += 'El pedido se realizo correctamente';
+        strHtml += '</div></div>';
+    }
+    if (strHtmlFaltantes != '') {
+
+        strHtml += strHtmlFaltantes;
+    }
+    if (strHtmlProblemasCrediticios != '') {
+
+        strHtml += strHtmlProblemasCrediticios;
+    }
+    //
+    //strHtml += '<div class="clear"></div>';
+    //strHtml += '<button type="button" class="btn_confirmar" href="#" onclick="onclickBtnConfirmarResultadoPedido(); return false;">CONFIRMAR</button>';
+    //strHtml += '<div class="clear"></div>';
+    //strHtml += '</div>';
+    //strHtml += '<div class="clear"></div>';
+    //strHtml += '</div></div>';
+    //$('#modalModulo').html(strHtml);
+    //$('#modalModulo').modal();
+    return strHtml;
+
+}
+function CargarRespuestaDePedidoTransfer_todos(pValor) {
+    var strHtml = '';
+
+    return strHtml;
 }

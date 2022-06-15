@@ -1273,3 +1273,23 @@ function RecuperarClientesConCarritos() {
         .then(data => { onclickCARROS_ABIERTOS(); });
 
 }
+function TomarPedidoCarritoTODOS( pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio) {
+    $.ajax({
+        type: "POST",
+        url: "/mvc/TomarPedidoCarritoTODOS",
+        data: { pMensajeEnFactura: pMensajeEnFactura, pMensajeEnRemito: pMensajeEnRemito, pTipoEnvio: pTipoEnvio },
+        success:
+            function (response) {
+                OnCallBackTomarPedidoCarritoTODOS(response);
+                hideCargando();
+            },
+        failure: function (response) {
+            OnFailBotonEnProceso(response);
+            hideCargando();
+        },
+        error: function (response) {
+            OnFailBotonEnProceso(response);
+            hideCargando();
+        }
+    });
+}

@@ -2335,7 +2335,7 @@ function CargarContenedorBaseTotales() {
             }
         }
         if (isAdd) {
-            strHTML += '<button type="button" id="btn_confirmar_TOTALES" class="btn_confirmar" onclick="onclickIsPuedeUsarDll(' + '0' + '); return false;" href="#">CONFIRMAR TODOS</button>';
+            strHTML += '<button type="button" id="btn_confirmar_TOTALES" class="btn_confirmar" onclick="onclickConfirmar_TOTALES(); return false;" href="#">CONFIRMAR TODOS</button>';
             strHTML += '<button type="button" id="btn_vaciar_TOTALES" class="btn_vaciar float-left" onclick="onclickVaciarCarritoTODOS(); return false;" href="#">VACIAR TODOS</button>';
             $('#divContenedorBase_TOTALES').html(strHTML);
         }
@@ -2364,7 +2364,7 @@ function CargarContenedorBaseTotales_borrar() {
         }
     }
     if (isAdd) {
-        strHTML += '<button type="button" id="btn_confirmar_TOTALES" class="btn_confirmar" onclick="onclickIsPuedeUsarDll(' + '0' + '); return false;" href="#">CONFIRMAR TODOS</button>';
+        strHTML += '<button type="button" id="btn_confirmar_TOTALES" class="btn_confirmar" onclick="onclickConfirmar_TOTALES(); return false;" href="#">CONFIRMAR TODOS</button>';
         strHTML += '<button type="button" id="btn_vaciar_TOTALES" class="btn_vaciar float-left" onclick="onclickVaciarCarritoTODOS(); return false;" href="#">VACIAR TODOS</button>';
         $('#divContenedorBase_TOTALES').html(strHTML);
     }
@@ -3648,4 +3648,7 @@ function onclickCARROS_ABIERTOS() {
 }
 function onclickCambiarCliente(pIdCliente) {
     CambiarCliente(pIdCliente);
+}
+function onclickConfirmar_TOTALES() {
+    MostrarConfirmarCarrito_todos();
 }
