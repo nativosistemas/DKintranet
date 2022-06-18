@@ -38,6 +38,7 @@ namespace DKintranet.Codigo.capaDatos
                     throw new Exception("Result == null");
                 }
                 DKbase.dll.cDllPedido objResult = t.Result;
+                objResult.web_Sucursal = pIdSucursal;
                 return objResult;
             }
             catch (Exception ex)
@@ -68,6 +69,7 @@ namespace DKintranet.Codigo.capaDatos
                     throw new Exception("Result == null");
                 }
                 List<DKbase.dll.cDllPedidoTransfer> objResult = t.Result;
+                objResult.ForEach(o => o.web_Sucursal = pIdSucursal);
                 return objResult;
             }
             catch (Exception ex)

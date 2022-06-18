@@ -1245,32 +1245,71 @@ function OnCallBackTomarPedidoCarritoTODOS(args) {
             }
             var strHTML_sucursal = '';
             var isCarritoSucursal = false;
-            strHTML_sucursal += listaSucursales[index].sde_sucursal + '<br>';
+            //strHTML_sucursal += listaSucursales[index].sde_sucursal + '<br>';
+            strHTML_sucursal += '<div class="alert alert-primary" role="alert">';
+            strHTML_sucursal += listaSucursales[index].sde_sucursal;
+            strHTML_sucursal += '</div>';
+
             var resultCarrrito = args[index + 1];
             if (resultCarrrito != '') {
                 resultCarrrito = eval('(' + resultCarrrito + ')');
-                strHTML_sucursal += CargarRespuestaDePedido_todos(resultCarrrito);
-                isCarritoSucursal = true;
+                //
+                if (resultCarrrito == null) {
+                    // mensaje_alert_base(mensajeCuandoSeMuestraError, 'volverBuscador()');
+                } else {
+                    // Error dsd dll pedido
+                    if (resultCarrrito.Error != '') {
+                        // mensaje_alert_base(args.Error, 'volverBuscador()');
+                        // Fin Error dsd dll pedido
+                    } else {
+                        strHTML_sucursal += CargarRespuestaDePedido_todos(resultCarrrito);
+                        isCarritoSucursal = true;
+                        creditoInicial = resultCarrrito.CreditoInicial;
+                        for (var iCarrito = 0; iCarrito < listaCarritos.length; iCarrito++) {
+                            if (listaCarritos[iCarrito].codSucursal == resultCarrrito.web_Sucursal) {
+                                $('#divContenedorCarrito_' + iCarrito).remove();
+                                //var sucur = listaCarritos[iCarrito].codSucursal;
+                                listaCarritos[iCarrito].codSucursal = '';
+                                LimpiarTextBoxProductosBuscados(resultCarrrito.web_Sucursal);
+                                carritoNoHayCarritosCelular();
+                                break;
+                            }
+                        }
+                    }
+                    //
+                }
+                strHTML_sucursal += '<br>';
+                var resultTransfer = args[index + 2];
+                if (resultTransfer != '') {
+                    resultTransfer = eval('(' + resultTransfer + ')');
+                    if (resultTransfer.length > 0) {
+                        var sucur = resultTransfer[0].web_Sucursal;
+                        for (var iCarritoTransfer = 0; iCarritoTransfer < listaCarritoTransferPorSucursal.length; iCarritoTransfer++) {
+                            if (listaCarritoTransferPorSucursal[iCarritoTransfer].Sucursal == sucur) {
+                                listaCarritoTransferPorSucursal[iCarritoTransfer].Sucursal = '';
+                                LimpiarTextBoxProductosBuscados(sucur);
+                                $('#divContenedorBaseTransfer_' + sucur).html('');
+                                carritoNoHayCarritosCelular();
+                                break;
+                            }
+                        }
+                    }
+                    strHTML_sucursal += CargarRespuestaDePedidoTransfer_todos(resultTransfer);
+                    isCarritoSucursal = true;
+                }
+                if (isCarritoSucursal) {
+                    strHTML += strHTML_sucursal;
+                }
             }
-            strHTML_sucursal += '<br>';
-            var resultTransfer = args[index + 2];
-            if (resultTransfer != '') {
-                resultTransfer = eval('(' + resultTransfer + ')');
-                strHTML_sucursal += CargarRespuestaDePedidoTransfer_todos(resultTransfer);
-                isCarritoSucursal = true;
-            }
-            if (isCarritoSucursal) {
-                strHTML +=  strHTML_sucursal;
-            }
-        }
-        strHTML += '<div class="clear"></div>';
-        strHTML += '<a class="btn_vaciar float-left" href="#" data-dismiss="modal">CERRAR</a>';
+            strHTML += '<div class="clear"></div>';
+            strHTML += '<a class="btn_vaciar float-left" href="#" data-dismiss="modal">CERRAR</a>';
 
-        strHTML += '</div>';
-        strHTML += '<div class="clear"></div>';
-        strHTML += '</div></div>';
-        $('#modalModulo').html(strHTML);
-        $('#modalModulo').modal();
+            strHTML += '</div>';
+            strHTML += '<div class="clear"></div>';
+            strHTML += '</div></div>';
+            $('#modalModulo').html(strHTML);
+            $('#modalModulo').modal();
+        }
     }
 }
 function CargarRespuestaDePedido_todos(pValor) {
@@ -1292,7 +1331,7 @@ function CargarRespuestaDePedido_todos(pValor) {
     strHtml += '</div>';
     strHtml += '</div>';
     strHtml += '<div class="close-modal" data-dismiss="modal"><i class="fa fa-times"></i></div>';
-    strHtml += '</div>';
+    //strHtml += '</div>';
     strHtml += '<div class="modal-body">';
     //
     if (strHtmlProductosPedidos != '') {
@@ -1316,7 +1355,7 @@ function CargarRespuestaDePedido_todos(pValor) {
     //strHtml += '<div class="clear"></div>';
     //strHtml += '<button type="button" class="btn_confirmar" href="#" onclick="onclickBtnConfirmarResultadoPedido(); return false;">CONFIRMAR</button>';
     //strHtml += '<div class="clear"></div>';
-    //strHtml += '</div>';
+    strHtml += '</div>';
     //strHtml += '<div class="clear"></div>';
     //strHtml += '</div></div>';
     //$('#modalModulo').html(strHtml);
