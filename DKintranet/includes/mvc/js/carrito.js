@@ -1231,9 +1231,15 @@ function OnCallBackTomarPedidoCarritoTODOS(args) {
         var max = (args.length + 1) / 3;
         strHTML += '<div class="modal-background">&nbsp;</div>';
         strHTML += '<div class="modal-dialog modal-lg"><div class="modal-content">';
-        strHTML += '<div class="modal-header no-padding-bottom">';
-        strHTML += '<div class="modulo_icon ok"></div>';
-        strHTML += '<div class="clear"></div>';
+
+        //strHTML += '<div class="modal-header no-padding-bottom">';
+        //strHTML += '<div class="clear"></div>';
+        //strHTML += '<a class="btn_vaciar float-left" href="#" data-dismiss="modal">CERRAR</a>';
+        //strHTML += '<div class="modulo_icon ok"></div>';
+        //strHTML += '<div class="clear"></div>';
+
+        strHTML += '<div class="modal-body">';
+
         for (var i = 0; i < (args.length + 1) / 3; i++) {
             if (i == 0) {
                 index = 0;
@@ -1247,9 +1253,9 @@ function OnCallBackTomarPedidoCarritoTODOS(args) {
             var isCarritoSucursal = false;
             //strHTML_sucursal += listaSucursales[index].sde_sucursal + '<br>';
             strHTML_sucursal += '<div class="alert alert-primary" role="alert">';
-            strHTML_sucursal += listaSucursales[index].sde_sucursal;
+            strHTML_sucursal += '<h3>' + listaSucursales[index].sde_sucursal + '</h3>' ;
             strHTML_sucursal += '</div>';
-
+        
             var resultCarrrito = args[index + 1];
             if (resultCarrrito != '') {
                 resultCarrrito = eval('(' + resultCarrrito + ')');
@@ -1259,6 +1265,7 @@ function OnCallBackTomarPedidoCarritoTODOS(args) {
                 } else {
                     // Error dsd dll pedido
                     if (resultCarrrito.Error != '') {
+                        strHTML_sucursal += 'Carrito Error: ' + args.Error;
                         // mensaje_alert_base(args.Error, 'volverBuscador()');
                         // Fin Error dsd dll pedido
                     } else {
@@ -1278,7 +1285,7 @@ function OnCallBackTomarPedidoCarritoTODOS(args) {
                     }
                     //
                 }
-                strHTML_sucursal += '<br>';
+                //strHTML_sucursal += '<br>';
                 var resultTransfer = args[index + 2];
                 if (resultTransfer != '') {
                     resultTransfer = eval('(' + resultTransfer + ')');
@@ -1301,15 +1308,17 @@ function OnCallBackTomarPedidoCarritoTODOS(args) {
                     strHTML += strHTML_sucursal;
                 }
             }
-            strHTML += '<div class="clear"></div>';
-            strHTML += '<a class="btn_vaciar float-left" href="#" data-dismiss="modal">CERRAR</a>';
 
-            strHTML += '</div>';
-            strHTML += '<div class="clear"></div>';
-            strHTML += '</div></div>';
-            $('#modalModulo').html(strHTML);
-            $('#modalModulo').modal();
+
+            //strHTML += '</div>';
+            //strHTML += '<div class="clear"></div>';
+    
         }
+        strHTML += '<div class="clear"></div>';
+        strHTML += '</div>';
+        strHTML += '</div></div>';
+        $('#modalModulo').html(strHTML);
+        $('#modalModulo').modal();
     }
 }
 function CargarRespuestaDePedido_todos(pValor) {
@@ -1320,19 +1329,19 @@ function CargarRespuestaDePedido_todos(pValor) {
     //strHtml += '<div class="modal-background">&nbsp;</div>';
     //strHtml += '<div class="modal-dialog modal-lg"><div class="modal-content">';
     //strHtml += '<div class="modal-header no-padding-bottom">';
-    strHtml += '<div class="row">';
-    strHtml += '<div class="col-lg-12">';
-    if (strHtmlProblemasCrediticios == '' && strHtmlFaltantes == '') {
-        strHtml += '<div class="modulo_icon ok"></div>';
-    } else {
-        strHtml += '<div class="modulo_icon alert"></div>';
-    }
+    //strHtml += '<div class="row">';
+    //strHtml += '<div class="col-lg-12">';
+    //if (strHtmlProblemasCrediticios == '' && strHtmlFaltantes == '') {
+    //    strHtml += '<div class="modulo_icon ok"></div>';
+    //} else {
+    //    strHtml += '<div class="modulo_icon alert"></div>';
+    //}
     strHtml += '<h4>Resultado del pedido</h4>';
-    strHtml += '</div>';
-    strHtml += '</div>';
-    strHtml += '<div class="close-modal" data-dismiss="modal"><i class="fa fa-times"></i></div>';
     //strHtml += '</div>';
-    strHtml += '<div class="modal-body">';
+    //strHtml += '</div>';
+   // strHtml += '<div class="close-modal" data-dismiss="modal"><i class="fa fa-times"></i></div>';
+    //strHtml += '</div>';
+  //  strHtml += '<div class="modal-body">';
     //
     if (strHtmlProductosPedidos != '') {
 
@@ -1355,7 +1364,7 @@ function CargarRespuestaDePedido_todos(pValor) {
     //strHtml += '<div class="clear"></div>';
     //strHtml += '<button type="button" class="btn_confirmar" href="#" onclick="onclickBtnConfirmarResultadoPedido(); return false;">CONFIRMAR</button>';
     //strHtml += '<div class="clear"></div>';
-    strHtml += '</div>';
+    //strHtml += '</div>';
     //strHtml += '<div class="clear"></div>';
     //strHtml += '</div></div>';
     //$('#modalModulo').html(strHtml);
@@ -1364,7 +1373,233 @@ function CargarRespuestaDePedido_todos(pValor) {
 
 }
 function CargarRespuestaDePedidoTransfer_todos(pValor) {
+    var MontoTotal = 0;
+    var isProductosTransferPedidos = false;
+    var isProductosTransferPedidosFaltantes = false;
+    var isProductosTransferPedidosRevision = false;
+    var isProductosPedidoFacturarseHabitual = false;
+    var strHtmlFaltantes = '';
     var strHtml = '';
+    var strHtmlMensajeFinales = '';
+    var strHtmlEnRevision = '';
+    var strHtmlPedidoFacturarseHabitual = '';
+    if (pValor != null) {
+        if (pValor.length > 0) {
+            strHtmlMensajeFinales += '<div  class="col-xs-12" style="font-size: 12px;">TIPO DE ENVIO: ' + textTipoEnvioCarritoTransfer + ' </div>';
+            strHtml += '<div class="col-xs-12">';
+            strHtml += '<div class="titleConfirmar">PRODUCTOS FACTURADOS</div>';
+            strHtml += '<table class="footable table carrito table-stripped" width="100%" align="center" cellspacing="0" cellpadding="0" border="0"><thead><tr>';
+            strHtml += '<th class="col-lg-10 col-md-10 col-sm-10 col-xs-9 text-left">Nombre producto</th>';
+            strHtml += '<th class="col-lg-2 col-md-2 col-sm-10 col-xs-3 text-center">Cantidad</th>';
+            strHtml += '</tr></thead></table>';
+            strHtml += '<table class="footable table popup table-stripped" data-empty="No hay informacion disponible" width="100%" align="center" cellspacing="0" cellpadding="0" border="0">';
+            strHtml += '<tbody>';
 
-    return strHtml;
+
+            // Encabezado PRODUCTOS EN FALTA
+            strHtmlFaltantes += '<div class="col-xs-12">';
+            strHtmlFaltantes += '<div class="titleConfirmar">PRODUCTOS EN FALTA</div>';
+            strHtmlFaltantes += '<table class="footable table carrito table-stripped" width="100%" align="center" cellspacing="0" cellpadding="0" border="0"><thead><tr>';
+            strHtmlFaltantes += '<th class="col-lg-10 col-md-10 col-sm-10 col-xs-9 text-left">Nombre producto</th>';
+            strHtmlFaltantes += '<th class="col-lg-2 col-md-2 col-sm-10 col-xs-3 text-center">Cantidad</th>';
+            strHtmlFaltantes += '</tr></thead></table>';
+            strHtmlFaltantes += '<table class="footable table popup table-stripped" data-empty="No hay informacion disponible" width="100%" align="center" cellspacing="0" cellpadding="0" border="0">';
+            strHtmlFaltantes += '<tbody>';
+            // Fin Encabezado PRODUCTOS EN FALTA
+
+            var cantFaltantes = 0;
+            var cantFacturados = 0;
+            for (var i = 0; i < pValor.length; i++) {
+
+                // EnRevision
+                if (pValor[i].Login == 'REVISION') {
+                    //Inicio Mensaje solamente a revicion
+                    if (indexSucursalTransferSeleccionado != null) {
+                        var sucursal = listaCarritoTransferPorSucursal[indexSucursalTransferSeleccionado].Sucursal;
+                        strHtmlMensajeFinales = '';
+                        strHtmlMensajeFinales += '<div  class="col-xs-12" style="font-size: 14px;">' + 'Transfers a Revisión. Se ha generado un mail a ';
+                        if (sucursal == 'CC') {
+                            strHtmlMensajeFinales += 'pedidos@DKintranet.com.ar';
+                        } else if (sucursal == 'CH') {
+                            strHtmlMensajeFinales += 'sucursalchanarladeado@DKintranet.com.ar';
+                        } else if (sucursal == 'SF') {
+                            strHtmlMensajeFinales += 'sucursalsantafe@DKintranet.com.ar';
+                        } else if (sucursal == 'CB') {
+                            strHtmlMensajeFinales += 'sucursalcordoba@DKintranet.com.ar';
+                        } else if (sucursal == 'CO') {
+                            strHtmlMensajeFinales += 'sucursalconcepcion@DKintranet.com.ar';
+                        } else if (sucursal == 'CD') {
+                            strHtmlMensajeFinales += 'sucursalconcordia@DKintranet.com.ar';
+                        } else if (sucursal == 'VH') {
+                            strHtmlMensajeFinales += 'terapiasespeciales@DKintranet.com.ar';
+                        }
+                        strHtmlMensajeFinales += ' </div>';
+                    }
+                    //Fin Mensaje solamente a revicion
+
+                    strHtmlEnRevision += '<div class="col-xs-12">';
+                    strHtmlEnRevision += '<div class="titleConfirmar">PRODUCTOS PENDIENTES EN FACTURACION </div>';
+                    strHtmlEnRevision += '<table class="footable table carrito table-stripped" width="100%" align="center" cellspacing="0" cellpadding="0" border="0"><thead><tr>';
+                    strHtmlEnRevision += '<th class="col-lg-10 col-md-10 col-sm-10 col-xs-9 text-left">Nombre producto</th>';
+                    strHtmlEnRevision += '<th class="col-lg-2 col-md-2 col-sm-10 col-xs-3 text-center">Cantidad</th>';
+                    strHtmlEnRevision += '</tr></thead></table>';
+                    strHtmlEnRevision += '<table class="footable table popup table-stripped" data-empty="No hay informacion disponible" width="100%" align="center" cellspacing="0" cellpadding="0" border="0">';
+                    strHtmlEnRevision += '<tbody>';
+
+                    for (var x = 0; x < pValor[i].Items.length; x++) {
+
+                        var strHtmlColorFondo = 'grs';
+                        if (x % 2 != 0) {
+                            strHtmlColorFondo = 'wht';
+                        }
+                        isProductosTransferPedidosRevision = true;
+                        strHtmlEnRevision += '<tr class="' + strHtmlColorFondo + '">';
+                        strHtmlEnRevision += '<td class="col-lg-10 col-md-10 col-sm-10 col-xs-9 text-left">' + pValor[i].Items[x].NombreObjetoComercial + '</td>';
+                        strHtmlEnRevision += '<td class="col-lg-2 col-md-2 col-sm-10 col-xs-3 text-center">' + pValor[i].Items[x].Cantidad + '</td>';
+                        strHtmlEnRevision += '</tr>';
+                    }
+                    //Fin EnRevision
+                } else if (pValor[i].Login == 'CONFIRMACION') {
+                    // facturarse de forma Habitual 
+
+                    strHtmlPedidoFacturarseHabitual += '<div class="col-xs-12">';
+                    //strHtmlPedidoFacturarseHabitual += '<div class="titleConfirmar">Productos en transfer no procesados por falta de stock para llegar a condición mínima o exceso en el cupo de unidades. Confirme cuantas unidades quiere con su descuento habitual.</div>';
+                    strHtmlPedidoFacturarseHabitual += '<div class="titleNoCumplenConCondicion">No cumplen con la condición mínima por falta de stock o exceden la cantidad de unidades semanales autorizadas por el laboratorio.<br>';
+                    strHtmlPedidoFacturarseHabitual += '<u><b>Si continúa, las unidades se facturarán con su descuento habitual.</b></u></div>';
+                    strHtmlPedidoFacturarseHabitual += '<table class="footable table carrito table-stripped" width="100%" align="center" cellspacing="0" cellpadding="0" border="0"><thead><tr>';
+                    strHtmlPedidoFacturarseHabitual += '<th class="col-lg-10 col-md-10 col-sm-10 col-xs-9 text-left">Nombre producto</th>';
+                    strHtmlPedidoFacturarseHabitual += '<th class="col-lg-2 col-md-2 col-sm-10 col-xs-3 text-center">Cantidad</th>';
+                    strHtmlPedidoFacturarseHabitual += '</tr></thead></table>';
+                    strHtmlPedidoFacturarseHabitual += '<table class="footable table popup table-stripped" data-empty="No hay informacion disponible" width="100%" align="center" cellspacing="0" cellpadding="0" border="0">';
+                    strHtmlPedidoFacturarseHabitual += '<tbody>';
+
+                    for (var x = 0; x < pValor[i].Items.length; x++) {
+                        var strHtmlColorFondo = 'grs';
+                        if (x % 2 != 0) {
+                            strHtmlColorFondo = 'wht';
+                        }
+                        isProductosPedidoFacturarseHabitual = true;
+                        strHtmlPedidoFacturarseHabitual += '<tr class="' + strHtmlColorFondo + '">';
+                        strHtmlPedidoFacturarseHabitual += '<td class="col-lg-10 col-md-10 col-sm-10 col-xs-9 text-left">' + pValor[i].Items[x].NombreObjetoComercial + '</td>';
+                        strHtmlPedidoFacturarseHabitual += '<td class="col-lg-2 col-md-2 col-sm-10 col-xs-3 text-center">';
+                        var typeInput = ' type="text" ';
+                        if (isMobile())
+                            typeInput = ' type="number" ';
+                        strHtmlPedidoFacturarseHabitual += '<input class="form-shop" id="inputPedidoCant' + i + "_" + x + '" ' + typeInput + '  value="' + pValor[i].Items[x].Cantidad + '" ></input>';
+                        strHtmlPedidoFacturarseHabitual += '</td>';
+                        strHtmlPedidoFacturarseHabitual += '</tr>';
+                    }
+
+                    // fin facturarse de forma Habitual 
+                } else {
+                    if (isProductosTransferPedidos) {
+                        //strHtml += '<tr>';
+                        //strHtml += '<td align="left"colspan="2">';
+                        //strHtml += '<div style="border-bottom: 1px solid #333333;line-height: 27px;width: 100%;"></div>';
+                        //strHtml += '</td>';
+                        //strHtml += '</tr>';
+                    }
+                    for (var x = 0; x < pValor[i].Items.length; x++) {
+                        if (pValor[i].Items[x].Cantidad > 0) {
+
+                            var strHtmlColorFondo = 'grs';
+                            if (cantFacturados % 2 != 0) {
+                                strHtmlColorFondo = 'wht';
+                            }
+                            cantFacturados++;
+                            isProductosTransferPedidos = true;
+                            strHtml += '<tr class="' + strHtmlColorFondo + '">';
+                            strHtml += '<td class="col-lg-10 col-md-10 col-sm-10 col-xs-9 text-left">' + pValor[i].Items[x].NombreObjetoComercial + '</td>';
+                            strHtml += '<td class="col-lg-2 col-md-2 col-sm-10 col-xs-3 text-center">' + pValor[i].Items[x].Cantidad + '</td>';
+                            strHtml += '</tr>';
+                        }
+                        if (pValor[i].Items[x].Faltas > 0) {
+                            var strHtmlColorFondo = 'grs';
+                            if (cantFaltantes % 2 != 0) {
+                                strHtmlColorFondo = 'wht';
+                            }
+                            cantFaltantes++;
+                            isProductosTransferPedidosFaltantes = true;
+                            strHtmlFaltantes += '<tr class="' + strHtmlColorFondo + '">';
+                            strHtmlFaltantes += '<td class="col-lg-10 col-md-10 col-sm-10 col-xs-9 text-left">' + pValor[i].Items[x].NombreObjetoComercial + '</td>';
+                            strHtmlFaltantes += '<td class="col-lg-2 col-md-2 col-sm-10 col-xs-3 text-center">' + pValor[i].Items[x].Faltas + '</td>';
+                            strHtmlFaltantes += '</tr>';
+                        }
+                    }
+                    MontoTotal += pValor[i].MontoTotal;
+                }
+            }
+
+        } // fin  if (pValor.length > 0) 
+        else {
+            strHtmlMensajeFinales = '<div>' + 'Su pedido ha sido enviado con éxito a la sucursal' + ' </div>';
+        }
+    } else {  // fin if (pValor != null){
+        // Se produjo un error
+    }
+
+    if (isProductosTransferPedidos) {
+        strHtml += '</tbody></table>';
+        strHtml += '<div  class="col-xs-12" style="font-size: 12px;background-color: #E5F3E4;"><b>MONTO TOTAL:</b>  <span style="color:#0B890A;"> $ ' + FormatoDecimalConDivisorMiles(MontoTotal.toFixed(2)) + ' </span>  </div>';
+        strHtml += '</div>';
+    } else {
+        strHtml = '';
+    }
+    if (isProductosTransferPedidosFaltantes) {
+        strHtmlFaltantes += '</tbody></table>';
+        strHtmlFaltantes += '</div>';
+    } else {
+        strHtmlFaltantes = '';
+    }
+    if (isProductosTransferPedidosRevision) {
+        strHtmlEnRevision += '</tbody></table>';
+        strHtmlEnRevision += '</div>';
+    } else {
+        strHtmlEnRevision = '';
+    }
+    if (isProductosPedidoFacturarseHabitual) {
+        strHtmlPedidoFacturarseHabitual += '</tbody></table>';
+        strHtmlPedidoFacturarseHabitual += '</div>';
+
+
+        //strHtmlPedidoFacturarseHabitual += '<button type="button" class="btn_confirmar" onclick="onclickPedidoFacturarseHabitualConfirmar(); return false;" href="#">Confirmar</button>';
+        //strHtmlPedidoFacturarseHabitual += '<button type="button" class="btn_confirmar" onclick="CerrarContenedorTransfer(); return false;"  href="#">Descartar</button>';
+        strHtmlPedidoFacturarseHabitual += '<div class="clear">';
+        strHtmlPedidoFacturarseHabitual += '</div>';
+        //document.getElementById('resultadoPedidoBotonOk').style.display = 'none';
+    } else {
+        strHtmlPedidoFacturarseHabitual = '';
+    }
+
+
+    var strHtml_modal = '';
+    //strHtml_modal += '<div class="modal-background">&nbsp;</div>';
+    //strHtml_modal += '<div class="modal-dialog modal-lg"><div class="modal-content">';
+    //strHtml_modal += '<div class="modal-header no-padding-bottom">';
+    //strHtml_modal += '<div class="row">';
+    //strHtml_modal += '<div class="col-lg-12">';
+    if (strHtml != '' && strHtmlPedidoFacturarseHabitual == '' && strHtmlEnRevision == '' && strHtmlFaltantes == '') {
+        //strHtml_modal += '<div class="modulo_icon ok"></div>';
+        strHtml_modal += '<h4>Resultado del pedido</h4>';
+    }
+    else {
+       // strHtml_modal += '<div class="modulo_icon alert"></div>';
+        strHtml_modal += '<h4>ALGUNOS PRODUCTOS DE TRANSFER NO PUDIERON SER PROCESADOS</h4>';
+    }
+    //strHtml_modal += '</div>';
+    //strHtml_modal += '</div>';
+    //strHtml_modal += '<div class="close-modal" data-dismiss="modal"><i class="fa fa-times"></i></div>';
+    //strHtml_modal += '</div>';
+    strHtml_modal += '<div class="modal-body">';
+    strHtml_modal += strHtml + strHtmlFaltantes + strHtmlPedidoFacturarseHabitual + strHtmlEnRevision + strHtmlMensajeFinales;
+    //strHtml_modal += '<div class="clear"></div>';
+    //if (!isProductosPedidoFacturarseHabitual) {
+    //    strHtml_modal += '<button type="button" class="btn_confirmar" href="#" onclick="modalModuloHide(); return false;">CONFIRMAR</button>';
+    //}
+    //strHtml_modal += '<div class="clear"></div>';
+    strHtml_modal += '</div>';
+    //strHtml_modal += '<div class="clear"></div>';
+    //strHtml_modal += '</div></div>';
+
+    return strHtml_modal;
 }
