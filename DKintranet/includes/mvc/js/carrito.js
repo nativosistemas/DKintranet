@@ -1264,11 +1264,17 @@ function OnCallBackTomarPedidoCarritoTODOS(args) {
                     // mensaje_alert_base(mensajeCuandoSeMuestraError, 'volverBuscador()');
                 } else {
                     // Error dsd dll pedido
-                    if (resultCarrrito.Error != '') {
-                        strHTML_sucursal += 'Carrito Error: ' + args.Error;
+                    if (resultCarrrito.web_Error != '') {
+                        strHTML_sucursal += '<b>Carrito Error: </b>' + args.web_Error + '<br>';
+                        isCarritoSucursal = true;
                         // mensaje_alert_base(args.Error, 'volverBuscador()');
                         // Fin Error dsd dll pedido
-                    } else {
+                    } if (resultCarrrito.Error != '') {
+                        strHTML_sucursal += '<b>Carrito Error: </b>' + args.Error + '<br>';
+                        isCarritoSucursal = true;
+                        // mensaje_alert_base(args.Error, 'volverBuscador()');
+                        // Fin Error dsd dll pedido
+                    }else {
                         strHTML_sucursal += CargarRespuestaDePedido_todos(resultCarrrito);
                         isCarritoSucursal = true;
                         creditoInicial = resultCarrrito.CreditoInicial;
@@ -1301,11 +1307,11 @@ function OnCallBackTomarPedidoCarritoTODOS(args) {
                                 break;
                             }
                         }
-                        error_Transfer = resultTransfer[0].Error;
+                        error_Transfer = resultTransfer[0].web_Error;
                    
                     }
                     if (error_Transfer != '') {
-                        strHTML_sucursal += 'Carrito Transfer Error: ' + error_Transfer;
+                        strHTML_sucursal += '<b>Carrito Transfer Error: </b>' + error_Transfer + '<br>';
                     } else { 
                         strHTML_sucursal += CargarRespuestaDePedidoTransfer_todos(resultTransfer);
                     }
