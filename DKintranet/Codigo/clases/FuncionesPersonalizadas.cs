@@ -58,17 +58,20 @@ namespace DKintranet.Codigo.clases
         public static string LimpiarStringErrorPedido(string pValor)
         {
             string resultado = pValor;
-            resultado = resultado.Replace("-", string.Empty);
-            resultado = resultado.Replace("0", string.Empty);
-            resultado = resultado.Replace("1", string.Empty);
-            resultado = resultado.Replace("2", string.Empty);
-            resultado = resultado.Replace("3", string.Empty);
-            resultado = resultado.Replace("4", string.Empty);
-            resultado = resultado.Replace("5", string.Empty);
-            resultado = resultado.Replace("6", string.Empty);
-            resultado = resultado.Replace("7", string.Empty);
-            resultado = resultado.Replace("8", string.Empty);
-            resultado = resultado.Replace("9", string.Empty);
+            if (!string.IsNullOrEmpty(pValor))
+            {
+                resultado = resultado.Replace("-", string.Empty);
+                resultado = resultado.Replace("0", string.Empty);
+                resultado = resultado.Replace("1", string.Empty);
+                resultado = resultado.Replace("2", string.Empty);
+                resultado = resultado.Replace("3", string.Empty);
+                resultado = resultado.Replace("4", string.Empty);
+                resultado = resultado.Replace("5", string.Empty);
+                resultado = resultado.Replace("6", string.Empty);
+                resultado = resultado.Replace("7", string.Empty);
+                resultado = resultado.Replace("8", string.Empty);
+                resultado = resultado.Replace("9", string.Empty);
+            }
             return resultado;
         }
         public static DataTable ConvertNombresSeccionToDataTable(List<string> pListaNombreSeccion)
@@ -208,7 +211,8 @@ namespace DKintranet.Codigo.clases
                 HttpContext.Current.Session["intranet_listaSucursales"] = ListaSucursal;
                 // Fin Optimizar
             }
-            else {
+            else
+            {
                 ListaSucursal = (List<string>)HttpContext.Current.Session["intranet_listaSucursales"];
             }
             return ListaSucursal;

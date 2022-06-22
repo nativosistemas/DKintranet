@@ -581,22 +581,27 @@ namespace DKintranet.Controllers
                                 resultadoPedido.Login = horarioCierre;
                                 // fin Obtener horario cierre
                                 // OPTIMIZAR //////////////////
-                                foreach (DKbase.dll.cDllPedidoItem itemFaltantes in resultadoPedido.Items)
+                                if (resultadoPedido.Items != null)
                                 {
-                                    if (itemFaltantes.Faltas > 0)
+                                    foreach (DKbase.dll.cDllPedidoItem itemFaltantes in resultadoPedido.Items)
                                     {
-                                        WebService.InsertarFaltantesProblemasCrediticios(item.lrc_id, pIdSucursal, cliente.cli_codigo, itemFaltantes.NombreObjetoComercial, itemFaltantes.Faltas, Constantes.cPEDIDO_FALTANTES);
+                                        if (itemFaltantes.Faltas > 0)
+                                        {
+                                            WebService.InsertarFaltantesProblemasCrediticios(item.lrc_id, pIdSucursal, cliente.cli_codigo, itemFaltantes.NombreObjetoComercial, itemFaltantes.Faltas, Constantes.cPEDIDO_FALTANTES);
+                                        }
                                     }
                                 }
-                                foreach (DKbase.dll.cDllPedidoItem itemConProblemasDeCreditos in resultadoPedido.ItemsConProblemasDeCreditos)
+                                if (resultadoPedido.ItemsConProblemasDeCreditos != null)
                                 {
-                                    int cantidadProblemaCrediticia = itemConProblemasDeCreditos.Cantidad + itemConProblemasDeCreditos.Faltas;
-                                    if (cantidadProblemaCrediticia > 0)
+                                    foreach (DKbase.dll.cDllPedidoItem itemConProblemasDeCreditos in resultadoPedido.ItemsConProblemasDeCreditos)
                                     {
-                                        WebService.InsertarFaltantesProblemasCrediticios(item.lrc_id, pIdSucursal, cliente.cli_codigo, itemConProblemasDeCreditos.NombreObjetoComercial, cantidadProblemaCrediticia, Constantes.cPEDIDO_PROBLEMACREDITICIO);
+                                        int cantidadProblemaCrediticia = itemConProblemasDeCreditos.Cantidad + itemConProblemasDeCreditos.Faltas;
+                                        if (cantidadProblemaCrediticia > 0)
+                                        {
+                                            WebService.InsertarFaltantesProblemasCrediticios(item.lrc_id, pIdSucursal, cliente.cli_codigo, itemConProblemasDeCreditos.NombreObjetoComercial, cantidadProblemaCrediticia, Constantes.cPEDIDO_PROBLEMACREDITICIO);
+                                        }
                                     }
                                 }
-
                                 capaCAR_decision.GuardarPedidoBorrarCarrito(item, pTipo, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pIsUrgente);
                             }
                         }
@@ -689,7 +694,11 @@ namespace DKintranet.Controllers
                     bool isErrorPedido = true;
                     if (listaCarritoAux.Count > 0)
                     {
-                        if (listaCarritoAux[0].Error == null)
+                        if (listaCarritoAux[0].web_Error == null)
+                        {
+                            isErrorPedido = false;
+                        }
+                        else if (listaCarritoAux[0].Error == null)
                         {
                             isErrorPedido = false;
                         }
@@ -1029,14 +1038,15 @@ namespace DKintranet.Controllers
             {
                 DKbase.web.Usuario oUsuario = (DKbase.web.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"];
                 List<cClientes> l = DKbase.web.acceso.RecuperarIdClientesConCarritos(oUsuario.id);
-                if (l != null) { 
+                if (l != null)
+                {
                     result = Serializador.SerializarAJson(l);
                 }
             }
             return result;
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
-        public string TomarPedidoCarritoTODOS( string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio)
+        public string TomarPedidoCarritoTODOS(string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio)
         {
             string result = string.Empty;
             List<string> l = new List<string>();
@@ -1044,12 +1054,14 @@ namespace DKintranet.Controllers
             foreach (string itemSucursal in ListaSucursalOptimizar)
             {
                 l.Add(itemSucursal);
-                result += itemSucursal ;
+                result += itemSucursal;
                 string carrito = TomarPedidoCarrito_generico(Constantes.cTipo_Carrito, itemSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, false);
-                if (string.IsNullOrEmpty(carrito)) { 
+                if (string.IsNullOrEmpty(carrito))
+                {
                     l.Add(string.Empty);
                 }
-                else {
+                else
+                {
                     l.Add(carrito);
                     result += carrito;
                 }
@@ -1064,7 +1076,7 @@ namespace DKintranet.Controllers
                     l.Add(transfer);
                 }
             }
-            return  Serializador.SerializarAJson(l);//result;//
+            return Serializador.SerializarAJson(l);//result;//
         }
     }
 }
