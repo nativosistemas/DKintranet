@@ -1253,7 +1253,16 @@ function OnCallBackTomarPedidoCarritoTODOS(args) {
             var isCarritoSucursal = false;
             //strHTML_sucursal += listaSucursales[index].sde_sucursal + '<br>';
             strHTML_sucursal += '<div class="alert alert-primary" role="alert">';
-            strHTML_sucursal += '<h3>' + listaSucursales[index].sde_sucursal + '</h3>';
+            var nombreSucursal = listaSucursales[index].sde_sucursal;
+            for (var iNombreSucursal = 0; iNombreSucursal < listaSucursalesDependienteInfo.length; iNombreSucursal++) {
+                if (listaSucursalesDependienteInfo[iNombreSucursal].sde_sucursal == listaSucursales[index].sde_sucursal) {
+                    nombreSucursal = listaSucursalesDependienteInfo[iNombreSucursal].suc_nombre;
+                    break;
+                }
+            }
+
+
+            strHTML_sucursal += '<h2>' + nombreSucursal + '</h2>';
             strHTML_sucursal += '</div>';
 
             var resultCarrrito = args[index + 1];
@@ -1274,7 +1283,7 @@ function OnCallBackTomarPedidoCarritoTODOS(args) {
                         isCarritoSucursal = true;
                         // mensaje_alert_base(args.Error, 'volverBuscador()');
                         // Fin Error dsd dll pedido
-                    }else {
+                    } else {
                         strHTML_sucursal += CargarRespuestaDePedido_todos(resultCarrrito);
                         isCarritoSucursal = true;
                         creditoInicial = resultCarrrito.CreditoInicial;
@@ -1308,11 +1317,11 @@ function OnCallBackTomarPedidoCarritoTODOS(args) {
                             }
                         }
                         error_Transfer = resultTransfer[0].web_Error;
-                   
+
                     }
                     if (error_Transfer != '') {
                         strHTML_sucursal += '<b>Carrito Transfer Error: </b>' + error_Transfer + '<br>';
-                    } else { 
+                    } else {
                         strHTML_sucursal += CargarRespuestaDePedidoTransfer_todos(resultTransfer);
                     }
                     isCarritoSucursal = true;
