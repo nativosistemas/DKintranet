@@ -1278,7 +1278,7 @@ function OnCallBackTomarPedidoCarritoTODOS(args) {
                         isCarritoSucursal = true;
                         // mensaje_alert_base(args.Error, 'volverBuscador()');
                         // Fin Error dsd dll pedido
-                    } if (resultCarrrito.Error != '') {
+                    } else if (resultCarrrito.Error != '') {
                         strHTML_sucursal += '<b>Carrito Error: </b>' + args.Error + '<br>';
                         isCarritoSucursal = true;
                         // mensaje_alert_base(args.Error, 'volverBuscador()');
