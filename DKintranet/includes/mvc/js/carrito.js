@@ -1338,6 +1338,8 @@ function OnCallBackTomarPedidoCarritoTODOS(args) {
                     //
                     if (isNotNullEmpty(resultTransfer[0].web_Error)) {
                         error_Transfer = resultTransfer[0].web_Error;
+                    } else if (isNotNullEmpty(resultTransfer[0].Error)) {
+                        error_Transfer = resultTransfer[0].Error;
                     } else {
                         for (var iCarritoTransfer = 0; iCarritoTransfer < listaCarritoTransferPorSucursal.length; iCarritoTransfer++) {
                             if (listaCarritoTransferPorSucursal[iCarritoTransfer].Sucursal == sucur) {
