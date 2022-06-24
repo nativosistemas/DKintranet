@@ -1273,17 +1273,18 @@ function OnCallBackTomarPedidoCarritoTODOS(args) {
                     // mensaje_alert_base(mensajeCuandoSeMuestraError, 'volverBuscador()');
                 } else {
                     // Error dsd dll pedido
-                    if (resultCarrrito.web_Error != '') {
+                    if (isNotNullEmpty(resultCarrrito.web_Error)) {
                         strHTML_sucursal += '<b>Carrito Error: </b>' + args.web_Error + '<br>';
                         isCarritoSucursal = true;
-                        // mensaje_alert_base(args.Error, 'volverBuscador()');
-                        // Fin Error dsd dll pedido
-                    } else if (resultCarrrito.Error != '') {
+                    } else if (isNotNullEmpty(resultCarrrito.Error)) {
                         strHTML_sucursal += '<b>Carrito Error: </b>' + args.Error + '<br>';
                         isCarritoSucursal = true;
                         // mensaje_alert_base(args.Error, 'volverBuscador()');
                         // Fin Error dsd dll pedido
                     } else {
+                        strHTML_sucursal += '<div class="alert alert-info">';
+                        strHTML_sucursal += 'CARRITO'
+                        strHTML_sucursal += '</div>';
                         strHTML_sucursal += CargarRespuestaDePedido_todos(resultCarrrito);
                         isCarritoSucursal = true;
                         creditoInicial = resultCarrrito.CreditoInicial;
@@ -1307,21 +1308,27 @@ function OnCallBackTomarPedidoCarritoTODOS(args) {
                     var error_Transfer = '';
                     if (resultTransfer.length > 0) {
                         var sucur = resultTransfer[0].web_Sucursal;
-                        for (var iCarritoTransfer = 0; iCarritoTransfer < listaCarritoTransferPorSucursal.length; iCarritoTransfer++) {
-                            if (listaCarritoTransferPorSucursal[iCarritoTransfer].Sucursal == sucur) {
-                                listaCarritoTransferPorSucursal[iCarritoTransfer].Sucursal = '';
-                                LimpiarTextBoxProductosBuscados(sucur);
-                                $('#divContenedorBaseTransfer_' + sucur).html('');
-                                carritoNoHayCarritosCelular();
-                                break;
+                        if (isNotNullEmpty(resultTransfer[0].web_Error)) {
+                            error_Transfer = resultTransfer[0].web_Error;
+                        } else {
+                            for (var iCarritoTransfer = 0; iCarritoTransfer < listaCarritoTransferPorSucursal.length; iCarritoTransfer++) {
+                                if (listaCarritoTransferPorSucursal[iCarritoTransfer].Sucursal == sucur) {
+                                    listaCarritoTransferPorSucursal[iCarritoTransfer].Sucursal = '';
+                                    LimpiarTextBoxProductosBuscados(sucur);
+                                    $('#divContenedorBaseTransfer_' + sucur).html('');
+                                    carritoNoHayCarritosCelular();
+                                    break;
+                                }
                             }
                         }
-                        error_Transfer = resultTransfer[0].web_Error;
-
                     }
-                    if (error_Transfer != '') {
+                    if (isNotNullEmpty(error_Transfer)) {
                         strHTML_sucursal += '<b>Carrito Transfer Error: </b>' + error_Transfer + '<br>';
                     } else {
+                        strHTML_sucursal += '<div class="alert alert-info">';
+                        strHTML_sucursal += 'CARRITO TRANSFER'
+                        strHTML_sucursal += '</div>';
+
                         strHTML_sucursal += CargarRespuestaDePedidoTransfer_todos(resultTransfer);
                     }
                     isCarritoSucursal = true;

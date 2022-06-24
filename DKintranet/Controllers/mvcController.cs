@@ -574,6 +574,9 @@ namespace DKintranet.Controllers
                             {
                                 resultadoPedido.Error = FuncionesPersonalizadas.LimpiarStringErrorPedido(resultadoPedido.Error);
                             }
+                            else if (!string.IsNullOrEmpty(resultadoPedido.web_Error)) { 
+                            // se genero excepción 
+                            }
                             else
                             {
                                 // Obtener horario cierre
