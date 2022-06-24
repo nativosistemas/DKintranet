@@ -1320,53 +1320,52 @@ function OnCallBackTomarPedidoCarritoTODOS(args) {
                         }
                     }
                     //
-                }
-                strHTML_sucursal += '<div class="clear"></div>';
-                var resultTransfer = args[index + 2];
-                if (resultTransfer != '') {
-                    resultTransfer = eval('(' + resultTransfer + ')');
-                    var error_Transfer = '';
-                    if (resultTransfer.length > 0) {
-                        var sucur = resultTransfer[0].web_Sucursal;
-                        if (strHTML_sucursal_encabezado == '') {
-                            strHTML_sucursal_encabezado = getEncabezadoSucursal(resultTransfer[0].web_Sucursal);
-                        }
-
-                        if (isNotNullEmpty(resultTransfer[0].web_Error)) {
-                            error_Transfer = resultTransfer[0].web_Error;
-                        } else {
-                            for (var iCarritoTransfer = 0; iCarritoTransfer < listaCarritoTransferPorSucursal.length; iCarritoTransfer++) {
-                                if (listaCarritoTransferPorSucursal[iCarritoTransfer].Sucursal == sucur) {
-                                    listaCarritoTransferPorSucursal[iCarritoTransfer].Sucursal = '';
-                                    LimpiarTextBoxProductosBuscados(sucur);
-                                    $('#divContenedorBaseTransfer_' + sucur).html('');
-                                    carritoNoHayCarritosCelular();
-                                    break;
-                                }
+                }              
+            }
+            var resultTransfer = args[index + 2];
+            if (resultTransfer != '') {
+                resultTransfer = eval('(' + resultTransfer + ')');
+                var error_Transfer = '';
+                if (resultTransfer.length > 0) {
+                    var sucur = resultTransfer[0].web_Sucursal;
+                    if (strHTML_sucursal_encabezado == '') {
+                        strHTML_sucursal_encabezado = getEncabezadoSucursal(resultTransfer[0].web_Sucursal);
+                    }
+                    //
+                    if (isNotNullEmpty(strHTML_sucursal)) {
+                        strHTML_sucursal += '<div class="clear"></div>';
+                    }
+                    //
+                    if (isNotNullEmpty(resultTransfer[0].web_Error)) {
+                        error_Transfer = resultTransfer[0].web_Error;
+                    } else {
+                        for (var iCarritoTransfer = 0; iCarritoTransfer < listaCarritoTransferPorSucursal.length; iCarritoTransfer++) {
+                            if (listaCarritoTransferPorSucursal[iCarritoTransfer].Sucursal == sucur) {
+                                listaCarritoTransferPorSucursal[iCarritoTransfer].Sucursal = '';
+                                LimpiarTextBoxProductosBuscados(sucur);
+                                $('#divContenedorBaseTransfer_' + sucur).html('');
+                                carritoNoHayCarritosCelular();
+                                break;
                             }
                         }
                     }
-                    strHTML_sucursal += '<div class="alert alert-info">';
-                    strHTML_sucursal += 'CARRITO TRANSFER';
-                    strHTML_sucursal += '</div>';
-                    if (isNotNullEmpty(error_Transfer)) {
-                        strHTML_sucursal += '<b>Carrito Transfer Error: </b>' + error_Transfer + '<br>';
-                    } else {
+                }
+                strHTML_sucursal += '<div class="alert alert-info">';
+                strHTML_sucursal += 'CARRITO TRANSFER';
+                strHTML_sucursal += '</div>';
+                if (isNotNullEmpty(error_Transfer)) {
+                    strHTML_sucursal += '<b>Carrito Transfer Error: </b>' + error_Transfer + '<br>';
+                } else {
 
 
-                        strHTML_sucursal += CargarRespuestaDePedidoTransfer_todos(resultTransfer);
-                    }
-                    isCarritoSucursal = true;
+                    strHTML_sucursal += CargarRespuestaDePedidoTransfer_todos(resultTransfer);
                 }
-                if (isCarritoSucursal) {
-                    strHTML += strHTML_sucursal_encabezado + strHTML_sucursal;
-                    isMostrarResultado = true;
-                }
+                isCarritoSucursal = true;
             }
-
-
-            //strHTML += '</div>';
-            //strHTML += '<div class="clear"></div>';
+            if (isCarritoSucursal) {
+                strHTML += strHTML_sucursal_encabezado + strHTML_sucursal;
+                isMostrarResultado = true;
+            };
 
         }
         strHTML += '<div class="clear"></div>';
