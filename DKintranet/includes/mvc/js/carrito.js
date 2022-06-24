@@ -1211,7 +1211,23 @@ function onclickConfimarTransferPedidoOk_todos() {
     showCargando();
     //
 }
-
+function getNombreSucursal(pIdSucursal) {
+    var result = pIdSucursal;
+    for (var iNombreSucursal = 0; iNombreSucursal < listaSucursalesDependienteInfo.length; iNombreSucursal++) {
+        if (listaSucursalesDependienteInfo[iNombreSucursal].sde_sucursal == pIdSucursal) {
+            nombreSucursal = listaSucursalesDependienteInfo[iNombreSucursal].suc_nombre;
+            break;
+        }
+    }
+    return result;
+}
+function getEncabezadoSucursal(pIdSucursal) {
+    var result = '';
+    result += '<div class="alert alert-primary">';
+    result += '<h2>' + getNombreSucursal(pIdSucursal) + '</h2>';
+    result += '</div>';
+    return result;
+}
 function OnCallBackTomarPedidoCarritoTODOS(args) {
     isBotonNoEstaEnProceso = true;
     /// mostrar faltantes y problema crediticio
@@ -1252,18 +1268,17 @@ function OnCallBackTomarPedidoCarritoTODOS(args) {
             var strHTML_sucursal = '';
             var isCarritoSucursal = false;
             //strHTML_sucursal += listaSucursales[index].sde_sucursal + '<br>';
-            strHTML_sucursal += '<div class="alert alert-primary" role="alert">';
-            var nombreSucursal = listaSucursales[index].sde_sucursal;
-            for (var iNombreSucursal = 0; iNombreSucursal < listaSucursalesDependienteInfo.length; iNombreSucursal++) {
-                if (listaSucursalesDependienteInfo[iNombreSucursal].sde_sucursal == listaSucursales[index].sde_sucursal) {
-                    nombreSucursal = listaSucursalesDependienteInfo[iNombreSucursal].suc_nombre;
-                    break;
-                }
-            }
+         
+            //var nombreSucursal = listaSucursales[index].sde_sucursal;
+            //for (var iNombreSucursal = 0; iNombreSucursal < listaSucursalesDependienteInfo.length; iNombreSucursal++) {
+            //    if (listaSucursalesDependienteInfo[iNombreSucursal].sde_sucursal == listaSucursales[index].sde_sucursal) {
+            //        nombreSucursal = listaSucursalesDependienteInfo[iNombreSucursal].suc_nombre;
+            //        break;
+            //    }
+            //}
 
+           var strHTML_sucursal_encabezado = '';
 
-            strHTML_sucursal += '<h2>' + nombreSucursal + '</h2>';
-            strHTML_sucursal += '</div>';
 
             var resultCarrrito = args[index + 1];
             if (resultCarrrito != '') {
@@ -1272,6 +1287,13 @@ function OnCallBackTomarPedidoCarritoTODOS(args) {
                 if (resultCarrrito == null) {
                     // mensaje_alert_base(mensajeCuandoSeMuestraError, 'volverBuscador()');
                 } else {
+                    if (strHTML_sucursal_encabezado == '') {
+                        strHTML_sucursal_encabezado = getEncabezadoSucursal(resultCarrrito.web_Sucursal);
+                    }
+                    strHTML_sucursal += '<div class="alert alert-info">';
+                    strHTML_sucursal += 'CARRITO';
+                    strHTML_sucursal += '</div>';
+
                     // Error dsd dll pedido
                     if (isNotNullEmpty(resultCarrrito.web_Error)) {
                         strHTML_sucursal += '<b>Carrito Error: </b>' + args.web_Error + '<br>';
@@ -1282,9 +1304,7 @@ function OnCallBackTomarPedidoCarritoTODOS(args) {
                         // mensaje_alert_base(args.Error, 'volverBuscador()');
                         // Fin Error dsd dll pedido
                     } else {
-                        strHTML_sucursal += '<div class="alert alert-info">';
-                        strHTML_sucursal += 'CARRITO'
-                        strHTML_sucursal += '</div>';
+;
                         strHTML_sucursal += CargarRespuestaDePedido_todos(resultCarrrito);
                         isCarritoSucursal = true;
                         creditoInicial = resultCarrrito.CreditoInicial;
@@ -1301,13 +1321,17 @@ function OnCallBackTomarPedidoCarritoTODOS(args) {
                     }
                     //
                 }
-                //strHTML_sucursal += '<br>';
+                strHTML_sucursal += '<div class="clear"></div>';
                 var resultTransfer = args[index + 2];
                 if (resultTransfer != '') {
                     resultTransfer = eval('(' + resultTransfer + ')');
                     var error_Transfer = '';
                     if (resultTransfer.length > 0) {
                         var sucur = resultTransfer[0].web_Sucursal;
+                        if (strHTML_sucursal_encabezado == '') {
+                            strHTML_sucursal_encabezado = getEncabezadoSucursal(resultTransfer[0].web_Sucursal);
+                        }
+
                         if (isNotNullEmpty(resultTransfer[0].web_Error)) {
                             error_Transfer = resultTransfer[0].web_Error;
                         } else {
@@ -1322,19 +1346,20 @@ function OnCallBackTomarPedidoCarritoTODOS(args) {
                             }
                         }
                     }
+                    strHTML_sucursal += '<div class="alert alert-info">';
+                    strHTML_sucursal += 'CARRITO TRANSFER';
+                    strHTML_sucursal += '</div>';
                     if (isNotNullEmpty(error_Transfer)) {
                         strHTML_sucursal += '<b>Carrito Transfer Error: </b>' + error_Transfer + '<br>';
                     } else {
-                        strHTML_sucursal += '<div class="alert alert-info">';
-                        strHTML_sucursal += 'CARRITO TRANSFER'
-                        strHTML_sucursal += '</div>';
+
 
                         strHTML_sucursal += CargarRespuestaDePedidoTransfer_todos(resultTransfer);
                     }
                     isCarritoSucursal = true;
                 }
                 if (isCarritoSucursal) {
-                    strHTML += strHTML_sucursal;
+                    strHTML += strHTML_sucursal_encabezado + strHTML_sucursal;
                     isMostrarResultado = true;
                 }
             }
