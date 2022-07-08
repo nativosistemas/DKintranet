@@ -1377,6 +1377,7 @@ function OnCallBackTomarPedidoCarritoTODOS(args) {
             $('#modalModulo').html(strHTML);
             $('#modalModulo').modal();
         }
+        CargarContenedorBaseTotales_borrar();
     }
 }
 function CargarRespuestaDePedido_todos(pValor) {
