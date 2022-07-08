@@ -69,6 +69,8 @@ namespace DKintranet.Controllers
             System.Web.HttpContext.Current.Session["isMostrarOferta"] = null;
             System.Web.HttpContext.Current.Session["master_ListaSinPermisoSecciones"] = null;
             System.Web.HttpContext.Current.Session["BaseAdmin_PermisosRol"] = null;
+            System.Web.HttpContext.Current.Session["intranet_listaSucursales"] = null;
+            //mvcController.resetCliente();
             return Content("Ok");
         }
         //public ActionResult loginTest(string pName, string pPass)

@@ -1016,7 +1016,6 @@ namespace DKintranet.Controllers
         {
             System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] = null;
             System.Web.HttpContext.Current.Session["intranet_listaSucursales"] = null;
-            //System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] = null;
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
         public string RecuperarUltimoProductoSeleccionado()

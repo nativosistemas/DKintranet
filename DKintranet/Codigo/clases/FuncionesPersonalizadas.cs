@@ -183,33 +183,9 @@ namespace DKintranet.Codigo.clases
             List<string> ListaSucursal = new List<string>();
             if (HttpContext.Current.Session["intranet_listaSucursales"] == null)
             {
-                // Optimizar
-                ListaSucursal.Add(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc);
-                if (((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codrep == "S7")//((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codtpoenv == "R" && 
-                {
-                    if (!ListaSucursal.Contains("SF"))
-                        ListaSucursal.Add("SF");
-                    if (!ListaSucursal.Contains("CC"))
-                        ListaSucursal.Add("CC");
-                }
-                else
-                {
-                    List<cSucursal> listaSucursalesAUX = WebService.RecuperarTodasSucursalesDependientes().Where(x => x.sde_sucursal == ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc).ToList();
-                    foreach (cSucursal itemSucursalesAUX in listaSucursalesAUX)
-                    {
-                        if (itemSucursalesAUX.sde_sucursalDependiente != ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc)
-                        {
-                            ListaSucursal.Add(itemSucursalesAUX.sde_sucursalDependiente);
-                        }
-                    }
-                    if (((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_IdSucursalAlternativa != null &&
-                        !ListaSucursal.Contains(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_IdSucursalAlternativa))
-                    {
-                        ListaSucursal.Add(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_IdSucursalAlternativa);
-                    }
-                }
+                cClientes oClientes = (cClientes)HttpContext.Current.Session["clientesDefault_Cliente"];
+                ListaSucursal = DKbase.web.FuncionesPersonalizadas_base.RecuperarSucursalesParaBuscadorDeCliente(oClientes);
                 HttpContext.Current.Session["intranet_listaSucursales"] = ListaSucursal;
-                // Fin Optimizar
             }
             else
             {
@@ -321,9 +297,25 @@ namespace DKintranet.Codigo.clases
             if (HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
                 cClientes oClientes = (cClientes)HttpContext.Current.Session["clientesDefault_Cliente"];
-                resultado = DKbase.web.FuncionesPersonalizadas_base.RecuperarProductosGeneral_V3(oClientes, pIdOferta, pTxtBuscador, pListaColumna, pIsOrfeta, pIsTransfer);
+                List<string> l_Sucursales = RecuperarSucursalesDelCliente();
+                resultado = DKbase.web.FuncionesPersonalizadas_base.RecuperarProductosGeneral_V3(l_Sucursales,oClientes, pIdOferta, pTxtBuscador, pListaColumna, pIsOrfeta, pIsTransfer);
             }
             return resultado;
+        }
+        public static List<string> RecuperarSucursalesDelCliente()
+        {
+            List<string> result = null;
+            if (HttpContext.Current.Session["intranet_listaSucursales"] != null)
+            {
+                result = (List<string>)HttpContext.Current.Session["intranet_listaSucursales"];
+            }
+            else if (HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+            {
+                cClientes oClientes = (cClientes)HttpContext.Current.Session["clientesDefault_Cliente"];
+                result = DKbase.web.FuncionesPersonalizadas_base.RecuperarSucursalesParaBuscadorDeCliente(oClientes);
+                HttpContext.Current.Session["intranet_listaSucursales"] = result;
+            }
+            return result;
         }
         public static cjSonBuscadorProductos RecuperarProductosBase_V3(int? pIdOferta, string pTxtBuscador, List<string> pListaColumna, bool pIsBuscarConOferta, bool pIsBuscarConTransfer)
         {
