@@ -1293,3 +1293,20 @@ function TomarPedidoCarritoTODOS( pMensajeEnFactura, pMensajeEnRemito, pTipoEnvi
         }
     });
 }
+function ajaxImageProducto(pPro_codigo) {
+    $.ajax({
+        type: "GET",
+        url: 'https://api.kellerhoff.com.ar/api/' + "ImageProducto",
+        data: { pro_codigo: pPro_codigo },
+        success:
+            function (response) {
+                OnCallBackAjaxImageProducto(response);
+            },
+        failure: function (response) {
+            OnFail(response);
+        },
+        error: function (response) {
+            OnFail(response);
+        }
+    });
+}

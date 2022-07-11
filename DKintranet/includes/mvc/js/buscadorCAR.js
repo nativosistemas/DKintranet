@@ -418,7 +418,7 @@ function AnimarPresentacionProducto(pIndice) {
     LimpiarTimeoutProducto();
 }
 function CargarDatosProductos(pIndice) {
-
+    //ajaxImageProducto(listaProductosBuscados[pIndice].pro_codigo);
     if (listaProductosBuscados[pIndice].pro_nombre != null) {
         $('#tdNombre').html(AgregarMark(listaProductosBuscados[pIndice].pro_nombre));
     } else {
@@ -491,17 +491,28 @@ function CargarDatosProductos(pIndice) {
     }
     //
     // Inicio Imagen Producto
-    if (listaProductosBuscados[pIndice].pri_nombreArchivo == null) {
-        $('#imgProductoDatos').attr('src', '');
-        // $('#imgProductoDatos').css('display', 'none');
-        $('#tdImgProductoDatos').css('display', 'none');
-    } else {
-        $('#imgProductoDatos').attr('src', '../../../servicios/thumbnail.aspx?r=' + 'productos' + '&n=' + listaProductosBuscados[pIndice].pri_nombreArchivo + '&an=' + String(250) + '&al=' + String(250));
-        //$('#imgProductoDatos').css('display', 'block');
-        $('#tdImgProductoDatos').css('display', 'inline');
-    }
+    //if (listaProductosBuscados[pIndice].pri_nombreArchivo == null) {
+    //    $('#imgProductoDatos').attr('src', '');
+    //    $('#tdImgProductoDatos').css('display', 'none');
+    //} else {
+    //    //$('#imgProductoDatos').attr('src', '../../../servicios/thumbnail.aspx?r=' + 'productos' + '&n=' + listaProductosBuscados[pIndice].pri_nombreArchivo + '&an=' + String(250) + '&al=' + String(250));
+    //    //$('#tdImgProductoDatos').css('display', 'inline');
+    //}
+    document.getElementById('imgProductoDatos').src = 'https://api.kellerhoff.com.ar/api/ImageProducto?pro_codigo=' + listaProductosBuscados[pIndice].pro_codigo;
+    $('#tdImgProductoDatos').css('display', 'inline');
     // Fin Imagen Producto
 }
+function OnCallBackAjaxImageProducto(args) {
+    //alert(args);
+    //src={`data:image/jpeg;base64,${laboratorio.imagenBase64}`}
+   // $('#imgProductoDatos').attr('src', 'data:image/jpeg;base64,' + args);
+    //var varArgs = eval( args );
+    document.getElementById('tdImgProductoDatos').innerHTML = args;
+ 
+  //  document.getElementById('imgProductoDatos').src = 'data:image/png;base64,' + args;
+        $('#tdImgProductoDatos').css('display', 'inline');
+}
+
 function setearVariablesBuscador() {
     Ascender_pro_nombre = true;
     Ascender_pro_precio = true;
