@@ -491,15 +491,15 @@ function CargarDatosProductos(pIndice) {
     }
     //
     // Inicio Imagen Producto
-    //if (listaProductosBuscados[pIndice].pri_nombreArchivo == null) {
-    //    $('#imgProductoDatos').attr('src', '');
-    //    $('#tdImgProductoDatos').css('display', 'none');
-    //} else {
-    //    //$('#imgProductoDatos').attr('src', '../../../servicios/thumbnail.aspx?r=' + 'productos' + '&n=' + listaProductosBuscados[pIndice].pri_nombreArchivo + '&an=' + String(250) + '&al=' + String(250));
-    //    //$('#tdImgProductoDatos').css('display', 'inline');
-    //}
-    document.getElementById('imgProductoDatos').src = 'https://api.kellerhoff.com.ar/api/ImageProducto?pro_codigo=' + listaProductosBuscados[pIndice].pro_codigo;
-    $('#tdImgProductoDatos').css('display', 'inline');
+    if (listaProductosBuscados[pIndice].pri_nombreArchivo == null) {
+        $('#imgProductoDatos').attr('src', '');
+        $('#tdImgProductoDatos').css('display', 'none');
+    } else {
+        $('#imgProductoDatos').attr('src', '../../../servicios/thumbnail.aspx?r=' + 'productos' + '&n=' + listaProductosBuscados[pIndice].pri_nombreArchivo + '&an=' + String(250) + '&al=' + String(250));
+        $('#tdImgProductoDatos').css('display', 'inline');
+    }
+    //document.getElementById('imgProductoDatos').src = 'https://api.kellerhoff.com.ar/api/ImageProducto?pro_codigo=' + listaProductosBuscados[pIndice].pro_codigo;
+    //$('#tdImgProductoDatos').css('display', 'inline');
     // Fin Imagen Producto
 }
 function OnCallBackAjaxImageProducto(args) {

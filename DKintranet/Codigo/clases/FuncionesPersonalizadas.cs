@@ -357,7 +357,7 @@ namespace DKintranet.Codigo.clases
         }
         public static string ObtenerHorarioCierreAnterior(string pSucursal, string pSucursalDependiente, string pCodigoReparto, string pHorarioCierre)
         {
-            return DKbase.web.FuncionesPersonalizadas_base.ObtenerHorarioCierreAnterior(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]), pSucursal, pSucursalDependiente, pCodigoReparto, pHorarioCierre);
+            return DKbase.web.FuncionesPersonalizadas_base.ObtenerHorarioCierreAnterior(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]), pSucursalDependiente, pHorarioCierre);
         }
         public static void GenerarCSV()
         {
