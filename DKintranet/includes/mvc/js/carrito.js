@@ -1171,26 +1171,26 @@ function MostrarConfirmarCarrito_todos() {
 function CargarHtmlOptionTipoEnvio_todos() {
     var strHtml = '';
     if (listaTipoEnviosSucursal != null) {
-        //var isSeEncontro = false;
+        var isSeEncontro = false;
         for (var i = 0; i < listaTipoEnviosSucursal.length; i++) {
-            if (listaTipoEnviosSucursal[i].sucursal == cli_codsuc() && listaTipoEnviosSucursal[i].tipoEnvio == null) {
-                //isSeEncontro = true;
+            if (listaTipoEnviosSucursal[i].sucursal == cli_codsuc() && listaTipoEnviosSucursal[i].tipoEnvio == cli_codtpoenv()) {
+                isSeEncontro = true;
                 for (var y = 0; y < listaTipoEnviosSucursal[i].lista.length; y++) {
                     strHtml += '<option value="' + listaTipoEnviosSucursal[i].lista[y].env_codigo + '">' + listaTipoEnviosSucursal[i].lista[y].env_nombre + '</option>';
                 }
-                //break;
+                break;
             }
         }
-        //if (!isSeEncontro) {
-        //    for (var i = 0; i < listaTipoEnviosSucursal.length; i++) {
-        //        if (listaTipoEnviosSucursal[i].sucursal == pSucursal && listaTipoEnviosSucursal[i].tipoEnvio == null) {
-        //            for (var y = 0; y < listaTipoEnviosSucursal[i].lista.length; y++) {
-        //                strHtml += '<option value="' + listaTipoEnviosSucursal[i].lista[y].env_codigo + '">' + listaTipoEnviosSucursal[i].lista[y].env_nombre + '</option>';
-        //            }
-        //            break;
-        //        }
-        //    }
-        //}
+        if (!isSeEncontro) {
+            for (var i = 0; i < listaTipoEnviosSucursal.length; i++) {
+                if (listaTipoEnviosSucursal[i].sucursal == cli_codsuc() && listaTipoEnviosSucursal[i].tipoEnvio == null) {
+                    for (var y = 0; y < listaTipoEnviosSucursal[i].lista.length; y++) {
+                        strHtml += '<option value="' + listaTipoEnviosSucursal[i].lista[y].env_codigo + '">' + listaTipoEnviosSucursal[i].lista[y].env_nombre + '</option>';
+                    }
+                    break;
+                }
+            }
+        }
     }
     return strHtml;
 }
