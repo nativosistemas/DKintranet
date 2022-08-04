@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 
@@ -574,8 +575,9 @@ namespace DKintranet.Controllers
                             {
                                 resultadoPedido.Error = FuncionesPersonalizadas.LimpiarStringErrorPedido(resultadoPedido.Error);
                             }
-                            else if (!string.IsNullOrEmpty(resultadoPedido.web_Error)) { 
-                            // se genero excepción 
+                            else if (!string.IsNullOrEmpty(resultadoPedido.web_Error))
+                            {
+                                // se genero excepción 
                             }
                             else
                             {
@@ -1057,7 +1059,16 @@ namespace DKintranet.Controllers
             {
                 l.Add(itemSucursal);
                 result += itemSucursal;
-                string carrito = TomarPedidoCarrito_generico(Constantes.cTipo_Carrito, itemSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, false);
+                string carrito = null;
+                try
+                {
+                    carrito = TomarPedidoCarrito_generico(Constantes.cTipo_Carrito, itemSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, false);
+                }
+                catch (Exception ex)
+                {
+                    DKbase.generales.Log.LogError(MethodBase.GetCurrentMethod(), ex, DateTime.Now, itemSucursal);
+                }
+
                 if (string.IsNullOrEmpty(carrito))
                 {
                     l.Add(string.Empty);
@@ -1067,7 +1078,15 @@ namespace DKintranet.Controllers
                     l.Add(carrito);
                     result += carrito;
                 }
-                string transfer = TomarTransferPedidoCarrito(false, itemSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio);
+                string transfer = null;
+                try
+                {
+                    transfer = TomarTransferPedidoCarrito(false, itemSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio);
+                }
+                catch (Exception ex)
+                {
+                    DKbase.generales.Log.LogError(MethodBase.GetCurrentMethod(), ex, DateTime.Now, itemSucursal);
+                }
                 if (string.IsNullOrEmpty(transfer))
                 {
                     l.Add(string.Empty);

@@ -1326,7 +1326,9 @@ function OnCallBackTomarPedidoCarritoTODOS(args) {
             if (resultTransfer != '') {
                 resultTransfer = eval('(' + resultTransfer + ')');
                 var error_Transfer = '';
-                if (resultTransfer.length > 0) {
+                if (resultTransfer == null) {
+ 
+                }else if (resultTransfer.length > 0) {
                     var sucur = resultTransfer[0].web_Sucursal;
                     if (strHTML_sucursal_encabezado == '') {
                         strHTML_sucursal_encabezado = getEncabezadoSucursal(resultTransfer[0].web_Sucursal);
@@ -1358,8 +1360,6 @@ function OnCallBackTomarPedidoCarritoTODOS(args) {
                 if (isNotNullEmpty(error_Transfer)) {
                     strHTML_sucursal += '<b>Carrito Transfer Error: </b>' + error_Transfer + '<br>';
                 } else {
-
-
                     strHTML_sucursal += CargarRespuestaDePedidoTransfer_todos(resultTransfer);
                 }
                 isCarritoSucursal = true;
@@ -1442,7 +1442,7 @@ function CargarRespuestaDePedidoTransfer_todos(pValor) {
     var strHtmlMensajeFinales = '';
     var strHtmlEnRevision = '';
     var strHtmlPedidoFacturarseHabitual = '';
-    if (pValor != null) {
+    if (typeof pValor != 'undefined' && pValor != null) {
         if (pValor.length > 0) {
             strHtmlMensajeFinales += '<div  class="col-xs-12" style="font-size: 12px;">TIPO DE ENVIO: ' + textTipoEnvioCarritoTransfer + ' </div>';
             strHtml += '<div class="col-xs-12">';
