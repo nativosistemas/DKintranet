@@ -1267,6 +1267,7 @@ function OnCallBackTomarPedidoCarritoTODOS(args) {
             }
             var strHTML_sucursal = '';
             var isCarritoSucursal = false;
+            var isCarritoSucursal_transfer = false;
             //strHTML_sucursal += listaSucursales[index].sde_sucursal + '<br>';
          
             //var nombreSucursal = listaSucursales[index].sde_sucursal;
@@ -1281,7 +1282,7 @@ function OnCallBackTomarPedidoCarritoTODOS(args) {
 
 
             var resultCarrrito = args[index + 1];
-            if (resultCarrrito != '') {
+            if (resultCarrrito != '' && typeof resultCarrrito != 'undefined' &&  resultCarrrito != undefined) {
                 resultCarrrito = eval('(' + resultCarrrito + ')');
                 //
                 if (resultCarrrito == null) {
@@ -1323,7 +1324,7 @@ function OnCallBackTomarPedidoCarritoTODOS(args) {
                 }              
             }
             var resultTransfer = args[index + 2];
-            if (resultTransfer != '') {
+            if (resultTransfer != '' && typeof resultTransfer != 'undefined' && resultTransfer != undefined) {
                 resultTransfer = eval('(' + resultTransfer + ')');
                 var error_Transfer = '';
                 if (resultTransfer == null) {
@@ -1363,11 +1364,13 @@ function OnCallBackTomarPedidoCarritoTODOS(args) {
                     strHTML_sucursal += CargarRespuestaDePedidoTransfer_todos(resultTransfer);
                 }
                 isCarritoSucursal = true;
+                isCarritoSucursal_transfer = true;
+               // strHTML += strHTML_sucursal_encabezado + strHTML_sucursal;
             }
             if (isCarritoSucursal) {
                 strHTML += strHTML_sucursal_encabezado + strHTML_sucursal;
                 isMostrarResultado = true;
-            };
+            }
 
         }
         strHTML += '<div class="clear"></div>';
@@ -1444,7 +1447,6 @@ function CargarRespuestaDePedidoTransfer_todos(pValor) {
     var strHtmlPedidoFacturarseHabitual = '';
     if (typeof pValor != 'undefined' && pValor != null) {
         if (pValor.length > 0) {
-            strHtmlMensajeFinales += '<div  class="col-xs-12" style="font-size: 12px;">TIPO DE ENVIO: ' + textTipoEnvioCarritoTransfer + ' </div>';
             strHtml += '<div class="col-xs-12">';
             strHtml += '<div class="titleConfirmar">PRODUCTOS FACTURADOS</div>';
             strHtml += '<table class="footable table carrito table-stripped" width="100%" align="center" cellspacing="0" cellpadding="0" border="0"><thead><tr>';
@@ -1522,7 +1524,6 @@ function CargarRespuestaDePedidoTransfer_todos(pValor) {
                     // facturarse de forma Habitual 
 
                     strHtmlPedidoFacturarseHabitual += '<div class="col-xs-12">';
-                    //strHtmlPedidoFacturarseHabitual += '<div class="titleConfirmar">Productos en transfer no procesados por falta de stock para llegar a condición mínima o exceso en el cupo de unidades. Confirme cuantas unidades quiere con su descuento habitual.</div>';
                     strHtmlPedidoFacturarseHabitual += '<div class="titleNoCumplenConCondicion">No cumplen con la condición mínima por falta de stock o exceden la cantidad de unidades semanales autorizadas por el laboratorio.<br>';
                     strHtmlPedidoFacturarseHabitual += '<u><b>Si continúa, las unidades se facturarán con su descuento habitual.</b></u></div>';
                     strHtmlPedidoFacturarseHabitual += '<table class="footable table carrito table-stripped" width="100%" align="center" cellspacing="0" cellpadding="0" border="0"><thead><tr>';
@@ -1552,11 +1553,7 @@ function CargarRespuestaDePedidoTransfer_todos(pValor) {
                     // fin facturarse de forma Habitual 
                 } else {
                     if (isProductosTransferPedidos) {
-                        //strHtml += '<tr>';
-                        //strHtml += '<td align="left"colspan="2">';
-                        //strHtml += '<div style="border-bottom: 1px solid #333333;line-height: 27px;width: 100%;"></div>';
-                        //strHtml += '</td>';
-                        //strHtml += '</tr>';
+
                     }
                     for (var x = 0; x < pValor[i].Items.length; x++) {
                         if (pValor[i].Items[x].Cantidad > 0) {
@@ -1619,46 +1616,22 @@ function CargarRespuestaDePedidoTransfer_todos(pValor) {
     if (isProductosPedidoFacturarseHabitual) {
         strHtmlPedidoFacturarseHabitual += '</tbody></table>';
         strHtmlPedidoFacturarseHabitual += '</div>';
-
-
-        //strHtmlPedidoFacturarseHabitual += '<button type="button" class="btn_confirmar" onclick="onclickPedidoFacturarseHabitualConfirmar(); return false;" href="#">Confirmar</button>';
-        //strHtmlPedidoFacturarseHabitual += '<button type="button" class="btn_confirmar" onclick="CerrarContenedorTransfer(); return false;"  href="#">Descartar</button>';
         strHtmlPedidoFacturarseHabitual += '<div class="clear">';
         strHtmlPedidoFacturarseHabitual += '</div>';
-        //document.getElementById('resultadoPedidoBotonOk').style.display = 'none';
     } else {
         strHtmlPedidoFacturarseHabitual = '';
     }
 
 
     var strHtml_modal = '';
-    //strHtml_modal += '<div class="modal-background">&nbsp;</div>';
-    //strHtml_modal += '<div class="modal-dialog modal-lg"><div class="modal-content">';
-    //strHtml_modal += '<div class="modal-header no-padding-bottom">';
-    //strHtml_modal += '<div class="row">';
-    //strHtml_modal += '<div class="col-lg-12">';
     if (strHtml != '' && strHtmlPedidoFacturarseHabitual == '' && strHtmlEnRevision == '' && strHtmlFaltantes == '') {
-        //strHtml_modal += '<div class="modulo_icon ok"></div>';
         strHtml_modal += '<h4>Resultado del pedido</h4>';
     }
     else {
-        // strHtml_modal += '<div class="modulo_icon alert"></div>';
         strHtml_modal += '<h4>ALGUNOS PRODUCTOS DE TRANSFER NO PUDIERON SER PROCESADOS</h4>';
     }
-    //strHtml_modal += '</div>';
-    //strHtml_modal += '</div>';
-    //strHtml_modal += '<div class="close-modal" data-dismiss="modal"><i class="fa fa-times"></i></div>';
-    //strHtml_modal += '</div>';
     strHtml_modal += '<div class="modal-body">';
     strHtml_modal += strHtml + strHtmlFaltantes + strHtmlPedidoFacturarseHabitual + strHtmlEnRevision + strHtmlMensajeFinales;
-    //strHtml_modal += '<div class="clear"></div>';
-    //if (!isProductosPedidoFacturarseHabitual) {
-    //    strHtml_modal += '<button type="button" class="btn_confirmar" href="#" onclick="modalModuloHide(); return false;">CONFIRMAR</button>';
-    //}
-    //strHtml_modal += '<div class="clear"></div>';
     strHtml_modal += '</div>';
-    //strHtml_modal += '<div class="clear"></div>';
-    //strHtml_modal += '</div></div>';
-
     return strHtml_modal;
 }
