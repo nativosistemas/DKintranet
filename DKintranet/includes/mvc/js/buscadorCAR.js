@@ -2771,9 +2771,13 @@ function countdown() {
         strHtml += '<div class="suc">Sucursal ' + nombreSucursalDefault + '</div>';
         strHtmlReducido += '<div class="suc">Sucursal ' + nombreSucursalDefault + '</div>';
 
+        var strFaltanDias = '';
+        if (dias > 0) {
+            strFaltanDias = '(Días: ' + dias + ')';
+        }
         strHtml += '<div class="cierre"><i class="fa fa-truck"></i>&nbsp;&nbsp;Cierre de reparto <span>' + new_fechaHorarioCierre + '</span></div>';
-        strHtml += '<div class="faltan">Faltan <span>' + horas + ':' + toString00(minutos) + ':' + toString00(segundos) + ' hs' + '</span></div>';
-        strHtmlReducido += '<div class="faltan">Faltan <span>' + horas + ':' + toString00(minutos) + ':' + toString00(segundos) + ' hs' + '</span></div>';
+        strHtml += '<div class="faltan">Faltan ' + strFaltanDias+' <span>' + horas + ':' + toString00(minutos) + ':' + toString00(segundos) + ' hs' + '</span></div>';
+        strHtmlReducido += '<div class="faltan">Faltan ' + strFaltanDias +' <span>' + horas + ':' + toString00(minutos) + ':' + toString00(segundos) + ' hs' + '</span></div>';
 
 
         if (new_fechaHorarioCierre != '') {
