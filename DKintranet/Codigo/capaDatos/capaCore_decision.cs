@@ -22,65 +22,21 @@ namespace DKintranet.Codigo.capaDatos
         }
         public static DKbase.dll.cDllPedido TomarPedidoTelefonistaAsync(int pIdCarrito, string pLoginCliente, string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, List<DKbase.dll.cDllProductosAndCantidad> pListaProducto, bool pIsUrgente)
         {
-            try
+            if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null)
             {
-                string pLoginTelefonista = string.Empty;
-                if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null)
-                {
-                    Usuario usuario = ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]);
-                    pLoginTelefonista = usuario.usu_login;
-                }
-                capaCAR_base.InicioCarritoEnProceso(pIdCarrito, Constantes.cAccionCarrito_TOMAR);
-                var t = Task.Run(() => capaCore_WebService.TomarPedidoTelefonistaAsync(pIdCarrito, pLoginCliente, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pListaProducto, pLoginTelefonista));
-                t.Wait();
-                if (t.Result == null)
-                {
-                    throw new Exception("Result == null");
-                }
-                DKbase.dll.cDllPedido objResult = t.Result;
-                objResult.web_Sucursal = pIdSucursal;
-                return objResult;
+                Usuario usuario = ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]);
+                return capaDLL.TomarPedidoTelefonistaAsync(usuario, pIdCarrito, pLoginCliente, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pListaProducto, pIsUrgente);
             }
-            catch (Exception ex)
-            {
-                FuncionesPersonalizadas.grabarLog(MethodBase.GetCurrentMethod(), ex, DateTime.Now, pIdCarrito, pLoginCliente, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pListaProducto, pIsUrgente);
-                return null;
-            }
-            finally
-            {
-                capaCAR_base.EndCarritoEnProceso(pIdCarrito);
-            }
+            return null;
         }
         public static List<DKbase.dll.cDllPedidoTransfer> TomarPedidoDeTransfersTelefonistaAsync(int pIdCarrito, string pLoginCliente, string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, List<DKbase.dll.cDllProductosAndCantidad> pListaProducto)
         {
-            try
+            if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null)
             {
-                string pLoginTelefonista = string.Empty;
-                if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null)
-                {
-                    Usuario usuario = ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]);
-                    pLoginTelefonista = usuario.usu_login;
-                }
-                capaCAR_base.InicioCarritoEnProceso(pIdCarrito, Constantes.cAccionCarrito_TOMAR);
-                var t = Task.Run(() => capaCore_WebService.TomarPedidoDeTransfersTelefonistaAsync(pIdCarrito, pLoginCliente, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pListaProducto, pLoginTelefonista));
-                t.Wait();
-                if (t.Result == null)
-                {
-                    throw new Exception("Result == null");
-                }
-                List<DKbase.dll.cDllPedidoTransfer> objResult = t.Result;
-                objResult.ForEach(o => o.web_Sucursal = pIdSucursal);
-                return objResult;
+                Usuario usuario = ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]);
+                return capaDLL.TomarPedidoDeTransfersTelefonistaAsync(usuario,  pIdCarrito,  pLoginCliente,  pIdSucursal,  pMensajeEnFactura,  pMensajeEnRemito,  pTipoEnvio,  pListaProducto);
             }
-            catch (Exception ex)
-            {
-                FuncionesPersonalizadas.grabarLog(MethodBase.GetCurrentMethod(), ex, DateTime.Now, pIdCarrito, pLoginCliente, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pListaProducto, pListaProducto);
-                return null;
-            }
-            finally
-            {
-                capaCAR_base.EndCarritoEnProceso(pIdCarrito);
-            }
+            return null;
         }
 
         public static decimal ObtenerCreditoDisponible(string pLoginWeb)

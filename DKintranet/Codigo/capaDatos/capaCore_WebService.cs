@@ -110,34 +110,6 @@ namespace DKintranet.Codigo.capaDatos
             }
             return result;
         }
-
-        public static async Task<DKbase.dll.cDllPedido> TomarPedidoTelefonistaAsync(int pIdCarrito, string pLoginCliente, string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, List<DKbase.dll.cDllProductosAndCantidad> pListaProducto, string pLoginTelefonista)
-        {
-            DKbase.dll.cDllPedido result = null;
-            string name = "TomarPedidoTelefonista";
-            DKbase.Models.TomarPedidoConIdCarritoRequest parameter = new DKbase.Models.TomarPedidoConIdCarritoRequest() { pIdCarrito = pIdCarrito, pLoginCliente = pLoginCliente, pIdSucursal = pIdSucursal, pMensajeEnFactura = pMensajeEnFactura, pMensajeEnRemito = pMensajeEnRemito, pTipoEnvio = pTipoEnvio, pListaProducto = pListaProducto, pLoginTelefonista = pLoginTelefonista };
-            HttpResponseMessage response = await PostAsync(name, parameter);
-            if (response != null)
-            {
-                var resultResponse = response.Content.ReadAsStringAsync().Result;
-                result = JsonSerializer.Deserialize<DKbase.dll.cDllPedido>(resultResponse);
-                //result = JsonSerializer.Deserialize<DKbase.dll.cDllPedido>(resultResponse, oJsonSerializerOptions);
-            }
-            return result;
-        }
-        public static async Task<List<DKbase.dll.cDllPedidoTransfer>> TomarPedidoDeTransfersTelefonistaAsync(int pIdCarrito, string pLoginCliente, string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, List<DKbase.dll.cDllProductosAndCantidad> pListaProducto, string pLoginTelefonista)
-        {
-            List<DKbase.dll.cDllPedidoTransfer> result = null;
-            string name = "TomarPedidoDeTransfersTelefonista";
-            DKbase.Models.TomarPedidoConIdCarritoRequest parameter = new DKbase.Models.TomarPedidoConIdCarritoRequest() { pIdCarrito = pIdCarrito, pLoginCliente = pLoginCliente, pIdSucursal = pIdSucursal, pMensajeEnFactura = pMensajeEnFactura, pMensajeEnRemito = pMensajeEnRemito, pTipoEnvio = pTipoEnvio, pListaProducto = pListaProducto, pLoginTelefonista = pLoginTelefonista };
-            HttpResponseMessage response = await PostAsync(name, parameter);
-            if (response != null)
-            {
-                var resultResponse = response.Content.ReadAsStringAsync().Result;
-                result = JsonSerializer.Deserialize<List<DKbase.dll.cDllPedidoTransfer>>(resultResponse);
-            }
-            return result;
-        }
         public static async Task<decimal> ObtenerCreditoDisponibleAsync(string pLoginWeb)
         {
             decimal result = 0;
