@@ -27,6 +27,9 @@ namespace DKintranet
             DKbase.Helper.getMail_pass = System.Configuration.ConfigurationManager.AppSettings["mail_pass"].ToString();
             DKbase.Helper.getSMTP_SERVER = System.Configuration.ConfigurationManager.AppSettings["SMTP_SERVER"].ToString();
             DKbase.Helper.getSMTP_PORT = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["SMTP_PORT"].ToString());
+            DKbase.Helper.getUrl_DKcore = System.Configuration.ConfigurationManager.AppSettings["url_DKcore"].ToString();
+            DKbase.Helper.getUrl_DKdll = System.Configuration.ConfigurationManager.AppSettings["url_DKdll"].ToString();
+            DKbase.Helper.getConnectionStringSQL_intranet = ConfigurationManager.ConnectionStrings["db_conexion_intranet"].ConnectionString;
         }
         //protected void Application_Error(object sender, EventArgs e)
         //{
