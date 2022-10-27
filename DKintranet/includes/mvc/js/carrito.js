@@ -361,7 +361,10 @@ function OnCallBackTomarPedidoCarrito(args) {
         mensaje_alert_base(mensajeCuandoSeMuestraError, 'volverBuscador()');
     } else {
         // Error dsd dll pedido
-        if (args.Error != '') {
+        if (isNotNullEmpty(args.web_Error)) {
+            var strHTML_mensaje_alert_base = '<b>Carrito Error: </b>' + args.web_Error + '<br>';
+            mensaje_alert_base(strHTML_mensaje_alert_base, 'volverBuscador()');
+        }else if (args.Error != '') {
             mensaje_alert_base(args.Error, 'volverBuscador()');
             // Fin Error dsd dll pedido
         } else {
