@@ -1118,9 +1118,9 @@ namespace DKintranet.Controllers
             return Serializador.SerializarAJson(l);//result;//
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
-        public void funReservaVacunas(List<DKbase.dll.cVacuna> pListaVacunas)
+        public void funReservaVacunas(List<DKbase.dll.cVacuna> pListaVacunas, string pLoginTelefonista )
         {
-            //DKbase.web.capaDatos.capaDLL.AgregarVacunas(pListaVacunas);
+            DKbase.web.capaDatos.capaDLL.AgregarVacunas(pListaVacunas, pLoginTelefonista);
         }
     }
 }

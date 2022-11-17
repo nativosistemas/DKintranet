@@ -44,10 +44,13 @@
     <div class="col-lg-12 no-padding">
         @{
             string disabledBuscador = "";
+            string displayNone = "";
             if (Session["clientesDefault_Cliente"] == null)
             {
                 disabledBuscador = " disabled ";
+                displayNone = "display: none;";
             }}
+
         <input class="form-control buscador" id="txtBuscador" name="txtBuscador" placeholder="Buscar por nombre, c&oacute;digo, laboratorio, otro"
                onkeypress="onkeypressEnter(event, this)" onfocus="onNullBuscar(this)" onblur="onNullBuscar(this)"
                autocomplete="off" @{ WriteLiteral(disabledBuscador);} /><a class="btn_buscar" href="#" onclick="onClickBuscar(); return false;" @{ WriteLiteral(disabledBuscador);}></a>
@@ -143,7 +146,8 @@
         }
         <div class="clear10"></div>
     </div>
-    <a href="/mvc/reservavacunas" ><i class="fa fa-stethoscope" title="RESERVA VACUNAS 2023"></i><span class="hidden-sm hidden-xs hidden-md">RESERVA VACUNAS 2023</span></a>
+
+<a href="/mvc/reservavacunas" style=" @{ WriteLiteral(displayNone);}"><i class="fa fa-stethoscope" title="RESERVA VACUNAS 2023"></i><span class="hidden-sm hidden-xs hidden-md">RESERVA VACUNAS 2023</span></a>
 
 
     <div id="divResultadoBuscador"></div>
