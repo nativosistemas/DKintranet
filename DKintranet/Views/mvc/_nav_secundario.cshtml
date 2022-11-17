@@ -6,6 +6,7 @@
     string classRecuperador = "";
     string classPromocionesCliente = "";
     string classNuevosLanzamientos = "";
+    string classReservaVacunas = "";
     string strController = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString();
     switch (strController)
     {
@@ -36,6 +37,11 @@
             }
             else { classPromocionesCliente = " active "; }
 
+            break;
+        case "reservavacunas":
+        case "reservavacunas_mis":
+        case "reservavacunas_total":
+            classReservaVacunas = " class=\"active\" ";
             break;
         default:
             break;
@@ -81,6 +87,9 @@
             <a href="/mvc/promocionescliente?t=0" class="oferta  @{ WriteLiteral(classPromocionesCliente);}"><i class="fa fa-percent" title="OFERTAS"></i><span class="hidden-sm hidden-xs hidden-md">OFERTAS</span></a>
             <div class="separate"></div>
             <a href="/mvc/promocionescliente?t=1" class="nuevoLanzamiento  @{ WriteLiteral(classNuevosLanzamientos);}"><i class="fa fa-percent" title="NUEVOS LANZAMIENTOS"></i><span class="hidden-sm hidden-xs hidden-md">NUEVOS LANZAMIENTOS</span></a>
+            <div class="separate separateReservaVacunas"></div>
+            <a href="/mvc/reservavacunas" @{ WriteLiteral(classReservaVacunas);}><i class="fa fa-stethoscope" title="RESERVA VACUNAS 2023"></i><span class="hidden-sm hidden-xs hidden-md">RESERVA VACUNAS 2023</span></a>
+
         </div>
     </div>
 </div>

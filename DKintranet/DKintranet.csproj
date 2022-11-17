@@ -632,6 +632,7 @@
     <Content Include="includes\mvc\js\plugins\daterangepicker\moment.min.js" />
     <Content Include="includes\mvc\js\plugins\footable\footable.js" />
     <Content Include="includes\mvc\js\promotores.js" />
+    <Content Include="includes\mvc\js\reservavacunas.js" />
     <Content Include="includes\mvc\js\select2.full.min.js" />
     <Content Include="includes\mvc\js\subirpedido.js" />
     <Content Include="includes\mvc\js\transfer.js" />
@@ -1187,6 +1188,11 @@
     <None Include="Service References\ServiceReferenceDLL\Service2.wsdl" />
     <Content Include="Views\config\LoginIntranet.cshtml" />
     <Content Include="Views\Shared\_navHeader.cshtml" />
+    <Content Include="Views\mvc\reservavacunas.cshtml" />
+    <Content Include="Views\mvc\reservavacunas_mis.cshtml" />
+    <Content Include="Views\mvc\reservavacunas_total.cshtml" />
+    <Content Include="Views\mvc\_nav_reservavacunas.cshtml" />
+    <Content Include="Views\mvc\_scripts_reservavacunas.cshtml" />
     <None Include="Web_config\Web.config_produccion">
       <SubType>Designer</SubType>
     </None>

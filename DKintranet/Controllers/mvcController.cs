@@ -93,6 +93,24 @@ namespace DKintranet.Controllers
             //return View();
         }
         [AuthorizePermisoAttribute(Permiso = "PEDIDOS", isCheckEstado = true)]
+        public ActionResult reservavacunas()
+        {
+            System.Web.HttpContext.Current.Session["url_type"] = "reservavacunas";
+            return View();
+        }
+        [AuthorizePermisoAttribute(Permiso = "PEDIDOS", isCheckEstado = true)]
+        public ActionResult reservavacunas_mis()
+        {
+            System.Web.HttpContext.Current.Session["url_type"] = "reservavacunas_mis";
+            return View();
+        }
+        [AuthorizePermisoAttribute(Permiso = "PEDIDOS", isCheckEstado = true)]
+        public ActionResult reservavacunas_total()
+        {
+            System.Web.HttpContext.Current.Session["url_type"] = "reservavacunas_total";
+            return View();
+        }
+        [AuthorizePermisoAttribute(Permiso = "PEDIDOS", isCheckEstado = true)]
         public ActionResult Buscador()
         {
             //var rr = 2 / Convert.ToInt16("0");
@@ -1098,6 +1116,11 @@ namespace DKintranet.Controllers
                 }
             }
             return Serializador.SerializarAJson(l);//result;//
+        }
+        [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
+        public void funReservaVacunas(List<DKbase.dll.cVacuna> pListaVacunas)
+        {
+            //DKbase.web.capaDatos.capaDLL.AgregarVacunas(pListaVacunas);
         }
     }
 }

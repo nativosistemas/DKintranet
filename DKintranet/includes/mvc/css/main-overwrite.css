@@ -744,3 +744,13 @@ button.btn_vaciar:focus {
 .divColorFondoBlanco {
     background-color: white;
 }
+.separateReservaVacunas {
+    margin-left: 80px;
+}
+
+.labelMsgError {
+    display: none;
+    color: red;
+    font-weight: bold;
+    text-transform: uppercase;
+}

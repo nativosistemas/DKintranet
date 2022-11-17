@@ -1310,3 +1310,27 @@ function ajaxImageProducto(pPro_codigo) {
         }
     });
 }
+function enviarReservaVacunas(pValue) {
+    showCargandoBuscador();
+    $.ajax({
+        type: "POST",
+        url: "/mvc/funReservaVacunas",
+        data: { pListaVacunas: pValue },
+        success:
+            function (response) {
+                hideCargandoBuscador();
+                mensaje_ReservaVacunas();
+                limpiarReservarVacunas();
+            },
+        failure: function (response) {
+
+            hideCargandoBuscador();
+            OnFail(response);
+        },
+        error: function (response) {
+
+            hideCargandoBuscador();
+            OnFail(response);
+        }
+    });
+}
