@@ -7,7 +7,7 @@
 
     string resultado = string.Empty;
 
-    List<DKbase.web.capaDatos.cReservasVacunasBD> listaReservaVacunas = DKbase.web.acceso.ObtenerReservasVacunas();
+    List<DKbase.web.capaDatos.cReservasVacunasBD> listaReservaVacunas = DKbase.web.acceso.ObtenerReservasVacunas(Boolean.Parse(System.Web.HttpContext.Current.Session["clientes_pages_reservavacunas_SinTroquel"].ToString()));
     if (listaReservaVacunas != null)
     {
         resultado += "<input type=\"hidden\" id=\"hiddenListaReservasVacunas\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(listaReservaVacunas)) + "\" />";

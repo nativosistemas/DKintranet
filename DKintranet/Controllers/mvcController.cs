@@ -93,8 +93,14 @@ namespace DKintranet.Controllers
             //return View();
         }
         [AuthorizePermisoAttribute(Permiso = "PEDIDOS", isCheckEstado = true)]
-        public ActionResult reservavacunas()
+        public ActionResult reservavacunas(string t)
         {
+            bool resultado = false;
+            if (!string.IsNullOrEmpty(t) && t == "1")
+            {
+                resultado = true;
+            }
+            System.Web.HttpContext.Current.Session["clientes_pages_reservavacunas_SinTroquel"] = resultado;
             System.Web.HttpContext.Current.Session["url_type"] = "reservavacunas";
             return View();
         }

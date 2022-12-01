@@ -2,6 +2,7 @@
 var listaReservasVacunas_mis = null;
 var listaReservasVacunas_total = null;
 var selectedInput_reservaVacunas = null;
+var isOnclickReservarVacunas = false;
 
 $(document).ready(function () {
     $(document).keydown(function (e) {
@@ -37,25 +38,29 @@ function limpiarReservarVacunas() {
     for (var i = 0; i < listaReservasVacunas.length; i++) {
         document.getElementById('textReserva' + i).value = '';
     }
-
+    isOnclickReservarVacunas = false;
 }
 function onclickReservarVacunas() {
-    var l_reserva = [];
-    for (var i = 0; i < listaReservasVacunas.length; i++) {
+    if (!isOnclickReservarVacunas) {
 
-        //listaReservasVacunas[i].rdv_nombre
-        var oTextNumber = document.getElementById('textReserva' + i).value;
-        if (isNotNullEmpty(oTextNumber)) {
-            var data = {};
-            data.ID = i;
-            data.Login = cli_login();
-            data.NombreProducto = listaReservasVacunas[i].rdv_nombre;
-            data.UnidadesVendidas = oTextNumber;
-            l_reserva.push(data);
+        var l_reserva = [];
+        for (var i = 0; i < listaReservasVacunas.length; i++) {
+
+            //listaReservasVacunas[i].rdv_nombre
+            var oTextNumber = document.getElementById('textReserva' + i).value;
+            if (isNotNullEmpty(oTextNumber)) {
+                var data = {};
+                data.ID = i;
+                data.Login = cli_login();
+                data.NombreProducto = listaReservasVacunas[i].rdv_nombre;
+                data.UnidadesVendidas = oTextNumber;
+                l_reserva.push(data);
+            }
         }
-    }
-    if (l_reserva.length > 0) {
-        enviarReservaVacunas(l_reserva);
+        if (l_reserva.length > 0) {
+            isOnclickReservarVacunas = true;
+            enviarReservaVacunas(l_reserva);
+        }
     }
 }
 function ReservasVacunas() {

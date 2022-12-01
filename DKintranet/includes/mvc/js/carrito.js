@@ -232,11 +232,11 @@ function MostrarConfirmarCarrito(pIndexCarrito, pIsTransfer) {
     strHtml += '<div class="close-modal" data-dismiss="modal"><i class="fa fa-times"></i></div>';
     strHtml += '</div>';
     strHtml += '<div class="modal-body">';
-    strHtml += '<div class="col-md-6 div_msj">';
-    strHtml += '<textarea class="" id="txtMensajeFactura" name="txtMensajeFactura" placeholder="Mensaje en factura" maxlength="40" onchange="MensajeFacturaRemitoLength(this)" onkeyup="MensajeFacturaRemitoLength(this)" onpaste="MensajeFacturaRemitoLength(this)"></textarea>';
-    strHtml += '</div>';
-    strHtml += '<div class="col-md-6 div_msj">';
-    strHtml += '<textarea class="" id="txtMensajeRemito" name="txtMensajeRemito" placeholder="Mensaje en remito" maxlength="40" onchange="MensajeFacturaRemitoLength(this)" onkeyup="MensajeFacturaRemitoLength(this)" onpaste="MensajeFacturaRemitoLength(this)"></textarea>';
+    //strHtml += '<div class="col-md-6 div_msj">';
+    //strHtml += '<textarea class="" id="txtMensajeFactura" name="txtMensajeFactura" placeholder="Mensaje en factura" maxlength="40" onchange="MensajeFacturaRemitoLength(this)" onkeyup="MensajeFacturaRemitoLength(this)" onpaste="MensajeFacturaRemitoLength(this)"></textarea>';
+    //strHtml += '</div>';
+    strHtml += '<div class="col-md-12 div_msj">';
+    strHtml += '<textarea class="" id="txtMensajeRemito" name="txtMensajeRemito" placeholder="Mensaje en Orden de Pedido" maxlength="40" onchange="MensajeFacturaRemitoLength(this)" onkeyup="MensajeFacturaRemitoLength(this)" onpaste="MensajeFacturaRemitoLength(this)"></textarea>';
     strHtml += '</div>';
     strHtml += '<div class="col-md-6">Tipo de envio:&nbsp;';
     strHtml += '<select class="form-shop" name="comboTipoEnvio" id="comboTipoEnvio" onchange="onChangeTipoEnvio()" style="width:200px">';
@@ -318,7 +318,7 @@ function ConfirmarCarrito(pIndexCarrito) {
             }
         }
         if (isTomarPedido) {
-            var textFactura = $('#txtMensajeFactura').val();
+            var textFactura = '';//$('#txtMensajeFactura').val();
             var textRemito = $('#txtMensajeRemito').val();
             var isUrgente = $('#checkboxIsUrgentePedido').is(":checked");
             var idTipoEnvio = $('#comboTipoEnvio').val();
@@ -1095,7 +1095,7 @@ function ConfirmarCarritoTODOS() {
             }
         }
         if (isTomarPedido) {
-            var textFactura = $('#txtMensajeFactura').val();
+            var textFactura = '';//$('#txtMensajeFactura').val();
             var textRemito = $('#txtMensajeRemito').val();
             var isUrgente = $('#checkboxIsUrgentePedido').is(":checked");
             var idTipoEnvio = $('#comboTipoEnvio').val();
@@ -1146,11 +1146,11 @@ function MostrarConfirmarCarrito_todos() {
     strHtml += '<div class="close-modal" data-dismiss="modal"><i class="fa fa-times"></i></div>';
     strHtml += '</div>';
     strHtml += '<div class="modal-body">';
-    strHtml += '<div class="col-md-6 div_msj">';
-    strHtml += '<textarea class="" id="txtMensajeFactura" name="txtMensajeFactura" placeholder="Mensaje en factura" maxlength="40" onchange="MensajeFacturaRemitoLength(this)" onkeyup="MensajeFacturaRemitoLength(this)" onpaste="MensajeFacturaRemitoLength(this)"></textarea>';
-    strHtml += '</div>';
-    strHtml += '<div class="col-md-6 div_msj">';
-    strHtml += '<textarea class="" id="txtMensajeRemito" name="txtMensajeRemito" placeholder="Mensaje en remito" maxlength="40" onchange="MensajeFacturaRemitoLength(this)" onkeyup="MensajeFacturaRemitoLength(this)" onpaste="MensajeFacturaRemitoLength(this)"></textarea>';
+    //strHtml += '<div class="col-md-6 div_msj">';
+    //strHtml += '<textarea class="" id="txtMensajeFactura" name="txtMensajeFactura" placeholder="Mensaje en factura" maxlength="40" onchange="MensajeFacturaRemitoLength(this)" onkeyup="MensajeFacturaRemitoLength(this)" onpaste="MensajeFacturaRemitoLength(this)"></textarea>';
+    //strHtml += '</div>';
+    strHtml += '<div class="col-md-12 div_msj">';
+    strHtml += '<textarea class="" id="txtMensajeRemito" name="txtMensajeRemito" placeholder="Mensaje en Orden de Pedido" maxlength="40" onchange="MensajeFacturaRemitoLength(this)" onkeyup="MensajeFacturaRemitoLength(this)" onpaste="MensajeFacturaRemitoLength(this)"></textarea>';
     strHtml += '</div>';
     strHtml += '<div class="col-md-6">Tipo de envio:&nbsp;';
     strHtml += '<select class="form-shop" name="comboTipoEnvio" id="comboTipoEnvio" onchange="onChangeTipoEnvio()" style="width:200px">';

@@ -285,7 +285,7 @@ function onclickConfimarTransferPedidoOk() {
 
 
             idTipoEnvioPedidoTransfer = $('#comboTipoEnvio').val();
-            textFacturaPedidoTransfer = $('#txtMensajeFactura').val();
+            textFacturaPedidoTransfer = ''; //$('#txtMensajeFactura').val();
             textRemitoPedidoTransfer = $('#txtMensajeRemito').val();
             codSucursalPedidoTransfer = listaCarritoTransferPorSucursal[indexSucursalTransferSeleccionado].Sucursal;
             textTipoEnvioCarritoTransfer = $('#comboTipoEnvio option:selected').text();
