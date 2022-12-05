@@ -32,7 +32,7 @@ namespace DKintranet.admin.pages
         public static string getHtmlOptionOferta()
         {
             string result = string.Empty;
-            List<cOferta> l = WebService.RecuperarTodasOfertas();
+            List<DKbase.web.capaDatos.cOferta> l = WebService.RecuperarTodasOfertas();
             if (l != null)
             {
                 // result += "<option value='-1'>((Sin Seleccionar))</option>";

@@ -7,72 +7,72 @@ using System.Web;
 
 namespace DKintranet.Codigo.capaDatos
 {
-    public class cOferta
-    {
-        public int ofe_idOferta { get; set; }
-        public string ofe_titulo { get; set; }
-        public string ofe_descr { get; set; }
-        public int ofe_tipo { get; set; }
-        public string ofe_nombreTransfer { get; set; }
-        public int? tfr_codigo { get; set; }
-        public string ofe_descuento { get; set; }
-        public string ofe_etiqueta { get; set; }
-        public string ofe_etiquetaColor { get; set; }
-        public bool ofe_publicar { get; set; }
-        public bool ofe_activo { get; set; }
-        public DateTime ofe_fecha { get; set; }
-        public string ofe_fechaToString { get; set; }
-        public string nameImagen { get; set; }
-        public string nameImagenAmpliar { get; set; }
-        public string namePdf { get; set; }
-        public int countOfertaDetalles { get; set; }
-        public int Rating { get; set; }
-        public DateTime? ofe_fechaFinOferta { get; set; }
-        public string ofe_fechaFinOfertaToString { get; set; }
-        public bool ofe_nuevosLanzamiento { get; set; }
-        public string ofe_descrHtml { get; set; }
+    //public class cOferta
+    //{
+    //    public int ofe_idOferta { get; set; }
+    //    public string ofe_titulo { get; set; }
+    //    public string ofe_descr { get; set; }
+    //    public int ofe_tipo { get; set; }
+    //    public string ofe_nombreTransfer { get; set; }
+    //    public int? tfr_codigo { get; set; }
+    //    public string ofe_descuento { get; set; }
+    //    public string ofe_etiqueta { get; set; }
+    //    public string ofe_etiquetaColor { get; set; }
+    //    public bool ofe_publicar { get; set; }
+    //    public bool ofe_activo { get; set; }
+    //    public DateTime ofe_fecha { get; set; }
+    //    public string ofe_fechaToString { get; set; }
+    //    public string nameImagen { get; set; }
+    //    public string nameImagenAmpliar { get; set; }
+    //    public string namePdf { get; set; }
+    //    public int countOfertaDetalles { get; set; }
+    //    public int Rating { get; set; }
+    //    public DateTime? ofe_fechaFinOferta { get; set; }
+    //    public string ofe_fechaFinOfertaToString { get; set; }
+    //    public bool ofe_nuevosLanzamiento { get; set; }
+    //    public string ofe_descrHtml { get; set; }
 
-    }
+    //}
 
-    public class cOfertaDetalle
-    {
-        public int ofd_idOfertaDetalle { get; set; }
-        public int ofd_idOferta { get; set; }
-        public string ofd_productoCodigo { get; set; }
-        public string ofd_productoNombre { get; set; }
-        public string codigo { get; set; }
-        public string nombre { get; set; }
-    }
-    public class cOfertaHome : cOferta
-    {
-        public int ofh_idOfertaHome { get; set; }
-        public int ofh_orden { get; set; }
-        public int ofh_idOferta { get; set; }
-    }
-    public class cHomeSlide
-    {
-        public int hsl_idHomeSlide { get; set; }
-        public string hsl_titulo { get; set; }
-        public string hsl_descr { get; set; }
-        public string hsl_descrReducido { get; set; }
-        public string hsl_descrHtml { get; set; }
-        public string hsl_descrHtmlReducido { get; set; }
-        public int hsl_tipo { get; set; }
-        public string tipoRecurso { get; set; }
-        public int hsl_idRecursoDoc { get; set; }
-        public string hsl_NombreRecursoDoc { get; set; }
-        public int hsl_idRecursoImgPC { get; set; }
-        public string arc_nombrePC { get; set; }
-        public int hsl_idRecursoImgMobil { get; set; }
-        public string arc_nombreMobil { get; set; }
-        public int hsl_idOferta { get; set; }
-        public string hsl_etiqueta { get; set; }
-        public bool hsl_publicar { get; set; }
-        public bool hsl_activo { get; set; }
-        public DateTime hsl_fecha { get; set; }
-        public string hsl_fechaToString { get; set; }
-        public int? hsl_orden { get; set; }
-    }
+    //public class cOfertaDetalle
+    //{
+    //    public int ofd_idOfertaDetalle { get; set; }
+    //    public int ofd_idOferta { get; set; }
+    //    public string ofd_productoCodigo { get; set; }
+    //    public string ofd_productoNombre { get; set; }
+    //    public string codigo { get; set; }
+    //    public string nombre { get; set; }
+    //}
+    //public class cOfertaHome : cOferta
+    //{
+    //    public int ofh_idOfertaHome { get; set; }
+    //    public int ofh_orden { get; set; }
+    //    public int ofh_idOferta { get; set; }
+    //}
+    //public class cHomeSlide
+    //{
+    //    public int hsl_idHomeSlide { get; set; }
+    //    public string hsl_titulo { get; set; }
+    //    public string hsl_descr { get; set; }
+    //    public string hsl_descrReducido { get; set; }
+    //    public string hsl_descrHtml { get; set; }
+    //    public string hsl_descrHtmlReducido { get; set; }
+    //    public int hsl_tipo { get; set; }
+    //    public string tipoRecurso { get; set; }
+    //    public int hsl_idRecursoDoc { get; set; }
+    //    public string hsl_NombreRecursoDoc { get; set; }
+    //    public int hsl_idRecursoImgPC { get; set; }
+    //    public string arc_nombrePC { get; set; }
+    //    public int hsl_idRecursoImgMobil { get; set; }
+    //    public string arc_nombreMobil { get; set; }
+    //    public int hsl_idOferta { get; set; }
+    //    public string hsl_etiqueta { get; set; }
+    //    public bool hsl_publicar { get; set; }
+    //    public bool hsl_activo { get; set; }
+    //    public DateTime hsl_fecha { get; set; }
+    //    public string hsl_fechaToString { get; set; }
+    //    public int? hsl_orden { get; set; }
+    //}
     public class capaHome
     {
         //

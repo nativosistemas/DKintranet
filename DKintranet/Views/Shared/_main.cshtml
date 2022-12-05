@@ -312,8 +312,8 @@
                 }
                 if (System.Web.HttpContext.Current.Session["main_ListaOferta"] != null)
                 {
-                    List<DKintranet.Codigo.capaDatos.cOferta>
-                    resultadoOferta = (List<DKintranet.Codigo.capaDatos.cOferta>
+                    List<DKbase.web.capaDatos.cOferta>
+                    resultadoOferta = (List<DKbase.web.capaDatos.cOferta>
                                                   )System.Web.HttpContext.Current.Session["main_ListaOferta"];
                     resultado += "<input type=\"hidden\" id=\"hiddenListaOfertas\" value=\"" + Server.HtmlEncode(DKintranet.Codigo.clases.Generales.Serializador.SerializarAJson(resultadoOferta)) + "\" />";
                 }
