@@ -64,17 +64,6 @@ namespace DKintranet.Codigo.capaDatos
         public decimal PrecioFinalTransfer { get; set; }
         public string stk_stock { get; set; }
     }
-    public class cHistorialArchivoSubir
-    {
-        public int has_id { get; set; }
-        public int has_codCliente { get; set; }
-        public string has_NombreArchivo { get; set; }
-        public string has_NombreArchivoOriginal { get; set; }
-        public string has_sucursal { get; set; }
-        public string suc_nombre { get; set; }
-        public DateTime has_fecha { get; set; }
-        public string has_fechaToString { get; set; }
-    }
     public class cFrasesFront
     {
         public int tff_id { get; set; }

@@ -1191,9 +1191,6 @@
     <Content Include="Views\mvc\reservavacunas_total.cshtml" />
     <Content Include="Views\mvc\_nav_reservavacunas.cshtml" />
     <Content Include="Views\mvc\_scripts_reservavacunas.cshtml" />
-    <None Include="Web_config\Web.config_produccion">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="admin\Default.aspx.cs">

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
+using DKbase.web;
 using DKbase.web.capaDatos;
 using DKintranet.Codigo.capaDatos;
 
@@ -93,12 +94,6 @@ public class cPageClientes : System.Web.UI.Page
         public string dia { get; set; }
         public string hora { get; set; }
     }  
-    public class cUsuarioSinPermisosIntranet
-    {
-        public int usp_id { get; set; }
-        public int usp_codUsuario { get; set; }
-        public string usp_nombreSeccion { get; set; }
-    }
     public class cGaleria
     {
         public cNoticia noticia { get; set; }
