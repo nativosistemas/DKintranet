@@ -16,24 +16,7 @@ namespace DKintranet.Codigo.capaDatos
         public DateTime? his_Fecha { get; set; }
         public string his_FechaToString { get; set; }
     }
-    public class cFaltantesConProblemasCrediticiosPadre
-    {
-        //public int fpc_id { get; set; }
-        //public int fpc_codCarrito { get; set; }
-        public string fpc_codSucursal { get; set; }
-        public string suc_nombre { get; set; }
-
-        //public int fpc_codCliente { get; set; }
-        //public string fpc_nombreProducto { get; set; }
-        //public int fpc_cantidad { get; set; }
-        public int fpc_tipo { get; set; }
-        //public DateTime? fpc_fecha { get; set; }
-        //public string fpc_fechaToString { get; set; }
-        //public string stk_stock { get; set; }
-
-        //public List<cFaltantesConProblemasCrediticios> listaProductos { get; set; }
-        public List<cProductosGenerico> listaProductos { get; set; }
-    }
+    
     public class cFaltantesConProblemasCrediticios//:cProductos
     {
         //public cFaltantesConProblemasCrediticios(cProductos pProducto)
