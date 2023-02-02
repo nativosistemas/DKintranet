@@ -8,19 +8,19 @@ using System.Web;
 namespace DKintranet.Codigo.capaDatos
 {
 
-    public class cCatalogo
-    {
-        public int tbc_codigo { get; set; }
-        public string tbc_titulo { get; set; }
-        public string tbc_descripcion { get; set; }
-        public int tbc_orden { get; set; }
-        public DateTime? tbc_fecha { get; set; }
-        public string tbc_fechaToString { get; set; }
-        public int tbc_estado { get; set; }
-        public bool? tbc_publicarHome { get; set; }
-        public string tbc_publicarHomeToString { get; set; }
-        public string tbc_estadoToString { get; set; }
-    }
+    //public class cCatalogo
+    //{
+    //    public int tbc_codigo { get; set; }
+    //    public string tbc_titulo { get; set; }
+    //    public string tbc_descripcion { get; set; }
+    //    public int tbc_orden { get; set; }
+    //    public DateTime? tbc_fecha { get; set; }
+    //    public string tbc_fechaToString { get; set; }
+    //    public int tbc_estado { get; set; }
+    //    public bool? tbc_publicarHome { get; set; }
+    //    public string tbc_publicarHomeToString { get; set; }
+    //    public string tbc_estadoToString { get; set; }
+    //}
     /// <summary>
     /// Summary description for capaCatalogo
     /// </summary>
