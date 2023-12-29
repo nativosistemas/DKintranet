@@ -327,7 +327,7 @@ namespace DKintranet.Controllers
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
         public string IsExistenciaComprobanteResumenes_todos(string pNombreArchivo, int pContadorAUX)
         {
-            cPdfComprobante resultado = new cPdfComprobante();
+            Codigo.clases.cPdfComprobante resultado = new Codigo.clases.cPdfComprobante();
             string nombreArchivo = pNombreArchivo + ".pdf";
             resultado.isOk = System.IO.File.Exists(Constantes.cArchivo_ImpresionesComprobante + nombreArchivo);
             if (!resultado.isOk && Session["clientes_pages_descargaResumenes_NumeroResumen"] != null && pContadorAUX == 0)
@@ -343,7 +343,7 @@ namespace DKintranet.Controllers
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
         public string IsExistenciaComprobanteResumenes(string pNombreArchivo, int pIndex, int pContadorAUX)
         {
-            cPdfComprobante resultado = new cPdfComprobante();
+            Codigo.clases.cPdfComprobante resultado = new Codigo.clases.cPdfComprobante();
             string nombreArchivo = pNombreArchivo + ".pdf";
             resultado.isOk = System.IO.File.Exists(Constantes.cArchivo_ImpresionesComprobante + nombreArchivo);
             if (!resultado.isOk && Session["clientes_pages_descargaResumenes_listaComprobantesAImprimir"] != null && pContadorAUX == 0)
